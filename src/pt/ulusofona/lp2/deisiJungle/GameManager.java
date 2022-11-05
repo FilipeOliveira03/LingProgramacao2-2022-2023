@@ -5,9 +5,7 @@ import java.util.ArrayList;
 
 public class GameManager {
 
-    public String[][] getSpecies(){
-        return null;
-    }
+    public String[][] getSpecies(){return null;}
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
         return true;
