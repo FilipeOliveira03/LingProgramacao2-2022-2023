@@ -2,7 +2,8 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.util.ArrayList;
-
+// numeros impares - Henrique
+// numeros pares - Filipe
 public class GameManager {
 
     public String[][] getSpecies(){return null;}
