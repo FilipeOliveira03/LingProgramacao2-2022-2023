@@ -18,7 +18,7 @@ public class GameManager {
 
         for (int countPlayer = 0; countPlayer < playersInfo.length; countPlayer++) {
 
-            for (int countIDs = 0; countIDs < playersInfo[countPlayer].length; countIDs++) {
+            for (int countIDs = 0; countIDs < playersInfo.length; countIDs++) {
 
                 if(countPlayer != countIDs){
 
