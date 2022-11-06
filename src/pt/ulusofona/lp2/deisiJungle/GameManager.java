@@ -13,8 +13,9 @@ public class GameManager {
     int nrJogadores;
     int energia;
 
-    GameManager(int nrJogadores){
+    GameManager(int nrJogadores, int energia){
         this.nrJogadores = nrJogadores;
+        this.energia = energia;
     }
 
     public String[][] getSpecies(){
@@ -51,8 +52,8 @@ public class GameManager {
             }
         }
 
-        for (boolean b : verificarEspecie) {
-            if (!b) {
+        for (boolean verificar : verificarEspecie) {
+            if (!verificar) {
                 return false;
             }
         }
