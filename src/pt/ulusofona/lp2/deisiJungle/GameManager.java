@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.util.ArrayList;
-// numeros impares - Henrique
+// numeros impares - Henrique o maior da aldeia
 // numeros pares - Filipe
 public class GameManager {
 
@@ -16,6 +16,7 @@ public class GameManager {
     }
 
     public int[] getPlayerIds(int squareNr){
+        
         return null;
     }
 
