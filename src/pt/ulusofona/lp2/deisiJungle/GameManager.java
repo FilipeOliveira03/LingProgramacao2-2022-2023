@@ -6,7 +6,10 @@ import java.util.ArrayList;
 // numeros pares - Filipe
 public class GameManager {
 
-    public String[][] getSpecies(){return null;}
+    public String[][] getSpecies(){
+
+        return new String[][]{ { "E", "Elefante","elefante.png" },{ "L", "Leão","leao.png" },{ "T", "Tartaruga","tartaruga.png" },{ "P", "Pássaro","passaro.png" },{ "Z", "Tarzan","tarzan.png" }, };
+    }
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
         return true;
