@@ -10,6 +10,8 @@ import java.util.Objects;
 
 public class GameManager {
 
+    public GameManager(){}
+
     public String[][] getSpecies(){
 
         return new String[][]{ { "E", "Elefante","elefante.png" },{ "L", "Leão","leao.png" },{ "T", "Tartaruga","tartaruga.png" },{ "P", "Pássaro","passaro.png" },{ "Z", "Tarzan","tarzan.png" }, };
@@ -19,6 +21,7 @@ public class GameManager {
 
         boolean[] verificarEspecie = new boolean[playersInfo.length];
         Arrays.fill(verificarEspecie, false);
+        int countNrTarzan = 0;
 
         for (int countPlayer1 = 0; countPlayer1 < playersInfo.length; countPlayer1++) {
 
@@ -42,6 +45,15 @@ public class GameManager {
 
                 return false;
             }
+
+            if(playersInfo[countPlayer1][2].equals("Z")){
+                countNrTarzan++;
+            }
+
+        }
+
+        if(countNrTarzan < 1){
+            return false;
         }
 
         if(playersInfo.length * 2 >= jungleSize){
@@ -53,6 +65,8 @@ public class GameManager {
                 return false;
             }
         }
+
+
 
         return true;
     }
@@ -94,7 +108,7 @@ public class GameManager {
     }
 
     public String whoIsTaborda(){
-        return null;
+        return "Professional wrestling";
     }
 
 }
