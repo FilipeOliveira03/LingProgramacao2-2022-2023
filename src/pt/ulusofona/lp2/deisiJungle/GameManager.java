@@ -2,8 +2,11 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Objects;
+
 // numeros impares - Henrique
 // numeros pares - Filipe
+
 public class GameManager {
 
     public String[][] getSpecies(){
@@ -12,6 +15,25 @@ public class GameManager {
     }
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
+
+        for (int countPlayer = 0; countPlayer < playersInfo.length; countPlayer++) {
+
+            for (int countIDs = 0; countIDs < playersInfo[countPlayer].length; countIDs++) {
+
+                if(countPlayer != countIDs){
+
+                    if(Objects.equals(playersInfo[countPlayer][0], playersInfo[countIDs][0])){ // nao percebo o que quer dizer com a gama esperada
+
+                        return false;
+
+                    }
+                }
+
+
+            }
+
+        }
+
         return true;
     }
 
