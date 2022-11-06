@@ -19,9 +19,9 @@ public class GameManager {
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
 
+        int countNrTarzan = 0;
         boolean[] verificarEspecie = new boolean[playersInfo.length];
         Arrays.fill(verificarEspecie, false);
-        int countNrTarzan = 0;
 
         for (int countPlayer1 = 0; countPlayer1 < playersInfo.length; countPlayer1++) {
 
