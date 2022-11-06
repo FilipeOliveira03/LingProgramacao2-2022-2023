@@ -10,14 +10,6 @@ import java.util.Objects;
 
 public class GameManager {
 
-    int nrJogadores;
-    int energia;
-
-    GameManager(int nrJogadores, int energia){
-        this.nrJogadores = nrJogadores;
-        this.energia = energia;
-    }
-
     public String[][] getSpecies(){
 
         return new String[][]{ { "E", "Elefante","elefante.png" },{ "L", "Leão","leao.png" },{ "T", "Tartaruga","tartaruga.png" },{ "P", "Pássaro","passaro.png" },{ "Z", "Tarzan","tarzan.png" }, };
@@ -52,21 +44,15 @@ public class GameManager {
             }
         }
 
+        if(playersInfo.length * 2 >= jungleSize){
+            return false;
+        }
+
         for (boolean verificar : verificarEspecie) {
             if (!verificar) {
                 return false;
             }
         }
-
-        if(playersInfo.length != nrJogadores){
-            return false;
-        }
-
-        if(playersInfo.length * 2 >= jungleSize){
-            return false;
-        }
-
-        energia = initialEnergy;
 
         return true;
     }
