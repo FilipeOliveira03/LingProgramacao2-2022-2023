@@ -5,7 +5,7 @@ import java.util.ArrayList;
 // numeros impares - Henrique o maior da aldeia
 // numeros pares - Filipe
 public class GameManager {
-
+    ArrayList<Players> jogadores = new ArrayList<>();
     public String[][] getSpecies(){
 
         return new String[][]{ { "E", "Elefante","elefante.png" },{ "L", "Leão","leao.png" },{ "T", "Tartaruga","tartaruga.png" },{ "P", "Pássaro","passaro.png" },{ "Z", "Tarzan","tarzan.png" }, };
@@ -15,11 +15,18 @@ public class GameManager {
         return true;
     }
 
-    public int[] getPlayerIds(int squareNr){
-        
-        return null;
-    }
+    public int[] getPlayerIds(int squareNr) {
 
+        int[] nr = new int[6];
+        for (Players jogadore : jogadores) {
+            if (jogadore.posicao == squareNr) {
+                int a = 0;
+                nr[a] = jogadore.id;
+            }
+
+        }
+        return nr;
+    }
     public String[] getSquareInfo(int squareNr){
         return null;
     }
