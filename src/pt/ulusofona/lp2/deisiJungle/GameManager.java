@@ -9,8 +9,7 @@ import java.util.Objects;
 // numeros pares - Filipe
 
 public class GameManager {
-
-    public GameManager(){}
+    ArrayList<Players> jogadores = new ArrayList<>();
 
     public String[][] getSpecies(){
 
@@ -18,6 +17,7 @@ public class GameManager {
     }
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
+
 
         int countNrTarzan = 0;
         boolean[] verificarEspecie = new boolean[playersInfo.length];
@@ -69,17 +69,37 @@ public class GameManager {
         return true;
     }
 
-    public int[] getPlayerIds(int squareNr){
-        return null;
-    }
+    public int[] getPlayerIds(int squareNr) {
 
+        int[] nr = new int[6];
+        for (Players jogadore : jogadores) {
+            if (jogadore.posicao == squareNr) {
+                int a = 0;
+                nr[a] = jogadore.id;
+            }
+
+        }
+        return nr;
+    }
     public String[] getSquareInfo(int squareNr){
         return null;
     }
 
     public String[] getPlayerInfo(int playerId) {
-        return null;
-    }
+
+            String[] info = new String[4];
+            for (Players jogadore : jogadores) {
+                if (jogadore.id == playerId) {
+
+                    info[0] = "" + jogadore.id + "";
+                    info[1] = "" + jogadore.nome + "";
+                    info[2] = "" + jogadore.especie + "";
+                    info[3] = "" + jogadore.energia + "";
+                }
+
+            }
+            return info;
+        }
 
     public String[] getCurrentPlayerInfo(){
         return null;
@@ -106,7 +126,7 @@ public class GameManager {
     }
 
     public String whoIsTaborda(){
-        return "Professional wrestling";
+        return null;
     }
 
 }
