@@ -126,7 +126,7 @@ public class GameManager {
     }
 
     public String whoIsTaborda(){
-        return "professional wrestling";
+        return null;
     }
 
 }
