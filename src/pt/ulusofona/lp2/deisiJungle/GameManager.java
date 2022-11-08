@@ -9,9 +9,8 @@ import java.util.Objects;
 // numeros pares - Filipe
 
 public class GameManager {
+
     ArrayList<Players> jogadores = new ArrayList<>();
-    int energiaInicial = 0;
-    int initialPlayers;
 
     public String[][] getSpecies(){
 
@@ -66,15 +65,14 @@ public class GameManager {
             }
         }
 
-        if(initialPlayers < 2){ // tem que iniciar com 2 jogadores
+        if(jogadores.size() < 2){
             return false;
         }
 
-        energiaInicial = initialEnergy; // a energia inicial de cada jogador
-
-        initialPlayers = playersInfo.length;
-
-
+        for(Players players : jogadores){
+            players.posicao = 0;
+            players.energia = initialEnergy;
+        }
 
         return true;
     }
@@ -93,7 +91,6 @@ public class GameManager {
     }
     public String[] getSquareInfo(int squareNr){
 
-        String[] array = new String[6];
 
 
         return null;
