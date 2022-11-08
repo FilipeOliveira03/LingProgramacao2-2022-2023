@@ -12,6 +12,10 @@ public class GameManager {
 
     ArrayList<Players> jogadores = new ArrayList<>();
 
+    int turno = 0;
+
+    public GameManager(){}
+
     public String[][] getSpecies(){
 
         return new String[][]{ { "E", "Elefante","elefante.png" },{ "L", "Leão","leao.png" },{ "T", "Tartaruga","tartaruga.png" },{ "P", "Pássaro","passaro.png" },{ "Z", "Tarzan","tarzan.png" }, };
@@ -121,6 +125,19 @@ public class GameManager {
     }
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
+        if(!bypassValidations){
+            if(nrSquares < 1 || nrSquares > 6){
+                return false;
+            }
+        }
+
+        if(turno < jogadores.size()){
+            turno = 0;
+        }
+
+        turno ++;
+
+
         return true;
     }
 
