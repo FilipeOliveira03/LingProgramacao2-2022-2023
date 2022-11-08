@@ -10,6 +10,8 @@ import java.util.Objects;
 
 public class GameManager {
     ArrayList<Players> jogadores = new ArrayList<>();
+    int energiaInicial = 0;
+    int initialPlayers;
 
     public String[][] getSpecies(){
 
@@ -17,7 +19,6 @@ public class GameManager {
     }
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
-
 
         int countNrTarzan = 0;
         boolean[] verificarEspecie = new boolean[playersInfo.length];
@@ -35,36 +36,45 @@ public class GameManager {
                     }
                 }
 
-                if(playersInfo[countPlayer1][2].equals(getSpecies()[countPlayer2][1])){
+                if(playersInfo[countPlayer1][2].equals(getSpecies()[countPlayer2][1])){ // vai ser true sempre que houver pelo menos uma especie das especies que podem existir
                     verificarEspecie[countPlayer1] = true;
                 }
 
             }
 
-            if(playersInfo[countPlayer1][1].equals("") || playersInfo[countPlayer1][1] == null){
-
+            if(playersInfo[countPlayer1][1].equals("") || playersInfo[countPlayer1][1] == null){ // nomes jogadores a null ou vazio
                 return false;
             }
 
-            if(playersInfo[countPlayer1][2].equals("Z")){
+            if(playersInfo[countPlayer1][2].equals("Z")){ // só pode existir 1 tarzan
                 countNrTarzan++;
             }
 
         }
 
-        if(countNrTarzan < 1){
+        if(countNrTarzan < 1){ // verificar se tem mais que 1 tarzan
             return false;
         }
 
-        if(playersInfo.length * 2 >= jungleSize){
+        if(playersInfo.length * 2 >= jungleSize){ // Pelo menos duas posições por cada jogador
             return false;
         }
 
-        for (boolean verificar : verificarEspecie) {
+        for (boolean verificar : verificarEspecie) { // verificar se existe algum false
             if (!verificar) {
                 return false;
             }
         }
+
+        if(initialPlayers < 2){ // tem que iniciar com 2 jogadores
+            return false;
+        }
+
+        energiaInicial = initialEnergy; // a energia inicial de cada jogador
+
+        initialPlayers = playersInfo.length;
+
+
 
         return true;
     }
@@ -72,16 +82,20 @@ public class GameManager {
     public int[] getPlayerIds(int squareNr) {
 
         int[] nr = new int[6];
-        for (Players jogadore : jogadores) {
-            if (jogadore.posicao == squareNr) {
+        for (Players jogador : jogadores) {
+            if (jogador.posicao == squareNr) {
                 int a = 0;
-                nr[a] = jogadore.id;
+                nr[a] = jogador.id;
             }
 
         }
         return nr;
     }
     public String[] getSquareInfo(int squareNr){
+
+        String[] array = new String[6];
+
+
         return null;
     }
 
