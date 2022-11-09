@@ -38,10 +38,27 @@ public class GameManager {
 
                 if(countPlayer1 != countPlayer2){ // jogadores iguais
 
-                    int jogador1 = Integer.parseInt(playersInfo[countPlayer1][0]);
-                    int jogador2 = Integer.parseInt(playersInfo[countPlayer2][0]);
+                    String jogador1 = playersInfo[countPlayer1][0];
+                    if(!jogador1.matches("[0-9]*")){
+                        return false;
+                    }
 
-                    if(jogador1 == jogador2){ //verifica se o id é igual
+                    String jogador2 = playersInfo[countPlayer2][0];
+                    if(!jogador2.matches("[0-9]*")){
+                        return false;
+                    }
+
+                    int jogador1Int = Integer.parseInt(jogador1);
+                    if(jogador1Int < 0){
+                        return false;
+                    }
+
+                    int jogador2Int = Integer.parseInt(jogador2);
+                    if(jogador2Int < 0){
+                        return false;
+                    }
+
+                    if(jogador1Int == jogador2Int){ //verifica se o id é igual
                         return false;
                     }
                 }
