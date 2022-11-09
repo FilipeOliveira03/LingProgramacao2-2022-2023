@@ -17,6 +17,22 @@ public class GameManager {
     int jogadoresMaximos = 4;
     int meta;
 
+    public static boolean isNumeric(String s)
+    {
+        if (s == null || s.equals("")) {
+            return false;
+        }
+
+        for (int i = 0; i < s.length(); i++)
+        {
+            char c = s.charAt(i);
+            if (c < '0' || c > '9') {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public String[][] getSpecies(){
 
         return new String[][]{ { "E", "Elefante","elefante.png" },
@@ -39,12 +55,12 @@ public class GameManager {
                 if(countPlayer1 != countPlayer2){ // jogadores iguais
 
                     String jogador1 = playersInfo[countPlayer1][0];
-                    if(!jogador1.matches("[0-9]*")){
+                    if(!isNumeric(jogador1)){
                         return false;
                     }
 
                     String jogador2 = playersInfo[countPlayer2][0];
-                    if(!jogador2.matches("[0-9]*")){
+                    if(!isNumeric(jogador2)){
                         return false;
                     }
 

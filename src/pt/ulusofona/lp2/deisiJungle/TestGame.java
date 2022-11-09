@@ -26,7 +26,7 @@ public class TestGame {
     public void testCreateJungleIds(){
         GameManager manager = new GameManager();
         String[][] array = {
-                { "-2", "crp","Z" },
+                { "1", "crp","Z" },
                 { "2", "Leão","P" },
                 { "3", "Leão","Z" },
 
