@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
-
+import java.util.List;
 // numeros impares - Henrique
 // numeros pares - Filipe
 
@@ -13,7 +13,11 @@ public class GameManager {
 
     public String[][] getSpecies(){
 
-        return new String[][]{ { "E", "Elefante","elefante.png" },{ "L", "Leão","leao.png" },{ "T", "Tartaruga","tartaruga.png" },{ "P", "Pássaro","passaro.png" },{ "Z", "Tarzan","tarzan.png" }, };
+        return new String[][]{ { "E", "Elefante","elefante.png" },
+                { "L", "Leão","leao.png" },
+                { "T", "Tartaruga","tartaruga.png" },
+                { "P", "Pássaro","passaro.png" },
+                { "Z", "Tarzan","tarzan.png" }, };
     }
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
@@ -70,16 +74,22 @@ public class GameManager {
     }
 
     public int[] getPlayerIds(int squareNr) {
-
-        int[] nr = new int[6];
+        int b = 0;
+        ArrayList<Integer> nr = new ArrayList<>();
         for (Players jogadore : jogadores) {
             if (jogadore.posicao == squareNr) {
-                int a = 0;
-                nr[a] = jogadore.id;
+
+                nr.set(b, jogadore.id);
+                b++;
             }
 
         }
-        return nr;
+        Integer[] nrarray = nr.toArray(new Integer[0]);
+        int []nra=new int[nrarray.length];
+        for(int i=0;i<nrarray.length;i++){
+            nra[i]= nrarray[i];
+        }
+        return nra;
     }
     public String[] getSquareInfo(int squareNr){
         return null;
