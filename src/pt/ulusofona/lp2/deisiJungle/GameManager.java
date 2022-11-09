@@ -157,6 +157,8 @@ public class GameManager {
 
             if(squareNr == meta){
                 info[1] = "Meta";
+            }else {
+                info[1] = "Vazio";
             }
 
             if(nrJogadoresCasa == nrJogadorAtual){
