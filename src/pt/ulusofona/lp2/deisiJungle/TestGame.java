@@ -26,12 +26,14 @@ public class TestGame {
     public void testCreateJungleIds(){
         GameManager manager = new GameManager();
         String[][] array = {
-                { "1", "Elefante","E" },
-                { "2", "Leão","L" },
+                { "1", "crp","Z" },
+                { "2", "Leão","P" },
+                { "3", "Leão","Z" },
+
         };
 
         boolean resultadoReal = manager.createInitialJungle(8, 6, array);
-        boolean resultadoEsperado = true;
+        boolean resultadoEsperado = false;
 
         assertEquals("testCreateJungleIDS", resultadoEsperado, resultadoReal);
     }

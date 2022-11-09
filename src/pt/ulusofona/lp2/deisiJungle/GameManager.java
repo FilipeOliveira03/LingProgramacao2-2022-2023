@@ -38,7 +38,10 @@ public class GameManager {
 
                 if(countPlayer1 != countPlayer2){ // jogadores iguais
 
-                    if(playersInfo[countPlayer1][0].equals(playersInfo[countPlayer2][0])){ //verifica se o id é igual
+                    int jogador1 = Integer.parseInt(playersInfo[countPlayer1][0]);
+                    int jogador2 = Integer.parseInt(playersInfo[countPlayer2][0]);
+
+                    if(jogador1 == jogador2){ //verifica se o id é igual
                         return false;
                     }
                 }
@@ -55,7 +58,10 @@ public class GameManager {
                 countNrTarzan++;
             }
 
-            for (int countEspecie = 0; countEspecie < playersInfo.length; countEspecie++) {
+            for (int countEspecie = 0; countEspecie < getSpecies().length; countEspecie++) {
+
+                String Player = playersInfo[countPlayer][2];
+                String spec = getSpecies()[countEspecie][0];
 
                 if(playersInfo[countPlayer][2].equals(getSpecies()[countEspecie][0])){
                     // verifica se a especie é do getSpecies()
@@ -69,7 +75,7 @@ public class GameManager {
             return false;
         }
 
-        if(playersInfo.length < jogadoresMinimos && playersInfo.length > jogadoresMaximos) {// verifica o numero de jogadores
+        if(playersInfo.length < jogadoresMinimos || playersInfo.length > jogadoresMaximos) {// verifica o numero de jogadores
             return false;
         }
 
