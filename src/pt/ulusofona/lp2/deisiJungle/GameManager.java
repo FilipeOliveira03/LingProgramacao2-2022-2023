@@ -19,7 +19,11 @@ public class GameManager {
 
     public String[][] getSpecies(){
 
-        return new String[][]{ { "E", "Elefante","elefante.png" },{ "L", "Leão","leao.png" },{ "T", "Tartaruga","tartaruga.png" },{ "P", "Pássaro","passaro.png" },{ "Z", "Tarzan","tarzan.png" }, };
+        return new String[][]{ { "E", "Elefante","elefante.png" },
+                { "L", "Leão","leao.png" },
+                { "T", "Tartaruga","tartaruga.png" },
+                { "P", "Pássaro","passaro.png" },
+                { "Z", "Tarzan","tarzan.png" } };
     }
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
@@ -27,7 +31,6 @@ public class GameManager {
         int countNrTarzan = 0;
 
         boolean[] verificarEspecie = new boolean[playersInfo.length];
-        Arrays.fill(verificarEspecie, false);
 
         for (int countPlayer1 = 0; countPlayer1 < playersInfo.length; countPlayer1++) {
 
@@ -52,10 +55,11 @@ public class GameManager {
                 countNrTarzan++;
             }
 
-            for (int countEspecie = 0; countEspecie < playersInfo[countPlayer].length; countEspecie++) {
+            for (int countEspecie = 0; countEspecie < playersInfo.length; countEspecie++) {
 
                 if(playersInfo[countPlayer][2].equals(getSpecies()[countEspecie][0])){
                     // verifica se a especie é do getSpecies()
+
                     verificarEspecie[countPlayer] = true;
                 }
             }
@@ -69,7 +73,7 @@ public class GameManager {
             return false;
         }
 
-        if(playersInfo.length * 2 < jungleSize){ // verifica o mapa
+        if(playersInfo.length * 2 > jungleSize){ // verifica o mapa
             return false;
         }
 
