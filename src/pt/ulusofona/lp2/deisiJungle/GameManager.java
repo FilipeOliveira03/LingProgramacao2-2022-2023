@@ -30,38 +30,42 @@ public class GameManager {
 
             for (int countPlayer2 = 0; countPlayer2 < playersInfo.length; countPlayer2++) {
 
-                if(countPlayer1 != countPlayer2){
+                if(countPlayer1 != countPlayer2){ // jogadores iguais
 
-                    if(playersInfo[countPlayer1][0].equals(playersInfo[countPlayer2][0])){ // se os ids forem iguais
+                    if(playersInfo[countPlayer1][0].equals(playersInfo[countPlayer2][0])){ //verifica se o id é igual
                         return false;
                     }
                 }
-
-                if(playersInfo[countPlayer1][2].equals(getSpecies()[countPlayer2][1])){ // verifica se a especie é do getSpecies()
-                    verificarEspecie[countPlayer1] = true;
-                }
-
             }
+        }
 
-            if(playersInfo[countPlayer1][1].equals("") || playersInfo[countPlayer1][1] == null){ //nome null ou vazio
+        for (int countPlayer = 0; countPlayer < playersInfo.length; countPlayer++) {
+
+            if(playersInfo[countPlayer][1].equals("") || playersInfo[countPlayer][1] == null){ //nome null ou vazio
                 return false;
             }
 
-            if(playersInfo[countPlayer1][2].equals("Z")){ // so pode existir 1 tarzan
+            if(playersInfo[countPlayer][2].equals("Z")){ // so pode existir 1 tarzan
                 countNrTarzan++;
             }
 
+            for (int countEspecie = 0; countEspecie < playersInfo[countPlayer].length; countEspecie++) {
+
+                if(playersInfo[countPlayer][2].equals(getSpecies()[countEspecie][0])){ // verifica se a especie é do getSpecies()
+                    verificarEspecie[countPlayer] = true;
+                }
+            }
         }
 
-        if(countNrTarzan < 1){ // verifica se só há 1
-            return false;
-        }
-
-        if(playersInfo.length * 2 >= jungleSize){ // verifica o mapa
+        if(countNrTarzan > 1){ // verifica se só há 1
             return false;
         }
 
         if(playersInfo.length < jogadoresMinimos && playersInfo.length > jogadoresMaximos) { // verifica o numero de jogadores
+            return false;
+        }
+
+        if(playersInfo.length * 2 < jungleSize){ // verifica o mapa
             return false;
         }
 
@@ -71,13 +75,13 @@ public class GameManager {
             }
         }
 
-        for (String[] strings : playersInfo) {
+        for (String[] info : playersInfo) {
 
             Player jogador = new Player();
 
-            int id = Integer.parseInt(strings[0]);
-            String nome = strings[1];
-            String especie = strings[2];
+            int id = Integer.parseInt(info[0]);
+            String nome = info[1];
+            String especie = info[2];
 
             jogador.adicionaId(id);
             jogador.adicionaNome(nome);
