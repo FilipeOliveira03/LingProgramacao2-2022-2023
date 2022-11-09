@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 // numeros impares - Henrique
 // numeros pares - Filipe
@@ -10,9 +11,11 @@ import java.util.Arrays;
 public class GameManager {
 
     ArrayList<Player> jogadores = new ArrayList<>();
+    HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
 
     int jogadoresMinimos = 2;
     int jogadoresMaximos = 4;
+    int meta;
 
     public String[][] getSpecies(){
 
@@ -51,7 +54,8 @@ public class GameManager {
 
             for (int countEspecie = 0; countEspecie < playersInfo[countPlayer].length; countEspecie++) {
 
-                if(playersInfo[countPlayer][2].equals(getSpecies()[countEspecie][0])){ // verifica se a especie é do getSpecies()
+                if(playersInfo[countPlayer][2].equals(getSpecies()[countEspecie][0])){
+                    // verifica se a especie é do getSpecies()
                     verificarEspecie[countPlayer] = true;
                 }
             }
@@ -61,7 +65,7 @@ public class GameManager {
             return false;
         }
 
-        if(playersInfo.length < jogadoresMinimos && playersInfo.length > jogadoresMaximos) { // verifica o numero de jogadores
+        if(playersInfo.length < jogadoresMinimos && playersInfo.length > jogadoresMaximos) {// verifica o numero de jogadores
             return false;
         }
 
@@ -74,6 +78,13 @@ public class GameManager {
                 return false;
             }
         }
+
+        for (int preencherHash = 0; preencherHash < jungleSize; preencherHash++) {
+            ArrayList<Player> players = new ArrayList<>();
+            tabuleiro.put(preencherHash, players);
+        }
+
+        meta = jungleSize;
 
         for (String[] info : playersInfo) {
 
@@ -88,7 +99,9 @@ public class GameManager {
             jogador.adicionaEspecie(especie);
             jogador.adicionaEnergiaAtual(initialEnergy);
 
+
             jogadores.add(jogador);
+            tabuleiro.get(0).add(jogador);
         }
 
         return true;
