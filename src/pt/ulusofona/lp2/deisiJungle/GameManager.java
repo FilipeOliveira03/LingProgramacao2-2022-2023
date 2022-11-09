@@ -17,7 +17,7 @@ public class GameManager {
     int jogadoresMaximos = 4;
     int meta;
 
-    public static boolean isNumeric(String s)
+    public boolean isNumeric(String s)
     {
         if (s == null || s.equals("")) {
             return false;
@@ -54,29 +54,17 @@ public class GameManager {
 
                 if(countPlayer1 != countPlayer2){ // jogadores iguais
 
-                    String jogador1 = playersInfo[countPlayer1][0];
-                    if(!isNumeric(jogador1)){
+                    if(!isNumeric(playersInfo[countPlayer1][0]) || !isNumeric(playersInfo[countPlayer2][0])){
                         return false;
                     }
 
-                    String jogador2 = playersInfo[countPlayer2][0];
-                    if(!isNumeric(jogador2)){
-                        return false;
-                    }
+                    int jogador1Int = Integer.parseInt(playersInfo[countPlayer1][0]);
+                    if(jogador1Int < 0){ return false; }
 
-                    int jogador1Int = Integer.parseInt(jogador1);
-                    if(jogador1Int < 0){
-                        return false;
-                    }
+                    int jogador2Int = Integer.parseInt(playersInfo[countPlayer2][0]);
+                    if(jogador2Int < 0){ return false;}
 
-                    int jogador2Int = Integer.parseInt(jogador2);
-                    if(jogador2Int < 0){
-                        return false;
-                    }
-
-                    if(jogador1Int == jogador2Int){ //verifica se o id é igual
-                        return false;
-                    }
+                    if(jogador1Int == jogador2Int){ return false; }//verifica se o id é igual
                 }
             }
         }
@@ -87,14 +75,9 @@ public class GameManager {
                 return false;
             }
 
-            if(playersInfo[countPlayer][2].equals("Z")){ // so pode existir 1 tarzan
-                countNrTarzan++;
-            }
+            if(playersInfo[countPlayer][2].equals("Z")){ countNrTarzan++;}// so pode existir 1 tarzan
 
             for (int countEspecie = 0; countEspecie < getSpecies().length; countEspecie++) {
-
-                String Player = playersInfo[countPlayer][2];
-                String spec = getSpecies()[countEspecie][0];
 
                 if(playersInfo[countPlayer][2].equals(getSpecies()[countEspecie][0])){
                     // verifica se a especie é do getSpecies()
@@ -104,15 +87,10 @@ public class GameManager {
             }
         }
 
-        if(countNrTarzan > 1){ // verifica se só há 1
-            return false;
-        }
+        if(countNrTarzan > 1 || playersInfo.length * 2 > jungleSize){ return false; } // verifica se só há 1
+
 
         if(playersInfo.length < jogadoresMinimos || playersInfo.length > jogadoresMaximos) {// verifica o numero de jogadores
-            return false;
-        }
-
-        if(playersInfo.length * 2 > jungleSize){ // verifica o mapa
             return false;
         }
 
@@ -133,13 +111,9 @@ public class GameManager {
 
             Player jogador = new Player();
 
-            int id = Integer.parseInt(info[0]);
-            String nome = info[1];
-            String especie = info[2];
-
-            jogador.adicionaId(id);
-            jogador.adicionaNome(nome);
-            jogador.adicionaEspecie(especie);
+            jogador.adicionaId(Integer.parseInt(info[0]));
+            jogador.adicionaNome(info[1]);
+            jogador.adicionaEspecie(info[2]);
             jogador.adicionaEnergiaAtual(initialEnergy);
 
 
