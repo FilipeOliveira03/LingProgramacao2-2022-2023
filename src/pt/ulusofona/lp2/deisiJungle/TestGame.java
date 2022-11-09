@@ -38,5 +38,22 @@ public class TestGame {
         assertEquals("testCreateJungleIDS", resultadoEsperado, resultadoReal);
     }
 
+    @Test
+    public void testGetSquareInfo(){
+        GameManager manager = new GameManager();
+        String[][] array = {
+                { "1", "crp","Z" },
+                { "2", "Leão","P" },
+        };
+
+        manager.createInitialJungle(8, 6, array);
+        String[] info = manager.getSquareInfo(0);
+
+        String resultadoReal = info[1];
+        String resultadoEsperado = "Vazio";
+
+        assertEquals("testGetSquareInfo", resultadoEsperado, resultadoReal);
+    }
+
 
 }
