@@ -17,8 +17,7 @@ public class GameManager {
     int jogadoresMaximos = 4;
     int meta;
 
-    public boolean isNumeric(String s)
-    {
+    public boolean isNumeric(String s) {
         if (s == null || s.equals("")) {
             return false;
         }
@@ -62,7 +61,7 @@ public class GameManager {
                     if(jogador1Int < 0){ return false; }
 
                     int jogador2Int = Integer.parseInt(playersInfo[countPlayer2][0]);
-                    if(jogador2Int < 0){ return false;}
+                    if(jogador2Int < 0){ return false; }
 
                     if(jogador1Int == jogador2Int){ return false; }//verifica se o id é igual
                 }
@@ -71,9 +70,7 @@ public class GameManager {
 
         for (int countPlayer = 0; countPlayer < playersInfo.length; countPlayer++) {
 
-            if(playersInfo[countPlayer][1].equals("") || playersInfo[countPlayer][1] == null){ //nome null ou vazio
-                return false;
-            }
+            if(playersInfo[countPlayer][1].equals("") || playersInfo[countPlayer][1] == null){ return false; }//nome null ou vazio
 
             if(playersInfo[countPlayer][2].equals("Z")){ countNrTarzan++;}// so pode existir 1 tarzan
 
@@ -90,14 +87,10 @@ public class GameManager {
         if(countNrTarzan > 1 || playersInfo.length * 2 > jungleSize){ return false; } // verifica se só há 1
 
 
-        if(playersInfo.length < jogadoresMinimos || playersInfo.length > jogadoresMaximos) {// verifica o numero de jogadores
-            return false;
-        }
+        if(playersInfo.length < jogadoresMinimos || playersInfo.length > jogadoresMaximos) { return false; }// verifica o numero de jogadores
 
         for (boolean verificar : verificarEspecie) { //
-            if (!verificar) {
-                return false;
-            }
+            if (!verificar) { return false; }
         }
 
         for (int preencherHash = 0; preencherHash < jungleSize; preencherHash++) {
@@ -137,7 +130,48 @@ public class GameManager {
         return nr;
     }
     public String[] getSquareInfo(int squareNr){
-        return null;
+
+        if(squareNr > tabuleiro.size()){
+            return null;
+        }
+
+        String[] info = new String[3];
+
+        ArrayList<Player> jogadores = tabuleiro.get(squareNr);
+        int nrJogadorAtual = 0;
+
+        for (Player jogador : jogadores) {
+
+            String especie = jogador.especie;
+            int id = jogador.id;
+            int nrJogadoresCasa = jogadores.size();
+            String ids = "";
+
+            switch (especie) {
+                case "E" -> info[0] = "elephant.png";
+                case "L" -> info[0] = "lion.png";
+                case "T" -> info[0] = "turtle.png";
+                case "P" -> info[0] = "bird.png";
+                case "Z" -> info[0] = "tarzan.png";
+            }
+
+            if(squareNr == meta){
+                info[1] = "Meta";
+            }
+
+            if(nrJogadoresCasa == nrJogadorAtual){
+                ids += id;
+            }else{
+                ids += id + ",";
+            }
+
+            info[2] = ids;
+
+            nrJogadorAtual++;
+        }
+
+
+        return info;
     }
 
     public String[] getPlayerInfo(int playerId) {
@@ -157,6 +191,9 @@ public class GameManager {
         }
 
     public String[] getCurrentPlayerInfo(){
+
+
+
         return null;
     }
 
