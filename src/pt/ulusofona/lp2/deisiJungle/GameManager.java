@@ -131,7 +131,7 @@ public class GameManager {
     }
     public String[] getSquareInfo(int squareNr){
 
-        if(squareNr > meta || squareNr < 0){
+        if(squareNr > meta && squareNr < 0 && tabuleiro.get(squareNr) == null){
             return null;
         }
 
