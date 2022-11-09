@@ -3,14 +3,13 @@ package pt.ulusofona.lp2.deisiJungle;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 // numeros impares - Henrique
 // numeros pares - Filipe
 
 public class GameManager {
 
-    ArrayList<Players> jogadores = new ArrayList<>();
+    ArrayList<Player> jogadores = new ArrayList<>();
 
     int jogadoresMinimos = 2;
     int jogadoresMaximos = 4;
@@ -66,17 +65,25 @@ public class GameManager {
             return false;
         }
 
-        for (boolean verificar : verificarEspecie) {
+        for (boolean verificar : verificarEspecie) { //
             if (!verificar) {
                 return false;
             }
         }
 
         for (String[] strings : playersInfo) {
+
+            Player jogador = new Player();
+
             int id = Integer.parseInt(strings[0]);
             String nome = strings[1];
             String especie = strings[2];
-            Players jogador = new Players(id, nome, especie);
+
+            jogador.adicionaId(id);
+            jogador.adicionaNome(nome);
+            jogador.adicionaEspecie(especie);
+            jogador.adicionaEnergiaAtual(initialEnergy);
+
             jogadores.add(jogador);
         }
 
@@ -86,10 +93,10 @@ public class GameManager {
     public int[] getPlayerIds(int squareNr) {
 
         int[] nr = new int[6];
-        for (Players jogadore : jogadores) {
-            if (jogadore.posicao == squareNr) {
+        for (Player jogador : jogadores) {
+            if (jogador.posicaoAtual == squareNr) {
                 int a = 0;
-                nr[a] = jogadore.id;
+                nr[a] = jogador.id;
             }
 
         }
@@ -102,13 +109,13 @@ public class GameManager {
     public String[] getPlayerInfo(int playerId) {
 
             String[] info = new String[4];
-            for (Players jogadore : jogadores) {
-                if (jogadore.id == playerId) {
+            for (Player jogador : jogadores) {
+                if (jogador.id == playerId) {
 
-                    info[0] = "" + jogadore.id + "";
-                    info[1] = "" + jogadore.nome + "";
-                    info[2] = "" + jogadore.especie + "";
-                    info[3] = "" + jogadore.energia + "";
+                    info[0] = "" + jogador.id + "";
+                    info[1] = "" + jogador.nome + "";
+                    info[2] = "" + jogador.especie + "";
+                    info[3] = "" + jogador.energiaAtual + "";
                 }
 
             }
