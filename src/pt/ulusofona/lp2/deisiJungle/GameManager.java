@@ -118,14 +118,14 @@ public class GameManager {
     }
 
     public int[] getPlayerIds(int squareNr) {
-        int[]arrayvazio=new int[0];
-        if(squareNr > meta || squareNr < 1 || tabuleiro.get(squareNr) == null){
-
+        int[]arrayvazio=new int[1];
+        if(squareNr > meta || squareNr < 0 || tabuleiro.get(squareNr) == null){
             return arrayvazio;
         }
        int jogadorescount=0;
         ArrayList<Integer> nr = new ArrayList<>();
-        for (Player jogador : jogadores) {
+        for (int i = 0; i < jogadores.size(); i++) {
+            Player jogador = jogadores.get(i);
             if (jogador.posicaoAtual == squareNr) {
                 nr.add(jogador.id);
                 jogadorescount++;
