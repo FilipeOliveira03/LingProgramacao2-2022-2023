@@ -145,6 +145,7 @@ public class GameManager {
         return  nrarray;
 
     }
+
     public String[] getSquareInfo(int squareNr){ // falta qualquer coisa
 
         if(squareNr > meta || squareNr < 0 || tabuleiro.get(squareNr) == null){
