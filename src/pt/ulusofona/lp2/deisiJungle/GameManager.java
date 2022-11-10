@@ -34,10 +34,10 @@ public class GameManager {
 
     public String[][] getSpecies(){
 
-        return new String[][]{ { "E", "Elefante","elefante.png" },
-                { "L", "Leão","leao.png" },
-                { "T", "Tartaruga","tartaruga.png" },
-                { "P", "Pássaro","passaro.png" },
+        return new String[][]{ { "E", "Elefante","elephant.png" },
+                { "L", "Leão","lion.png" },
+                { "T", "Tartaruga","turtle.png" },
+                { "P", "Pássaro","bird.png" },
                 { "Z", "Tarzan","tarzan.png" } };
     }
 
@@ -118,16 +118,32 @@ public class GameManager {
     }
 
     public int[] getPlayerIds(int squareNr) {
+        int[]arrayvazio=new int[0];
+        if(squareNr > meta || squareNr < 1 || tabuleiro.get(squareNr) == null){
 
-        int[] nr = new int[6];
+            return arrayvazio;
+        }
+       int jogadorescount=0;
+        ArrayList<Integer> nr = new ArrayList<>();
         for (Player jogador : jogadores) {
             if (jogador.posicaoAtual == squareNr) {
-                int a = 0;
-                nr[a] = jogador.id;
+                nr.add(jogador.id);
+                jogadorescount++;
             }
 
         }
-        return nr;
+
+        if(jogadorescount==0){
+            return arrayvazio;
+        }
+
+        int[] nrarray= new int[nr.size()];
+        for (int i = 0; i < nr.size(); i++) {
+            nrarray[i]=nr.get(i);
+        }
+
+        return  nrarray;
+
     }
     public String[] getSquareInfo(int squareNr){ // falta qualquer coisa
 
