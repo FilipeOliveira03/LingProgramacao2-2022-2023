@@ -118,24 +118,21 @@ public class GameManager {
     }
 
     public int[] getPlayerIds(int squareNr) {
-
         if(squareNr > meta || squareNr < 0 || tabuleiro.get(squareNr) == null){
             return new int[0];
         }
         int countjogadores=0;
-        ArrayList<Integer> nrjogadores = new ArrayList<>();
-        for (Player jogadore : jogadores) {
-            if (jogadore.posicaoAtual == squareNr) {
-                nrjogadores.add(jogadore.id);
+        int[] returnArray= new int[jogadores.size()];
+        int count=0;
+        for (int i = 0; i < jogadores.size(); i++) {
+            if (jogadores.get(i).posicaoAtual == squareNr) {
+                returnArray[count] = jogadores.get(i).id;
+                count++;
                 countjogadores++;
             }
         }
         if(countjogadores==0){
             return new int[0];
-        }
-        int[] returnArray= new int[nrjogadores.size()];
-        for (int i = 0; i < nrjogadores.size(); i++) {
-            returnArray[i]=nrjogadores.get(i);
         }
         return  returnArray;
     }
