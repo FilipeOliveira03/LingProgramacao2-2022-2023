@@ -1,6 +1,8 @@
 package pt.ulusofona.lp2.deisiJungle;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 public class TestGame {
@@ -52,4 +54,31 @@ public class TestGame {
 
         assertEquals("testGetSquareInfo", resultadoEsperado, resultadoReal);
     }
+    @Test
+    public void TestGetPlayerIds(){
+        String[][] array = {
+                { "1", "crp","Z" },
+                { "2", "Leão","P" },
+        };
+        GameManager manager = new GameManager();
+        manager.createInitialJungle(8, 6, array);
+        Player p1 = new Player();
+        p1.id= 1;
+        p1.posicaoAtual= 1;
+        int [] a = new int[1];
+        a[0]=p1.id;
+        int [] resultadoReal = manager.getPlayerIds(90);
+
+
+        System.out.println("epserado"+a[0]+"");
+        System.out.println("real"+resultadoReal[0]+"");
+
+
+
+    }
+
+
+
+
+
 }

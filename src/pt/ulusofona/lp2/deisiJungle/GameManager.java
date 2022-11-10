@@ -119,13 +119,13 @@ public class GameManager {
 
     public int[] getPlayerIds(int squareNr) {
         int[]arrayvazio=new int[0];
-        if(squareNr > meta || squareNr < 1 || tabuleiro.get(squareNr) == null){
-
+        if(squareNr > meta || squareNr < 0 || tabuleiro.get(squareNr) == null){
             return arrayvazio;
         }
        int jogadorescount=0;
         ArrayList<Integer> nr = new ArrayList<>();
-        for (Player jogador : jogadores) {
+        for (int i = 0; i < jogadores.size(); i++) {
+            Player jogador = jogadores.get(i);
             if (jogador.posicaoAtual == squareNr) {
                 nr.add(jogador.id);
                 jogadorescount++;
@@ -201,10 +201,11 @@ public class GameManager {
                 info[1] = "" + jogador.nome + "";
                 info[2] = "" + jogador.especie + "";
                 info[3] = "" + jogador.energiaAtual + "";
+                return info;
             }
 
         }
-        return info;
+        return null;
     }
 
     public String[] getCurrentPlayerInfo(){
