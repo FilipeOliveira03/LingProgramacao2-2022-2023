@@ -123,11 +123,11 @@ public class GameManager {
             return arrayvazio;
         }
        int jogadorescount=0;
-        ArrayList<Integer> nr = new ArrayList<>();
+        ArrayList<Integer> nra = new ArrayList<>();
         for (int i = 0; i < jogadores.size(); i++) {
             Player jogador = jogadores.get(i);
             if (jogador.posicaoAtual == squareNr) {
-                nr.add(jogador.id);
+                nra.add(jogador.id);
                 jogadorescount++;
             }
 
@@ -137,9 +137,9 @@ public class GameManager {
             return arrayvazio;
         }
 
-        int[] nrarray= new int[nr.size()];
-        for (int i = 0; i < nr.size(); i++) {
-            nrarray[i]=nr.get(i);
+        int[] nrarray= new int[nra.size()];
+        for (int i = 0; i < nra.size(); i++) {
+            nrarray[i]=nra.get(i);
         }
 
         return  nrarray;
