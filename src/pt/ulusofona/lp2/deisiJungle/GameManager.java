@@ -145,23 +145,22 @@ public class GameManager {
         return  nrarray;
 
     }
+
     public String[] getSquareInfo(int squareNr){ // falta qualquer coisa
 
         if(squareNr > meta || squareNr < 0 || tabuleiro.get(squareNr) == null){
             return null;
         }
+        int nrJogadorAtual = 1;
+        StringBuilder ids = new StringBuilder();
 
         String[] info = new String[3];
 
-        ArrayList<Player> jogadores = tabuleiro.get(squareNr);
-        int nrJogadorAtual = 0;
+        ArrayList<Player> jogadores = tabuleiro.get(squareNr);;
 
         for (Player jogador : jogadores) {
 
             String especie = jogador.especie;
-            int id = jogador.id;
-            int nrJogadoresCasa = jogadores.size();
-            String ids = "";
 
             switch (especie) {
                 case "E" -> info[0] = "elephant.png";
@@ -171,23 +170,24 @@ public class GameManager {
                 case "Z" -> info[0] = "tarzan.png";
             }
 
-            if(squareNr == meta){
-                info[1] = "Meta";
-            }else {
-                info[1] = "Vazio";
-            }
+            String id = String.valueOf(jogador.id);
 
-            if(nrJogadoresCasa == nrJogadorAtual){
-                ids += id;
+            if(nrJogadorAtual == jogadores.size()){
+                ids.append(id);
             }else{
-                ids += id + ",";
+                ids.append(id).append(",");
             }
-
-            info[2] = ids;
 
             nrJogadorAtual++;
         }
 
+        if(squareNr == meta){
+            info[1] = "Meta";
+        }else {
+            info[1] = "Vazio";
+        }
+
+        info[2] = ids.toString();
 
         return info;
     }

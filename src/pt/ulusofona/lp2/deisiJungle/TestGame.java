@@ -48,10 +48,9 @@ public class TestGame {
         };
 
         manager.createInitialJungle(8, 6, array);
-        String[] info = manager.getSquareInfo(0);
+        String[] resultadoReal = manager.getSquareInfo(0);
 
-        String resultadoReal = info[1];
-        String resultadoEsperado = "Vazio";
+        String[] resultadoEsperado = {"bird.png", "Vazio", "1,2"};
 
         assertEquals("testGetSquareInfo", resultadoEsperado, resultadoReal);
     }
