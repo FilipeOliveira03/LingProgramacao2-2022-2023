@@ -14,7 +14,7 @@ public class GameManager {
     int jogadoresMinimos = 2;
     int jogadoresMaximos = 4;
     int meta;
-    int turno = 1;
+    int turno = 0;
 
     public boolean isNumeric(String s) {
         if (s == null || s.equals("")) {
@@ -252,8 +252,8 @@ public class GameManager {
 
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
-        if(turno == jogadores.size()){
-            turno = 1;
+        if(turno == jogadores.size() - 1){
+            turno = 0;
         }else{
             turno++;
         }
