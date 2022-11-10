@@ -113,7 +113,7 @@ public class GameManager {
             tabuleiro.get(0).add(jogador);
         }
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
+       // jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
         return true;
     }
 
