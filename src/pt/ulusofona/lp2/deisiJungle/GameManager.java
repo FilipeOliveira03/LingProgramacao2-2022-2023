@@ -118,32 +118,26 @@ public class GameManager {
     }
 
     public int[] getPlayerIds(int squareNr) {
-        int[]arrayvazio=new int[0];
+
         if(squareNr > meta || squareNr < 0 || tabuleiro.get(squareNr) == null){
-            return arrayvazio;
+            return new int[0];
         }
-       int jogadorescount=0;
-        ArrayList<Integer> nra = new ArrayList<>();
-        for (int i = 0; i < jogadores.size(); i++) {
-            Player jogador = jogadores.get(i);
-            if (jogador.posicaoAtual == squareNr) {
-                nra.add(jogador.id);
-                jogadorescount++;
+        int countjogadores=0;
+        ArrayList<Integer> nrjogadores = new ArrayList<>();
+        for (Player jogadore : jogadores) {
+            if (jogadore.posicaoAtual == squareNr) {
+                nrjogadores.add(jogadore.id);
+                countjogadores++;
             }
-
         }
-
-        if(jogadorescount==0){
-            return arrayvazio;
+        if(countjogadores==0){
+            return new int[0];
         }
-
-        int[] nrarray= new int[nra.size()];
-        for (int i = 0; i < nra.size(); i++) {
-            nrarray[i]=nra.get(i);
+        int[] returnArray= new int[nrjogadores.size()];
+        for (int i = 0; i < nrjogadores.size(); i++) {
+            returnArray[i]=nrjogadores.get(i);
         }
-
-        return  nrarray;
-
+        return  returnArray;
     }
 
     public String[] getSquareInfo(int squareNr){ // falta qualquer coisa
