@@ -68,7 +68,7 @@ public class TestGame {
         p1.posicaoAtual= 1;
         int [] a = new int[1];
         a[0]=p1.id;
-        int [] resultadoReal = manager.getPlayerIds(0);
+        int [] resultadoReal = manager.getPlayerIds(90);
 
 
         System.out.println("epserado"+a[0]+"");

@@ -118,7 +118,7 @@ public class GameManager {
     }
 
     public int[] getPlayerIds(int squareNr) {
-        int[]arrayvazio=new int[1];
+        int[]arrayvazio=new int[0];
         if(squareNr > meta || squareNr < 0 || tabuleiro.get(squareNr) == null){
             return arrayvazio;
         }
@@ -202,10 +202,11 @@ public class GameManager {
                 info[1] = "" + jogador.nome + "";
                 info[2] = "" + jogador.especie + "";
                 info[3] = "" + jogador.energiaAtual + "";
+                return info;
             }
 
         }
-        return info;
+        return null;
     }
 
     public String[] getCurrentPlayerInfo(){
