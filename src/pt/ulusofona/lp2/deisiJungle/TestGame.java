@@ -114,14 +114,11 @@ public class TestGame {
 
         };
         manager.createInitialJungle(8, 6, array);
-        String[][] resultadoReal = manager.getPlayersInfo();
+        manager.getPlayersInfo();
+        String[] resultadoReal = manager.getCurrentPlayerInfo();
 
-        String[][] resultadoEsperado = {
-                { "11", "joao", "E","6" },
-                { "2", "Leão", "L","6" },
-                { "3", "Leão", "L","6" },
-                { "23", "Leão", "L","6" },
-        };
+        String[] resultadoEsperado = { "2", "Leão", "L","6" };
+
         assertEquals("testgetPlayersInfo2", resultadoEsperado, resultadoReal);
     }
 

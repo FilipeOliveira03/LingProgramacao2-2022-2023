@@ -14,7 +14,7 @@ public class GameManager {
     int jogadoresMinimos = 2;
     int jogadoresMaximos = 4;
     int meta;
-    int turno = 0;
+    int turno = 1;
 
     public boolean isNumeric(String s) {
         if (s == null || s.equals("")) {
@@ -210,7 +210,25 @@ public class GameManager {
     }
 
     public String[] getCurrentPlayerInfo(){
-        return null;
+
+        String[] jogador = new String[4];
+
+        String[][] jogadores = getPlayersInfo();
+
+        int pos = turno - 1;
+
+        jogador[0] = jogadores[pos][0];
+        jogador[1] = jogadores[pos][1];
+        jogador[2] = jogadores[pos][2];
+        jogador[3] = jogadores[pos][3];
+
+        if(turno == jogadores.length - 1){
+            turno = 1;
+        }else{
+            turno++;
+        }
+
+        return jogador;
     }
 
     public String[][] getPlayersInfo(){
