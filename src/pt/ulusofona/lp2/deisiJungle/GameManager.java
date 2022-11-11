@@ -117,7 +117,6 @@ public class GameManager {
             tabuleiro.get(1).add(jogador);
         }
 
-       // jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
         return true;
     }
 
@@ -224,6 +223,8 @@ public class GameManager {
     }
 
     public String[][] getPlayersInfo(){
+
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
 
         String[][] array = new String[jogadores.size()][4];
         int count = 0;
