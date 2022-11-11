@@ -198,9 +198,9 @@ public class GameManager {
             }
         }
 
-        if(!verificar){
-            return null;
-        }
+//        if(!verificar){
+//            return null;
+//        }
 
         return array;
     }
