@@ -69,10 +69,6 @@ public class GameManager {
 
         for (int countPlayer = 0; countPlayer < playersInfo.length; countPlayer++) {
 
-            if(playersInfo[countPlayer][0] == null){ return false; }
-
-            if(playersInfo[countPlayer][2] == null){ return false; }
-
             if(playersInfo[countPlayer][1] == null || playersInfo[countPlayer][1].equals("")){ return false; }//nome null ou vazio
 
             if(playersInfo[countPlayer][2].equals("Z")){ countNrTarzan++;}// so pode existir 1 tarzan
@@ -200,6 +196,10 @@ public class GameManager {
                 array[3] = String.valueOf(jogador.energiaAtual);
                 verificar = true;
             }
+        }
+
+        if(!verificar){
+            return null;
         }
 
         return array;
