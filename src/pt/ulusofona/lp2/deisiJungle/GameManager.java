@@ -119,8 +119,8 @@ public class GameManager {
 
     public int[] getPlayerIds(int squareNr) {
 
-        if(squareNr > meta || squareNr < 0 || tabuleiro.get(squareNr) == null){
-            return new int[0];
+        if(squareNr > meta || squareNr < 0){
+            return new int[1];
         }
 
         int nrJogadoresCasa = tabuleiro.get(squareNr).size();
@@ -187,11 +187,9 @@ public class GameManager {
         String[] array = new String[4];
         boolean verificar = false;
 
-        for (int countPlayers = 0; countPlayers < jogadores.size(); countPlayers++) {
+        for (Player jogador : jogadores) {
 
-            Player jogador = jogadores.get(countPlayers);
-
-            if(playerId == jogador.id){
+            if (playerId == jogador.id) {
                 array[0] = String.valueOf(jogador.id);
                 array[1] = jogador.nome;
                 array[2] = jogador.especie;
@@ -199,6 +197,7 @@ public class GameManager {
                 verificar = true;
             }
         }
+
         if(!verificar){
             return null;
         }

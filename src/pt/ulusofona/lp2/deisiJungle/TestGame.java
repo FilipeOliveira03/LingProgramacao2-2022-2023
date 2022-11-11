@@ -69,7 +69,7 @@ public class TestGame {
                 { "1", "crp","Z" },
                 { "2", "Leão","P" },
                 { "3", "Leão","P" },
-                { "4", "Leão","P" },
+
         };
 
         GameManager manager = new GameManager();
@@ -79,7 +79,7 @@ public class TestGame {
         System.out.println(resultadoReal[0]);
         System.out.println(resultadoReal[1]);
         System.out.println(resultadoReal[2]);
-        System.out.println(resultadoReal[3]);
+
         int [] resultadoEsperado = new int[]{1,2,3,4};
 
         assertEquals("TestGetPlayerIds", resultadoEsperado, resultadoReal);
