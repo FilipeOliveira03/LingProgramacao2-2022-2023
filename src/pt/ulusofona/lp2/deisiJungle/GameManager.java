@@ -92,7 +92,7 @@ public class GameManager {
             if (!verificar) { return false; }
         }
 
-        for (int preencherHash = 0; preencherHash < jungleSize; preencherHash++) {
+        for (int preencherHash = 1; preencherHash <= jungleSize; preencherHash++) {
             ArrayList<Player> players = new ArrayList<>();
             tabuleiro.put(preencherHash, players);
         }
@@ -110,7 +110,7 @@ public class GameManager {
 
 
             jogadores.add(jogador);
-            tabuleiro.get(0).add(jogador);
+            tabuleiro.get(1).add(jogador);
         }
 
         jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
@@ -120,7 +120,7 @@ public class GameManager {
     public int[] getPlayerIds(int squareNr) {
 
         if(squareNr > meta || squareNr < 0){
-            return new int[1];
+            return new int[0];
         }
 
         int nrJogadoresCasa = tabuleiro.get(squareNr).size();

@@ -86,7 +86,21 @@ public class TestGame {
 
     }
 
+    @Test
+    public void testgetPlayersInfo(){
+        GameManager manager = new GameManager();
+        String[][] array = {
+                { "11", "joao","E" },
+                { "2", "Leão","L" },
 
+        };
+        manager.createInitialJungle(8, 6, array);
+        String[] resultadoReal = manager.getPlayerInfo(25);
+
+        String[] resultadoEsperado = null;
+
+        assertEquals("testCreateJungle", resultadoEsperado, resultadoReal);
+    }
 
 
 
