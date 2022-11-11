@@ -64,29 +64,6 @@ public class TestGame {
         assertEquals("testGetSquareInfo", resultadoEsperado, resultadoReal);
     }
 
-//    @Test
-//    public void TestGetPlayerIds(){
-//        String[][] array = {
-//                { "1", "crp","Z" },
-//                { "2", "Leão","P" },
-//                { "3", "Leão","P" },
-//
-//        };
-//
-//        GameManager manager = new GameManager();
-//        manager.createInitialJungle(8, 6, array);
-//
-//        int [] resultadoReal = manager.getPlayerIds(1);
-//        System.out.println(resultadoReal[0]);
-//        System.out.println(resultadoReal[1]);
-//        System.out.println(resultadoReal[2]);
-//
-//        int [] resultadoEsperado = new int[]{1,2,3,4};
-//
-//        assertEquals("TestGetPlayerIds", resultadoEsperado, resultadoReal);
-//
-//    }
-
     @Test
     public void testgetPlayerInfo(){
         GameManager manager = new GameManager();
@@ -103,7 +80,9 @@ public class TestGame {
         String[] resultadoEsperado = new String[]{"23", "Leão", "L", "6"};
         assertEquals("testgetPlayersInfo", resultadoEsperado, resultadoReal);
 
-    }@Test
+    }
+
+    @Test
     public void testgetPlayersInfo(){
         GameManager manager = new GameManager();
         String[][] array = {
@@ -120,6 +99,26 @@ public class TestGame {
         String[] resultadoEsperado = { "2", "Leão", "L","6" };
 
         assertEquals("testgetPlayersInfo2", resultadoEsperado, resultadoReal);
+    }
+
+    @Test
+    public void testMoveCurrentPlayer(){
+        GameManager manager = new GameManager();
+        String[][] array = {
+                { "11", "joao","E" },
+                { "2", "Leão","L" },
+                { "3", "Leão","L" },
+                { "23", "Leão","L" },
+
+        };
+        manager.createInitialJungle(8, 6, array);
+
+
+        String[] resultadoReal = manager.getCurrentPlayerInfo();
+
+        String[] resultadoEsperado = { "2", "Leão", "L","6" };
+
+        assertEquals("testMoveCurrentPlayer", resultadoEsperado, resultadoReal);
     }
 
 

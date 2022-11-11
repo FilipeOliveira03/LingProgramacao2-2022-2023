@@ -251,46 +251,41 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
-//        if(!bypassValidations){
-//            if(nrSquares < 1 || nrSquares > 6){
-//                return false;
-//            }
-//        }
-//
-//        int jogadorJoga = jogadores.get(turno).id;
-//        int posJogadorTabuleiro = 1;
-//        int posJogadorCasaArray = 0;
-//
-//        for (int countCasa = 1; countCasa < tabuleiro.size(); countCasa++) {
-//
-//            ArrayList<Player> array = tabuleiro.get(countCasa);
-//
-//            for (int countPlayerPos = 0; countPlayerPos < array.size(); countPlayerPos++) {
-//
-//                Player jogador = array.get(countPlayerPos);
-//
-//                if(jogadorJoga == jogador.id){
-//
-//                    posJogadorTabuleiro = countCasa;
-//                    posJogadorCasaArray = countPlayerPos;
-//
-//                }
-//            }
-//        }
-//
-//        Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
-//
-//        tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
-//
-//        posJogadorTabuleiro += nrSquares;
-//
-//        tabuleiro.get(posJogadorTabuleiro).add(jogador);
-//
-//        if(turno == jogadores.size() - 1) {
-//            turno = 0;
-//        }else{
-//            turno++;
-//        }
+        if(!bypassValidations){
+            if(nrSquares < 1 || nrSquares > 6){
+                return false;
+            }
+        }
+
+        int jogadorJoga = jogadores.get(turno - 1).id;
+
+        int posJogadorTabuleiro = 1;
+        int posJogadorCasaArray = 0;
+
+        for (int countCasa = 1; countCasa <= tabuleiro.size(); countCasa++) {
+
+            ArrayList<Player> array = tabuleiro.get(countCasa);
+
+            for (int countPlayerPos = 0; countPlayerPos < array.size(); countPlayerPos++) {
+
+                Player jogador = array.get(countPlayerPos);
+
+                if(jogadorJoga == jogador.id){
+
+                    posJogadorTabuleiro = countCasa;
+                    posJogadorCasaArray = countPlayerPos;
+
+                }
+            }
+        }
+
+        Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
+
+        tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
+
+        posJogadorTabuleiro += nrSquares;
+
+        tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
         return true;
     }
