@@ -227,7 +227,7 @@ public class GameManager {
         }
 
         int jogadorJoga = jogadores.get(turno).id;
-        int posJogadorTabuleiro = 0;
+        int posJogadorTabuleiro = 1;
         int posJogadorCasaArray = 0;
 
         for (int countCasa = 1; countCasa < tabuleiro.size(); countCasa++) {
@@ -255,7 +255,7 @@ public class GameManager {
 
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
-        if(turno == jogadores.size()){
+        if(turno == jogadores.size() - 1) {
             turno = 0;
         }else{
             turno++;
