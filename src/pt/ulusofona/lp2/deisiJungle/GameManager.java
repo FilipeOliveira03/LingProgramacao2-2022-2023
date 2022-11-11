@@ -230,7 +230,7 @@ public class GameManager {
         int posJogadorTabuleiro = 0;
         int posJogadorCasaArray = 0;
 
-        for (int countCasa = 0; countCasa < tabuleiro.size(); countCasa++) {
+        for (int countCasa = 1; countCasa < tabuleiro.size(); countCasa++) {
 
             ArrayList<Player> array = tabuleiro.get(countCasa);
 
