@@ -202,9 +202,7 @@ public class GameManager {
             }
         }
 
-        if(!verificar){
-            return null;
-        }
+
 
         return array;
     }

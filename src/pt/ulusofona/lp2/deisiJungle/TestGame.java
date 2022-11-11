@@ -75,7 +75,7 @@ public class TestGame {
         GameManager manager = new GameManager();
         manager.createInitialJungle(8, 6, array);
 
-        int [] resultadoReal = manager.getPlayerIds(0);
+        int [] resultadoReal = manager.getPlayerIds(1);
         System.out.println(resultadoReal[0]);
         System.out.println(resultadoReal[1]);
         System.out.println(resultadoReal[2]);
@@ -98,7 +98,21 @@ public class TestGame {
         String[] resultadoReal = manager.getPlayerInfo(1);
 
         String[] resultadoEsperado = new String[]{"11", "joao", "E", "6"};
-        assertEquals("testCreateJungle", resultadoEsperado, resultadoReal);
+        assertEquals("testgetPlayersInfo", resultadoEsperado, resultadoReal);
+
+    }@Test
+    public void testgetPlayersInfo2(){
+        GameManager manager = new GameManager();
+        String[][] array = {
+                { "11", "joao","E" },
+                { "2", "Leão","L" },
+
+        };
+        manager.createInitialJungle(8, 6, array);
+        String[] resultadoReal = manager.getPlayerInfo(14);
+
+        String[] resultadoEsperado = null;
+        assertEquals("testgetPlayersInfo2", resultadoEsperado, resultadoReal);
     }
 
 
