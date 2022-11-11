@@ -93,12 +93,14 @@ public class TestGame {
         String[][] array = {
                 { "11", "joao","E" },
                 { "2", "Leão","L" },
+                { "3", "Leão","L" },
+                { "23", "Leão","L" },
 
         };
         manager.createInitialJungle(8, 6, array);
-        String[] resultadoReal = manager.getPlayerInfo(11);
+        String[] resultadoReal = manager.getPlayerInfo(23);
 
-        String[] resultadoEsperado = new String[]{"11", "joao", "E", "6"};
+        String[] resultadoEsperado = new String[]{"23", "Leão", "L", "6"};
         assertEquals("testgetPlayersInfo", resultadoEsperado, resultadoReal);
 
     }@Test

@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import kotlin.reflect.jvm.internal.impl.utils.DFS;
+
 import javax.swing.*;
 import java.util.*;
 
@@ -214,12 +216,21 @@ public class GameManager {
     }
 
     public String[][] getPlayersInfo(){
-        return null;
-    }
 
-    public ArrayList<String> ordemParaJogar(){
+        String[][] array = new String[jogadores.size()][];
+        int count = 0;
 
-        return null;
+        for (Player jogadores : jogadores) {
+
+            array[count][0] = String.valueOf(jogadores.id);
+            array[count][1] = String.valueOf(jogadores.nome);
+            array[count][2] = String.valueOf(jogadores.especie);
+            array[count][3] = String.valueOf(jogadores.energiaAtual);
+
+            count++;
+        }
+
+        return array;
     }
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
