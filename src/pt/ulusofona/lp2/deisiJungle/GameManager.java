@@ -69,7 +69,7 @@ public class GameManager {
 
         for (int countPlayer = 0; countPlayer < playersInfo.length; countPlayer++) {
 
-            if(playersInfo[countPlayer][1].equals("")){ return false; }//nome null ou vazio
+           // if(playersInfo[countPlayer][1].equals("") || playersInfo[countPlayer][1] == null){ return false; }//nome null ou vazio
 
             if(playersInfo[countPlayer][2].equals("Z")){ countNrTarzan++;}// so pode existir 1 tarzan
 
