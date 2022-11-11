@@ -5,7 +5,8 @@ public class Player {
     String nome;
     String especie;
     int energiaAtual;
-    int posicaoAtual = 0;
+    int posicaoAtual = 1;
+    boolean terminou = false;
 
     Player(){
     }
@@ -26,5 +27,8 @@ public class Player {
         this.energiaAtual = energiaAtual;
     }
 
+    public void mudaPosicaoAtual(int posicaoAtual){
+        this.posicaoAtual += posicaoAtual;
+    }
 
 }

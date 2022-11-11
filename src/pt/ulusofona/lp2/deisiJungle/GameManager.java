@@ -274,13 +274,37 @@ public class GameManager {
             }
         }
 
+
+
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
-        tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
 
-        posJogadorTabuleiro += nrSquares;
 
-        tabuleiro.get(posJogadorTabuleiro).add(jogador);
+        int distanciaMeta = meta - posJogadorTabuleiro;
+
+        if(distanciaMeta > nrSquares){
+
+            tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
+
+            posJogadorTabuleiro += nrSquares;
+
+            tabuleiro.get(posJogadorTabuleiro).add(jogador);
+
+        }else {
+
+            tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
+
+            posJogadorTabuleiro = meta;
+
+            tabuleiro.get(posJogadorTabuleiro).add(jogador);
+
+        }
+
+
+
+
+
+
 
         if(turno == jogadores.size()){
             turno = 1;
