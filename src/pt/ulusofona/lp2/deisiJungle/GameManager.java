@@ -1,21 +1,20 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 // numeros impares - Henrique
 // numeros pares - Filipe
 
 public class GameManager {
 
-    ArrayList<Player> jogadores = new ArrayList<>();
     HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
+    ArrayList<Player> jogadores = new ArrayList<>();
 
     int jogadoresMinimos = 2;
     int jogadoresMaximos = 4;
     int meta;
+    int turno = 0;
 
     public boolean isNumeric(String s) {
         if (s == null || s.equals("")) {
@@ -114,36 +113,28 @@ public class GameManager {
             tabuleiro.get(0).add(jogador);
         }
 
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
         return true;
     }
 
     public int[] getPlayerIds(int squareNr) {
-        int[]arrayvazio=new int[0];
         if(squareNr > meta || squareNr < 0 || tabuleiro.get(squareNr) == null){
-            return arrayvazio;
+            return new int[0];
         }
-        int jogadorescount=0;
-        ArrayList<Integer> nr = new ArrayList<>();
+        int countjogadores=0;
+        int[] returnArray= new int[jogadores.size()];
+        int count=0;
         for (int i = 0; i < jogadores.size(); i++) {
-            Player jogador = jogadores.get(i);
-            if (jogador.posicaoAtual == squareNr) {
-                nr.add(jogador.id);
-                jogadorescount++;
+            if (jogadores.get(i).posicaoAtual == squareNr) {
+                returnArray[count] = jogadores.get(i).id;
+                count++;
+                countjogadores++;
             }
-
         }
-
-        if(jogadorescount==0){
-            return arrayvazio;
+        if(countjogadores==0){
+            return new int[0];
         }
-
-        int[] nrarray= new int[nr.size()];
-        for (int i = 0; i < nr.size(); i++) {
-            nrarray[i]=nr.get(i);
-        }
-
-        return  nrarray;
-
+        return  returnArray;
     }
 
     public String[] getSquareInfo(int squareNr){ // falta qualquer coisa
@@ -151,6 +142,7 @@ public class GameManager {
         if(squareNr > meta || squareNr < 0 || tabuleiro.get(squareNr) == null){
             return null;
         }
+
         int nrJogadorAtual = 1;
         StringBuilder ids = new StringBuilder();
 
@@ -182,6 +174,7 @@ public class GameManager {
         }
 
         if(squareNr == meta){
+            info[0] = "finish.png";
             info[1] = "Meta";
         }else {
             info[1] = "Vazio";
@@ -210,9 +203,6 @@ public class GameManager {
     }
 
     public String[] getCurrentPlayerInfo(){
-
-
-
         return null;
     }
 
@@ -220,7 +210,54 @@ public class GameManager {
         return null;
     }
 
+    public ArrayList<String> ordemParaJogar(){
+
+        return null;
+    }
+
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
+
+        if(!bypassValidations){
+            if(nrSquares < 1 || nrSquares > 6){
+                return false;
+            }
+        }
+
+        int jogadorJoga = jogadores.get(turno).id;
+        int posJogadorTabuleiro = 0;
+        int posJogadorCasaArray = 0;
+
+        for (int countCasa = 0; countCasa < tabuleiro.size(); countCasa++) {
+
+            ArrayList<Player> array = tabuleiro.get(countCasa);
+
+            for (int countPlayerPos = 0; countPlayerPos < array.size(); countPlayerPos++) {
+
+                Player jogador = array.get(countPlayerPos);
+
+                if(jogadorJoga == jogador.id){
+
+                    posJogadorTabuleiro = countCasa;
+                    posJogadorCasaArray = countPlayerPos;
+
+                }
+            }
+        }
+
+        Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
+
+        tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
+
+        posJogadorTabuleiro += nrSquares;
+
+        tabuleiro.get(posJogadorTabuleiro).add(jogador);
+
+        if(turno == jogadores.size()){
+            turno = 0;
+        }else{
+            turno++;
+        }
+
         return true;
     }
 
