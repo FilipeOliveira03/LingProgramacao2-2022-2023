@@ -232,7 +232,9 @@ public class GameManager {
 
         for (Player jogadores : jogadores) {
 
-            array[count][0] = String.valueOf(jogadores.id);
+            int id = jogadores.id;
+
+            array[count][0] = String.valueOf(id);
             array[count][1] = jogadores.nome;
             array[count][2] = jogadores.especie;
             array[count][3] = String.valueOf(jogadores.energiaAtual);
