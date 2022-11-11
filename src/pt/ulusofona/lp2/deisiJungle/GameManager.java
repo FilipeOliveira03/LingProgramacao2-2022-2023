@@ -118,23 +118,20 @@ public class GameManager {
     }
 
     public int[] getPlayerIds(int squareNr) {
+
         if(squareNr > meta || squareNr < 0 || tabuleiro.get(squareNr) == null){
             return new int[0];
         }
-        int countjogadores=0;
-        int[] returnArray= new int[jogadores.size()];
-        int count=0;
-        for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).posicaoAtual == squareNr) {
-                returnArray[count] = jogadores.get(i).id;
-                count++;
-                countjogadores++;
-            }
+
+        int nrJogadoresCasa = tabuleiro.get(squareNr).size();
+        int[] arrayFinal = new int[nrJogadoresCasa];
+
+        for (int countJogadores = 0; countJogadores < nrJogadoresCasa; countJogadores++) {
+            int id = tabuleiro.get(squareNr).get(countJogadores).id;
+            arrayFinal[countJogadores] = id;
         }
-        if(countjogadores==0){
-            return new int[0];
-        }
-        return  returnArray;
+
+        return arrayFinal;
     }
 
     public String[] getSquareInfo(int squareNr){ // falta qualquer coisa
