@@ -12,17 +12,12 @@ public class TestGame {
     public void testCreateJungle(){
         GameManager manager = new GameManager();
         String[][] array = {
-                { "11", "Elefante","E" },
+                { "11", null,"E" },
                 { "2", "Leão","L" },
-                { "334", "Tartaruga","P" },
-                { "44", "Pássaro","T" }
+
         };
 
         boolean resultadoReal = manager.createInitialJungle(8, 6, array);
-        System.out.println(manager.jogadores.get(0).id);
-        System.out.println(manager.jogadores.get(1).id);
-        System.out.println(manager.jogadores.get(2).id);
-        System.out.println(manager.jogadores.get(3).id);
         boolean resultadoEsperado = true;
 
         assertEquals("testCreateJungle", resultadoEsperado, resultadoReal);
