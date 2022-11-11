@@ -68,21 +68,21 @@ public class TestGame {
         String[][] array = {
                 { "1", "crp","Z" },
                 { "2", "Leão","P" },
+                { "3", "Leão","P" },
+                { "4", "Leão","P" },
         };
+
         GameManager manager = new GameManager();
         manager.createInitialJungle(8, 6, array);
-        Player p1 = new Player();
-        p1.id= 1;
-        p1.posicaoAtual= 0;
-        int [] a = new int[1];
-        a[0]=p1.id;
+
         int [] resultadoReal = manager.getPlayerIds(0);
+        System.out.println(resultadoReal[0]);
+        System.out.println(resultadoReal[1]);
+        System.out.println(resultadoReal[2]);
+        System.out.println(resultadoReal[3]);
+        int [] resultadoEsperado = new int[]{1,2,3,4};
 
-
-        System.out.println("epserado"+a[0]+"");
-        System.out.println("real"+ Arrays.toString(resultadoReal) +"");
-
-
+        assertEquals("TestGetPlayerIds", resultadoEsperado, resultadoReal);
 
     }
 

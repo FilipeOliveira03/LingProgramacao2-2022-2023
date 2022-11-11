@@ -184,19 +184,26 @@ public class GameManager {
 
     public String[] getPlayerInfo(int playerId) {
 
-        String[] info = new String[4];
-        for (Player jogador : jogadores) {
-            if (jogador.id == playerId) {
+        String[] array = new String[4];
+        boolean verificar = false;
 
-                info[0] = "" + jogador.id + "";
-                info[1] = "" + jogador.nome + "";
-                info[2] = "" + jogador.especie + "";
-                info[3] = "" + jogador.energiaAtual + "";
-                return info;
+        for (int countPlayers = 0; countPlayers < jogadores.size(); countPlayers++) {
+
+            Player jogador = jogadores.get(countPlayers);
+
+            if(playerId == jogador.id){
+                array[0] = String.valueOf(jogador.id);
+                array[1] = jogador.nome;
+                array[2] = jogador.especie;
+                array[3] = String.valueOf(jogador.energiaAtual);
+                verificar = true;
             }
-
         }
-        return null;
+        if(!verificar){
+            return null;
+        }
+
+        return array;
     }
 
     public String[] getCurrentPlayerInfo(){
