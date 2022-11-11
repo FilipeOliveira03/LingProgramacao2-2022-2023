@@ -69,6 +69,10 @@ public class GameManager {
 
         for (int countPlayer = 0; countPlayer < playersInfo.length; countPlayer++) {
 
+            if(playersInfo[countPlayer][0] == null){ return false; }
+
+            if(playersInfo[countPlayer][2] == null){ return false; }
+
             if(playersInfo[countPlayer][1] == null || playersInfo[countPlayer][1].equals("")){ return false; }//nome null ou vazio
 
             if(playersInfo[countPlayer][2].equals("Z")){ countNrTarzan++;}// so pode existir 1 tarzan
@@ -119,7 +123,7 @@ public class GameManager {
 
     public int[] getPlayerIds(int squareNr) {
 
-        if(squareNr > meta || squareNr < 1){
+        if(squareNr > meta || squareNr < 1 || tabuleiro.get(squareNr) == null ){
             return new int[0];
         }
 
