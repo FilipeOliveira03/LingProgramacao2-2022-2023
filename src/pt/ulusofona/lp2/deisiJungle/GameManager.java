@@ -215,18 +215,12 @@ public class GameManager {
 
         String[][] jogadores = getPlayersInfo();
 
-        int pos = turno - 1;
+        int pos = turno - 1 ;
 
         jogador[0] = jogadores[pos][0];
         jogador[1] = jogadores[pos][1];
         jogador[2] = jogadores[pos][2];
         jogador[3] = jogadores[pos][3];
-
-        if(turno == jogadores.length - 1){
-            turno = 1;
-        }else{
-            turno++;
-        }
 
         return jogador;
     }
@@ -257,6 +251,7 @@ public class GameManager {
             }
         }
 
+
         int jogadorJoga = jogadores.get(turno - 1).id;
 
         int posJogadorTabuleiro = 1;
@@ -286,6 +281,12 @@ public class GameManager {
         posJogadorTabuleiro += nrSquares;
 
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
+
+        if(turno == jogadores.size()){
+            turno = 1;
+        }else{
+            turno++;
+        }
 
         return true;
     }
