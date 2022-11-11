@@ -1,17 +1,16 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 public class Player {
-    String id;
+    int id;
     String nome;
     String especie;
     int energiaAtual;
     int posicaoAtual = 1;
-    boolean terminou = false;
 
     Player(){
     }
 
-    public void adicionaId(String id){
+    public void adicionaId(int id){
         this.id = id;
     }
 

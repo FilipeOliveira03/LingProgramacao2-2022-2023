@@ -107,7 +107,7 @@ public class GameManager {
 
             Player jogador = new Player();
 
-            jogador.adicionaId(info[0]);
+            jogador.adicionaId(Integer.parseInt(info[0]));
             jogador.adicionaNome(info[1]);
             jogador.adicionaEspecie(info[2]);
             jogador.adicionaEnergiaAtual(initialEnergy);
@@ -131,7 +131,7 @@ public class GameManager {
         int[] arrayFinal = new int[nrJogadoresCasa];
 
         for (int countJogadores = 0; countJogadores < nrJogadoresCasa; countJogadores++) {
-            int id = Integer.parseInt(tabuleiro.get(squareNr).get(countJogadores).id);
+            int id = tabuleiro.get(squareNr).get(countJogadores).id;
             arrayFinal[countJogadores] = id;
         }
 
@@ -193,9 +193,7 @@ public class GameManager {
 
         for (Player jogador : jogadores) {
 
-            int id = Integer.parseInt(jogador.id);
-
-            if (playerId == id) {
+            if (playerId == jogador.id) {
                 array[0] = String.valueOf(jogador.id);
                 array[1] = jogador.nome;
                 array[2] = jogador.especie;
@@ -215,14 +213,12 @@ public class GameManager {
 
         String[] jogador = new String[4];
 
-        String[][] jogadores = getPlayersInfo();
-
         int pos = turno - 1 ;
 
-        jogador[0] = jogadores[pos][0];
-        jogador[1] = jogadores[pos][1];
-        jogador[2] = jogadores[pos][2];
-        jogador[3] = jogadores[pos][3];
+        jogador[0] = String.valueOf(jogadores.get(pos).id);
+        jogador[1] = jogadores.get(pos).nome;
+        jogador[2] = jogadores.get(pos).especie;
+        jogador[3] = String.valueOf(jogadores.get(pos).energiaAtual);
 
         return jogador;
     }
@@ -234,7 +230,7 @@ public class GameManager {
 
         for (Player jogadores : jogadores) {
 
-            array[count][0] = jogadores.id;
+            array[count][0] = String.valueOf(jogadores.id);
             array[count][1] = jogadores.nome;
             array[count][2] = jogadores.especie;
             array[count][3] = String.valueOf(jogadores.energiaAtual);
@@ -254,7 +250,7 @@ public class GameManager {
         }
 
 
-        int jogadorJoga = Integer.parseInt(jogadores.get(turno - 1).id);
+        int jogadorJoga = jogadores.get(turno - 1).id;
 
         int posJogadorTabuleiro = 1;
         int posJogadorCasaArray = 0;
@@ -266,8 +262,8 @@ public class GameManager {
             for (int countPlayerPos = 0; countPlayerPos < array.size(); countPlayerPos++) {
 
                 Player jogador = array.get(countPlayerPos);
-                int id = Integer.parseInt(jogador.id);
-                if(jogadorJoga == id){
+
+                if(jogadorJoga == jogador.id){
 
                     posJogadorTabuleiro = countCasa;
                     posJogadorCasaArray = countPlayerPos;
