@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 public class Player {
-    int id;
+    String id;
     String nome;
     String especie;
     int energiaAtual;
@@ -11,7 +11,7 @@ public class Player {
     Player(){
     }
 
-    public void adicionaId(int id){
+    public void adicionaId(String id){
         this.id = id;
     }
 

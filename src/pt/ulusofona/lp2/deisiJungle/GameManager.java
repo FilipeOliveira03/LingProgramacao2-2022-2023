@@ -107,7 +107,7 @@ public class GameManager {
 
             Player jogador = new Player();
 
-            jogador.adicionaId(Integer.parseInt(info[0]));
+            jogador.adicionaId(info[0]);
             jogador.adicionaNome(info[1]);
             jogador.adicionaEspecie(info[2]);
             jogador.adicionaEnergiaAtual(initialEnergy);
@@ -131,7 +131,7 @@ public class GameManager {
         int[] arrayFinal = new int[nrJogadoresCasa];
 
         for (int countJogadores = 0; countJogadores < nrJogadoresCasa; countJogadores++) {
-            int id = tabuleiro.get(squareNr).get(countJogadores).id;
+            int id = Integer.parseInt(tabuleiro.get(squareNr).get(countJogadores).id);
             arrayFinal[countJogadores] = id;
         }
 
@@ -193,7 +193,9 @@ public class GameManager {
 
         for (Player jogador : jogadores) {
 
-            if (playerId == jogador.id) {
+            int id = Integer.parseInt(jogador.id);
+
+            if (playerId == id) {
                 array[0] = String.valueOf(jogador.id);
                 array[1] = jogador.nome;
                 array[2] = jogador.especie;
@@ -232,9 +234,7 @@ public class GameManager {
 
         for (Player jogadores : jogadores) {
 
-            int id = jogadores.id;
-
-            array[count][0] = String.valueOf(id);
+            array[count][0] = jogadores.id;
             array[count][1] = jogadores.nome;
             array[count][2] = jogadores.especie;
             array[count][3] = String.valueOf(jogadores.energiaAtual);
@@ -254,7 +254,7 @@ public class GameManager {
         }
 
 
-        int jogadorJoga = jogadores.get(turno - 1).id;
+        int jogadorJoga = Integer.parseInt(jogadores.get(turno - 1).id);
 
         int posJogadorTabuleiro = 1;
         int posJogadorCasaArray = 0;
@@ -266,8 +266,8 @@ public class GameManager {
             for (int countPlayerPos = 0; countPlayerPos < array.size(); countPlayerPos++) {
 
                 Player jogador = array.get(countPlayerPos);
-
-                if(jogadorJoga == jogador.id){
+                int id = Integer.parseInt(jogador.id);
+                if(jogadorJoga == id){
 
                     posJogadorTabuleiro = countCasa;
                     posJogadorCasaArray = countPlayerPos;
