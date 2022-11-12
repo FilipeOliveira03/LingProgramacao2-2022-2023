@@ -335,7 +335,7 @@ public class GameManager {
             }
         }
 
-        for (int countTabuleiro = 0; countTabuleiro < tabuleiro.size(); countTabuleiro++) {
+        for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
             tabuleiro.get(countTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.id));
         }
 
