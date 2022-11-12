@@ -347,10 +347,8 @@ public class GameManager {
         ArrayList<String> resultadoJogo= new ArrayList<>();
 
         ArrayList<Player> jogadoresPorOrdem = jogadores;
-        //jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
-
-
-
+        jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
+/*
         for (int count = 1; count <= jogadores.size(); count++) {
 
             if(ordemJogadores.get(count) == null){
@@ -363,14 +361,15 @@ public class GameManager {
             }
         }
 
+
         for (int count = 1; count <= jogadores.size(); count++) {
+
+            ordemJogadores.get(count);
 
             jogadoresPorOrdem.addAll(ordemJogadores.get(count));
 
         }
-
-
-
+*/
         for (int countJogadores = 1 ; countJogadores <= jogadoresPorOrdem.size() ; countJogadores++) {
 
             String especie = "";
