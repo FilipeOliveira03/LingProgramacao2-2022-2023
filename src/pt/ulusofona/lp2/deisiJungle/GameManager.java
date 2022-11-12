@@ -341,9 +341,13 @@ public class GameManager {
 
         if(countenergia == jogadores.size()|| jogoacabado != 0) {
 
-            ArrayList<Player> jogadoresPorOrdem = jogadores;
-            jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
+            ArrayList<Player> jogadoresPorOrdem = new ArrayList<>();
 
+            for (int countTabuleiro = 0; countTabuleiro < tabuleiro.size(); countTabuleiro++) {
+                jogadoresPorOrdem.addAll(tabuleiro.get(countTabuleiro));
+            }
+
+           // jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
 
             String[] infojogadorvencedor = new String[4];
             infojogadorvencedor[0] = String.valueOf(jogadoresPorOrdem.get(0).id);
