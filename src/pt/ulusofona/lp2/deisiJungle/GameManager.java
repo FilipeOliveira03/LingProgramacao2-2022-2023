@@ -268,7 +268,20 @@ public class GameManager {
             }
         }
 
+
+
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
+
+        if(jogador.energiaAtual < 2){
+
+            if(turno == jogadores.size()){
+                turno = 1;
+            }else{
+                turno++;
+            }
+
+            return false;
+        }
 
         int distanciaMeta = meta - posJogadorTabuleiro;
 

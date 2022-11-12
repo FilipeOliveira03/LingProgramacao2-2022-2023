@@ -120,6 +120,7 @@ public class TestGame {
         };
         manager.createInitialJungle(8, 6, array);
 
+        manager.getPlayersInfo();
 
         String[] resultadoReal = manager.getCurrentPlayerInfo();
 
