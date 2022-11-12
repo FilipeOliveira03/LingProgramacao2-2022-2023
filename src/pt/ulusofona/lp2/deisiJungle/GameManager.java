@@ -1,8 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import javax.imageio.ImageIO;
-import javax.management.StandardMBean;
-import javax.print.attribute.HashAttributeSet;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,7 +17,6 @@ public class GameManager {
     int jogadoresMaximos = 4;
     int meta;
     int turno = 1;
-// creditos
 
 
     public boolean isNumeric(String s) {
@@ -254,6 +251,8 @@ public class GameManager {
             }
         }
 
+
+
         int jogadorJoga = jogadores.get(turno - 1).id;
 
         int posJogadorTabuleiro = 1;
@@ -278,33 +277,39 @@ public class GameManager {
 
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
-        if(jogador.energiaAtual < 2){
+        if(!jogador.temEnergia){
 
-            if(turno == jogadores.size()){
-                turno = 1;
-            }else{
-                turno++;
+            if(jogador.energiaAtual < 2){
+
+                jogador.naoTemEnergia(false);
+
+                if(turno == jogadores.size()){
+                    turno = 1;
+                }else{
+                    turno++;
+                }
+
+                return false;
             }
 
-            return false;
+            int distanciaMeta = meta - posJogadorTabuleiro;
+
+            tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
+
+            if(distanciaMeta > nrSquares){
+                posJogadorTabuleiro += nrSquares;
+            } else {
+                posJogadorTabuleiro = meta;
+            }
+
+            tabuleiro.get(posJogadorTabuleiro).add(jogador);
+
+            jogador.mudaPosicaoAtual(posJogadorTabuleiro);
+            jogador.energiaAtual -= 2;
+
+            tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.id));
+
         }
-
-        int distanciaMeta = meta - posJogadorTabuleiro;
-
-        tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
-
-        if(distanciaMeta > nrSquares){
-            posJogadorTabuleiro += nrSquares;
-        } else {
-            posJogadorTabuleiro = meta;
-        }
-
-        tabuleiro.get(posJogadorTabuleiro).add(jogador);
-
-        jogador.mudaPosicaoAtual(posJogadorTabuleiro);
-        jogador.energiaAtual -= 2;
-
-        tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.id));
 
         if(turno == jogadores.size()){
             turno = 1;
@@ -345,11 +350,7 @@ public class GameManager {
 
     public ArrayList<String> getGameResults(){
 
-//        HashMap<Integer, ArrayList<Player>> ordemJogadores = tabuleiro;
         ArrayList<String> resultadoJogo= new ArrayList<>();
-
-//        ArrayList<Player> jogadoresPorOrdem = jogadores;
-//        jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
 
         int pos = 1;
 
