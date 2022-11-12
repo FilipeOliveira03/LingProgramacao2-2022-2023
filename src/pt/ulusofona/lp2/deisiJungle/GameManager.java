@@ -334,8 +334,17 @@ public class GameManager {
         ArrayList<Player> jogadoresPorOrdem= jogadores;
         ArrayList<String> resultadoJogo= new ArrayList<String>();
         jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual));
-        for (int i = 1; i <= jogadoresPorOrdem.size(); i++) {
-            resultadoJogo.add("#"+i+" " + jogadoresPorOrdem.get(i-1).nome + ", " + jogadoresPorOrdem.get(i-1).especie + ", " + jogadoresPorOrdem.get(i-1).posicaoAtual);
+
+        for (int i = jogadoresPorOrdem.size(); i >=1 ; i--) {
+            String a = "";
+            switch(jogadoresPorOrdem.get(i).especie){
+                case "L" -> a="Leão";
+                case "E" -> a="Elefante";
+                case "T" -> a="Tartaruga";
+                case "P" -> a="Pássaro";
+                case "Z" -> a="Tarzan";
+            }
+            resultadoJogo.add("#"+i+" " + jogadoresPorOrdem.get(i-1).nome + ", " + a + ", " + jogadoresPorOrdem.get(i-1).posicaoAtual);
         }
 
         return resultadoJogo;
