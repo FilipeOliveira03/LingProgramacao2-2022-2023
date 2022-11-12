@@ -6,7 +6,6 @@ public class Player {
     String especie;
     int energiaAtual;
     int posicaoAtual = 1;
-    boolean temEnergia = true;
 
     Player(){
     }
@@ -31,7 +30,4 @@ public class Player {
         this.posicaoAtual = posicaoAtual;
     }
 
-    public void naoTemEnergia(boolean temEnergia){
-        this.temEnergia = temEnergia;
-    }
 }

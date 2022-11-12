@@ -121,6 +121,8 @@ public class GameManager {
 
     public int[] getPlayerIds(int squareNr) {
 
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
+
         if(squareNr > meta || squareNr < 1 || tabuleiro.get(squareNr) == null ){
             return new int[0];
         }
@@ -137,6 +139,8 @@ public class GameManager {
     }
 
     public String[] getSquareInfo(int squareNr){ // falta qualquer coisa
+
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
 
         if(squareNr > meta || squareNr < 1 || tabuleiro.get(squareNr) == null){
             return null;
@@ -186,6 +190,8 @@ public class GameManager {
 
     public String[] getPlayerInfo(int playerId) {
 
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
+
         String[] array = new String[4];
         boolean verificar = false;
 
@@ -208,6 +214,8 @@ public class GameManager {
     }
 
     public String[] getCurrentPlayerInfo(){
+
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
 
         String[] jogador = new String[4];
 
@@ -251,8 +259,6 @@ public class GameManager {
             }
         }
 
-
-
         int jogadorJoga = jogadores.get(turno - 1).id;
 
         int posJogadorTabuleiro = 1;
@@ -277,39 +283,33 @@ public class GameManager {
 
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
-        if(jogador.temEnergia){
+        if(jogador.energiaAtual < 2){
 
-            if(jogador.energiaAtual < 2){
-
-                jogador.naoTemEnergia(false);
-
-                if(turno == jogadores.size()){
-                    turno = 1;
-                }else{
-                    turno++;
-                }
-
-                return false;
+            if(turno == jogadores.size()){
+                turno = 1;
+            }else{
+                turno++;
             }
 
-            int distanciaMeta = meta - posJogadorTabuleiro;
-
-            tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
-
-            if(distanciaMeta > nrSquares){
-                posJogadorTabuleiro += nrSquares;
-            } else {
-                posJogadorTabuleiro = meta;
-            }
-
-            tabuleiro.get(posJogadorTabuleiro).add(jogador);
-
-            jogador.mudaPosicaoAtual(posJogadorTabuleiro);
-            jogador.energiaAtual -= 2;
-
-            tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.id));
-
+            return false;
         }
+
+        int distanciaMeta = meta - posJogadorTabuleiro;
+
+        tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
+
+        if(distanciaMeta > nrSquares){
+            posJogadorTabuleiro += nrSquares;
+        } else {
+            posJogadorTabuleiro = meta;
+        }
+
+        tabuleiro.get(posJogadorTabuleiro).add(jogador);
+
+        jogador.mudaPosicaoAtual(posJogadorTabuleiro);
+        jogador.energiaAtual -= 2;
+
+        tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.id));
 
         if(turno == jogadores.size()){
             turno = 1;
