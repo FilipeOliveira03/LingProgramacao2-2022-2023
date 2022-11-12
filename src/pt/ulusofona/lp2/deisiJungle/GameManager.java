@@ -341,7 +341,7 @@ public class GameManager {
                 countenergia++;
             }
         }
-        if(countenergia==4||jogoacabado!=0) {
+        if(countenergia==jogadores.size()||jogoacabado!=0) {
             ArrayList<Player> jogadoresPorOrdem = jogadores;
             jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
 
