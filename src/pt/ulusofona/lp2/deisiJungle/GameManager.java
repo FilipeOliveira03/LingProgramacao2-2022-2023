@@ -346,8 +346,9 @@ public class GameManager {
         HashMap<Integer, ArrayList<Player>> ordemJogadores = new HashMap<>();
         ArrayList<String> resultadoJogo= new ArrayList<>();
 
-        //jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
-
+        ArrayList<Player> jogadoresPorOrdem = jogadores;
+        jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
+/*
         for (int count = 1; count <= jogadores.size(); count++) {
 
             if(ordemJogadores.get(count) == null){
@@ -360,7 +361,6 @@ public class GameManager {
             }
         }
 
-        ArrayList<Player> jogadoresPorOrdem = new ArrayList<>();
 
         for (int count = 1; count <= jogadores.size(); count++) {
 
@@ -369,7 +369,7 @@ public class GameManager {
             jogadoresPorOrdem.addAll(ordemJogadores.get(count));
 
         }
-
+*/
         for (int countJogadores = 1 ; countJogadores <= jogadoresPorOrdem.size() ; countJogadores++) {
 
             String especie = "";
