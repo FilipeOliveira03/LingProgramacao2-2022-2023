@@ -8,6 +8,7 @@ public class TestGameManager {
     @Test
     public void testMoveCurrentPlayer1(){
         GameManager manager = new GameManager();
+
         String[][] array = {
                 { "11", "joao","E" },
                 { "2", "Leão","L" },
@@ -15,11 +16,11 @@ public class TestGameManager {
                 { "23", "Leão","L" },
 
         };
-        manager.createInitialJungle(8, 3, array);
-
+        manager.createInitialJungle(8, 10, array);
+        manager.moveCurrentPlayer(2,false);
         String[] resultadoReal = manager.getCurrentPlayerInfo();
+        String[] resultadoEsperado = { "3", "Leão", "L","10" };
 
-        String[] resultadoEsperado = { "2", "Leão", "L","3" };
 
         assertEquals("testMoveCurrentPlayer", resultadoEsperado, resultadoReal);
     }
