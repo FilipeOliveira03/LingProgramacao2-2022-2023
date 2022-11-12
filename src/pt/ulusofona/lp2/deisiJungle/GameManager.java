@@ -331,7 +331,16 @@ public class GameManager {
     }
 
     public ArrayList<String> getGameResults(){
-        return null;
+    ArrayList<Player> jogadoresPorOrdem= jogadores;
+        ArrayList<String> resultadoJogo= new ArrayList<String>();
+        jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual));
+
+        resultadoJogo.add("#1 "+jogadoresPorOrdem.get(0).nome+", "+jogadoresPorOrdem.get(0).especie+", "+jogadoresPorOrdem.get(0).posicaoAtual);
+        resultadoJogo.add("#2 "+jogadoresPorOrdem.get(1).nome+", "+jogadoresPorOrdem.get(1).especie+", "+jogadoresPorOrdem.get(1).posicaoAtual);
+        resultadoJogo.add("#3 "+jogadoresPorOrdem.get(2).nome+", "+jogadoresPorOrdem.get(2).especie+", "+jogadoresPorOrdem.get(2).posicaoAtual);
+        resultadoJogo.add("#4 "+jogadoresPorOrdem.get(3).nome+", "+jogadoresPorOrdem.get(3).especie+", "+jogadoresPorOrdem.get(3).posicaoAtual);
+
+        return resultadoJogo;
     }
 
     public JPanel getAuthorsPanel() throws IOException {
