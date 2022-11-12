@@ -319,15 +319,15 @@ public class GameManager {
     }
 
     public String[] getWinnerInfo(){
+        ArrayList<Player> jogadoresPorOrdem= jogadores;
+        jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual));
 
-        if(tabuleiro.get(meta).isEmpty()){
-            return null;
-        }
-
-        int idVencedor = tabuleiro.get(meta).get(0).id;
-
-
-        return getPlayerInfo(idVencedor);
+        String[] infojogadorvencedor= new String[4];
+        infojogadorvencedor[0] = String.valueOf(jogadoresPorOrdem.get(0).id);
+        infojogadorvencedor[1] = jogadoresPorOrdem.get(0).nome;
+        infojogadorvencedor[2] = jogadoresPorOrdem.get(0).especie;
+        infojogadorvencedor[3] = String.valueOf(jogadoresPorOrdem.get(0).energiaAtual);
+        return infojogadorvencedor;
     }
 
     public ArrayList<String> getGameResults(){
