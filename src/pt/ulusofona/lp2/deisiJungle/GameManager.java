@@ -321,27 +321,36 @@ public class GameManager {
     }
 
     public String[] getWinnerInfo(){
-        int countenergia=0;
+        int countenergia = 0;
         int jogoacabado = 0;
-        for (int countjogoacabado = 0; countjogoacabado < jogadores.size(); countjogoacabado++) {
-            if(jogadores.get(countjogoacabado).posicaoAtual==meta){
+
+        for (Player jogadore : jogadores) {
+
+            if (jogadore.posicaoAtual == meta) {
                 jogoacabado++;
             }
-        }
-        for (int energiacount = 0; energiacount < jogadores.size(); energiacount++) {
-            if(jogadores.get(energiacount).energiaAtual==0){
+
+            if (jogadore.energiaAtual == 0) {
                 countenergia++;
             }
         }
-        if(countenergia==jogadores.size()||jogoacabado!=0) {
+
+        for (int countTabuleiro = 0; countTabuleiro < tabuleiro.size(); countTabuleiro++) {
+            tabuleiro.get(countTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.id));
+        }
+
+        if(countenergia == jogadores.size()|| jogoacabado != 0) {
+
             ArrayList<Player> jogadoresPorOrdem = jogadores;
             jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
+
 
             String[] infojogadorvencedor = new String[4];
             infojogadorvencedor[0] = String.valueOf(jogadoresPorOrdem.get(0).id);
             infojogadorvencedor[1] = jogadoresPorOrdem.get(0).nome;
             infojogadorvencedor[2] = jogadoresPorOrdem.get(0).especie;
             infojogadorvencedor[3] = String.valueOf(jogadoresPorOrdem.get(0).energiaAtual);
+
             return infojogadorvencedor;
         }else{
             return null;
