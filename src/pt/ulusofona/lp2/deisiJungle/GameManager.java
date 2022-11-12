@@ -355,22 +355,24 @@ public class GameManager {
 
             ArrayList<Player> array = tabuleiro.get(countJogadores);
 
-            for (Player jogador : array) {
+            if(!array.isEmpty()){
 
-                String especie = "";
+                for (Player jogador : array) {
 
-                switch (jogador.especie) {
-                    case "L" -> especie = "Leão";
-                    case "E" -> especie = "Elefante";
-                    case "T" -> especie = "Tartaruga";
-                    case "P" -> especie = "Pássaro";
-                    case "Z" -> especie = "Tarzan";
+                    String especie = "";
+
+                    switch (jogador.especie) {
+                        case "L" -> especie = "Leão";
+                        case "E" -> especie = "Elefante";
+                        case "T" -> especie = "Tartaruga";
+                        case "P" -> especie = "Pássaro";
+                        case "Z" -> especie = "Tarzan";
+                    }
+
+                    resultadoJogo.add("#" + countJogadores + " " + jogador.nome + ", " + especie + ", " + jogador.posicaoAtual);
+
                 }
-
-                resultadoJogo.add("#" + countJogadores + " " + jogador.nome + ", " + especie + ", " + jogador.posicaoAtual);
-
             }
-
         }
 
         return resultadoJogo;
