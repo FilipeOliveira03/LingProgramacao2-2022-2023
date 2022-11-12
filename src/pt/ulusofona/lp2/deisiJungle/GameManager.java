@@ -277,7 +277,7 @@ public class GameManager {
 
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
-        if(!jogador.temEnergia){
+        if(jogador.temEnergia){
 
             if(jogador.energiaAtual < 2){
 
