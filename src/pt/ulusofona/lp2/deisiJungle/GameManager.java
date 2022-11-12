@@ -379,8 +379,11 @@ public class GameManager {
     public JPanel getAuthorsPanel() throws IOException {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
-        BufferedImage image = ImageIO.read(new File("deisi-jungle/src/creditos.png"));
+        BufferedImage image = ImageIO.read(new File("C:/deisi-jungle/src/creditos.png"));
         JLabel label = new JLabel(new ImageIcon(image));
+        JLabel texto = new JLabel();
+        texto.setText("Developers : Henrique Franco , Filipe Oliveira");
+        panel.add(texto);
         panel.add(label);
 
         return panel;
