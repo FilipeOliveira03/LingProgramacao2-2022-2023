@@ -343,17 +343,18 @@ public class GameManager {
 
             ArrayList<Player> jogadoresPorOrdem = new ArrayList<>();
 
-            for (int countTabuleiro = 0; countTabuleiro < tabuleiro.size(); countTabuleiro++) {
+            for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
                 jogadoresPorOrdem.addAll(tabuleiro.get(countTabuleiro));
             }
 
            // jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
 
             String[] infojogadorvencedor = new String[4];
-            infojogadorvencedor[0] = String.valueOf(jogadoresPorOrdem.get(0).id);
-            infojogadorvencedor[1] = jogadoresPorOrdem.get(0).nome;
-            infojogadorvencedor[2] = jogadoresPorOrdem.get(0).especie;
-            infojogadorvencedor[3] = String.valueOf(jogadoresPorOrdem.get(0).energiaAtual);
+            int posRelevante = jogadoresPorOrdem.size() - 1;
+            infojogadorvencedor[0] = String.valueOf(jogadoresPorOrdem.get(posRelevante).id);
+            infojogadorvencedor[1] = jogadoresPorOrdem.get(posRelevante).nome;
+            infojogadorvencedor[2] = jogadoresPorOrdem.get(posRelevante).especie;
+            infojogadorvencedor[3] = String.valueOf(jogadoresPorOrdem.get(posRelevante).energiaAtual);
 
             return infojogadorvencedor;
         }else{
