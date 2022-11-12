@@ -6,7 +6,8 @@ public class Player {
     String especie;
     int energiaAtual;
     int posicaoAtual = 1;
-    int posicaoPodio;
+    boolean jogadorMesmaCasa = false;
+    int desempate = 0;
 
     Player(){
     }
@@ -31,8 +32,14 @@ public class Player {
         this.posicaoAtual = posicaoAtual;
     }
 
-    public void mudaPosicaoPodio(int posicaoPodio){
-        this.posicaoPodio = posicaoPodio;
+    public void Desempate(int desempate){
+        this.desempate = desempate;
     }
+
+    public void temJogadoresMesmaCasa(boolean jogadorMesmaCasa){
+        this.jogadorMesmaCasa = jogadorMesmaCasa;
+    }
+
+
 
 }
