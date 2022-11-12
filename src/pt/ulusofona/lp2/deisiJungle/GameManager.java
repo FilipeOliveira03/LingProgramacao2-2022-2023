@@ -1,6 +1,11 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 // numeros impares - Henrique
@@ -15,6 +20,8 @@ public class GameManager {
     int jogadoresMaximos = 4;
     int meta;
     int turno = 1;
+// creditos
+
 
     public boolean isNumeric(String s) {
         if (s == null || s.equals("")) {
@@ -327,8 +334,15 @@ public class GameManager {
         return null;
     }
 
-    public JPanel getAuthorsPanel(){
-        return null;
+    public JPanel getAuthorsPanel() throws IOException {
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+        BufferedImage image = ImageIO.read(new File("deisi-jungle/src/creditos.png"));
+        JLabel label = new JLabel(new ImageIcon(image));
+        panel.add(label);
+
+        return panel;
+
     }
 
     public String whoIsTaborda(){
