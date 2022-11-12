@@ -231,6 +231,7 @@ public class GameManager {
 
         String[][] array = new String[jogadores.size()][4];
         int count = 0;
+        int posPodio = 1;
 
         for (Player jogadores : jogadores) {
 
@@ -238,6 +239,8 @@ public class GameManager {
             array[count][1] = jogadores.nome;
             array[count][2] = jogadores.especie;
             array[count][3] = String.valueOf(jogadores.energiaAtual);
+
+            jogadores.mudaPosicaoPodio(posPodio);
 
             count++;
         }
@@ -275,8 +278,6 @@ public class GameManager {
             }
         }
 
-
-
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
         if(jogador.energiaAtual < 2){
@@ -295,19 +296,28 @@ public class GameManager {
         tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
 
         if(distanciaMeta > nrSquares){
-
             posJogadorTabuleiro += nrSquares;
-
         } else {
-
             posJogadorTabuleiro = meta;
         }
 
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
-
         jogador.mudaPosicaoAtual(posJogadorTabuleiro);
-
         jogador.energiaAtual -= 2;
+
+        int jogadorPodio = jogador.posicaoPodio;
+
+        for (int countPodio = 0; countPodio < jogadores.size(); countPodio++) {
+
+            if(jogadorPodio < jogadores.get(countPodio).posicaoPodio){
+
+                int posAtual = jogadorPodio;
+
+                jogadorPodio = jogadores.get(countPodio).posicaoPodio;
+                jogadores.get(countPodio).posicaoPodio = posAtual;
+
+            }
+        }
 
         if(turno == jogadores.size()){
             turno = 1;
