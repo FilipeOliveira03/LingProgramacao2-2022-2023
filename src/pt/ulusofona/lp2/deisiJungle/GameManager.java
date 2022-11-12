@@ -304,6 +304,8 @@ public class GameManager {
         jogador.mudaPosicaoAtual(posJogadorTabuleiro);
         jogador.energiaAtual -= 2;
 
+        tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.id));
+
         if(turno == jogadores.size()){
             turno = 1;
         }else{
@@ -343,37 +345,21 @@ public class GameManager {
 
     public ArrayList<String> getGameResults(){
 
-        HashMap<Integer, ArrayList<Player>> ordemJogadores = new HashMap<>();
+//        HashMap<Integer, ArrayList<Player>> ordemJogadores = tabuleiro;
         ArrayList<String> resultadoJogo= new ArrayList<>();
 
-        ArrayList<Player> jogadoresPorOrdem = jogadores;
-        jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
+//        ArrayList<Player> jogadoresPorOrdem = jogadores;
+//        jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
 
-        int pos = 0;
+        for (int countJogadores = tabuleiro.size(); countJogadores < 1; countJogadores++) {
 
-        for (int count = 1; count <= jogadores.size(); count++) {
-
-            if(ordemJogadores.get(count) == null){
-                ArrayList<Player> array = new ArrayList<>();
-                array.add(jogadores.get(pos));
-                ordemJogadores.put(count, array);
-            }else{
-                ordemJogadores.get(count).add(jogadores.get(pos));
-                ordemJogadores.get(count).sort(Comparator.comparing((Player jogador) -> jogador.id));
-            }
-
-            pos++;
-        }
-
-        for (int countJogadores = 1 ; countJogadores <= jogadoresPorOrdem.size() ; countJogadores++) {
-
-            ArrayList<Player> array = ordemJogadores.get(countJogadores);
+            ArrayList<Player> array = tabuleiro.get(countJogadores);
 
             for (Player jogador : array) {
 
                 String especie = "";
 
-                switch (jogadoresPorOrdem.get(countJogadores - 1).especie) {
+                switch (jogador.especie) {
                     case "L" -> especie = "Leão";
                     case "E" -> especie = "Elefante";
                     case "T" -> especie = "Tartaruga";
@@ -384,6 +370,7 @@ public class GameManager {
                 resultadoJogo.add("#" + countJogadores + " " + jogador.nome + ", " + especie + ", " + jogador.posicaoAtual);
 
             }
+
         }
 
         return resultadoJogo;
