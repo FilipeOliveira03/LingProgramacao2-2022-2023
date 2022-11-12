@@ -268,11 +268,7 @@ public class GameManager {
             }
         }
 
-
-
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
-
-
 
         int distanciaMeta = meta - posJogadorTabuleiro;
 
@@ -284,13 +280,17 @@ public class GameManager {
 
             tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
-        }else {
+            jogador.energiaAtual -= 2;
+
+        } else {
 
             tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
 
             posJogadorTabuleiro = meta;
 
             tabuleiro.get(posJogadorTabuleiro).add(jogador);
+
+            jogador.energiaAtual -= 2;
 
         }
 
