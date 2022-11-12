@@ -331,14 +331,12 @@ public class GameManager {
     }
 
     public ArrayList<String> getGameResults(){
-    ArrayList<Player> jogadoresPorOrdem= jogadores;
+        ArrayList<Player> jogadoresPorOrdem= jogadores;
         ArrayList<String> resultadoJogo= new ArrayList<String>();
         jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual));
-
-        resultadoJogo.add("#1 "+jogadoresPorOrdem.get(0).nome+", "+jogadoresPorOrdem.get(0).especie+", "+jogadoresPorOrdem.get(0).posicaoAtual);
-        resultadoJogo.add("#2 "+jogadoresPorOrdem.get(1).nome+", "+jogadoresPorOrdem.get(1).especie+", "+jogadoresPorOrdem.get(1).posicaoAtual);
-        resultadoJogo.add("#3 "+jogadoresPorOrdem.get(2).nome+", "+jogadoresPorOrdem.get(2).especie+", "+jogadoresPorOrdem.get(2).posicaoAtual);
-        resultadoJogo.add("#4 "+jogadoresPorOrdem.get(3).nome+", "+jogadoresPorOrdem.get(3).especie+", "+jogadoresPorOrdem.get(3).posicaoAtual);
+        for (int i = 1; i <= jogadoresPorOrdem.size(); i++) {
+            resultadoJogo.add("#"+i+" " + jogadoresPorOrdem.get(i-1).nome + ", " + jogadoresPorOrdem.get(i-1).especie + ", " + jogadoresPorOrdem.get(i-1).posicaoAtual);
+        }
 
         return resultadoJogo;
     }
