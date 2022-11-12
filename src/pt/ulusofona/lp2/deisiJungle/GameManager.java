@@ -349,17 +349,20 @@ public class GameManager {
         ArrayList<Player> jogadoresPorOrdem = jogadores;
         jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
 
+        int pos = 0;
 
         for (int count = 1; count <= jogadores.size(); count++) {
 
             if(ordemJogadores.get(count) == null){
                 ArrayList<Player> array = new ArrayList<>();
-                array.add(jogadores.get(count));
+                array.add(jogadores.get(pos));
                 ordemJogadores.put(count, array);
             }else{
-                ordemJogadores.get(count).add(jogadores.get(count));
+                ordemJogadores.get(count).add(jogadores.get(pos));
                 ordemJogadores.get(count).sort(Comparator.comparing((Player jogador) -> jogador.id));
             }
+
+            pos++;
         }
 
         for (int countJogadores = 1 ; countJogadores <= jogadoresPorOrdem.size() ; countJogadores++) {
