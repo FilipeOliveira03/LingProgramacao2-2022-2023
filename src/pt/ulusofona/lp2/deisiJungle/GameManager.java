@@ -341,20 +341,28 @@ public class GameManager {
 
         if(countenergia == jogadores.size()|| jogoacabado != 0) {
 
-            ArrayList<Player> jogadoresPorOrdem = new ArrayList<>();
+            Player jogadorVencedor = new Player();
 
-            for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
-                jogadoresPorOrdem.addAll(tabuleiro.get(countTabuleiro));
+            int soUm = 0;
+            for (int countJogadoresReverso = tabuleiro.size(); countJogadoresReverso >= 1; countJogadoresReverso--) {
+
+                if(soUm == 0){
+                    if(!tabuleiro.get(countJogadoresReverso).isEmpty() ){
+                        jogadorVencedor = tabuleiro.get(countJogadoresReverso).get(0);
+                        soUm++;
+                    }
+                }
+
             }
 
            // jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
 
             String[] infojogadorvencedor = new String[4];
-            int posRelevante = jogadoresPorOrdem.size() - 1;
-            infojogadorvencedor[0] = String.valueOf(jogadoresPorOrdem.get(posRelevante).id);
-            infojogadorvencedor[1] = jogadoresPorOrdem.get(posRelevante).nome;
-            infojogadorvencedor[2] = jogadoresPorOrdem.get(posRelevante).especie;
-            infojogadorvencedor[3] = String.valueOf(jogadoresPorOrdem.get(posRelevante).energiaAtual);
+
+            infojogadorvencedor[0] = String.valueOf(jogadorVencedor.id);
+            infojogadorvencedor[1] = jogadorVencedor.nome;
+            infojogadorvencedor[2] = jogadorVencedor.especie;
+            infojogadorvencedor[3] = String.valueOf(jogadorVencedor.energiaAtual);
 
             return infojogadorvencedor;
         }else{

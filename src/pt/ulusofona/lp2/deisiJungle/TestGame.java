@@ -115,26 +115,22 @@ public class TestGame {
         GameManager manager = new GameManager();
         String[][] array = {
                 { "2", "a","E" },
-                { "11", "b","E" },
                 { "3", "c","E" },
+                { "11", "b","E" },
                 { "23", "d","E" },
 
         };
-        manager.createInitialJungle(8, 6, array);
+        manager.createInitialJungle(8, 2, array);
         manager.moveCurrentPlayer(6, false);
         manager.moveCurrentPlayer(4, false);
         manager.moveCurrentPlayer(4, false);
         manager.moveCurrentPlayer(3, false);
 
-        ArrayList<String> resultadoReal = manager.getGameResults();
 
+        String[] resultadoReal = manager.getWinnerInfo();
 
+        String[] resultadoEsperado = { "2", "a","E", "0"};
 
-        ArrayList<String> resultadoEsperado = new ArrayList<>();
-        resultadoEsperado.add("#1 a, Elefante, 7");
-        resultadoEsperado.add("#2 c, Elefante, 5");
-        resultadoEsperado.add("#3 b, Elefante, 5");
-        resultadoEsperado.add("#4 d, Elefante, 4");
 
         assertEquals("testMoveCurrentPlayer", resultadoEsperado, resultadoReal);
     }
