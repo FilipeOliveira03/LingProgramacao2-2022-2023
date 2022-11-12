@@ -27,7 +27,7 @@ public class Player {
     }
 
     public void mudaPosicaoAtual(int posicaoAtual){
-        this.posicaoAtual += posicaoAtual;
+        this.posicaoAtual = posicaoAtual;
     }
 
 }

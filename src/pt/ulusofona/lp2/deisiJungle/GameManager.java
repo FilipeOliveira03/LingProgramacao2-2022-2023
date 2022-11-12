@@ -298,6 +298,8 @@ public class GameManager {
 
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
+        jogador.mudaPosicaoAtual(posJogadorTabuleiro);
+
         jogador.energiaAtual -= 2;
 
         if(turno == jogadores.size()){
@@ -310,7 +312,15 @@ public class GameManager {
     }
 
     public String[] getWinnerInfo(){
-        return null;
+
+        if(tabuleiro.get(meta).isEmpty()){
+            return null;
+        }
+
+        int idVencedor = tabuleiro.get(meta).get(0).id;
+
+
+        return getPlayerInfo(idVencedor);
     }
 
     public ArrayList<String> getGameResults(){
