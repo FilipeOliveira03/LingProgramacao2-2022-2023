@@ -345,7 +345,7 @@ public class GameManager {
         ArrayList<Player> jogadoresPorOrdem = jogadores;
         ArrayList<String> resultadoJogo= new ArrayList<>();
 
-        jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
+        jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoPodio));
 
         for (int countJogadores = 1 ; countJogadores <= jogadoresPorOrdem.size() ; countJogadores++) {
 
