@@ -299,9 +299,9 @@ public class GameManager {
 
         if(distanciaMeta < nrSquares){
 
-//            jogador.energiaAtual -= 2;
-//
-//            mudarTurno();
+            jogador.energiaAtual -= 2;
+
+            mudarTurno();
 
             return false;
         }
