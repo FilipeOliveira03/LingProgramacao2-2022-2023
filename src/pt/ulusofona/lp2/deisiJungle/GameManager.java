@@ -116,8 +116,6 @@ public class GameManager {
             tabuleiro.get(1).add(jogador);
         }
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
-
         return true;
     }
 
@@ -153,7 +151,7 @@ public class GameManager {
 
         String[] info = new String[3];
 
-        ArrayList<Player> jogadores = tabuleiro.get(squareNr);;
+        ArrayList<Player> jogadores = tabuleiro.get(squareNr);
 
         for (Player jogador : jogadores) {
 
@@ -237,7 +235,6 @@ public class GameManager {
 
         String[][] array = new String[jogadores.size()][4];
         int count = 0;
-        int posPodio = 1;
 
         for (Player jogadores : jogadores) {
 
@@ -246,7 +243,6 @@ public class GameManager {
             array[count][2] = jogadores.especie;
             array[count][3] = String.valueOf(jogadores.energiaAtual);
 
-            posPodio++;
             count++;
         }
 
@@ -254,6 +250,8 @@ public class GameManager {
     }
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
+
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
 
         if(!bypassValidations){
             if(nrSquares < 1 || nrSquares > 6){
