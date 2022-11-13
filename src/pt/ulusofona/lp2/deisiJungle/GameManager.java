@@ -253,6 +253,8 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
+
         if(!bypassValidations){
             if(nrSquares < 1 || nrSquares > 6){
                 return false;
@@ -321,6 +323,9 @@ public class GameManager {
     }
 
     public String[] getWinnerInfo(){
+
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
+
         int countenergia = 0;
         int jogoacabado = 0;
 
@@ -352,10 +357,7 @@ public class GameManager {
                         soUm++;
                     }
                 }
-
             }
-
-           // jogadoresPorOrdem.sort(Comparator.comparing((Player jogador) -> jogador.posicaoAtual).reversed());
 
             String[] infojogadorvencedor = new String[4];
 
@@ -371,6 +373,8 @@ public class GameManager {
     }
 
     public ArrayList<String> getGameResults(){
+
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
 
         ArrayList<String> resultadoJogo= new ArrayList<>();
 
