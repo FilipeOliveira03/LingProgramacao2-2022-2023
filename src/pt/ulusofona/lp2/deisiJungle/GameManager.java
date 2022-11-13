@@ -251,10 +251,9 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
-
         if(!bypassValidations){
             if(nrSquares < 1 || nrSquares > 6){
+
                 return false;
             }
         }
@@ -283,7 +282,7 @@ public class GameManager {
 
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
-        if(jogador.energiaAtual < 2){
+        if(jogador.energiaAtual < 2 || jogador.posicaoAtual == meta){
 
             if(turno == jogadores.size()){
                 turno = 1;
@@ -306,7 +305,12 @@ public class GameManager {
 
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
-        jogador.mudaPosicaoAtual(posJogadorTabuleiro);
+        if(posJogadorTabuleiro == meta){
+            jogador.mudaPosicaoAtual(meta);
+        }else{
+            jogador.mudaPosicaoAtual(posJogadorTabuleiro);
+        }
+
         jogador.energiaAtual -= 2;
 
         tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.id));

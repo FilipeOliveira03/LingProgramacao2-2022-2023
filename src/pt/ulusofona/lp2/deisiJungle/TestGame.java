@@ -117,17 +117,19 @@ public class TestGame {
                 { "2", "a","E" },
                 { "3", "c","E" },
                 { "11", "b","E" },
-
+                { "12", "d","E" },
 
         };
-        manager.createInitialJungle(8, 2, array);
+        manager.createInitialJungle(8, 8, array);
+        manager.moveCurrentPlayer(6, false);
+        manager.moveCurrentPlayer(6, false);
         manager.moveCurrentPlayer(6, false);
         manager.moveCurrentPlayer(6, false);
         manager.moveCurrentPlayer(6, false);
 
-        String[] resultadoReal = manager.getWinnerInfo();
+        String[] resultadoReal = manager.getCurrentPlayerInfo();
 
-        String[] resultadoEsperado = { "2", "a","E", "0"};
+        String[] resultadoEsperado = { "3", "c","E", "6"};
 
 
         assertEquals("testMoveCurrentPlayer", resultadoEsperado, resultadoReal);
