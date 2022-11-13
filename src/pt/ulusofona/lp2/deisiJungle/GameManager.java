@@ -253,8 +253,6 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
-
         if(!bypassValidations){
             if(nrSquares < 1 || nrSquares > 6){
                 return false;
