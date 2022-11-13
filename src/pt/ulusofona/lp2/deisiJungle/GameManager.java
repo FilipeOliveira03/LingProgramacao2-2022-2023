@@ -116,6 +116,8 @@ public class GameManager {
             tabuleiro.get(1).add(jogador);
         }
 
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
+
         return true;
     }
 

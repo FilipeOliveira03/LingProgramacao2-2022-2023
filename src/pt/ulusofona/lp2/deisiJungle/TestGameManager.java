@@ -55,7 +55,6 @@ public class TestGameManager {
         };
         manager.createInitialJungle(8, 6, array);
 
-
         String[] resultadoReal = manager.getCurrentPlayerInfo();
 
         String[] resultadoEsperado = { "2", "Leão", "L","6" };
