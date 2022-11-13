@@ -18,6 +18,13 @@ public class GameManager {
     int meta;
     int turno = 1;
 
+    public void mudarTurno(){
+        if(turno == jogadores.size()){
+            turno = 1;
+        }else{
+            turno++;
+        }
+    }
 
     public boolean isNumeric(String s) {
         if (s == null || s.equals("")) {
@@ -283,11 +290,7 @@ public class GameManager {
 
         if(jogador.energiaAtual < 2){
 
-            if(turno == jogadores.size()){
-                turno = 1;
-            }else{
-                turno++;
-            }
+            mudarTurno();
 
             return false;
         }
@@ -296,11 +299,9 @@ public class GameManager {
 
         if(distanciaMeta < nrSquares){
 
-            if(turno == jogadores.size()){
-                turno = 1;
-            }else{
-                turno++;
-            }
+            jogador.energiaAtual -= 2;
+
+            mudarTurno();
 
             return false;
         }
@@ -309,7 +310,6 @@ public class GameManager {
 
         posJogadorTabuleiro += nrSquares;
 
-
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
         jogador.mudaPosicaoAtual(posJogadorTabuleiro);
@@ -317,11 +317,7 @@ public class GameManager {
 
         tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.id));
 
-        if(turno == jogadores.size()){
-            turno = 1;
-        }else{
-            turno++;
-        }
+        mudarTurno();
 
         return true;
     }
