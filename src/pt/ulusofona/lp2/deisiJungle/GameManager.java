@@ -409,7 +409,6 @@ public class GameManager {
         panel.setLayout(new FlowLayout());
         BufferedImage image = ImageIO.read(new File("C:/deisi-jungle/src/creditos.png"));
         JLabel label = new JLabel(new ImageIcon(image));
-
         JLabel texto = new JLabel();
         texto.setText("Developers : Henrique Franco , Filipe Oliveira");
         panel.add(texto);
