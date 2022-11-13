@@ -253,13 +253,8 @@ public class GameManager {
 
         if(!bypassValidations){
             if(nrSquares < 1 || nrSquares > 6){
-
                 return false;
             }
-        }
-
-        if(nrSquares > meta){
-            return false;
         }
 
         int jogadorJoga = jogadores.get(turno - 1).id;
@@ -286,7 +281,7 @@ public class GameManager {
 
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
-        if(jogador.energiaAtual < 2 || jogador.posicaoAtual == meta){
+        if(jogador.energiaAtual < 2){
 
             if(turno == jogadores.size()){
                 turno = 1;
@@ -299,22 +294,25 @@ public class GameManager {
 
         int distanciaMeta = meta - posJogadorTabuleiro;
 
+        if(distanciaMeta < nrSquares){
+
+            if(turno == jogadores.size()){
+                turno = 1;
+            }else{
+                turno++;
+            }
+
+            return false;
+        }
+
         tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
 
-        if(distanciaMeta > nrSquares){
-            posJogadorTabuleiro += nrSquares;
-        } else {
-            posJogadorTabuleiro = meta;
-        }
+        posJogadorTabuleiro += nrSquares;
+
 
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
-        if(posJogadorTabuleiro <= meta){
-            jogador.mudaPosicaoAtual(meta);
-        }else{
-            jogador.mudaPosicaoAtual(posJogadorTabuleiro);
-        }
-
+        jogador.mudaPosicaoAtual(posJogadorTabuleiro);
         jogador.energiaAtual -= 2;
 
         tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.id));

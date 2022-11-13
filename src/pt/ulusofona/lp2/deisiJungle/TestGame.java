@@ -123,7 +123,7 @@ public class TestGame {
         manager.createInitialJungle(8, 8, array);
 
 
-        boolean resultadoReal = manager.moveCurrentPlayer(10, true);;
+        boolean resultadoReal = manager.moveCurrentPlayer(10, true);
 
         boolean resultadoEsperado = false;
 
