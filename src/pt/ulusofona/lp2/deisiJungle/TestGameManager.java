@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TestGameManager {
     @Test
@@ -18,8 +19,10 @@ public class TestGameManager {
         };
         manager.createInitialJungle(8, 10, array);
         manager.moveCurrentPlayer(2,false);
-        String[] resultadoReal = manager.getCurrentPlayerInfo();
-        String[] resultadoEsperado = { "3", "Leão", "L","10" };
+        manager.moveCurrentPlayer(4,false);
+        manager.moveCurrentPlayer(5,false);
+        boolean resultadoReal = manager.moveCurrentPlayer(5,false);
+        boolean resultadoEsperado = true;
 
 
         assertEquals("testMoveCurrentPlayer", resultadoEsperado, resultadoReal);
@@ -34,12 +37,16 @@ public class TestGameManager {
                 { "23", "Leão","L" },
 
         };
-        manager.createInitialJungle(8, 2, array);
+        manager.createInitialJungle(8, 6, array);
 
+        manager.moveCurrentPlayer(2,false);
+        manager.moveCurrentPlayer(4,false);
+        manager.moveCurrentPlayer(5,false);
+        manager.moveCurrentPlayer(2,false);
 
         String[] resultadoReal = manager.getCurrentPlayerInfo();
 
-        String[] resultadoEsperado = { "2", "Leão", "L","2" };
+        String[] resultadoEsperado = { "2", "Leão", "L","4" };
 
         assertEquals("testMoveCurrentPlayer", resultadoEsperado, resultadoReal);
     }
@@ -55,9 +62,18 @@ public class TestGameManager {
         };
         manager.createInitialJungle(8, 6, array);
 
+        manager.moveCurrentPlayer(2,false);
+        manager.moveCurrentPlayer(4,false);
+        manager.moveCurrentPlayer(5,false);
+        manager.moveCurrentPlayer(2,false);
+        manager.moveCurrentPlayer(2,false);
+        manager.moveCurrentPlayer(4,false);
+        manager.moveCurrentPlayer(5,false);
+        manager.moveCurrentPlayer(2,false);
+
         String[] resultadoReal = manager.getCurrentPlayerInfo();
 
-        String[] resultadoEsperado = { "2", "Leão", "L","6" };
+        String[] resultadoEsperado = { "2", "Leão", "L","2" };
 
         assertEquals("testMoveCurrentPlayer", resultadoEsperado, resultadoReal);
     }
@@ -68,14 +84,22 @@ public class TestGameManager {
                 { "11", "joao","E" },
                 { "2", "Leão","L" },
                 { "3", "Leão","L" },
-                { "23", "Leão","L" },
 
         };
         manager.createInitialJungle(8, 5, array);
 
-        String[] resultadoReal = manager.getCurrentPlayerInfo();
+        manager.moveCurrentPlayer(2,false);
+        manager.moveCurrentPlayer(4,false);
+        manager.moveCurrentPlayer(5,false);
+        manager.moveCurrentPlayer(2,false);
+        manager.moveCurrentPlayer(2,false);
+        manager.moveCurrentPlayer(4,false);
+        manager.moveCurrentPlayer(5,false);
+        manager.moveCurrentPlayer(2,false);
 
-        String[] resultadoEsperado = { "2", "Leão", "L","5" };
+        boolean resultadoReal = manager.moveCurrentPlayer(2,false);
+
+        boolean resultadoEsperado = false;
 
         assertEquals("testMoveCurrentPlayer", resultadoEsperado, resultadoReal);
     }
