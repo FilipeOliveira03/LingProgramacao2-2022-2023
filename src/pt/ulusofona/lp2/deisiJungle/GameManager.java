@@ -323,9 +323,6 @@ public class GameManager {
     }
 
     public String[] getWinnerInfo(){
-
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
-
         int countenergia = 0;
         int jogoacabado = 0;
 
@@ -373,8 +370,6 @@ public class GameManager {
     }
 
     public ArrayList<String> getGameResults(){
-
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
 
         ArrayList<String> resultadoJogo= new ArrayList<>();
 
