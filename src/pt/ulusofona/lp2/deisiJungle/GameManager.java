@@ -299,9 +299,9 @@ public class GameManager {
 
         if(distanciaMeta < nrSquares){
 
-            jogador.energiaAtual -= 2;
-
-            mudarTurno();
+//            jogador.energiaAtual -= 2;
+//
+//            mudarTurno();
 
             return false;
         }
@@ -322,7 +322,7 @@ public class GameManager {
         return true;
     }
 
-    public String[] getWinnerInfo(){
+    public String[] getWinnerInfo() {
         int countenergia = 0;
         int jogoacabado = 0;
 

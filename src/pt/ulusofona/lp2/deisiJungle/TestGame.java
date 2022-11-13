@@ -1,9 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import static org.junit.Assert.assertEquals;
 
 public class TestGame {
@@ -116,16 +113,20 @@ public class TestGame {
         String[][] array = {
                 { "2", "a","E" },
                 { "3", "c","E" },
-                { "11", "b","E" },
-                { "12", "d","E" },
 
         };
-        manager.createInitialJungle(8, 8, array);
+        manager.createInitialJungle(8, 6, array);
 
 
-        boolean resultadoReal = manager.moveCurrentPlayer(10, true);
+        manager.moveCurrentPlayer(3, true);
+        manager.moveCurrentPlayer(1, true);
+        manager.moveCurrentPlayer(10, true);
+        manager.moveCurrentPlayer(10, true);
+        manager.moveCurrentPlayer(10, true);
+        manager.moveCurrentPlayer(10, true);
 
-        boolean resultadoEsperado = false;
+        String[] resultadoReal = manager.getWinnerInfo();
+        String[] resultadoEsperado = {"2", "a", "E", "0"} ;
 
 
         assertEquals("testMoveCurrentPlayer", resultadoEsperado, resultadoReal);
