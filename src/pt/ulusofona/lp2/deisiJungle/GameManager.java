@@ -258,6 +258,10 @@ public class GameManager {
             }
         }
 
+        if(nrSquares > meta){
+            return false;
+        }
+
         int jogadorJoga = jogadores.get(turno - 1).id;
 
         int posJogadorTabuleiro = 1;
@@ -305,7 +309,7 @@ public class GameManager {
 
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
-        if(posJogadorTabuleiro == meta){
+        if(posJogadorTabuleiro <= meta){
             jogador.mudaPosicaoAtual(meta);
         }else{
             jogador.mudaPosicaoAtual(posJogadorTabuleiro);

@@ -121,15 +121,11 @@ public class TestGame {
 
         };
         manager.createInitialJungle(8, 8, array);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
 
-        String[] resultadoReal = manager.getCurrentPlayerInfo();
 
-        String[] resultadoEsperado = { "3", "c","E", "6"};
+        boolean resultadoReal = manager.moveCurrentPlayer(10, true);;
+
+        boolean resultadoEsperado = false;
 
 
         assertEquals("testMoveCurrentPlayer", resultadoEsperado, resultadoReal);

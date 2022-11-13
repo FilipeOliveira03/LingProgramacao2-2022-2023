@@ -6,6 +6,7 @@ public class Player {
     String especie;
     int energiaAtual;
     int posicaoAtual = 1;
+    boolean jaGanhou = false;
 
     Player(){
     }
@@ -28,6 +29,10 @@ public class Player {
 
     public void mudaPosicaoAtual(int posicaoAtual){
         this.posicaoAtual = posicaoAtual;
+    }
+
+    public void jaGanhou(boolean jaGanhou){
+        this.jaGanhou = jaGanhou;
     }
 
 }
