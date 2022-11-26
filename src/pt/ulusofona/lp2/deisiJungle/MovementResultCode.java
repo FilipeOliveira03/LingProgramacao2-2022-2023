@@ -7,11 +7,5 @@ public class MovementResultCode {
     static String VALID_MOVEMENT;
     static String CAUGHT_FOOD;
 
-    public String code(){
-        return "";
-    }
 
-    public String message(){
-        return "";
-    }
 }
