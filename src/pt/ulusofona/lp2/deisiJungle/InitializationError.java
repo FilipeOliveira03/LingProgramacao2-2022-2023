@@ -3,7 +3,6 @@ package pt.ulusofona.lp2.deisiJungle;
 public class InitializationError extends MovementResultCode{
 
     public String getMessage(){
-        String a = "";
-        return "";
+        return "Crocodilo";
     }
 }
