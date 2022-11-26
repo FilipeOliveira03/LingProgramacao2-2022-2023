@@ -1,11 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 public class MovementResult extends MovementResultCode{
-    public String code(){
-        return "";
-    }
+    MovementResultCode code;
+    String message;
 
-    public String message(){
-        return "";
-    }
 }
