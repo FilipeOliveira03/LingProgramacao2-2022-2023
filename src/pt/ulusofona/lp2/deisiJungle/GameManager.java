@@ -411,7 +411,7 @@ public class GameManager {
 
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
-        BufferedImage image = ImageIO.read(new File("C:/Users/filip/IdeaProjects/ProjetoLP2/src/creditos.png"));
+        BufferedImage image = ImageIO.read(new File("C://Users//filip//IdeaProjects//ProjetoLP2"));
         JLabel label = new JLabel(new ImageIcon(image));
         JLabel texto = new JLabel();
         texto.setText("Developers : Henrique Franco , Filipe Oliveira");
