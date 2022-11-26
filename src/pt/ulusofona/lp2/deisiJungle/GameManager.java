@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 public class GameManager {
@@ -236,7 +237,7 @@ public class GameManager {
         return jogador;
     }
 
-    public String[][] getPlayersInfo(){
+   public String[][] getPlayersInfo(){
 
         jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
 
@@ -411,7 +412,8 @@ public class GameManager {
 
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
-        BufferedImage image = ImageIO.read(new File("C://Users//filip//IdeaProjects//ProjetoLP2"));
+        BufferedImage image = ImageIO.read(Objects.requireNonNull(getClass().
+                getResource("/creditos.png")));
         JLabel label = new JLabel(new ImageIcon(image));
         JLabel texto = new JLabel();
         texto.setText("Developers : Henrique Franco , Filipe Oliveira");
