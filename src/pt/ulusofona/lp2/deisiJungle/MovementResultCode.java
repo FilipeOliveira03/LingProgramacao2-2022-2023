@@ -1,21 +1,11 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 public class MovementResultCode {
-    void INVALID_MOVEMENT(){
 
-    }
-
-    void NO_ENERGY(){
-
-    }
-
-    void VALID_MOVEMENT(){
-
-    }
-
-    void CAUGHT_FOOD(){
-
-    }
+    String INVALID_MOVEMENT;
+    String NO_ENERGY;
+    String VALID_MOVEMENT;
+    String CAUGHT_FOOD;
 
     public String code(){
         return "";
