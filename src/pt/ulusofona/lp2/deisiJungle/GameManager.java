@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import org.junit.runners.model.InitializationError;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -27,21 +29,6 @@ public class GameManager {
         }
     }
 
-    public boolean isNumeric(String s) {
-        if (s == null || s.equals("")) {
-            return false;
-        }
-
-        for (int i = 0; i < s.length(); i++)
-        {
-            char c = s.charAt(i);
-            if (c < '0' || c > '9') {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public String[][] getSpecies(){
 
         return new String[][]{ { "E", "Elefante","elephant.png" },
@@ -51,7 +38,11 @@ public class GameManager {
                 { "Z", "Tarzan","tarzan.png" } };
     }
 
-    public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
+    public String[][] getFoodTypes(){
+        return null;
+    }
+
+    public boolean createInitialJungle(int jungleSize, String[][] playersInfo,String[][] foodsInfo){
 
         int countNrTarzan = 0;
 
@@ -63,7 +54,7 @@ public class GameManager {
 
                 if(countPlayer1 != countPlayer2){ // jogadores iguais
 
-                    if(!isNumeric(playersInfo[countPlayer1][0]) || !isNumeric(playersInfo[countPlayer2][0])){
+                    if(!OtherFunctions.isNumeric(playersInfo[countPlayer1][0]) || !OtherFunctions.isNumeric(playersInfo[countPlayer2][0])){
                         return false;
                     }
 
@@ -117,7 +108,7 @@ public class GameManager {
             jogador.adicionaId(Integer.parseInt(info[0]));
             jogador.adicionaNome(info[1]);
             jogador.adicionaEspecie(info[2]);
-            jogador.adicionaEnergiaAtual(initialEnergy);
+           // jogador.adicionaEnergiaAtual(initialEnergy);
 
 
             jogadores.add(jogador);
@@ -125,6 +116,10 @@ public class GameManager {
         }
 
         return true;
+    }
+
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
+        return null;
     }
 
     public int[] getPlayerIds(int squareNr) {
@@ -237,7 +232,11 @@ public class GameManager {
         return jogador;
     }
 
-   public String[][] getPlayersInfo(){
+    public String[] getCurrentPlayerEnergyInfo(int nrPositions){
+        return null;
+    }
+
+    public String[][] getPlayersInfo(){
 
         jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
 
@@ -257,14 +256,14 @@ public class GameManager {
         return array;
     }
 
-    public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
+    public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
         if(!bypassValidations){
             if(nrSquares < 1 || nrSquares > 6){
 
                 mudarTurno();
 
-                return false;
+                //return false;
             }
         }
 
@@ -296,7 +295,7 @@ public class GameManager {
 
             mudarTurno();
 
-            return false;
+           // return false;
         }
 
         int distanciaMeta = meta - posJogadorTabuleiro;
@@ -307,7 +306,7 @@ public class GameManager {
 
             mudarTurno();
 
-            return false;
+           // return false;
         }
 
         tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
@@ -323,7 +322,7 @@ public class GameManager {
 
         mudarTurno();
 
-        return true;
+        return null; // seria true
     }
 
     public String[] getWinnerInfo() {
@@ -426,6 +425,14 @@ public class GameManager {
 
     public String whoIsTaborda(){
         return "professional wrestling";
+    }
+
+    public boolean saveGame(File file){
+        return true;
+    }
+
+    public boolean loadGame(File file){
+        return true;
     }
 
 }
