@@ -1,22 +1,13 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class Alimento {
-    protected String tipoAlimento;
+public abstract class Alimento {
     protected char identificador;
     protected String imagemPNG;
 
-    Alimento(){
-    }
-
-    public void setTipoAlimento(String tipoAlimento) {
-        this.tipoAlimento = tipoAlimento;
-    }
-
-    public void setIdentificador(char identificador) {
+    public Alimento(char identificador, String imagemPNG){
         this.identificador = identificador;
-    }
-
-    public void setImagemPNG(String imagemPNG) {
         this.imagemPNG = imagemPNG;
     }
+
+    public abstract void escreveTooltip();
 }
