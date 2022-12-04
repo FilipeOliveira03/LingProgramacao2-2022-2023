@@ -2,10 +2,10 @@ package pt.ulusofona.lp2.deisiJungle;
 
 public class MovementResultCode {
 
-    static String INVALID_MOVEMENT;
-    static String NO_ENERGY;
-    static String VALID_MOVEMENT;
-    static String CAUGHT_FOOD;
+    protected static String INVALID_MOVEMENT;
+    protected static String NO_ENERGY;
+    protected static String VALID_MOVEMENT;
+    protected static String CAUGHT_FOOD;
 
 
 }
