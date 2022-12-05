@@ -9,5 +9,8 @@ public abstract class Alimento {
         this.imagemPNG = imagemPNG;
     }
 
-    public abstract void escreveTooltip();
+    public abstract void acontecimentoIngerir(Player jogador);
+
+    //public abstract void escreveTooltip();
+
 }

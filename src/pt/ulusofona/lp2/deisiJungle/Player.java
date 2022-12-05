@@ -6,6 +6,7 @@ public class Player {
     String especie;
     int energiaAtual;
     int posicaoAtual = 1;
+    private Especie especiee;
 
     Player(){
     }
@@ -30,4 +31,7 @@ public class Player {
         this.posicaoAtual = posicaoAtual;
     }
 
+    public Especie getEspecie() {
+        return especiee;
+    }
 }

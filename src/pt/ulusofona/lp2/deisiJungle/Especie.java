@@ -1,39 +1,19 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import java.util.ArrayList;
-
 public class Especie {
 
-    protected int energiaInicial;
+    protected int energia;
     protected int consumoEnergia;
-    protected int descanso;
+    protected int ganhoEnerDescanso;
     protected String velocidade;
     protected String tipoAlimentacao;
-    protected ArrayList<Alimento> alimentosIngeridos = new ArrayList<>();
 
-    public Especie(){}
-
-    public void setEnergiaInicial(int energiaInicial) {
-        this.energiaInicial = energiaInicial;
-    }
-
-    public void setConsumoEnergia(int consumoEnergia) {
+    public Especie(int energia, int consumoEnergia, int ganhoEnerDescanso, String velocidade,String tipoAlimentacao){
+        this.energia = energia;
         this.consumoEnergia = consumoEnergia;
-    }
-
-    public void setDescanso(int descanso) {
-        this.descanso = descanso;
-    }
-
-    public void setVelocidade(String velocidade) {
+        this.ganhoEnerDescanso = ganhoEnerDescanso;
         this.velocidade = velocidade;
-    }
-
-    public void setTipoAlimentacao(String tipoAlimentacao) {
         this.tipoAlimentacao = tipoAlimentacao;
     }
 
-    public void adicionaAlimento(Alimento alimento){
-        alimentosIngeridos.add(alimento);
-    }
 }

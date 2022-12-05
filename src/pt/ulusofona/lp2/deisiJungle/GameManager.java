@@ -17,6 +17,11 @@ public class GameManager {
     int jogadoresMaximos = 4;
     int meta;
     int turno = 1;
+    private static int jogadasPassadas = 0;
+
+    public static int getJogadasPassadas() {
+        return jogadasPassadas;
+    }
 
     public void mudarTurno(){
         if(turno == jogadores.size()){

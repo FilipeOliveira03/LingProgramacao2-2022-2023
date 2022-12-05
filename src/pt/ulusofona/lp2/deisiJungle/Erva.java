@@ -4,35 +4,33 @@ public class Erva extends Alimento{
 
     public Erva(){
         super('e', "grass.png");
-
     }
 
-    public void acontecimentoIngerir(Especie especie){
+    @Override
+    public void acontecimentoIngerir(Player jogador){
+
+        Especie especie = jogador.getEspecie();
 
         if(especie.tipoAlimentacao.equals("Herbívoro") || especie.tipoAlimentacao.equals("Omnívoro")){
 
-            if(especie.energiaInicial > 180){
-                especie.energiaInicial = 200;
+            if(especie.energia > 180){
+                especie.energia = 200;
 
             }else{
-                especie.energiaInicial += 20;
+                especie.energia += 20;
             }
 
         }else if(especie.tipoAlimentacao.equals("Carnívoro")){
 
-            if(especie.energiaInicial < 20){
-                especie.energiaInicial = 0;
+            if(especie.energia < 20){
+                especie.energia = 0;
 
             }else {
-                especie.energiaInicial -= 20;
+                especie.energia -= 20;
             }
         }
     }
 
-    @Override
-    public void escreveTooltip() {
-        //adicionar a tooltip
-    }
 
     @Override
     public String toString() {
