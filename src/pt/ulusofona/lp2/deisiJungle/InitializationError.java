@@ -1,9 +1,13 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-
-public class InitializationError{
+public record InitializationError(Boolean inicializou) {
 
     public String getMessage(){
-        return "Erro";
+        if(inicializou){
+            return "Inicializou corretamente o terreno";
+        }else{
+            return "Não inicializou corretamente o terreno";
+        }
+
     }
 }
