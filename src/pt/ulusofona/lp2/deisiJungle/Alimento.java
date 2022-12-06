@@ -11,6 +11,7 @@ public abstract class Alimento {
 
     public abstract void acontecimentoIngerir(Player jogador);
 
+
     //public abstract void escreveTooltip();
 
 }

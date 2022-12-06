@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CachoBananas extends Alimento{
 
     private int countBanCacho = 3;
-    private final ArrayList<Integer> IdsJogadoresComeram = new ArrayList<>();
+    private final ArrayList<Integer> idsJogadoresComeram = new ArrayList<>();
 
     public CachoBananas() {
         super('b', "bananas.png");
@@ -20,7 +20,7 @@ public class CachoBananas extends Alimento{
             countBanCacho--;
             boolean jogadorComeu = false;
 
-            if(IdsJogadoresComeram.contains(jogador.id)){
+            if(idsJogadoresComeram.contains(jogador.id)){
                 jogadorComeu = true;
             }
 
@@ -44,7 +44,7 @@ public class CachoBananas extends Alimento{
             }
         }
 
-        IdsJogadoresComeram.add(jogador.id);
+        idsJogadoresComeram.add(jogador.id);
     }
 
     @Override

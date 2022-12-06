@@ -45,7 +45,7 @@ public class GameManager {
     }
 
     public boolean createInitialJungle(int jungleSize, String[][] playersInfo,String[][] foodsInfo){
-
+        // tipo é InitializationError
         int countNrTarzan = 0;
 
         boolean[] verificarEspecie = new boolean[playersInfo.length];

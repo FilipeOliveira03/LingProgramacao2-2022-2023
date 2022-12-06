@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 
-public class InitializationError extends MovementResultCode{
+public class InitializationError{
 
     public String getMessage(){
         return "Erro";
