@@ -8,7 +8,7 @@ import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.CAUGHT_FOOD;
 
 public record MovementResult(MovementResultCode code) {
 
-    public String valorMensagem(){
+    public String message(){
         String mensagem = "";
         if(code == VALID_MOVEMENT){
 
