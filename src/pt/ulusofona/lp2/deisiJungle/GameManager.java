@@ -44,7 +44,7 @@ public class GameManager {
         return null;
     }
 
-    public boolean createInitialJungle(int jungleSize, String[][] playersInfo,String[][] foodsInfo){
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo,String[][] foodsInfo){
         // tipo é InitializationError
         int countNrTarzan = 0;
 
@@ -57,23 +57,23 @@ public class GameManager {
                 if(countPlayer1 != countPlayer2){ // jogadores iguais
 
                     if(!OtherFunctions.isNumeric(playersInfo[countPlayer1][0]) || !OtherFunctions.isNumeric(playersInfo[countPlayer2][0])){
-                        return false;
+                        return null; // false
                     }
 
                     int jogador1Int = Integer.parseInt(playersInfo[countPlayer1][0]);
-                    if(jogador1Int < 0){ return false; }
+                    if(jogador1Int < 0){ return null; } // false
 
                     int jogador2Int = Integer.parseInt(playersInfo[countPlayer2][0]);
-                    if(jogador2Int < 0){ return false; }
+                    if(jogador2Int < 0){ return null;} // false
 
-                    if(jogador1Int == jogador2Int){ return false; }//verifica se o id é igual
+                    if(jogador1Int == jogador2Int){ return null; }// false //verifica se o id é igual
                 }
             }
         }
 
         for (int countPlayer = 0; countPlayer < playersInfo.length; countPlayer++) {
 
-            if(playersInfo[countPlayer][1] == null || playersInfo[countPlayer][1].equals("")){ return false; }//nome null ou vazio
+            if(playersInfo[countPlayer][1] == null || playersInfo[countPlayer][1].equals("")){ return null; } // false //nome null ou vazio
 
             if(playersInfo[countPlayer][2].equals("Z")){ countNrTarzan++;}// so pode existir 1 tarzan
 
@@ -87,13 +87,13 @@ public class GameManager {
             }
         }
 
-        if(countNrTarzan > 1 || playersInfo.length * 2 > jungleSize){ return false; } // verifica se só há 1
+        if(countNrTarzan > 1 || playersInfo.length * 2 > jungleSize){ return null; }// false  // verifica se só há 1
 
 
-        if(playersInfo.length < jogadoresMinimos || playersInfo.length > jogadoresMaximos) { return false; }// verifica o numero de jogadores
+        if(playersInfo.length < jogadoresMinimos || playersInfo.length > jogadoresMaximos) { return null; }// false // verifica o numero de jogadores
 
         for (boolean verificar : verificarEspecie) { //
-            if (!verificar) { return false; }
+            if (!verificar) { return null; }// false
         }
 
         for (int preencherHash = 1; preencherHash <= jungleSize; preencherHash++) {
@@ -117,7 +117,7 @@ public class GameManager {
             tabuleiro.get(1).add(jogador);
         }
 
-        return true;
+            return null; // true
     }
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
