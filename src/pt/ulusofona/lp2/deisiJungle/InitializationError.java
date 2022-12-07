@@ -1,13 +1,45 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public record InitializationError(Boolean inicializou){
+import kotlin.reflect.jvm.internal.impl.util.ReturnsCheck;
+
+import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.*;
+
+public record InitializationError(InitializationErrorCode code){
 
     public String getMessage(){
 
-        if(inicializou ){
-            return "O jogo foi inicializado";
-        }else{
-            return "O jogo não foi inicializado";
+        String mensagem = "";
+
+        if(code == INVALID_IDS){
+
+            mensagem = "Os IDS são inválidos";
+
+        }else if(code == INVALID_NAME){
+
+            mensagem = "O nome é inválido";
+
+        }else if(code == INVALID_SPECIE){
+
+            mensagem = "A espécie é inválida";
+
+        }else if(code == INVALID_FOOD){
+
+            mensagem = "A comida é inválida";
+
+        }else if(code == INVALID_POSITION_FOOD){
+
+            mensagem = "A posição da comida é inválida";
+
+        }else if(code == INVALID_NUM_PLAYERS){
+
+            mensagem = "Numero de jogadores inválido";
+
+        }else if(code == INVALID_MAP_CONFIGURATION){
+
+            mensagem = "Não existem, pelo menos, duas posições por cada jogador";
+
         }
+
+        return mensagem;
     }
 }

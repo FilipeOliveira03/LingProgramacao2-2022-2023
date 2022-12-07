@@ -1,10 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.VALID_MOVEMENT;
-import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.INVALID_MOVEMENT;
-import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.NO_ENERGY;
-import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.CAUGHT_FOOD;
-
+import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.*;
 
 public record MovementResult(MovementResultCode code) {
 
