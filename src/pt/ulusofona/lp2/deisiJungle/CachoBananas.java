@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import java.util.ArrayList;
 
-public class CachoBananas extends Alimento{
+public class CachoBananas extends Alimento {
 
     private int countBanCacho = 3;
     private final ArrayList<Integer> idsJogadoresComeram = new ArrayList<>();

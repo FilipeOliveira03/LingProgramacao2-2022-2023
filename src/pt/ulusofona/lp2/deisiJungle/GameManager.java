@@ -10,14 +10,12 @@ import java.util.*;
 
 public class GameManager {
 
-    HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
-    ArrayList<Player> jogadores = new ArrayList<>();
+    private final HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
+    private final ArrayList<Player> jogadores = new ArrayList<>();
 
-    int jogadoresMinimos = 2;
-    int jogadoresMaximos = 4;
-    int meta;
-    int turno = 1;
-    private static int jogadasPassadas = 0;
+    private int meta;
+    private int turno = 1;
+    private static final int jogadasPassadas = 0;
 
     public static int getJogadasPassadas() {
         return jogadasPassadas;
@@ -33,19 +31,23 @@ public class GameManager {
 
     public String[][] getSpecies(){
 
-        return new String[][]{ { "E", "Elefante","elephant.png" },
-                { "L", "Leão","lion.png" },
-                { "T", "Tartaruga","turtle.png" },
-                { "P", "Pássaro","bird.png" },
-                { "Z", "Tarzan","tarzan.png" } };
+        return new String[][]{ { "E", "Elefante","elephant.png", "180", "4", "10", "1..6"},
+                { "L", "Leão","lion.png", "80", "2", "10", "4..6" },
+                { "T", "Tartaruga", "turtle.png" , "150", "1", "5", "1..3"},
+                { "P", "Pássaro","bird.png" , "70", "4", "50", "5..6"},
+                { "Z", "Tarzan","tarzan.png" , "70", "2", "20", "1..6"} };
     }
 
     public String[][] getFoodTypes(){
-        return null;
+        return new String[][]{ { "e", "Erva", "grass.png"},
+                { "a", "Agua", "water.png"},
+                { "c", "Carne", "meat.png"},
+                { "b", "Cacho de Bananas", "bananas.png"},
+                { "m", "Cogumelos magicos", "mushroom.png"} };
     }
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo,String[][] foodsInfo){
-        // tipo é InitializationError
+
         int countNrTarzan = 0;
 
         boolean[] verificarEspecie = new boolean[playersInfo.length];
@@ -89,6 +91,8 @@ public class GameManager {
 
         if(countNrTarzan > 1 || playersInfo.length * 2 > jungleSize){ return null; }// false  // verifica se só há 1
 
+        int jogadoresMinimos = 2;
+        int jogadoresMaximos = 4;
 
         if(playersInfo.length < jogadoresMinimos || playersInfo.length > jogadoresMaximos) { return null; }// false // verifica o numero de jogadores
 

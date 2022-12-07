@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class Carne extends Alimento{
+public class Carne extends Alimento {
 
     private final int jogadaAtual = GameManager.getJogadasPassadas();
 

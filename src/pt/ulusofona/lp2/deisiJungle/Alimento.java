@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import pt.ulusofona.lp2.deisiJungle.Player;
+
 public abstract class Alimento {
     protected char identificador;
     protected String imagemPNG;

@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class Erva extends Alimento{
+public class Erva extends Alimento {
 
     public Erva(){
         super('e', "grass.png");

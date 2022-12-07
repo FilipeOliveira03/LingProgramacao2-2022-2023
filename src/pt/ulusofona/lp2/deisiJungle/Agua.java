@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class Agua extends Alimento{
+public class Agua extends Alimento {
 
     public Agua() {
         super('a', "water.png");

@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import java.util.Random;
 
-public class Cogumelo extends Alimento{
+public class Cogumelo extends Alimento {
 
     private int numRandom;
     private final int jogadaAtual = GameManager.getJogadasPassadas();
