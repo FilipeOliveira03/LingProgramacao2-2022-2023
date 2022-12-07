@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import kotlin.reflect.jvm.internal.impl.util.ReturnsCheck;
-
 import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.*;
 
 public record InitializationError(InitializationErrorCode code){
