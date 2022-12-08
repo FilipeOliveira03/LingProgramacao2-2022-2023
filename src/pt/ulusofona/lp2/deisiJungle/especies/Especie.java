@@ -24,6 +24,10 @@ public class Especie {
         return tipoAlimentacao;
     }
 
+    public String getVelocidade() {
+        return velocidade;
+    }
+
     public int mudaEnergia(int energia){
         return this.energia = energia;
     }

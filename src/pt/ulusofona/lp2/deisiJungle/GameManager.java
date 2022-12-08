@@ -215,7 +215,7 @@ public class GameManager {
 
         jogadores.sort(Comparator.comparing((Player jogador) -> jogador.getID()));
 
-        String[] array = new String[4];
+        String[] array = new String[5];
         boolean verificar = false;
 
         for (Player jogador : jogadores) {
@@ -225,6 +225,7 @@ public class GameManager {
                 array[1] = jogador.getNome();
                 array[2] = jogador.getEspecie().getNomeSigla();
                 array[3] = String.valueOf(jogador.getEspecie().getEnergia());
+                array[4] = jogador.getEspecie().getVelocidade();
                 verificar = true;
             }
         }
