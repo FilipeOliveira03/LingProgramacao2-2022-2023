@@ -68,16 +68,22 @@ public class GameManager {
                 }
             }
 
+            if(!OtherFunctions.isNumeric(foodsInfo[countAlimentos][1])){
+                return new InitializationError(INVALID_FOOD_POSITION_NOT_NUMBER);
+            }
+
             int posicaoComida = Integer.parseInt(foodsInfo[countAlimentos][1]);
 
-            if(posicaoComida <= 1 || posicaoComida >= jungleSize){
+            if( posicaoComida <= 1 || posicaoComida >= jungleSize){
                 return new InitializationError(INVALID_FOOD_POSITION);
             }
+
+
 
         }
 
         for (boolean verificar : verificarComida) { // verifica se a comida existe
-            if (!verificar) {  return new InitializationError(INVALID_FOOD_DOES_NOT_EXIST); }// false
+            if (!verificar) {  return new InitializationError(INVALID_FOOD_DOES_NOT_EXIST); }
         }
 
         return createInitialJungle(jungleSize, playersInfo);

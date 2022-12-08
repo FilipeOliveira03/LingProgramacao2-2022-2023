@@ -42,9 +42,13 @@ public record InitializationError(InitializationErrorCode code){
 
         }else if(code == INVALID_FOOD_DOES_NOT_EXIST){
          
-                     mensagem = "A comida não existe";
+            mensagem = "A comida não existe";
          
-                 }
+        }else if(code == INVALID_FOOD_POSITION_NOT_NUMBER){
+
+            mensagem = "A comida não têm um valor numérico";
+
+        }
 
         return mensagem;
     }
