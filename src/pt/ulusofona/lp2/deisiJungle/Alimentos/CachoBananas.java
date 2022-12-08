@@ -1,4 +1,7 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Alimentos;
+
+import pt.ulusofona.lp2.deisiJungle.Especies.Especie;
+import pt.ulusofona.lp2.deisiJungle.Player;
 
 import java.util.ArrayList;
 
@@ -8,43 +11,44 @@ public class CachoBananas extends Alimento {
     private final ArrayList<Integer> idsJogadoresComeram = new ArrayList<>();
 
     public CachoBananas() {
-        super('b', "bananas.png");
+        super("Cacho de Bananas");
     }
 
     @Override
     public void acontecimentoIngerir(Player jogador) {
 
         Especie especie = jogador.getEspecie();
+        int energiaAtual = especie.getEnergia();
 
         if(countBanCacho > 0){
             countBanCacho--;
             boolean jogadorComeu = false;
 
-            if(idsJogadoresComeram.contains(jogador.id)){
+            if(idsJogadoresComeram.contains(jogador.getId())){
                 jogadorComeu = true;
             }
 
             if(!jogadorComeu){
 
-                if(especie.energia > 160){
-                    especie.energia = 200;
+                if(energiaAtual > 160){
+                    especie.mudaEnergia(200);
 
                 }else{
-                    especie.energia += 40;
+                    especie.mudaEnergia(energiaAtual + 40);
                 }
 
             }else{
 
-                if(especie.energia > 40){
-                    especie.energia = 0;
+                if(energiaAtual > 40){
+                    especie.mudaEnergia(0);
 
                 }else{
-                    especie.energia -= 40;
+                    especie.mudaEnergia(energiaAtual - 40);
                 }
             }
         }
 
-        idsJogadoresComeram.add(jogador.id);
+        idsJogadoresComeram.add(jogador.getId());
     }
 
     @Override

@@ -1,4 +1,8 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Alimentos;
+
+import pt.ulusofona.lp2.deisiJungle.Especies.Especie;
+import pt.ulusofona.lp2.deisiJungle.GameManager;
+import pt.ulusofona.lp2.deisiJungle.Player;
 
 import java.util.Random;
 
@@ -9,13 +13,15 @@ public class Cogumelo extends Alimento {
 
 
     public Cogumelo() {
-        super('m', "mushroom.png");
+        super("Cogumelo");
     }
 
     @Override
     public void acontecimentoIngerir(Player jogador) {
 
         Especie especie = jogador.getEspecie();
+        int energiaAtual = especie.getEnergia();
+
         Random random = new Random();
         int numMin = 10;
         int numMax = 50;
@@ -24,8 +30,7 @@ public class Cogumelo extends Alimento {
         float numeroPercentagem = numeroRandom / 100;
         numRandom = (int) numeroRandom;
 
-        int energiaAtual = especie.energia;
-        int energiaPercentagem = (int) (especie.energia * numeroPercentagem);
+        int energiaPercentagem = (int) (energiaAtual * numeroPercentagem);
         int energiaFinal;
 
         if(jogadaAtual % 2 == 0){
@@ -37,10 +42,10 @@ public class Cogumelo extends Alimento {
         }
 
         if(energiaFinal > 200){
-            especie.energia = 200;
+            especie.mudaEnergia(200);
 
         }else{
-            especie.energia += energiaPercentagem;
+            especie.mudaEnergia( energiaAtual + energiaPercentagem);
 
         }
     }

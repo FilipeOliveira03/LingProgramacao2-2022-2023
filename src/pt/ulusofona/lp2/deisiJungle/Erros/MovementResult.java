@@ -1,6 +1,6 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Erros;
 
-import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.*;
+import static pt.ulusofona.lp2.deisiJungle.Erros.MovementResultCode.*;
 
 public record MovementResult(MovementResultCode code) {
 

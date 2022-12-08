@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Especies;
 
 public class Especie {
 
@@ -16,4 +16,15 @@ public class Especie {
         this.tipoAlimentacao = tipoAlimentacao;
     }
 
+    public int getEnergia() {
+        return energia;
+    }
+
+    public int mudaEnergia(int energia){
+        return this.energia = energia;
+    }
+
+    public String getTipoAlimentacao() {
+        return tipoAlimentacao;
+    }
 }

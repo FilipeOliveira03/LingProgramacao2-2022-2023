@@ -1,5 +1,10 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import pt.ulusofona.lp2.deisiJungle.Alimentos.Alimento;
+import pt.ulusofona.lp2.deisiJungle.Especies.Especie;
+
+import java.util.ArrayList;
+
 public class Player {
     int id;
     String nome;
@@ -7,8 +12,11 @@ public class Player {
     int energiaAtual;
     int posicaoAtual = 1;
     private Especie especiee;
+    private int distanciaViajada;
+    private final ArrayList<Alimento> alimentosIngeridos = new ArrayList<>();;
 
     Player(){
+
     }
 
     public void adicionaId(int id){
@@ -33,5 +41,9 @@ public class Player {
 
     public Especie getEspecie() {
         return especiee;
+    }
+
+    public int getId() {
+        return id;
     }
 }

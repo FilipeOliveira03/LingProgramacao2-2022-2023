@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Erros;
 
 public enum InitializationErrorCode {
     INVALID_IDS,

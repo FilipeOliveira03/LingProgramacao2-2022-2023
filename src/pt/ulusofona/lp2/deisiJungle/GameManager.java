@@ -1,5 +1,8 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import pt.ulusofona.lp2.deisiJungle.Erros.InitializationError;
+import pt.ulusofona.lp2.deisiJungle.Erros.MovementResult;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -46,7 +49,7 @@ public class GameManager {
                 { "m", "Cogumelos magicos", "mushroom.png"} };
     }
 
-    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo,String[][] foodsInfo){
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
 
         int countNrTarzan = 0;
 
