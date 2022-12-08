@@ -36,7 +36,15 @@ public record InitializationError(InitializationErrorCode code){
 
             mensagem = "A espécie não existe";
 
-        }
+        }else if(code == INVALID_FOOD_POSITION){
+
+            mensagem = "A comida está fora dos limites do terreno ou na casa inicial/final";
+
+        }else if(code == INVALID_FOOD_DOES_NOT_EXIST){
+         
+                     mensagem = "A comida não existe";
+         
+                 }
 
         return mensagem;
     }
