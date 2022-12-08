@@ -24,7 +24,7 @@ public class CachoBananas extends Alimento {
             countBanCacho--;
             boolean jogadorComeu = false;
 
-            if(idsJogadoresComeram.contains(jogador.getId())){
+            if(idsJogadoresComeram.contains(jogador.getID())){
                 jogadorComeu = true;
             }
 
@@ -48,7 +48,7 @@ public class CachoBananas extends Alimento {
             }
         }
 
-        idsJogadoresComeram.add(jogador.getId());
+        idsJogadoresComeram.add(jogador.getID());
     }
 
     @Override
