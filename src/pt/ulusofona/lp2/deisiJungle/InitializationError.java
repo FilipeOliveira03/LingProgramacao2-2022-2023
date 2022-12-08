@@ -7,34 +7,34 @@ public record InitializationError(InitializationErrorCode code){
     public String getMessage(){
 
         String mensagem = "";
+        
+        if(code == INVALID_ID_WITHOUT_NUMBERS){
+            
+            mensagem = "O jogador apresenta um ID com caracteres não núméricos";
+            
+        }else if(code == INVALID_ID_WITH_NEGATIVE_NUMBERS){
 
-        if(code == INVALID_IDS){
+            mensagem = "O jogador apresenta um ID com valores negativos";
 
-            mensagem = "Os IDS são inválidos";
+        }else if(code == INVALID_PLAYERS_WITH_SAME_ID){
 
-        }else if(code == INVALID_NAME){
+            mensagem = "Existem pelo menos dois jogadores com ids iguais";
 
-            mensagem = "O nome é inválido";
+        }else if(code == INVALID_PLAYER_NAME){
 
-        }else if(code == INVALID_SPECIE){
+            mensagem = "O jogador apresenta um nome vazio ou null";
 
-            mensagem = "A espécie é inválida";
+        }else  if(code == INVALID_JUST_ONE_TARZAN){
 
-        }else if(code == INVALID_FOOD){
+            mensagem = "Não há só um Tarzan";
 
-            mensagem = "A comida é inválida";
+        }else if(code == INVALID_NUMBER_OF_PLAYERS){
 
-        }else if(code == INVALID_POSITION_FOOD){
+            mensagem = "O número de jogadores é inválido";
 
-            mensagem = "A posição da comida é inválida";
+        }else if(code == INVALID_SPECIE_INEXISTANTE){
 
-        }else if(code == INVALID_NUM_PLAYERS){
-
-            mensagem = "Numero de jogadores inválido";
-
-        }else if(code == INVALID_MAP_CONFIGURATION){
-
-            mensagem = "Não existem, pelo menos, duas posições por cada jogador";
+            mensagem = "A espécie não existe";
 
         }
 

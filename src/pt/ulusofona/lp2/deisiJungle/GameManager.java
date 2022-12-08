@@ -1,7 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import pt.ulusofona.lp2.deisiJungle.especies.Especie;
-import pt.ulusofona.lp2.deisiJungle.especies.Leao;
+import pt.ulusofona.lp2.deisiJungle.especies.*;
 import pt.ulusofona.lp2.deisiJungle.outrasFuncoes.OtherFunctions;
 
 import javax.imageio.ImageIO;
@@ -11,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+
+import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.*;
 
 public class GameManager {
 
@@ -53,6 +54,10 @@ public class GameManager {
     }
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
+        return null;
+    }
+
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
 
         int countNrTarzan = 0;
 
@@ -65,23 +70,24 @@ public class GameManager {
                 if(countPlayer1 != countPlayer2){ // jogadores iguais
 
                     if(!OtherFunctions.isNumeric(playersInfo[countPlayer1][0]) || !OtherFunctions.isNumeric(playersInfo[countPlayer2][0])){
-                        return null; // false
-                    }
+                        return new InitializationError(INVALID_ID_WITHOUT_NUMBERS);
+                    } // se são numeros
 
                     int jogador1Int = Integer.parseInt(playersInfo[countPlayer1][0]);
-                    if(jogador1Int < 0){ return null; } // false
+                    if(jogador1Int < 0){ return new InitializationError(INVALID_ID_WITH_NEGATIVE_NUMBERS); } // false nao podem ser negativos
 
                     int jogador2Int = Integer.parseInt(playersInfo[countPlayer2][0]);
-                    if(jogador2Int < 0){ return null;} // false
+                    if(jogador2Int < 0){ return new InitializationError(INVALID_ID_WITH_NEGATIVE_NUMBERS);} // false nao podem ser negativos
 
-                    if(jogador1Int == jogador2Int){ return null; }// false //verifica se o id é igual
+                    if(jogador1Int == jogador2Int){ return new InitializationError(INVALID_PLAYERS_WITH_SAME_ID); }// false //verifica se o id é igual
                 }
             }
         }
 
         for (int countPlayer = 0; countPlayer < playersInfo.length; countPlayer++) {
 
-            if(playersInfo[countPlayer][1] == null || playersInfo[countPlayer][1].equals("")){ return null; } // false //nome null ou vazio
+            if(playersInfo[countPlayer][1] == null || playersInfo[countPlayer][1].equals("")){
+                return new InitializationError(INVALID_PLAYER_NAME); } // false //nome null ou vazio
 
             if(playersInfo[countPlayer][2].equals("Z")){ countNrTarzan++;}// so pode existir 1 tarzan
 
@@ -95,15 +101,17 @@ public class GameManager {
             }
         }
 
-        if(countNrTarzan > 1 || playersInfo.length * 2 > jungleSize){ return null; }// false  // verifica se só há 1
+        if(countNrTarzan > 1 || playersInfo.length * 2 > jungleSize){
+             return new InitializationError(INVALID_JUST_ONE_TARZAN); }// false  // verifica se só há 1
 
         int jogadoresMinimos = 2;
         int jogadoresMaximos = 4;
 
-        if(playersInfo.length < jogadoresMinimos || playersInfo.length > jogadoresMaximos) { return null; }// false // verifica o numero de jogadores
+        if(playersInfo.length < jogadoresMinimos || playersInfo.length > jogadoresMaximos) {
+            return new InitializationError(INVALID_NUMBER_OF_PLAYERS); }// false // verifica o numero de jogadores
 
-        for (boolean verificar : verificarEspecie) { //
-            if (!verificar) { return null; }// false
+        for (boolean verificar : verificarEspecie) { // verifica se a especie existe
+            if (!verificar) {  return new InitializationError(INVALID_SPECIE_INEXISTANTE); }// false
         }
 
         for (int preencherHash = 1; preencherHash <= jungleSize; preencherHash++) {
@@ -114,23 +122,23 @@ public class GameManager {
         meta = jungleSize;
 
         for (String[] info : playersInfo) {
-            Leao leao = new Leao();
-            Player jogador = new Player(Integer.parseInt(info[0]),info[1], leao /* info[2] */);
 
-//            jogador.adicionaId(]));
-//            jogador.adicionaNome();
-//            jogador.adicionaEspecie();
-           // jogador.adicionaEnergiaAtual(initialEnergy);
+            Especie especie = new Especie();
 
+            switch (info[2]){
+                case "E" -> especie = new Elefante();
+                case "L" -> especie = new Leao();
+                case "T" -> especie = new Tartaruga();
+                case "P" -> especie = new Passaro();
+                case "Z" -> especie = new Tarzan();
+            }
+
+            Player jogador = new Player(Integer.parseInt(info[0]),info[1], especie);
 
             jogadores.add(jogador);
             tabuleiro.get(1).add(jogador);
         }
 
-            return null; // true
-    }
-
-    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
         return null;
     }
 

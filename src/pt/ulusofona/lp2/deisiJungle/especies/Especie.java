@@ -9,13 +9,7 @@ public class Especie {
     protected String velocidade;
     protected String tipoAlimentacao;
 
-    public Especie(String nomeSigla, int energia, int consumoEnergia, int ganhoEnerDescanso, String velocidade,String tipoAlimentacao){
-        this.nomeSigla = nomeSigla;
-        this.energia = energia;
-        this.consumoEnergia = consumoEnergia;
-        this.ganhoEnerDescanso = ganhoEnerDescanso;
-        this.velocidade = velocidade;
-        this.tipoAlimentacao = tipoAlimentacao;
+    public Especie(){
     }
 
     public String getNomeSigla() {

@@ -25,7 +25,7 @@ public class Player {
     public int getID() {
         return id;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -41,6 +41,6 @@ public class Player {
     public Especie getEspecie() {
         return especie;
     }
-   
-    
+
+
 }

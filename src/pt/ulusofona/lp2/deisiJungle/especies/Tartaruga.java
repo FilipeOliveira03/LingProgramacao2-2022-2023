@@ -3,6 +3,11 @@ package pt.ulusofona.lp2.deisiJungle.especies;
 public class Tartaruga extends Especie {
 
     public Tartaruga(){
-        super("T", 150,1,5,"1..3", "Herbívoro");
+        this.nomeSigla = "T";
+        this.energia = 150;
+        this.consumoEnergia = 1;
+        this.ganhoEnerDescanso = 5;
+        this.velocidade = "1..3";
+        this.tipoAlimentacao = "Herbívoro";
     }
 }

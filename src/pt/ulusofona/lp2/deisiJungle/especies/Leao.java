@@ -3,6 +3,11 @@ package pt.ulusofona.lp2.deisiJungle.especies;
 public class Leao extends Especie {
 
     public Leao(){
-        super("L", 80,2,10,"4..6","Carnívoro");
+        this.nomeSigla = "L";
+        this.energia = 80;
+        this.consumoEnergia = 2;
+        this.ganhoEnerDescanso = 10;
+        this.velocidade = "4..6";
+        this.tipoAlimentacao = "Carnívoro";
     }
 }
