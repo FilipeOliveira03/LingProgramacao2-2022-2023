@@ -6,44 +6,41 @@ import pt.ulusofona.lp2.deisiJungle.especies.Especie;
 import java.util.ArrayList;
 
 public class Player {
-    int id;
-    String nome;
-    String especie;
-    int energiaAtual;
-    int posicaoAtual = 1;
-    private Especie especiee;
+    private int id;
+    private String nome;
+    private int posicaoAtual = 1;
+    private Especie especie;
     private int distanciaViajada;
-    private final ArrayList<Alimento> alimentosIngeridos = new ArrayList<>();;
+    private ArrayList<Alimento> alimentosIngeridos;
 
-    Player(){
-
+    public Player(){
     }
-
-    public void adicionaId(int id){
+    public Player(int id, String nome, Especie especie){
         this.id = id;
-    }
-
-    public void adicionaNome(String nome){
         this.nome = nome;
-    }
-
-    public void adicionaEspecie(String especie){
         this.especie = especie;
+        alimentosIngeridos = new ArrayList<>();
     }
 
-    public void adicionaEnergiaAtual(int energiaAtual){
-        this.energiaAtual = energiaAtual;
+    public int getID() {
+        return id;
+    }
+    
+    public String getNome() {
+        return nome;
     }
 
-    public void mudaPosicaoAtual(int posicaoAtual){
-        this.posicaoAtual = posicaoAtual;
+    public int getPosicaoAtual() {
+        return posicaoAtual;
+    }
+
+    public void mudaPosicaoAtual(int posicaoAtualMudada){
+        this.posicaoAtual = posicaoAtualMudada;
     }
 
     public Especie getEspecie() {
-        return especiee;
+        return especie;
     }
-
-    public int getId() {
-        return id;
-    }
+   
+    
 }

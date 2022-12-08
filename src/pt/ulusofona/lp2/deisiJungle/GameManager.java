@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import pt.ulusofona.lp2.deisiJungle.especies.Especie;
+import pt.ulusofona.lp2.deisiJungle.especies.Leao;
 import pt.ulusofona.lp2.deisiJungle.outrasFuncoes.OtherFunctions;
 
 import javax.imageio.ImageIO;
@@ -33,7 +35,8 @@ public class GameManager {
 
     public String[][] getSpecies(){
 
-        return new String[][]{ { "E", "Elefante","elephant.png", "180", "4", "10", "1..6"},
+        return new String[][]{
+                { "E", "Elefante","elephant.png", "180", "4", "10", "1..6"},
                 { "L", "Leão","lion.png", "80", "2", "10", "4..6" },
                 { "T", "Tartaruga", "turtle.png" , "150", "1", "5", "1..3"},
                 { "P", "Pássaro","bird.png" , "70", "4", "50", "5..6"},
@@ -41,7 +44,8 @@ public class GameManager {
     }
 
     public String[][] getFoodTypes(){
-        return new String[][]{ { "e", "Erva", "grass.png"},
+        return new String[][]{
+                { "e", "Erva", "grass.png"},
                 { "a", "Agua", "water.png"},
                 { "c", "Carne", "meat.png"},
                 { "b", "Cacho de Bananas", "bananas.png"},
@@ -110,12 +114,12 @@ public class GameManager {
         meta = jungleSize;
 
         for (String[] info : playersInfo) {
+            Leao leao = new Leao();
+            Player jogador = new Player(Integer.parseInt(info[0]),info[1], leao /* info[2] */);
 
-            Player jogador = new Player();
-
-            jogador.adicionaId(Integer.parseInt(info[0]));
-            jogador.adicionaNome(info[1]);
-            jogador.adicionaEspecie(info[2]);
+//            jogador.adicionaId(]));
+//            jogador.adicionaNome();
+//            jogador.adicionaEspecie();
            // jogador.adicionaEnergiaAtual(initialEnergy);
 
 
@@ -132,7 +136,7 @@ public class GameManager {
 
     public int[] getPlayerIds(int squareNr) {
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.getID()));
 
         if(squareNr > meta || squareNr < 1 || tabuleiro.get(squareNr) == null ){
             return new int[0];
@@ -142,7 +146,7 @@ public class GameManager {
         int[] arrayFinal = new int[nrJogadoresCasa];
 
         for (int countJogadores = 0; countJogadores < nrJogadoresCasa; countJogadores++) {
-            int id = tabuleiro.get(squareNr).get(countJogadores).id;
+            int id = tabuleiro.get(squareNr).get(countJogadores).getID();
             arrayFinal[countJogadores] = id;
         }
 
@@ -151,7 +155,7 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr){ // falta qualquer coisa
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.getID()));
 
         if(squareNr > meta || squareNr < 1 || tabuleiro.get(squareNr) == null){
             return null;
@@ -166,7 +170,7 @@ public class GameManager {
 
         for (Player jogador : jogadores) {
 
-            String especie = jogador.especie;
+            String especie = jogador.getEspecie().getNomeSigla();
 
             switch (especie) {
                 case "E" -> info[0] = "elephant.png";
@@ -176,7 +180,7 @@ public class GameManager {
                 case "Z" -> info[0] = "tarzan.png";
             }
 
-            String id = String.valueOf(jogador.id);
+            String id = String.valueOf(jogador.getID());
 
             if(nrJogadorAtual == jogadores.size()){
                 ids.append(id);
@@ -201,18 +205,18 @@ public class GameManager {
 
     public String[] getPlayerInfo(int playerId) {
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.getID()));
 
         String[] array = new String[4];
         boolean verificar = false;
 
         for (Player jogador : jogadores) {
 
-            if (playerId == jogador.id) {
-                array[0] = String.valueOf(jogador.id);
-                array[1] = jogador.nome;
-                array[2] = jogador.especie;
-                array[3] = String.valueOf(jogador.energiaAtual);
+            if (playerId == jogador.getID()) {
+                array[0] = String.valueOf(jogador.getID());
+                array[1] = jogador.getNome();
+                array[2] = jogador.getEspecie().getNomeSigla();
+                array[3] = String.valueOf(jogador.getEspecie().getEnergia());
                 verificar = true;
             }
         }
@@ -226,16 +230,16 @@ public class GameManager {
 
     public String[] getCurrentPlayerInfo(){
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.getID()));
 
         String[] jogador = new String[4];
 
         int pos = turno - 1 ;
 
-        jogador[0] = String.valueOf(jogadores.get(pos).id);
-        jogador[1] = jogadores.get(pos).nome;
-        jogador[2] = jogadores.get(pos).especie;
-        jogador[3] = String.valueOf(jogadores.get(pos).energiaAtual);
+        jogador[0] = String.valueOf(jogadores.get(pos).getID());
+        jogador[1] = jogadores.get(pos).getNome();
+        jogador[2] = jogadores.get(pos).getEspecie().getNomeSigla();
+        jogador[3] = String.valueOf(jogadores.get(pos).getEspecie().getEnergia());
 
         return jogador;
     }
@@ -246,17 +250,17 @@ public class GameManager {
 
     public String[][] getPlayersInfo(){
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.id));
+        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.getID()));
 
         String[][] array = new String[jogadores.size()][4];
         int count = 0;
 
         for (Player jogadores : jogadores) {
 
-            array[count][0] = String.valueOf(jogadores.id);
-            array[count][1] = jogadores.nome;
-            array[count][2] = jogadores.especie;
-            array[count][3] = String.valueOf(jogadores.energiaAtual);
+            array[count][0] = String.valueOf(jogadores.getID());
+            array[count][1] = jogadores.getNome();
+            array[count][2] = jogadores.getEspecie().getNomeSigla();
+            array[count][3] = String.valueOf(jogadores.getEspecie().getEnergia());
 
             count++;
         }
@@ -275,7 +279,7 @@ public class GameManager {
             }
         }
 
-        int jogadorJoga = jogadores.get(turno - 1).id;
+        int jogadorJoga = jogadores.get(turno - 1).getID();
 
         int posJogadorTabuleiro = 1;
         int posJogadorCasaArray = 0;
@@ -288,7 +292,7 @@ public class GameManager {
 
                 Player jogador = array.get(countPlayerPos);
 
-                if(jogadorJoga == jogador.id){
+                if(jogadorJoga == jogador.getID()){
 
                     posJogadorTabuleiro = countCasa;
                     posJogadorCasaArray = countPlayerPos;
@@ -299,7 +303,7 @@ public class GameManager {
 
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
-        if(jogador.energiaAtual < 2){
+        if(jogador.getEspecie().getEnergia() < 2){
 
             mudarTurno();
 
@@ -307,10 +311,11 @@ public class GameManager {
         }
 
         int distanciaMeta = meta - posJogadorTabuleiro;
+        int energiaAtual = jogador.getEspecie().getEnergia();
 
         if(distanciaMeta < nrSquares){
 
-            jogador.energiaAtual -= 2;
+            jogador.getEspecie().mudaEnergia(energiaAtual - 2);
 
             mudarTurno();
 
@@ -324,9 +329,9 @@ public class GameManager {
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
         jogador.mudaPosicaoAtual(posJogadorTabuleiro);
-        jogador.energiaAtual -= 2;
+        jogador.getEspecie().mudaEnergia(energiaAtual - 2);
 
-        tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.id));
+        tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.getID()));
 
         mudarTurno();
 
@@ -339,17 +344,17 @@ public class GameManager {
 
         for (Player jogadore : jogadores) {
 
-            if (jogadore.posicaoAtual == meta) {
+            if (jogadore.getPosicaoAtual() == meta) {
                 jogoacabado++;
             }
 
-            if (jogadore.energiaAtual == 0) {
+            if (jogadore.getEspecie().getEnergia() == 0) {
                 countenergia++;
             }
         }
 
         for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
-            tabuleiro.get(countTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.id));
+            tabuleiro.get(countTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.getID()));
         }
 
         if(countenergia == jogadores.size()|| jogoacabado != 0) {
@@ -369,10 +374,10 @@ public class GameManager {
 
             String[] infojogadorvencedor = new String[4];
 
-            infojogadorvencedor[0] = String.valueOf(jogadorVencedor.id);
-            infojogadorvencedor[1] = jogadorVencedor.nome;
-            infojogadorvencedor[2] = jogadorVencedor.especie;
-            infojogadorvencedor[3] = String.valueOf(jogadorVencedor.energiaAtual);
+            infojogadorvencedor[0] = String.valueOf(jogadorVencedor.getID());
+            infojogadorvencedor[1] = jogadorVencedor.getNome();
+            infojogadorvencedor[2] = jogadorVencedor.getEspecie().getNomeSigla();
+            infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergia());
 
             return infojogadorvencedor;
         }else{
@@ -396,7 +401,7 @@ public class GameManager {
 
                     String especie = "";
 
-                    switch (jogador.especie) {
+                    switch (jogador.getNome()) {
                         case "L" -> especie = "Leão";
                         case "E" -> especie = "Elefante";
                         case "T" -> especie = "Tartaruga";
@@ -404,14 +409,11 @@ public class GameManager {
                         case "Z" -> especie = "Tarzan";
                     }
 
-                    resultadoJogo.add("#" + pos + " " + jogador.nome + ", " + especie + ", " + jogador.posicaoAtual);
+                    resultadoJogo.add("#" + pos + " " + jogador.getNome() + ", " + especie + ", " + jogador.getPosicaoAtual());
                     pos++;
                 }
             }
         }
-
-
-
         return resultadoJogo;
     }
 
