@@ -1,6 +1,4 @@
-package pt.ulusofona.lp2.deisiJungle.Especies;
-
-import pt.ulusofona.lp2.deisiJungle.Especies.Especie;
+package pt.ulusofona.lp2.deisiJungle.especies;
 
 public class Tartaruga extends Especie {
 

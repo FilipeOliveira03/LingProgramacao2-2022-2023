@@ -1,6 +1,6 @@
-package pt.ulusofona.lp2.deisiJungle.Alimentos;
+package pt.ulusofona.lp2.deisiJungle.alimentos;
 
-import pt.ulusofona.lp2.deisiJungle.Especies.Especie;
+import pt.ulusofona.lp2.deisiJungle.especies.Especie;
 import pt.ulusofona.lp2.deisiJungle.Player;
 
 import java.util.ArrayList;

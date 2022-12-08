@@ -1,7 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import pt.ulusofona.lp2.deisiJungle.Erros.InitializationError;
-import pt.ulusofona.lp2.deisiJungle.Erros.MovementResult;
+import pt.ulusofona.lp2.deisiJungle.outrasFuncoes.OtherFunctions;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

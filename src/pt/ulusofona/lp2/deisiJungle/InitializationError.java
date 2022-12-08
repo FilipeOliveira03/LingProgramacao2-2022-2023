@@ -1,6 +1,6 @@
-package pt.ulusofona.lp2.deisiJungle.Erros;
+package pt.ulusofona.lp2.deisiJungle;
 
-import static pt.ulusofona.lp2.deisiJungle.Erros.InitializationErrorCode.*;
+import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.*;
 
 public record InitializationError(InitializationErrorCode code){
 
