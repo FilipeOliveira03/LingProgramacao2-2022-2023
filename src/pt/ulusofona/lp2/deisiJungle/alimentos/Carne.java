@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle.alimentos;
 
 import pt.ulusofona.lp2.deisiJungle.especies.Especie;
 import pt.ulusofona.lp2.deisiJungle.GameManager;
-import pt.ulusofona.lp2.deisiJungle.Player;
+import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 
 public class Carne extends Alimento {
 

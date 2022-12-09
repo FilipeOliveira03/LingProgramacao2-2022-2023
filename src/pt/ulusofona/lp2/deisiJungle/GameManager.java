@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import pt.ulusofona.lp2.deisiJungle.especies.*;
+import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 import pt.ulusofona.lp2.deisiJungle.outrasFuncoes.OtherFunctions;
 
 import javax.imageio.ImageIO;
