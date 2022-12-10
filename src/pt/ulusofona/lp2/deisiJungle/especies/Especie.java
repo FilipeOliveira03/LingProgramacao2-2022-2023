@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle.especies;
 
+import java.util.ArrayList;
+
 public class Especie {
 
     protected String nomeSigla;
@@ -8,8 +10,14 @@ public class Especie {
     protected int ganhoEnerDescanso;
     protected String velocidade;
     protected String tipoAlimentacao;
+    private ArrayList<Especie> todasAsEspecies = new ArrayList<>();
 
     public Especie(){
+        todasAsEspecies.add(new Elefante());
+        todasAsEspecies.add(new Leao());
+        todasAsEspecies.add(new Tartaruga());
+        todasAsEspecies.add(new Passaro());
+        todasAsEspecies.add(new Tarzan());
     }
 
     public String getNomeSigla() {
@@ -32,5 +40,11 @@ public class Especie {
         return this.energia = energia;
     }
 
+    public int getConsumoEnergetico() {
+        return consumoEnergia;
+    }
 
+    public ArrayList<Especie> getTodasAsEspecies() {
+        return todasAsEspecies;
+    }
 }

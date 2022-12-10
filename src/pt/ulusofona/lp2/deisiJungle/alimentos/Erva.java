@@ -6,7 +6,8 @@ import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 public class Erva extends Alimento {
 
     public Erva(){
-        super("Erva");
+        this.nome = "Erva";
+        this.idAlimento = "e";
     }
 
     @Override

@@ -4,6 +4,8 @@ import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.*;
 
 public record MovementResult(MovementResultCode code) {
 
+    private static String outPutalimento;
+
     public String message(){
         String mensagem = "";
         if(code == VALID_MOVEMENT){
@@ -20,9 +22,13 @@ public record MovementResult(MovementResultCode code) {
 
         }else if(code == CAUGHT_FOOD){
 
-            mensagem = "O jogador comeu um alimento";
+            mensagem = "Apanhou " + outPutalimento;
 
         }
         return mensagem;
+    }
+
+    public static String mudaOutPutalimento(String alimento) {
+        return outPutalimento = alimento;
     }
 }

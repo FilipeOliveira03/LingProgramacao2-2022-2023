@@ -11,7 +11,8 @@ public class CachoBananas extends Alimento {
     private final ArrayList<Integer> idsJogadoresComeram = new ArrayList<>();
 
     public CachoBananas() {
-        super("Cacho de Bananas");
+        this.nome = "Cacho de Bananas";
+        this.idAlimento = "b";
     }
 
     @Override

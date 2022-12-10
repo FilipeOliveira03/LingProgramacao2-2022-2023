@@ -13,7 +13,8 @@ public class Cogumelo extends Alimento {
 
 
     public Cogumelo() {
-        super("Cogumelo");
+        this.nome = "Cogumelo";
+        this.idAlimento = "m";
     }
 
     @Override

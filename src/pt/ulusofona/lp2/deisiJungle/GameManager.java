@@ -1,6 +1,9 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import pt.ulusofona.lp2.deisiJungle.alimentos.*;
+import pt.ulusofona.lp2.deisiJungle.alimentos.Alimento;
 import pt.ulusofona.lp2.deisiJungle.especies.*;
+import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.*;
 import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 import pt.ulusofona.lp2.deisiJungle.outrasFuncoes.OtherFunctions;
 
@@ -17,11 +20,12 @@ import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.*;
 public class GameManager {
 
     private final HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
+    private final HashMap <Integer,String> tabuleiroAlimentos = new HashMap<>();
     private final ArrayList<Player> jogadores = new ArrayList<>();
 
     private int meta;
     private int turno = 1;
-    private static final int jogadasPassadas = 0;
+    private static int jogadasPassadas = 0;
 
     public static int getJogadasPassadas() {
         return jogadasPassadas;
@@ -56,6 +60,8 @@ public class GameManager {
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
 
+        tabuleiroAlimentos.clear();
+
         boolean[] verificarComida = new boolean[foodsInfo.length];
 
         for (int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++) {
@@ -87,7 +93,13 @@ public class GameManager {
             if (!verificar) {  return new InitializationError(INVALID_FOOD_DOES_NOT_EXIST); }
         }
 
-        return createInitialJungle(jungleSize, playersInfo);
+         for (int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++) { //meter comida no tabuleri
+             int posAlimentos = Integer.parseInt(Arrays.toString(foodsInfo[countAlimentos]));
+             tabuleiroAlimentos.put(posAlimentos, foodsInfo[countAlimentos][countAlimentos]);
+         }
+
+
+         return createInitialJungle(jungleSize, playersInfo);
     }
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
@@ -177,7 +189,7 @@ public class GameManager {
 
     public int[] getPlayerIds(int squareNr) {
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.getID()));
+        jogadores.sort(Comparator.comparing(Player::getID));
 
         if(squareNr > meta || squareNr < 1 || tabuleiro.get(squareNr) == null ){
             return new int[0];
@@ -196,7 +208,7 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr){ // falta qualquer coisa
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.getID()));
+        jogadores.sort(Comparator.comparing(Player::getID));
 
         if(squareNr > meta || squareNr < 1 || tabuleiro.get(squareNr) == null){
             return null;
@@ -246,7 +258,7 @@ public class GameManager {
 
     public String[] getPlayerInfo(int playerId) {
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.getID()));
+        jogadores.sort(Comparator.comparing(Player::getID));
 
         String[] array = new String[5];
         boolean verificar = false;
@@ -272,7 +284,7 @@ public class GameManager {
 
     public String[] getCurrentPlayerInfo(){
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.getID()));
+        jogadores.sort(Comparator.comparing(Player::getID));
 
         String[] jogador = new String[4];
 
@@ -292,7 +304,7 @@ public class GameManager {
 
     public String[][] getPlayersInfo(){
 
-        jogadores.sort(Comparator.comparing((Player jogador) -> jogador.getID()));
+        jogadores.sort(Comparator.comparing(Player::getID));
 
         String[][] array = new String[jogadores.size()][4];
         int count = 0;
@@ -311,15 +323,6 @@ public class GameManager {
     }
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations){
-
-        if(!bypassValidations){
-            if(nrSquares < 1 || nrSquares > 6){
-
-                mudarTurno();
-
-                //return false;
-            }
-        }
 
         int jogadorJoga = jogadores.get(turno - 1).getID();
 
@@ -345,39 +348,86 @@ public class GameManager {
 
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
-        if(jogador.getEspecie().getEnergia() < 2){
+        if(!bypassValidations){
+            if(nrSquares < -6 || nrSquares > 6){
+                mudarTurno();
+                return new MovementResult(INVALID_MOVEMENT);
+            }
+        }
 
+        if(jogador.getPosicaoAtual() - nrSquares < 1){
             mudarTurno();
+            return new MovementResult(INVALID_MOVEMENT);
+        }
 
-           // return false;
+        Especie especie = new Especie();
+        ArrayList<Especie> todasAsEspecies = especie.getTodasAsEspecies();
+
+        int energiaConsumida = 0;
+
+        for (Especie todasAsEspecy : todasAsEspecies) {
+            if (todasAsEspecy.getNomeSigla().equals(jogador.getEspecie().getNomeSigla())) {
+
+                energiaConsumida = todasAsEspecy.getConsumoEnergetico();
+
+            }
+        }
+
+        if(jogador.getEspecie().getEnergia() - energiaConsumida < 0 ){
+            mudarTurno();
+            return new MovementResult(NO_ENERGY);
+
+        }
+
+        int posicaoAtual = jogador.getPosicaoAtual();
+        String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
+
+        Alimento alimento;
+
+        switch(alimentoTabu){
+            case "a" -> alimento = new Agua();
+            case "b" -> alimento = new CachoBananas();
+            case "c" -> alimento = new Carne();
+            case "m" -> alimento = new Cogumelo();
+            case "e" -> alimento = new Erva();
+            default -> alimento = null;
+        }
+
+        if(alimento != null){
+            alimento.acontecimentoIngerir(jogador);
+            mudarTurno();
+            MovementResult.mudaOutPutalimento(alimentoTabu);
+            return new MovementResult(CAUGHT_FOOD);
+
         }
 
         int distanciaMeta = meta - posJogadorTabuleiro;
         int energiaAtual = jogador.getEspecie().getEnergia();
 
-        if(distanciaMeta < nrSquares){
-
-            jogador.getEspecie().mudaEnergia(energiaAtual - 2);
+        if(distanciaMeta < nrSquares ){
 
             mudarTurno();
+            return new MovementResult(INVALID_MOVEMENT);
 
-           // return false;
+        }else {
+            tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
+
+            posJogadorTabuleiro += nrSquares;
+
+            tabuleiro.get(posJogadorTabuleiro).add(jogador);
+
+            jogador.mudaPosicaoAtual(posJogadorTabuleiro);
+
+            if(nrSquares!=0){
+                jogador.getEspecie().mudaEnergia(energiaAtual - energiaConsumida);
+            }
+
+            tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing(Player::getID));
+
+            mudarTurno();
+            jogadasPassadas++;
+            return new MovementResult(VALID_MOVEMENT);
         }
-
-        tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
-
-        posJogadorTabuleiro += nrSquares;
-
-        tabuleiro.get(posJogadorTabuleiro).add(jogador);
-
-        jogador.mudaPosicaoAtual(posJogadorTabuleiro);
-        jogador.getEspecie().mudaEnergia(energiaAtual - 2);
-
-        tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.getID()));
-
-        mudarTurno();
-
-        return null; // seria true
     }
 
     public String[] getWinnerInfo() {

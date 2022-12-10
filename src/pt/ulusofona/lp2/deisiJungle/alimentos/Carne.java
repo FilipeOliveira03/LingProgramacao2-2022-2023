@@ -9,7 +9,8 @@ public class Carne extends Alimento {
     private final int jogadaAtual = GameManager.getJogadasPassadas();
 
     public Carne() {
-        super("Carne");
+        this.nome = "Carne";
+        this.idAlimento = "c";
     }
 
     @Override
