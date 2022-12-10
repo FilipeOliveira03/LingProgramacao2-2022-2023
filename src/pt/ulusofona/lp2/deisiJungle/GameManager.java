@@ -361,14 +361,10 @@ public class GameManager {
 
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
-
-
-        if(jogador.getPosicaoAtual() - nrSquares < 1){
+        if(jogador.getPosicaoAtual() + nrSquares < 1){
             mudarTurno();
             return new MovementResult(INVALID_MOVEMENT);
         }
-
-        Especie especie = new Especie();
 
         int energiaConsumida = 0;
 

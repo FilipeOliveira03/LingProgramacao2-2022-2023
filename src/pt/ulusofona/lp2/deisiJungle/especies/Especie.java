@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle.especies;
 
-import java.util.ArrayList;
-
 public class Especie {
 
     protected String nomeSigla;
