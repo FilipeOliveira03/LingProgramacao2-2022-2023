@@ -330,6 +330,13 @@ public class GameManager {
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
+        if(!bypassValidations){
+            if(nrSquares < -6 || nrSquares > 6){
+                mudarTurno();
+                return new MovementResult(INVALID_MOVEMENT);
+            }
+        }
+
         int jogadorJoga = jogadores.get(turno - 1).getID();
 
         int posJogadorTabuleiro = 1;
@@ -354,12 +361,7 @@ public class GameManager {
 
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
-        if(!bypassValidations){
-            if(nrSquares < -6 || nrSquares > 6){
-                mudarTurno();
-                return new MovementResult(INVALID_MOVEMENT);
-            }
-        }
+
 
         if(jogador.getPosicaoAtual() - nrSquares < 1){
             mudarTurno();
@@ -389,6 +391,10 @@ public class GameManager {
 
         Alimento alimento;
 
+        if(alimentoTabu == "a"){
+
+        }
+
         switch(alimentoTabu){
             case "a" -> alimento = new Agua();
             case "b" -> alimento = new CachoBananas();
@@ -396,7 +402,7 @@ public class GameManager {
             case "m" -> alimento = new Cogumelo();
             case "e" -> alimento = new Erva();
             default -> alimento = null;
-        }
+        }default -> alimento = null;
 
         if(alimento != null){
             alimento.acontecimentoIngerir(jogador);
@@ -445,6 +451,9 @@ public class GameManager {
 
         if(nrSquares != 0 ){
             jogador.getEspecie().mudaEnergia(energiaAtual - energiaConsumida);
+        }else{
+            int energiaDescanso = jogador.getEspecie().getGanhoEnerDescanso();
+            jogador.getEspecie().mudaEnergia(energiaAtual + energiaDescanso);
         }
 
         tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing(Player::getID));

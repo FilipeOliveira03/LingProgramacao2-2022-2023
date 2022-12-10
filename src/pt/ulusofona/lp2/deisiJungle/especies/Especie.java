@@ -29,13 +29,19 @@ public class Especie {
     public String getVelocidade() {
         return velocidade;
     }
+    
+    public int getConsumoEnergetico() {
+            return consumoEnergia;
+        }
+
+    public int getGanhoEnerDescanso() {
+        return ganhoEnerDescanso;
+    }
 
     public int mudaEnergia(int energia){
         return this.energia = energia;
     }
 
-    public int getConsumoEnergetico() {
-        return consumoEnergia;
-    }
+    
 
 }

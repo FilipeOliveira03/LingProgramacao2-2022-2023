@@ -3,11 +3,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.INVALID_FOOD_POSITION_NOT_NUMBER;
+import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.*;
 
 public class TestGame {
 
     @Test
-    public void testCreateJungle(){
+    public void testCreateJungle1(){
         GameManager manager = new GameManager();
         String[][] arrayPlayers = {
                 { "11", "abc","E" },
@@ -23,6 +24,26 @@ public class TestGame {
         InitializationError resultadoEsperado = new InitializationError(INVALID_FOOD_POSITION_NOT_NUMBER);
 
         assertEquals("testCreateJungle", resultadoEsperado, resultadoReal);
+    }
+
+    @Test
+    public void testMoveCurrentPlayer1(){
+        GameManager manager = new GameManager();
+        String[][] arrayPlayers = {
+                { "11", "abc","E" },
+                { "2", "Leão","L" },
+        };
+
+        String[][] arrayFood= {
+                { "e", "4"},
+                { "e", "3"},
+        };
+
+        manager.createInitialJungle(8, arrayPlayers, arrayFood);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(0, false);
+        MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
+
+        assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
     }
 
 //
