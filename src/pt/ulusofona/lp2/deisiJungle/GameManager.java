@@ -99,6 +99,12 @@ public class GameManager {
              tabuleiroAlimentos.put(posAlimentos, foodsInfo[countAlimentos][0]);
          }
 
+        todasAsEspecies.add(new Elefante());
+        todasAsEspecies.add(new Leao());
+        todasAsEspecies.add(new Tartaruga());
+        todasAsEspecies.add(new Passaro());
+        todasAsEspecies.add(new Tarzan());
+
          return createInitialJungle(jungleSize, playersInfo);
     }
 
@@ -183,12 +189,6 @@ public class GameManager {
             jogadores.add(jogador);
             tabuleiro.get(1).add(jogador);
         }
-
-        todasAsEspecies.add(new Elefante());
-        todasAsEspecies.add(new Leao());
-        todasAsEspecies.add(new Tartaruga());
-        todasAsEspecies.add(new Passaro());
-        todasAsEspecies.add(new Tarzan());
 
         return null;
     }
@@ -386,31 +386,27 @@ public class GameManager {
 
         }
 
-        int posicaoAtual = jogador.getPosicaoAtual();
+        int posicaoAtual = jogador.getPosicaoAtual() + nrSquares;
         String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
 
-        Alimento alimento;
+        if(alimentoTabu != null){
+            Alimento alimento = switch (alimentoTabu) {
+                case "a" -> new Agua();
+                case "b" -> new CachoBananas();
+                case "c" -> new Carne();
+                case "m" -> new Cogumelo();
+                case "e" -> new Erva();
+                default -> null;
+            };
 
-        if(alimentoTabu == "a"){
+            if(alimento != null){
+                alimento.acontecimentoIngerir(jogador);
+                mudarTurno();
+                MovementResult.mudaOutPutalimento(alimentoTabu);
+                jogador.adicionaAlimentosIngeridos(alimentoTabu);
+                return new MovementResult(CAUGHT_FOOD);
 
-        }
-
-        switch(alimentoTabu){
-            case "a" -> alimento = new Agua();
-            case "b" -> alimento = new CachoBananas();
-            case "c" -> alimento = new Carne();
-            case "m" -> alimento = new Cogumelo();
-            case "e" -> alimento = new Erva();
-            default -> alimento = null;
-        }default -> alimento = null;
-
-        if(alimento != null){
-            alimento.acontecimentoIngerir(jogador);
-            mudarTurno();
-            MovementResult.mudaOutPutalimento(alimentoTabu);
-            jogador.adicionaAlimentosIngeridos(alimentoTabu);
-            return new MovementResult(CAUGHT_FOOD);
-
+            }
         }
 
         int distanciaMeta = meta - posJogadorTabuleiro;
