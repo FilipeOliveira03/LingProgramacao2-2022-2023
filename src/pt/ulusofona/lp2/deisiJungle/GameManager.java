@@ -402,6 +402,7 @@ public class GameManager {
             alimento.acontecimentoIngerir(jogador);
             mudarTurno();
             MovementResult.mudaOutPutalimento(alimentoTabu);
+            jogador.adicionaAlimentosIngeridos(alimentoTabu);
             return new MovementResult(CAUGHT_FOOD);
 
         }
@@ -409,30 +410,50 @@ public class GameManager {
         int distanciaMeta = meta - posJogadorTabuleiro;
         int energiaAtual = jogador.getEspecie().getEnergia();
 
-        if(distanciaMeta < nrSquares ){
+//         if(distanciaMeta < nrSquares ){
+//
+//             mudarTurno();
+//             return new MovementResult(INVALID_MOVEMENT);
+//
+//         }else {
+//             tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
+//
+//             posJogadorTabuleiro += nrSquares;
+//
+//             tabuleiro.get(posJogadorTabuleiro).add(jogador);
+//
+//             jogador.mudaPosicaoAtual(posJogadorTabuleiro);
+//
+//             if(nrSquares!=0){
+//                 jogador.getEspecie().mudaEnergia(energiaAtual - energiaConsumida);
+//             }
+//
+//             tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing(Player::getID));
+//
+//             mudarTurno();
+//             jogadasPassadas++;
+//             return new MovementResult(VALID_MOVEMENT);
+//         }
 
-            mudarTurno();
-            return new MovementResult(INVALID_MOVEMENT);
+        tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
 
-        }else {
-            tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
+        posJogadorTabuleiro += nrSquares;
 
-            posJogadorTabuleiro += nrSquares;
+        tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
-            tabuleiro.get(posJogadorTabuleiro).add(jogador);
+        jogador.mudaPosicaoAtual(posJogadorTabuleiro);
 
-            jogador.mudaPosicaoAtual(posJogadorTabuleiro);
-
-            if(nrSquares!=0){
-                jogador.getEspecie().mudaEnergia(energiaAtual - energiaConsumida);
-            }
-
-            tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing(Player::getID));
-
-            mudarTurno();
-            jogadasPassadas++;
-            return new MovementResult(VALID_MOVEMENT);
+        if(nrSquares != 0 ){
+            jogador.getEspecie().mudaEnergia(energiaAtual - energiaConsumida);
         }
+
+        tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing(Player::getID));
+        jogador.adicionaDistanciaViajada(nrSquares);
+
+        mudarTurno();
+        jogadasPassadas++;
+
+        return new MovementResult(VALID_MOVEMENT);
     }
 
     public String[] getWinnerInfo() {
@@ -498,15 +519,17 @@ public class GameManager {
 
                     String especie = "";
 
-                    switch (jogador.getNome()) {
-                        case "L" -> especie = "Leão";
+                    switch (jogador.getEspecie().getNomeSigla()) {
+                        case "L" -> especie = "Leao";
                         case "E" -> especie = "Elefante";
                         case "T" -> especie = "Tartaruga";
-                        case "P" -> especie = "Pássaro";
+                        case "P" -> especie = "Passaro";
                         case "Z" -> especie = "Tarzan";
                     }
 
-                    resultadoJogo.add("#" + pos + " " + jogador.getNome() + ", " + especie + ", " + jogador.getPosicaoAtual());
+                    resultadoJogo.add("#" + pos + " " + jogador.getNome() + ", " + especie + ", " +
+                    jogador.getPosicaoAtual() + ", " + jogador.getDistanciaViajada() +  ", "
+                    + jogador.getAlimentosIngeridos().size());
                     pos++;
                 }
             }

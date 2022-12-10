@@ -1,6 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle.jogador;
 
-import pt.ulusofona.lp2.deisiJungle.alimentos.Alimento;
 import pt.ulusofona.lp2.deisiJungle.especies.Especie;
 
 import java.util.ArrayList;
@@ -10,8 +9,8 @@ public class Player {
     private String nome;
     private int posicaoAtual = 1;
     private Especie especie;
-    private int distanciaViajada;
-    private ArrayList<Alimento> alimentosIngeridos;
+    private int distanciaViajada = 0;
+    private ArrayList<String> alimentosIngeridos;
 
     public Player(){
     }
@@ -34,13 +33,30 @@ public class Player {
         return posicaoAtual;
     }
 
-    public void mudaPosicaoAtual(int posicaoAtualMudada){
-        this.posicaoAtual = posicaoAtualMudada;
-    }
-
     public Especie getEspecie() {
         return especie;
     }
 
+    public ArrayList<String> getAlimentosIngeridos() {
+        return alimentosIngeridos;
+    }
 
+    public int getDistanciaViajada() {
+        return distanciaViajada;
+    }
+
+    public void adicionaAlimentosIngeridos(String nomeAlimento) {
+        alimentosIngeridos.add(nomeAlimento);
+    }
+
+    public void mudaPosicaoAtual(int posicaoAtualMudada){
+        this.posicaoAtual = posicaoAtualMudada;
+    }
+
+    public int adicionaDistanciaViajada(int distancia) {
+        if(distancia < 0){
+            return distanciaViajada -= distancia;
+        }
+        return distanciaViajada += distancia;
+    }
 }
