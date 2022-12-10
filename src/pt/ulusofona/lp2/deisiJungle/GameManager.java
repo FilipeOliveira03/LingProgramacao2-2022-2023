@@ -22,6 +22,7 @@ public class GameManager {
     private final HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
     private final HashMap <Integer,String> tabuleiroAlimentos = new HashMap<>();
     private final ArrayList<Player> jogadores = new ArrayList<>();
+    private final ArrayList<Especie> todasAsEspecies = new ArrayList<>();
 
     private int meta;
     private int turno = 1;
@@ -94,10 +95,9 @@ public class GameManager {
         }
 
          for (int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++) { //meter comida no tabuleri
-             int posAlimentos = Integer.parseInt(Arrays.toString(foodsInfo[countAlimentos]));
-             tabuleiroAlimentos.put(posAlimentos, foodsInfo[countAlimentos][countAlimentos]);
+             int posAlimentos = Integer.parseInt(foodsInfo[countAlimentos][1]);
+             tabuleiroAlimentos.put(posAlimentos, foodsInfo[countAlimentos][0]);
          }
-
 
          return createInitialJungle(jungleSize, playersInfo);
     }
@@ -183,6 +183,12 @@ public class GameManager {
             jogadores.add(jogador);
             tabuleiro.get(1).add(jogador);
         }
+
+        todasAsEspecies.add(new Elefante());
+        todasAsEspecies.add(new Leao());
+        todasAsEspecies.add(new Tartaruga());
+        todasAsEspecies.add(new Passaro());
+        todasAsEspecies.add(new Tarzan());
 
         return null;
     }
@@ -361,7 +367,6 @@ public class GameManager {
         }
 
         Especie especie = new Especie();
-        ArrayList<Especie> todasAsEspecies = especie.getTodasAsEspecies();
 
         int energiaConsumida = 0;
 

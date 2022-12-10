@@ -10,14 +10,8 @@ public class Especie {
     protected int ganhoEnerDescanso;
     protected String velocidade;
     protected String tipoAlimentacao;
-    private ArrayList<Especie> todasAsEspecies = new ArrayList<>();
 
     public Especie(){
-        todasAsEspecies.add(new Elefante());
-        todasAsEspecies.add(new Leao());
-        todasAsEspecies.add(new Tartaruga());
-        todasAsEspecies.add(new Passaro());
-        todasAsEspecies.add(new Tarzan());
     }
 
     public String getNomeSigla() {
@@ -44,7 +38,4 @@ public class Especie {
         return consumoEnergia;
     }
 
-    public ArrayList<Especie> getTodasAsEspecies() {
-        return todasAsEspecies;
-    }
 }
