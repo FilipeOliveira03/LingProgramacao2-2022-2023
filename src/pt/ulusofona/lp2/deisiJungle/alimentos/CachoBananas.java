@@ -11,7 +11,7 @@ public class CachoBananas extends Alimento {
     private final ArrayList<Integer> idsJogadoresComeram = new ArrayList<>();
 
     public CachoBananas() {
-        this.nome = "Cacho de Bananas";
+        this.nome = "Bananas";
         this.idAlimento = "b";
     }
 

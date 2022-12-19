@@ -382,7 +382,6 @@ public class GameManager {
 
         int posicaoAtual = jogador.getPosicaoAtual() + nrSquares;
         String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
-        String nomeAlimento = "";
 
         if(alimentoTabu != null){
             Alimento alimento = switch (alimentoTabu) {
@@ -502,8 +501,7 @@ public class GameManager {
                     }
 
                     resultadoJogo.add("#" + pos + " " + jogador.getNome() + ", " + especie + ", " +
-                    jogador.getPosicaoAtual() + ", " + jogador.getDistanciaViajada() +  ", "
-                    + jogador.getAlimentosIngeridos().size());
+                    jogador.getPosicaoAtual());
                     pos++;
                 }
             }
