@@ -7,7 +7,9 @@ public record MovementResult(MovementResultCode code) {
     private static String outPutalimento;
 
     public String message(){
+
         String mensagem = "";
+
         if(code == VALID_MOVEMENT){
 
             mensagem = "O movimento do jogador é válido";
@@ -25,10 +27,11 @@ public record MovementResult(MovementResultCode code) {
             mensagem = "Apanhou " + outPutalimento;
 
         }
+
         return mensagem;
     }
 
-    public static String mudaOutPutalimento(String alimento) {
+    public static String mudaOutPutAlimento(String alimento) {
         return outPutalimento = alimento;
     }
 }
