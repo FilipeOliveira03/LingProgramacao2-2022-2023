@@ -20,7 +20,7 @@ import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.*;
 public class GameManager {
 
     private final HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
-    private final HashMap <Integer,ArrayList<String>> tabuleiroAlimentos = new HashMap<>();
+    private final HashMap <Integer,String> tabuleiroAlimentos = new HashMap<>();
     private final ArrayList<Player> jogadores = new ArrayList<>();
     private final ArrayList<Especie> todasAsEspecies = new ArrayList<>();
 
@@ -96,10 +96,7 @@ public class GameManager {
 
          for (int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++) { //meter comida no tabuleri
              int posAlimentos = Integer.parseInt(foodsInfo[countAlimentos][1]);
-             ArrayList<String> array = new ArrayList<>();
-             array.add(foodsInfo[countAlimentos][0]);
-             array.add(foodsInfo[countAlimentos][1]);
-             tabuleiroAlimentos.put(posAlimentos, array);
+             tabuleiroAlimentos.put(posAlimentos, foodsInfo[countAlimentos][0]);
          }
 
         todasAsEspecies.add(new Elefante());
@@ -177,15 +174,14 @@ public class GameManager {
 
         for (String[] info : playersInfo) {
 
-            Especie especie = new Especie();
-
-            switch (info[2]){
-                case "E" -> especie = new Elefante();
-                case "L" -> especie = new Leao();
-                case "T" -> especie = new Tartaruga();
-                case "P" -> especie = new Passaro();
-                case "Z" -> especie = new Tarzan();
-            }
+            Especie especie = switch (info[2]){
+                case "E" -> new Elefante();
+                case "L" -> new Leao();
+                case "T" -> new Tartaruga();
+                case "P" -> new Passaro();
+                case "Z" -> new Tarzan();
+                default -> null;
+            };
 
             Player jogador = new Player(Integer.parseInt(info[0]),info[1], especie);
 
@@ -385,8 +381,8 @@ public class GameManager {
         }
 
         int posicaoAtual = jogador.getPosicaoAtual() + nrSquares;
-        String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual).get(0);
-        String nomeAlimento = tabuleiroAlimentos.get(posicaoAtual).get(1);
+        String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
+        String nomeAlimento = "";
 
         if(alimentoTabu != null){
             Alimento alimento = switch (alimentoTabu) {
@@ -401,7 +397,7 @@ public class GameManager {
             if(alimento != null){
                 alimento.acontecimentoIngerir(jogador);
                 mudarTurno();
-                MovementResult.mudaOutPutAlimento(nomeAlimento);
+                MovementResult.mudaOutPutAlimento(alimento.getNome());
                 jogador.adicionaAlimentosIngeridos(alimentoTabu);
                 return new MovementResult(CAUGHT_FOOD);
 

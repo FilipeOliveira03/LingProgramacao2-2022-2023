@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle.especies;
 
-public class Especie {
+public abstract class Especie {
 
     protected String nomeSigla;
     protected int energia;

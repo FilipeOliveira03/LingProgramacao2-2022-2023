@@ -9,6 +9,10 @@ public abstract class Alimento {
     public Alimento(){
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public Alimento(String nome, String idAlimento) {
         this.nome = nome;
         this.idAlimento = idAlimento;
