@@ -312,7 +312,7 @@ public class GameManager {
 
         int pos = turno - 1 ;
 
-        int energiaConsumida = nrPositions * jogadores.get(pos).getEspecie().getConsumoEnergetico();
+        int energiaConsumida = jogadores.get(pos).getEspecie().getConsumoEnergetico();
 
         if(energiaConsumida > 0){
             jogadorInfo[0] = String.valueOf(energiaConsumida);

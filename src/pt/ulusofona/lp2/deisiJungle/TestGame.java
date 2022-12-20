@@ -97,16 +97,14 @@ public class TestGame {
         GameManager manager = new GameManager();
         String[][] arrayPlayers = {
                 {"11", "abc", "T"},
-                {"22", "Leão", "P"},
+                {"22", "Leão", "L"},
         };
 
         String[] arrayEnergia = {"1", "5"};
 
         manager.createInitialJungle(10, arrayPlayers);
-        manager.moveCurrentPlayer(3, false);
-        manager.moveCurrentPlayer(3, false);
-        manager.moveCurrentPlayer(3, false);
-        manager.moveCurrentPlayer(3, false);
+
+
         String[] resultadoReal = manager.getCurrentPlayerEnergyInfo(1);
         String[] resultadoEsperado = arrayEnergia;
 
