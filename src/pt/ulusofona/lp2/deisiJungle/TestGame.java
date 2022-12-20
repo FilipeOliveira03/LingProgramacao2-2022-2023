@@ -122,7 +122,7 @@ public class TestGame {
         GameManager manager = new GameManager();
         String[][] arrayPlayers = {
                 {"11", "abc", "T"},
-                {"22", "Leão", "E"},
+                {"2", "Leão", "E"},
         };
 
         String[] arrayEnergia = {"4", "10"};
