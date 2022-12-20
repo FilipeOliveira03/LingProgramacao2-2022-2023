@@ -125,12 +125,12 @@ public class TestGame {
                 {"22", "Leão", "E"},
         };
 
-        String[] arrayEnergia = {"24", "10"};
+        String[] arrayEnergia = {"4", "10"};
 
         manager.createInitialJungle(10, arrayPlayers);
 
 
-        String[] resultadoReal = manager.getCurrentPlayerEnergyInfo(7);
+        String[] resultadoReal = manager.getCurrentPlayerEnergyInfo(-7);
         String[] resultadoEsperado = arrayEnergia;
 
         assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);

@@ -313,18 +313,25 @@ public class GameManager {
         int pos = turno - 1 ;
         int energiaConsumida = nrPositions * jogadores.get(pos).getEspecie().getConsumoEnergetico();
 
-//        String velocidade = jogadores.get(pos).getEspecie().getVelocidade();
-//        int velocidadeMin = Integer.parseInt(String.valueOf(velocidade.charAt(0)));
-//        int velocidadeMax = Integer.parseInt(String.valueOf(velocidade.charAt(3)));
+        String velocidade = jogadores.get(pos).getEspecie().getVelocidade();
+        int velocidadeMin = Integer.parseInt(String.valueOf(velocidade.charAt(0)));
+        int velocidadeMax = Integer.parseInt(String.valueOf(velocidade.charAt(3)));
 //
 //        if(!(nrPositions >= velocidadeMin && nrPositions <= velocidadeMax)){
 //            energiaConsumida = jogadores.get(pos).getEspecie().getConsumoEnergetico();
 //        }
+        if(nrPositions < 0){
+            nrPositions = nrPositions * -1;
+        }
+
+        if(!(nrPositions >= velocidadeMin && nrPositions <= velocidadeMax)){
+            energiaConsumida = jogadores.get(pos).getEspecie().getConsumoEnergetico();
+        }
 
         if(energiaConsumida > 0){
             jogadorInfo[0] = String.valueOf(energiaConsumida);
         }else {
-            jogadorInfo[0] = String.valueOf(energiaConsumida); // -1
+            jogadorInfo[0] = String.valueOf(energiaConsumida * -1);
         }
 
         jogadorInfo[1] = String.valueOf(jogadores.get(pos).getEspecie().getGanhoEnerDescanso());
