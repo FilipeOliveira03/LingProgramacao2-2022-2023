@@ -15,24 +15,24 @@ public class Erva extends Alimento {
 
         Especie especie = jogador.getEspecie();
         String tipoAlimen = especie.getTipoAlimentacao();
-        int energiaAtual = especie.getEnergia();
+        int energiaAtual = especie.getEnergiaAtual();
 
         if(tipoAlimen.equals("Herbívoro") || tipoAlimen.equals("Omnívoro")){
 
             if(energiaAtual > 180){
-                especie.mudaEnergia(200);
+                especie.mudaEnergiaAtual(200);
 
             }else{
-                especie.mudaEnergia(energiaAtual + 20);
+                especie.mudaEnergiaAtual(energiaAtual + 20);
             }
 
         }else if(tipoAlimen.equals("Carnívoro")){
 
             if(energiaAtual < 20){
-                especie.mudaEnergia(0);
+                especie.mudaEnergiaAtual(0);
 
             }else {
-                especie.mudaEnergia(energiaAtual - 20);
+                especie.mudaEnergiaAtual(energiaAtual - 20);
             }
         }
     }

@@ -76,7 +76,7 @@ public class TestGame {
     public void testMoveCurrentPlayer3() {
         GameManager manager = new GameManager();
         String[][] arrayPlayers = {
-                {"11", "abc", "E"},
+                {"11", "abc", "P"},
                 {"22", "Leão", "T"},
         };
 
@@ -91,9 +91,10 @@ public class TestGame {
                 {"a", "9"},
         };
 
-        manager.createInitialJungle(10, arrayPlayers, arrayFood);
-        manager.moveCurrentPlayer(6, false);
-        MovementResult resultadoReal = manager.moveCurrentPlayer(6, false);
+        manager.createInitialJungle(40, arrayPlayers);
+        manager.moveCurrentPlayer(10, true);
+        manager.moveCurrentPlayer(10, true);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(0, true);
         MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
         assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);

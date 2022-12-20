@@ -15,15 +15,15 @@ public class Agua extends Alimento {
 
         Especie especie = jogador.getEspecie();
         String tipoAlimen = especie.getTipoAlimentacao();
-        int energiaAtual = especie.getEnergia();
+        int energiaAtual = especie.getEnergiaAtual();
 
         if(tipoAlimen.equals("Carnívoro") || tipoAlimen.equals("Herbívoro")){
 
             if(energiaAtual > 185){
-                especie.mudaEnergia(200);
+                especie.mudaEnergiaAtual(200);
 
             }else{
-                especie.mudaEnergia(energiaAtual + 15);
+                especie.mudaEnergiaAtual(energiaAtual + 15);
             }
         }else if(tipoAlimen.equals("Omnívoro")){
 
@@ -31,9 +31,9 @@ public class Agua extends Alimento {
             int energiaFinal = energiaAtual + energiaAdicionar;
 
             if(energiaFinal > 200){
-                especie.mudaEnergia(200);
+                especie.mudaEnergiaAtual(200);
             }else{
-                especie.mudaEnergia(energiaAtual + energiaAdicionar);
+                especie.mudaEnergiaAtual(energiaAtual + energiaAdicionar);
             }
         }
     }

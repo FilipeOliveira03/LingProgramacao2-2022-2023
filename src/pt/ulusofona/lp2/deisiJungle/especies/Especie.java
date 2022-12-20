@@ -3,8 +3,8 @@ package pt.ulusofona.lp2.deisiJungle.especies;
 public abstract class Especie {
 
     protected String nomeSigla;
-    protected int energia;
-    protected int consumoEnergia;
+    protected int energiaAtual;
+    protected int consumoEnergetico;
     protected int ganhoEnerDescanso;
     protected String velocidade;
     protected String tipoAlimentacao;
@@ -16,8 +16,8 @@ public abstract class Especie {
         return nomeSigla;
     }
 
-    public int getEnergia() {
-        return energia;
+    public int getEnergiaAtual() {
+        return energiaAtual;
     }
 
     public String getTipoAlimentacao() {
@@ -29,15 +29,15 @@ public abstract class Especie {
     }
     
     public int getConsumoEnergetico() {
-            return consumoEnergia;
+            return consumoEnergetico;
         }
 
     public int getGanhoEnerDescanso() {
         return ganhoEnerDescanso;
     }
 
-    public int mudaEnergia(int energia){
-        return this.energia = energia;
+    public int mudaEnergiaAtual(int energia){
+        return this.energiaAtual = energia;
     }
 
     

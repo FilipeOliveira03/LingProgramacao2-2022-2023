@@ -18,7 +18,7 @@ public class Carne extends Alimento {
 
         Especie especie = jogador.getEspecie();
         String tipoAlimen = especie.getTipoAlimentacao();
-        int energiaAtual = especie.getEnergia();
+        int energiaAtual = especie.getEnergiaAtual();
 
         if(!tipoAlimen.equals("Herbívoro")){
 
@@ -27,15 +27,15 @@ public class Carne extends Alimento {
                 if(tipoAlimen.equals("Carnívoro") || tipoAlimen.equals("Omnívoro")){
 
                     if(energiaAtual > 150){
-                        especie.mudaEnergia(200);
+                        especie.mudaEnergiaAtual(200);
 
                     }else{
-                        especie.mudaEnergia(energiaAtual + 50);
+                        especie.mudaEnergiaAtual(energiaAtual + 50);
 
                     }
                 }
             }else{
-                especie.mudaEnergia(energiaAtual / 2);
+                especie.mudaEnergiaAtual(energiaAtual / 2);
 
             }
         }

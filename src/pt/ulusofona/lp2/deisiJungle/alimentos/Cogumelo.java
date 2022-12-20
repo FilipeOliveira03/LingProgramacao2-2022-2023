@@ -21,7 +21,7 @@ public class Cogumelo extends Alimento {
     public void acontecimentoIngerir(Player jogador) {
 
         Especie especie = jogador.getEspecie();
-        int energiaAtual = especie.getEnergia();
+        int energiaAtual = especie.getEnergiaAtual();
 
         Random random = new Random();
         int numMin = 10;
@@ -43,10 +43,10 @@ public class Cogumelo extends Alimento {
         }
 
         if(energiaFinal > 200){
-            especie.mudaEnergia(200);
+            especie.mudaEnergiaAtual(200);
 
         }else{
-            especie.mudaEnergia( energiaAtual + energiaPercentagem);
+            especie.mudaEnergiaAtual( energiaAtual + energiaPercentagem);
 
         }
     }

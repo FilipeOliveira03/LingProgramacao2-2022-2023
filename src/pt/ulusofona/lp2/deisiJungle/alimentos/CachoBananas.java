@@ -19,7 +19,7 @@ public class CachoBananas extends Alimento {
     public void acontecimentoIngerir(Player jogador) {
 
         Especie especie = jogador.getEspecie();
-        int energiaAtual = especie.getEnergia();
+        int energiaAtual = especie.getEnergiaAtual();
 
         if(countBanCacho > 0){
             countBanCacho--;
@@ -32,19 +32,19 @@ public class CachoBananas extends Alimento {
             if(!jogadorComeu){
 
                 if(energiaAtual > 160){
-                    especie.mudaEnergia(200);
+                    especie.mudaEnergiaAtual(200);
 
                 }else{
-                    especie.mudaEnergia(energiaAtual + 40);
+                    especie.mudaEnergiaAtual(energiaAtual + 40);
                 }
 
             }else{
 
                 if(energiaAtual > 40){
-                    especie.mudaEnergia(0);
+                    especie.mudaEnergiaAtual(0);
 
                 }else{
-                    especie.mudaEnergia(energiaAtual - 40);
+                    especie.mudaEnergiaAtual(energiaAtual - 40);
                 }
             }
         }

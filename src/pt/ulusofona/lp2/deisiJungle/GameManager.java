@@ -23,7 +23,6 @@ public class GameManager {
     private final HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
     private final HashMap <Integer,String> tabuleiroAlimentos = new HashMap<>();
     private final ArrayList<Player> jogadores = new ArrayList<>();
-    private final ArrayList<Especie> todasAsEspecies = new ArrayList<>();
 
     private int meta;
     private int turno = 1;
@@ -100,12 +99,6 @@ public class GameManager {
              tabuleiroAlimentos.put(posAlimentos, foodsInfo[countAlimentos][0]);
          }
 
-        todasAsEspecies.add(new Elefante());
-        todasAsEspecies.add(new Leao());
-        todasAsEspecies.add(new Tartaruga());
-        todasAsEspecies.add(new Passaro());
-        todasAsEspecies.add(new Tarzan());
-
          return createInitialJungle(jungleSize, playersInfo);
     }
 
@@ -172,12 +165,6 @@ public class GameManager {
         }
 
         meta = jungleSize;
-
-        todasAsEspecies.add(new Elefante());
-        todasAsEspecies.add(new Leao());
-        todasAsEspecies.add(new Tartaruga());
-        todasAsEspecies.add(new Passaro());
-        todasAsEspecies.add(new Tarzan());
 
         for (String[] info : playersInfo) {
 
@@ -281,7 +268,7 @@ public class GameManager {
                 array[0] = String.valueOf(jogador.getID());
                 array[1] = jogador.getNome();
                 array[2] = jogador.getEspecie().getNomeSigla();
-                array[3] = String.valueOf(jogador.getEspecie().getEnergia());
+                array[3] = String.valueOf(jogador.getEspecie().getEnergiaAtual());
                 array[4] = jogador.getEspecie().getVelocidade();
                 verificar = true;
             }
@@ -305,7 +292,7 @@ public class GameManager {
         jogador[0] = String.valueOf(jogadores.get(pos).getID());
         jogador[1] = jogadores.get(pos).getNome();
         jogador[2] = jogadores.get(pos).getEspecie().getNomeSigla();
-        jogador[3] = String.valueOf(jogadores.get(pos).getEspecie().getEnergia());
+        jogador[3] = String.valueOf(jogadores.get(pos).getEspecie().getEnergiaAtual());
 
         return jogador;
     }
@@ -342,7 +329,7 @@ public class GameManager {
             array[count][0] = String.valueOf(jogadores.getID());
             array[count][1] = jogadores.getNome();
             array[count][2] = jogadores.getEspecie().getNomeSigla();
-            array[count][3] = String.valueOf(jogadores.getEspecie().getEnergia());
+            array[count][3] = String.valueOf(jogadores.getEspecie().getEnergiaAtual());
 
             count++;
         }
@@ -393,19 +380,11 @@ public class GameManager {
             return new MovementResult(INVALID_MOVEMENT);
         }
 
-        int energiaConsumida = 0;
+        int energiaConsumidaMov = nrSquares * jogador.getEspecie().getConsumoEnergetico();
 
-        for (Especie todasAsEspecies : todasAsEspecies) {
-            if (todasAsEspecies.getNomeSigla().equals(jogador.getEspecie().getNomeSigla())) {
-
-                energiaConsumida = todasAsEspecies.getConsumoEnergetico();
-            }
-        }
-
-        if(jogador.getEspecie().getEnergia() - (nrSquares * energiaConsumida) <= 0 ){
+        if(jogador.getEspecie().getEnergiaAtual() - energiaConsumidaMov <= 0 ){
             mudarTurno();
             return new MovementResult(NO_ENERGY);
-
         }
 
         int posicaoAtual = jogador.getPosicaoAtual() + nrSquares;
@@ -430,7 +409,7 @@ public class GameManager {
             }
         }
 
-        int energiaAtual = jogador.getEspecie().getEnergia();
+        int energiaAtual = jogador.getEspecie().getEnergiaAtual();
 
         tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
 
@@ -441,10 +420,21 @@ public class GameManager {
         jogador.mudaPosicaoAtual(posJogadorTabuleiro);
 
         if(nrSquares != 0 ){
-            jogador.getEspecie().mudaEnergia(energiaAtual - energiaConsumida);
+            if(energiaConsumidaMov < 0){
+                jogador.getEspecie().mudaEnergiaAtual((energiaAtual - energiaConsumidaMov) * -1);
+            }else{
+                jogador.getEspecie().mudaEnergiaAtual(energiaAtual - energiaConsumidaMov);
+            }
+
         }else{
             int energiaDescanso = jogador.getEspecie().getGanhoEnerDescanso();
-            jogador.getEspecie().mudaEnergia(energiaAtual + energiaDescanso);
+            int energiaGanha = energiaAtual + energiaDescanso;
+
+            if(energiaGanha > 200){
+                jogador.getEspecie().mudaEnergiaAtual(200);
+            }else{
+                jogador.getEspecie().mudaEnergiaAtual(energiaGanha);
+            }
         }
 
         tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing(Player::getID));
@@ -472,7 +462,7 @@ public class GameManager {
                 jogoacabado++;
             }
 
-            if (jogadore.getEspecie().getEnergia() == 0) {
+            if (jogadore.getEspecie().getEnergiaAtual() == 0) {
                 countenergia++;
             }
         }
@@ -501,7 +491,7 @@ public class GameManager {
             infojogadorvencedor[0] = String.valueOf(jogadorVencedor.getID());
             infojogadorvencedor[1] = jogadorVencedor.getNome();
             infojogadorvencedor[2] = jogadorVencedor.getEspecie().getNomeSigla();
-            infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergia());
+            infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergiaAtual());
 
             return infojogadorvencedor;
         }else{
