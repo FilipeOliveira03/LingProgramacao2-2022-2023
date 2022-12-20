@@ -402,7 +402,7 @@ public class GameManager {
             }
         }
 
-        if(jogador.getEspecie().getEnergia() - energiaConsumida <= 0 ){
+        if(jogador.getEspecie().getEnergia() - (nrSquares * energiaConsumida) <= 0 ){
             mudarTurno();
             return new MovementResult(NO_ENERGY);
 
