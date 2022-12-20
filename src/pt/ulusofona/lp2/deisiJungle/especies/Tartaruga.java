@@ -8,6 +8,6 @@ public class Tartaruga extends Especie {
         this.consumoEnergia = 1;
         this.ganhoEnerDescanso = 5;
         this.velocidade = "1..3";
-        this.tipoAlimentacao = "Herbívoro";
+        this.tipoAlimentacao = "Omnívoro";
     }
 }

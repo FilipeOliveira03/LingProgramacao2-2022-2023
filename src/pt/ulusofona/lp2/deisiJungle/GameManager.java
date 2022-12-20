@@ -361,6 +361,8 @@ public class GameManager {
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
+        jogadores.sort(Comparator.comparing(Player::getID));
+
         if(!bypassValidations){
             if(nrSquares < -6 || nrSquares > 6){
                 mudarTurno();
