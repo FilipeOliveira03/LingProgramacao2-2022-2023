@@ -99,6 +99,34 @@ public class TestGame {
     }
 
     @Test
+    public void testMoveCurrentPlayer4() {
+        GameManager manager = new GameManager();
+        String[][] arrayPlayers = {
+                {"11", "abc", "P"},
+                {"22", "Leão", "P"},
+        };
+
+        String[][] arrayFood = {
+                {"a", "4"},
+                {"a", "3"},
+                {"a", "2"},
+                {"a", "5"},
+                {"a", "6"},
+                {"a", "7"},
+                {"a", "8"},
+                {"a", "9"},
+        };
+
+
+        manager.createInitialJungle(10, arrayPlayers);
+
+        MovementResult resultadoReal = manager.moveCurrentPlayer(6, false);
+        MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
+
+        assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
+    }
+
+    @Test
     public void testGetCurrentPlayerEnergyInfo1() {
         GameManager manager = new GameManager();
         String[][] arrayPlayers = {

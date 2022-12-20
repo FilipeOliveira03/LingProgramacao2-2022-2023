@@ -173,6 +173,12 @@ public class GameManager {
 
         meta = jungleSize;
 
+        todasAsEspecies.add(new Elefante());
+        todasAsEspecies.add(new Leao());
+        todasAsEspecies.add(new Tartaruga());
+        todasAsEspecies.add(new Passaro());
+        todasAsEspecies.add(new Tarzan());
+
         for (String[] info : playersInfo) {
 
             Especie especie = switch (info[2]){
@@ -212,7 +218,7 @@ public class GameManager {
         return arrayFinal;
     }
 
-    public String[] getSquareInfo(int squareNr){ // falta qualquer coisa
+    public String[] getSquareInfo(int squareNr){
 
         jogadores.sort(Comparator.comparing(Player::getID));
 
@@ -290,7 +296,7 @@ public class GameManager {
 
     public String[] getCurrentPlayerInfo(){
 
-        jogadores.sort(Comparator.comparing(Player::getID));
+//        jogadores.sort(Comparator.comparing(Player::getID));
 
         String[] jogador = new String[4];
 
