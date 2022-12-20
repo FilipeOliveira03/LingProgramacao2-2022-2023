@@ -304,7 +304,17 @@ public class GameManager {
     }
 
     public String[] getCurrentPlayerEnergyInfo(int nrPositions){
-        return null;
+
+        jogadores.sort(Comparator.comparing(Player::getID));
+
+        String[] jogadorInfo = new String[2];
+
+        int pos = turno - 1 ;
+
+        jogadorInfo[0] = String.valueOf(jogadores.get(pos).getEspecie().getConsumoEnergetico());
+        jogadorInfo[1] = String.valueOf(jogadores.get(pos).getEspecie().getGanhoEnerDescanso());
+
+        return jogadorInfo;
     }
 
     public String[][] getPlayersInfo(){

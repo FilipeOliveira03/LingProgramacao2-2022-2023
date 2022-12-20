@@ -66,7 +66,7 @@ public class TestGame {
         manager.moveCurrentPlayer(6, false);
         manager.moveCurrentPlayer(6, false);
 
-        MovementResult resultadoReal = manager.moveCurrentPlayer(2, false);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(-2, false);
         MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
         assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
