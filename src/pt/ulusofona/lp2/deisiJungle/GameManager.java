@@ -311,7 +311,15 @@ public class GameManager {
 
         int pos = turno - 1 ;
 
-        jogadorInfo[0] = String.valueOf(nrPositions * jogadores.get(pos).getEspecie().getConsumoEnergetico());
+        int energiaConsumida = nrPositions * jogadores.get(pos).getEspecie().getConsumoEnergetico();
+
+        if(energiaConsumida > 0){
+            jogadorInfo[0] = String.valueOf(energiaConsumida);
+        }else {
+
+            jogadorInfo[0] = String.valueOf(energiaConsumida * -1);
+        }
+
         jogadorInfo[1] = String.valueOf(jogadores.get(pos).getEspecie().getGanhoEnerDescanso());
 
         return jogadorInfo;
@@ -460,7 +468,7 @@ public class GameManager {
         }
 
         for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
-            tabuleiro.get(countTabuleiro).sort(Comparator.comparing((Player jogador2) -> jogador2.getID()));
+            tabuleiro.get(countTabuleiro).sort(Comparator.comparing(Player::getID));
         }
 
         if(countenergia == jogadores.size()|| jogoacabado != 0) {
