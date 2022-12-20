@@ -173,11 +173,11 @@ public class GameManager {
 
         meta = jungleSize;
 
-        todasAsEspecies.add(new Elefante());
-        todasAsEspecies.add(new Leao());
-        todasAsEspecies.add(new Tartaruga());
-        todasAsEspecies.add(new Passaro());
-        todasAsEspecies.add(new Tarzan());
+//        todasAsEspecies.add(new Elefante());
+//        todasAsEspecies.add(new Leao());
+//        todasAsEspecies.add(new Tartaruga());
+//        todasAsEspecies.add(new Passaro());
+//        todasAsEspecies.add(new Tarzan());
 
         for (String[] info : playersInfo) {
 
@@ -402,7 +402,7 @@ public class GameManager {
             }
         }
 
-        if(jogador.getEspecie().getEnergia() - energiaConsumida <= 0 ){
+        if(jogador.getEspecie().getEnergia() - energiaConsumida < 0 ){
             mudarTurno();
             return new MovementResult(NO_ENERGY);
 
