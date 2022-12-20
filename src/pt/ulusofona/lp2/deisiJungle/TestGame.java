@@ -105,7 +105,7 @@ public class TestGame {
         manager.createInitialJungle(10, arrayPlayers);
 
 
-        String[] resultadoReal = manager.getCurrentPlayerEnergyInfo(1);
+        String[] resultadoReal = manager.getCurrentPlayerEnergyInfo(4);
         String[] resultadoEsperado = arrayEnergia;
 
         assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
