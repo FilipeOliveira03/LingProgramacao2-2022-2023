@@ -201,7 +201,7 @@ public class GameManager {
 
     public int[] getPlayerIds(int squareNr) {
 
-       // jogadores.sort(Comparator.comparing(Player::getID));
+        jogadores.sort(Comparator.comparing(Player::getID));
 
         if(squareNr > meta || squareNr < 1 || tabuleiro.get(squareNr) == null ){
             return new int[0];
@@ -220,7 +220,7 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr){
 
-       // jogadores.sort(Comparator.comparing(Player::getID));
+        jogadores.sort(Comparator.comparing(Player::getID));
 
         if(squareNr > meta || squareNr < 1 || tabuleiro.get(squareNr) == null){
             return null;
@@ -270,7 +270,7 @@ public class GameManager {
 
     public String[] getPlayerInfo(int playerId) {
 
-       // jogadores.sort(Comparator.comparing(Player::getID));
+        jogadores.sort(Comparator.comparing(Player::getID));
 
         String[] array = new String[5];
         boolean verificar = false;
@@ -296,7 +296,7 @@ public class GameManager {
 
     public String[] getCurrentPlayerInfo(){
 
-//        jogadores.sort(Comparator.comparing(Player::getID));
+        jogadores.sort(Comparator.comparing(Player::getID));
 
         String[] jogador = new String[4];
 
@@ -312,7 +312,7 @@ public class GameManager {
 
     public String[] getCurrentPlayerEnergyInfo(int nrPositions){
 
-//        jogadores.sort(Comparator.comparing(Player::getID));
+        jogadores.sort(Comparator.comparing(Player::getID));
 
         String[] jogadorInfo = new String[2];
 
