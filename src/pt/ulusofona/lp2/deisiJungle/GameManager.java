@@ -316,7 +316,6 @@ public class GameManager {
         if(energiaConsumida > 0){
             jogadorInfo[0] = String.valueOf(energiaConsumida);
         }else {
-
             jogadorInfo[0] = String.valueOf(energiaConsumida * -1);
         }
 
@@ -384,6 +383,15 @@ public class GameManager {
         }
 
         if(posJogadorTabuleiro + nrSquares > meta){
+            mudarTurno();
+            return new MovementResult(INVALID_MOVEMENT);
+        }
+
+        String velocidade = jogador.getEspecie().getVelocidade();
+        int velocidadeMinima = velocidade.charAt(0);
+        int velocidadeMaxima = velocidade.charAt(3);
+
+        if(nrSquares < velocidadeMinima || nrSquares > velocidadeMaxima){
             mudarTurno();
             return new MovementResult(INVALID_MOVEMENT);
         }
