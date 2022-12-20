@@ -365,6 +365,11 @@ public class GameManager {
             return new MovementResult(INVALID_MOVEMENT);
         }
 
+        if(posJogadorTabuleiro + nrSquares > meta){
+            mudarTurno();
+            return new MovementResult(INVALID_MOVEMENT);
+        }
+
         int energiaConsumida = 0;
 
         for (Especie todasAsEspecy : todasAsEspecies) {
