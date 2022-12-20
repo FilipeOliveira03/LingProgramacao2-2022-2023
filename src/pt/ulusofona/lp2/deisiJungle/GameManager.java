@@ -311,7 +311,7 @@ public class GameManager {
 
         int pos = turno - 1 ;
 
-        jogadorInfo[0] = String.valueOf(jogadores.get(pos).getEspecie().getConsumoEnergetico());
+        jogadorInfo[0] = String.valueOf(nrPositions * jogadores.get(pos).getEspecie().getConsumoEnergetico());
         jogadorInfo[1] = String.valueOf(jogadores.get(pos).getEspecie().getGanhoEnerDescanso());
 
         return jogadorInfo;
