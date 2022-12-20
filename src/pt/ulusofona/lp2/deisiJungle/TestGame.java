@@ -92,6 +92,7 @@ public class TestGame {
         };
 
         manager.createInitialJungle(10, arrayPlayers, arrayFood);
+        manager.moveCurrentPlayer(6, false);
         MovementResult resultadoReal = manager.moveCurrentPlayer(6, false);
         MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 

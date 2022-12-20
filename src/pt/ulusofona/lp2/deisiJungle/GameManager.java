@@ -173,11 +173,11 @@ public class GameManager {
 
         meta = jungleSize;
 
-//        todasAsEspecies.add(new Elefante());
-//        todasAsEspecies.add(new Leao());
-//        todasAsEspecies.add(new Tartaruga());
-//        todasAsEspecies.add(new Passaro());
-//        todasAsEspecies.add(new Tarzan());
+        todasAsEspecies.add(new Elefante());
+        todasAsEspecies.add(new Leao());
+        todasAsEspecies.add(new Tartaruga());
+        todasAsEspecies.add(new Passaro());
+        todasAsEspecies.add(new Tarzan());
 
         for (String[] info : playersInfo) {
 
@@ -395,14 +395,14 @@ public class GameManager {
 
         int energiaConsumida = 0;
 
-        for (Especie todasAsEspecy : todasAsEspecies) {
-            if (todasAsEspecy.getNomeSigla().equals(jogador.getEspecie().getNomeSigla())) {
+        for (Especie todasAsEspecies : todasAsEspecies) {
+            if (todasAsEspecies.getNomeSigla().equals(jogador.getEspecie().getNomeSigla())) {
 
-                energiaConsumida = todasAsEspecy.getConsumoEnergetico();
+                energiaConsumida = todasAsEspecies.getConsumoEnergetico();
             }
         }
 
-        if(jogador.getEspecie().getEnergia() - energiaConsumida < 0 ){
+        if(jogador.getEspecie().getEnergia() - energiaConsumida <= 0 ){
             mudarTurno();
             return new MovementResult(NO_ENERGY);
 
@@ -422,11 +422,10 @@ public class GameManager {
             };
 
             if(alimento != null){
+
                 alimento.acontecimentoIngerir(jogador);
-                mudarTurno();
                 MovementResult.mudaOutPutAlimento(alimento.getNome());
                 jogador.adicionaAlimentosIngeridos(alimentoTabu);
-                return new MovementResult(CAUGHT_FOOD);
 
             }
         }
@@ -454,7 +453,13 @@ public class GameManager {
         mudarTurno();
         jogadasPassadas++;
 
-        return new MovementResult(VALID_MOVEMENT);
+        if (alimentoTabu != null) {
+            return new MovementResult(CAUGHT_FOOD);
+        }else{
+            return new MovementResult(VALID_MOVEMENT);
+        }
+
+
     }
 
     public String[] getWinnerInfo() {
