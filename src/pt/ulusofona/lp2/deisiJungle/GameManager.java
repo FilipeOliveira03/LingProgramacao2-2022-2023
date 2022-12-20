@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import kotlin.math.UMathKt;
 import pt.ulusofona.lp2.deisiJungle.alimentos.*;
 import pt.ulusofona.lp2.deisiJungle.alimentos.Alimento;
 import pt.ulusofona.lp2.deisiJungle.especies.*;
@@ -388,10 +389,10 @@ public class GameManager {
         }
 
         String velocidade = jogador.getEspecie().getVelocidade();
-        int velocidadeMinima = velocidade.charAt(0);
-        int velocidadeMaxima = velocidade.charAt(3);
+        int velocidadeMinima = Integer.parseInt(String.valueOf(velocidade.charAt(0)));
+        int velocidadeMaxima = Integer.parseInt(String.valueOf(velocidade.charAt(3)));
 
-        if(nrSquares < velocidadeMinima || nrSquares > velocidadeMaxima){
+        if(!(nrSquares >= velocidadeMinima && nrSquares <= velocidadeMaxima)){
             mudarTurno();
             return new MovementResult(INVALID_MOVEMENT);
         }
