@@ -324,7 +324,7 @@ public class GameManager {
         if(energiaConsumida > 0){
             jogadorInfo[0] = String.valueOf(energiaConsumida);
         }else {
-            jogadorInfo[0] = String.valueOf(energiaConsumida * -1);
+            jogadorInfo[0] = String.valueOf(energiaConsumida); // -1
         }
 
         jogadorInfo[1] = String.valueOf(jogadores.get(pos).getEspecie().getGanhoEnerDescanso());
