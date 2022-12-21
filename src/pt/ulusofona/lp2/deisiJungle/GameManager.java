@@ -389,6 +389,10 @@ public class GameManager {
 
         int energiaConsumidaMov = nrSquares * jogador.getEspecie().getConsumoEnergetico();
 
+        if(energiaConsumidaMov < 0){
+            energiaConsumidaMov = energiaConsumidaMov * -1;
+        }
+
         if(jogador.getEspecie().getEnergiaAtual() - energiaConsumidaMov < 0 ){
             mudarTurno();
             return new MovementResult(NO_ENERGY);
@@ -431,6 +435,7 @@ public class GameManager {
         }
 
         tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing(Player::getID));
+
         if(nrSquares > 0){
             jogador.adicionaDistanciaViajada(nrSquares);
         }else{
