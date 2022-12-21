@@ -1,6 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import kotlin.math.UMathKt;
 import pt.ulusofona.lp2.deisiJungle.alimentos.*;
 import pt.ulusofona.lp2.deisiJungle.alimentos.Alimento;
 import pt.ulusofona.lp2.deisiJungle.especies.*;
@@ -243,6 +242,7 @@ public class GameManager {
             nrJogadorAtual++;
         }
 
+
         if(squareNr == meta){
             info[0] = "finish.png";
             info[1] = "Meta";
@@ -458,7 +458,7 @@ public class GameManager {
     }
 
     public String[] getWinnerInfo() {
-        int countenergia = 0;
+
         int jogoacabado = 0;
 
         for (Player jogadore : jogadores) {
@@ -467,16 +467,13 @@ public class GameManager {
                 jogoacabado++;
             }
 
-            if (jogadore.getEspecie().getEnergiaAtual() == 0) {
-                countenergia++;
-            }
         }
 
         for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
             tabuleiro.get(countTabuleiro).sort(Comparator.comparing(Player::getID));
         }
 
-        if(countenergia == jogadores.size()|| jogoacabado != 0) {
+        if(jogoacabado != 0) {
 
             Player jogadorVencedor = new Player();
 

@@ -136,7 +136,7 @@ public class TestGame {
                 {"22", "Leão", "L"},
         };
 
-        String[] arrayEnergia = {"1", "5"};
+        String[] arrayEnergia = {"4", "5"};
 
         manager.createInitialJungle(10, arrayPlayers);
 
