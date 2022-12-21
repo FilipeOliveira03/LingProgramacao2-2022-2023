@@ -13,7 +13,7 @@ public class Cogumelo extends Alimento {
 
 
     public Cogumelo() {
-        this.nome = "Cogumelo";
+        this.nome = "Cogumelo Magico";
         this.idAlimento = "m";
     }
 

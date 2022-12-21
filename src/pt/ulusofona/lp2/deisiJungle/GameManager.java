@@ -243,6 +243,8 @@ public class GameManager {
         }
 
 
+
+
         if(squareNr == meta){
             info[0] = "finish.png";
             info[1] = "Meta";
@@ -370,15 +372,15 @@ public class GameManager {
 
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
-        if(jogador.getPosicaoAtual() + nrSquares < 1){
+        if(jogador.getPosicaoAtual() + nrSquares < 1 || posJogadorTabuleiro + nrSquares > meta){
             mudarTurno();
             return new MovementResult(INVALID_MOVEMENT);
         }
 
-        if(posJogadorTabuleiro + nrSquares > meta){
-            mudarTurno();
-            return new MovementResult(INVALID_MOVEMENT);
-        }
+//        if(posJogadorTabuleiro + nrSquares > meta){
+//            mudarTurno();
+//            return new MovementResult(INVALID_MOVEMENT);
+//        }
 
         int energiaConsumidaMov = nrSquares * jogador.getEspecie().getConsumoEnergetico();
 
@@ -388,9 +390,8 @@ public class GameManager {
         }
 
         int posicaoAtual = jogador.getPosicaoAtual() + nrSquares;
-        
         String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
-        
+
         int energiaAtual = jogador.getEspecie().getEnergiaAtual();
 
         tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
