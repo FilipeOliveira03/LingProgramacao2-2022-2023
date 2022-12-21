@@ -8,27 +8,13 @@ public record MovementResult(MovementResultCode code) {
 
     public String message(){
 
-        String mensagem = "";
+        if(code == CAUGHT_FOOD){
 
-        if(code == VALID_MOVEMENT){
-
-            mensagem = "O movimento do jogador é válido";
-
-        }else if(code == INVALID_MOVEMENT){
-
-            mensagem = "O movimento do jogador é inválido";
-
-        }else if(code == NO_ENERGY){
-
-            mensagem = "O jogador não têm energia";
-
-        }else if(code == CAUGHT_FOOD){
-
-            mensagem = "Apanhou " + outPutalimento;
-
+            return "Apanhou " + outPutalimento;
         }
 
-        return mensagem;
+        return null;
+
     }
 
     public static String mudaOutPutAlimento(String alimento) {
