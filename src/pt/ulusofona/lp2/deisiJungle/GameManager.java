@@ -387,6 +387,10 @@ public class GameManager {
             return new MovementResult(NO_ENERGY);
         }
 
+        int posicaoAtual = jogador.getPosicaoAtual() + nrSquares;
+        
+        String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
+        
         int energiaAtual = jogador.getEspecie().getEnergiaAtual();
 
         tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
@@ -425,10 +429,6 @@ public class GameManager {
         mudarTurno();
         jogadasPassadas++;
 
-        int posicaoAtual = jogador.getPosicaoAtual() + nrSquares;
-        String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
-
-
         if(alimentoTabu != null){
             Alimento alimento = switch (alimentoTabu) {
                 case "a" -> new Agua();
@@ -444,16 +444,11 @@ public class GameManager {
                 alimento.acontecimentoIngerir(jogador);
                 MovementResult.mudaOutPutAlimento(alimento.getNome());
                 jogador.adicionaAlimentosIngeridos(alimentoTabu);
-
+                return new MovementResult(CAUGHT_FOOD);
             }
         }
 
-        if (alimentoTabu != null) {
-            return new MovementResult(CAUGHT_FOOD);
-        }else{
-            return new MovementResult(VALID_MOVEMENT);
-        }
-
+        return new MovementResult(VALID_MOVEMENT);
 
     }
 

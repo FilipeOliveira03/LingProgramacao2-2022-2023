@@ -35,17 +35,21 @@ public class TestGame {
         GameManager manager = new GameManager();
         String[][] arrayPlayers = {
                 {"11", "abc", "E"},
-                {"2", "Leão", "L"},
+                {"22", "Leão", "L"},
         };
 
         String[][] arrayFood = {
-                {"e", "4"},
-                {"e", "3"},
+                {"a", "4"},
+                
+                {"a", "2"},
+                {"a", "5"},
+                {"a", "6"},
+                {"a", "7"},
+                {"a", "8"},
+                {"a", "9"},
         };
 
         manager.createInitialJungle(10, arrayPlayers, arrayFood);
-        manager.moveCurrentPlayer(5, false);
-        manager.moveCurrentPlayer(6, false);
         MovementResult resultadoReal = manager.moveCurrentPlayer(2, false);
         MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
@@ -137,15 +141,15 @@ public class TestGame {
         GameManager manager = new GameManager();
         String[][] arrayPlayers = {
                 {"11", "abc", "T"},
-                {"22", "Leão", "L"},
+                {"22", "Leão", "E"},
         };
 
-        String[] arrayEnergia = {"4", "5"};
+        String[] arrayEnergia = {"4", "10"};
 
         manager.createInitialJungle(10, arrayPlayers);
+    manager.moveCurrentPlayer(2, false);
 
-
-        String[] resultadoReal = manager.getCurrentPlayerEnergyInfo(4);
+        String[] resultadoReal = manager.getCurrentPlayerEnergyInfo(1);
         String[] resultadoEsperado = arrayEnergia;
 
         assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
@@ -172,21 +176,6 @@ public class TestGame {
     @Test
     public void testWater() {
         GameManager manager = new GameManager();
-        String[][] arrayPlayers = {
-                {"11", "abc", "E"},
-                {"2", "Leão", "P"},
-        };
-
-        String[][] arrayFood = {
-                {"a", "4"},
-                {"a", "3"},
-                {"a", "2"},
-                {"a", "5"},
-                {"a", "6"},
-                {"a", "7"},
-                {"a", "8"},
-                {"a", "9"},
-        };
 
         Player jogador = new Player(213, "SAD", new Tarzan());
         jogador.getEspecie().mudaEnergiaAtual(78);
