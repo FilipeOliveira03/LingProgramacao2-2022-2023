@@ -22,6 +22,7 @@ public class GameManager {
     private final HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
     private final HashMap <Integer,String> tabuleiroAlimentos = new HashMap<>();
     private final ArrayList<Player> jogadores = new ArrayList<>();
+    private final ArrayList<Alimento> alimentos = new ArrayList<>();
 
     private int meta;
     private int turno = 1;
@@ -218,6 +219,7 @@ public class GameManager {
         String[] info = new String[3];
 
         ArrayList<Player> jogadores = tabuleiro.get(squareNr);
+        String alimento = tabuleiroAlimentos.get(squareNr);
 
         for (Player jogador : jogadores) {
 
@@ -242,7 +244,15 @@ public class GameManager {
             nrJogadorAtual++;
         }
 
-
+        if(alimento != null){
+            switch (alimento){
+                case "e" ->  info[0] = "grass.png";
+                case "a" ->  info[0] = "water.png";
+                case "b" ->  info[0] = "bananas.png";
+                case "c" ->  info[0] = "meat.png";
+                case "m" ->  info[0] = "mushroom.png";
+            }
+        }
 
 
         if(squareNr == meta){
@@ -377,11 +387,6 @@ public class GameManager {
             return new MovementResult(INVALID_MOVEMENT);
         }
 
-//        if(posJogadorTabuleiro + nrSquares > meta){
-//            mudarTurno();
-//            return new MovementResult(INVALID_MOVEMENT);
-//        }
-
         int energiaConsumidaMov = nrSquares * jogador.getEspecie().getConsumoEnergetico();
 
         if(jogador.getEspecie().getEnergiaAtual() - energiaConsumidaMov < 0 ){
@@ -390,6 +395,11 @@ public class GameManager {
         }
 
         int posicaoAtual = jogador.getPosicaoAtual() + nrSquares;
+
+        if(posicaoAtual < 0){
+            posicaoAtual = posicaoAtual * -1;
+        }
+
         String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
 
         int energiaAtual = jogador.getEspecie().getEnergiaAtual();

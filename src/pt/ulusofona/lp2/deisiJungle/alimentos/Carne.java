@@ -22,7 +22,7 @@ public class Carne extends Alimento {
 
         if(!tipoAlimen.equals("Herbívoro")){
 
-            if(jogadaAtual >= 12){
+            if(jogadaAtual <= 12){
 
                 if(tipoAlimen.equals("Carnívoro") || tipoAlimen.equals("Omnívoro")){
 
