@@ -524,7 +524,8 @@ public class GameManager {
                     }
 
                     resultadoJogo.add("#" + pos + " " + jogador.getNome() + ", " + especie + ", " +
-                    jogador.getPosicaoAtual());
+                    jogador.getPosicaoAtual() + ", " + jogador.getDistanciaViajada() +
+                            ", " + jogador.getAlimentosIngeridos().size());
                     pos++;
                 }
             }
