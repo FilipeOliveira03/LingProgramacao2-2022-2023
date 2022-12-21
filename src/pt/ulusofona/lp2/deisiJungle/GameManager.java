@@ -387,28 +387,6 @@ public class GameManager {
             return new MovementResult(NO_ENERGY);
         }
 
-        int posicaoAtual = jogador.getPosicaoAtual() + nrSquares;
-        String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
-
-        if(alimentoTabu != null){
-            Alimento alimento = switch (alimentoTabu) {
-                case "a" -> new Agua();
-                case "b" -> new CachoBananas();
-                case "c" -> new Carne();
-                case "m" -> new Cogumelo();
-                case "e" -> new Erva();
-                default -> null;
-            };
-
-            if(alimento != null){
-
-                alimento.acontecimentoIngerir(jogador);
-                MovementResult.mudaOutPutAlimento(alimento.getNome());
-                jogador.adicionaAlimentosIngeridos(alimentoTabu);
-
-            }
-        }
-
         int energiaAtual = jogador.getEspecie().getEnergiaAtual();
 
         tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
@@ -444,9 +422,31 @@ public class GameManager {
             jogador.adicionaDistanciaViajada(nrSquares * -1);
         }
 
-
         mudarTurno();
         jogadasPassadas++;
+
+        int posicaoAtual = jogador.getPosicaoAtual() + nrSquares;
+        String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
+
+
+        if(alimentoTabu != null){
+            Alimento alimento = switch (alimentoTabu) {
+                case "a" -> new Agua();
+                case "b" -> new CachoBananas();
+                case "c" -> new Carne();
+                case "m" -> new Cogumelo();
+                case "e" -> new Erva();
+                default -> null;
+            };
+
+            if(alimento != null){
+
+                alimento.acontecimentoIngerir(jogador);
+                MovementResult.mudaOutPutAlimento(alimento.getNome());
+                jogador.adicionaAlimentosIngeridos(alimentoTabu);
+
+            }
+        }
 
         if (alimentoTabu != null) {
             return new MovementResult(CAUGHT_FOOD);

@@ -1,5 +1,9 @@
 package pt.ulusofona.lp2.deisiJungle;
 import org.junit.Test;
+import pt.ulusofona.lp2.deisiJungle.alimentos.Agua;
+import pt.ulusofona.lp2.deisiJungle.alimentos.Alimento;
+import pt.ulusofona.lp2.deisiJungle.especies.Tarzan;
+import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 
 import static org.junit.Assert.assertEquals;
 import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.INVALID_FOOD_POSITION_NOT_NUMBER;
@@ -163,6 +167,33 @@ public class TestGame {
         String[] resultadoEsperado = arrayEnergia;
 
         assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
+    }
+
+    @Test
+    public void testWater() {
+        GameManager manager = new GameManager();
+        String[][] arrayPlayers = {
+                {"11", "abc", "E"},
+                {"2", "Leão", "P"},
+        };
+
+        String[][] arrayFood = {
+                {"a", "4"},
+                {"a", "3"},
+                {"a", "2"},
+                {"a", "5"},
+                {"a", "6"},
+                {"a", "7"},
+                {"a", "8"},
+                {"a", "9"},
+        };
+
+        Player jogador = new Player(213, "SAD", new Tarzan());
+        jogador.getEspecie().mudaEnergiaAtual(78);
+
+        Alimento agua = new Agua();
+        agua.acontecimentoIngerir(jogador);
+
     }
 
 }
