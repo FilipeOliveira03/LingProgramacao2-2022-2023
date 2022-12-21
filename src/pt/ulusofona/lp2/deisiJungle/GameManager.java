@@ -438,7 +438,12 @@ public class GameManager {
         }
 
         tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing(Player::getID));
-        jogador.adicionaDistanciaViajada(nrSquares);
+        if(nrSquares > 0){
+            jogador.adicionaDistanciaViajada(nrSquares);
+        }else{
+            jogador.adicionaDistanciaViajada(nrSquares * -1);
+        }
+
 
         mudarTurno();
         jogadasPassadas++;
