@@ -56,7 +56,8 @@ public class GameManager {
                 { "a", "Agua", "water.png"},
                 { "c", "Carne", "meat.png"},
                 { "b", "Cacho de Bananas", "bananas.png"},
-                { "m", "Cogumelos magicos", "mushroom.png"} };
+                { "m", "Cogumelos magicos", "mushroom.png"}
+        };
     }
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
@@ -70,7 +71,7 @@ public class GameManager {
             for (int countIdAlimento = 0; countIdAlimento < getFoodTypes().length; countIdAlimento++) {
 
                 if(foodsInfo[countAlimentos][0].equals(getFoodTypes()[countIdAlimento][0])){
-                    // verifica se o id da comida é do getFoodTypes()
+                                                                                                 // verifica se o id da comida é do getFoodTypes()
 
                     verificarComida[countAlimentos] = true;
                 }
@@ -90,11 +91,11 @@ public class GameManager {
 
         }
 
-        for (boolean verificar : verificarComida) { // verifica se a comida existe
+        for (boolean verificar : verificarComida) {                                                     // verifica se a comida existe
             if (!verificar) {  return new InitializationError(INVALID_FOOD_DOES_NOT_EXIST); }
         }
 
-         for (int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++) { //meter comida no tabuleri
+         for (int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++) {              //meter comida no tabuleri
              int posAlimentos = Integer.parseInt(foodsInfo[countAlimentos][1]);
              tabuleiroAlimentos.put(posAlimentos, foodsInfo[countAlimentos][0]);
          }
@@ -182,7 +183,6 @@ public class GameManager {
             jogadores.add(jogador);
             tabuleiro.get(1).add(jogador);
         }
-
         return null;
     }
 
@@ -259,6 +259,9 @@ public class GameManager {
             info[0] = "finish.png";
             info[1] = "Meta";
         }else {
+
+
+            //retornar comida
             info[1] = "Vazio";
         }
 
@@ -297,7 +300,7 @@ public class GameManager {
 
         jogadores.sort(Comparator.comparing(Player::getID));
 
-        String[] jogador = new String[4];
+        String[] jogador = new String[5];
 
         int pos = turno - 1 ;
 
@@ -305,7 +308,7 @@ public class GameManager {
         jogador[1] = jogadores.get(pos).getNome();
         jogador[2] = jogadores.get(pos).getEspecie().getNomeSigla();
         jogador[3] = String.valueOf(jogadores.get(pos).getEspecie().getEnergiaAtual());
-
+        jogador[4] = jogadores.get(pos).getEspecie().getVelocidade();
         return jogador;
     }
 
@@ -316,15 +319,19 @@ public class GameManager {
         String[] jogadorInfo = new String[2];
 
         int pos = turno - 1 ;
-        int energiaConsumida = nrPositions * jogadores.get(pos).getEspecie().getConsumoEnergetico();
+        int energiaConsumida = nrPositions * jogadores.get(pos-1).getEspecie().getConsumoEnergetico();
 
         if(energiaConsumida > 0){
+
             jogadorInfo[0] = String.valueOf(energiaConsumida);
-        }else {
+
+        }else{
+
             jogadorInfo[0] = String.valueOf(energiaConsumida * -1);
+
         }
 
-        jogadorInfo[1] = String.valueOf(jogadores.get(pos).getEspecie().getGanhoEnerDescanso());
+        jogadorInfo[1] = String.valueOf(jogadores.get(pos-1).getEspecie().getGanhoEnerDescanso());
 
         return jogadorInfo;
     }
