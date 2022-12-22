@@ -1,9 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 import org.junit.Test;
-import pt.ulusofona.lp2.deisiJungle.alimentos.Agua;
-import pt.ulusofona.lp2.deisiJungle.alimentos.Alimento;
-import pt.ulusofona.lp2.deisiJungle.alimentos.Carne;
-import pt.ulusofona.lp2.deisiJungle.alimentos.Cogumelo;
+import pt.ulusofona.lp2.deisiJungle.alimentos.*;
 import pt.ulusofona.lp2.deisiJungle.especies.Tarzan;
 import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 
@@ -237,14 +234,17 @@ public class TestGame {
                 {"2", "Leão", "P"},
         };
          String[][] arrayalimentos = {
-                {"a","1"},
-                {"c","2"},
+                {"b","2"},
+                {"b","3"},
         };
-        manager.createInitialJungle(8, arrayPlayers);
-        manager.createInitialJungle(8, arrayPlayers,arrayalimentos);
-        manager.getSquareInfo(1);
+        CachoBananas bananas= new CachoBananas();
+        Player jogador = new Player(213, "SAD", new Tarzan());
+        manager.createInitialJungle(40, arrayPlayers,arrayalimentos);
+        bananas.acontecimentoIngerir(jogador);
+        manager.moveCurrentPlayer(1,false);
         manager.getSquareInfo(2);
-        HashMap<Integer,String> tabuleiroAlimentos = new HashMap<>();
+
+
 
     }
 }
