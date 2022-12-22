@@ -314,7 +314,8 @@ public class GameManager {
 
     public String[] getCurrentPlayerEnergyInfo(int nrPositions){
 
-        jogadores.sort(Comparator.comparing(Player::getID));
+
+        // jogadores.sort(Comparator.comparing(Player::getID));
 
         String[] jogadorInfo = new String[2];
 
