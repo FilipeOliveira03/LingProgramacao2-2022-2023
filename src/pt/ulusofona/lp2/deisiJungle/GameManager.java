@@ -319,7 +319,7 @@ public class GameManager {
         String[] jogadorInfo = new String[2];
 
         int pos = turno - 1 ;
-        int energiaConsumida = nrPositions * jogadores.get(pos-1).getEspecie().getConsumoEnergetico();
+        int energiaConsumida = nrPositions * jogadores.get(pos).getEspecie().getConsumoEnergetico();
 
         if(energiaConsumida > 0){
 
@@ -331,7 +331,7 @@ public class GameManager {
 
         }
 
-        jogadorInfo[1] = String.valueOf(jogadores.get(pos-1).getEspecie().getGanhoEnerDescanso());
+        jogadorInfo[1] = String.valueOf(jogadores.get(pos).getEspecie().getGanhoEnerDescanso());
 
         return jogadorInfo;
     }

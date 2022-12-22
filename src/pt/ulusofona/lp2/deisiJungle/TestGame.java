@@ -143,7 +143,7 @@ public class TestGame {
         GameManager manager = new GameManager();
         String[][] arrayPlayers = {
                 {"11", "abc", "T"},
-                {"22", "Leão", "E"},
+                {"22", "Leão", "L"},
         };
 
         String[] arrayEnergia = {"1", "5"};
@@ -205,15 +205,19 @@ public class TestGame {
                 {"2", "Leão", "P"},
         };
 
-        manager.createInitialJungle(10, arrayPlayers);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(-6, false);
-        manager.moveCurrentPlayer(-6, false);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(-6, false);
-        manager.moveCurrentPlayer(-6, false);
+        manager.createInitialJungle(30, arrayPlayers);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(-1, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(-1, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(-1, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(-1, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(-1, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(-1, false);
 
         Player jogador = new Player(213, "SAD", new Tarzan());
         jogador.getEspecie().mudaEnergiaAtual(78);
