@@ -27,7 +27,7 @@ public class GameManager {
     private int meta;
     private int turno = 1;
     private static int jogadasPassadas = 0;
-
+    private static int countBananas = 3;
     public static int getJogadasPassadas() {
         return jogadasPassadas;
     }
@@ -242,7 +242,8 @@ public class GameManager {
 
             nrJogadorAtual++;
         }
-         Alimento tooltipalimento = null;
+
+         Alimento tooltipalimento=null;
         if(alimento != null){
             switch (alimento){
                 case "e" -> {info[0] = "grass.png";tooltipalimento= new Erva();             }
@@ -472,7 +473,9 @@ public class GameManager {
             };
 
             if(alimento != null){
-
+              if(alimentoTabu.equals("b")){
+                   countBananas--;
+                 }
                 alimento.acontecimentoIngerir(jogador);
                 MovementResult.mudaOutPutAlimento(alimento.getNome());
                 jogador.adicionaAlimentosIngeridos(alimentoTabu);

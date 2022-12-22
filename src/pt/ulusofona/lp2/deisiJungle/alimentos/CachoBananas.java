@@ -6,7 +6,6 @@ import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 import java.util.ArrayList;
 
 public class CachoBananas extends Alimento {
-
     private int countBanCacho = 3;
     private final ArrayList<Integer> idsJogadoresComeram = new ArrayList<>();
 
@@ -54,6 +53,7 @@ public class CachoBananas extends Alimento {
 
     @Override
     public String toString() {
-        return "Bananas : " + countBanCacho + " : + 40 energia" ;
+        int countBananas = 3;
+        return "Bananas : " + countBananas + " : + 40 energia" ;
     }
 }
