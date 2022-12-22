@@ -7,6 +7,8 @@ import pt.ulusofona.lp2.deisiJungle.alimentos.Cogumelo;
 import pt.ulusofona.lp2.deisiJungle.especies.Tarzan;
 import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 
+import java.util.HashMap;
+
 import static org.junit.Assert.assertEquals;
 import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.INVALID_FOOD_POSITION_NOT_NUMBER;
 import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.*;
@@ -224,5 +226,25 @@ public class TestGame {
 
         Alimento carne = new Carne();
         carne.acontecimentoIngerir(jogador);
+    }
+    @Test
+    public void testTooltipalimentosSquareinfo() {
+
+        GameManager manager = new GameManager();
+
+        String[][] arrayPlayers = {
+                {"11", "abc", "T"},
+                {"2", "Leão", "P"},
+        };
+         String[][] arrayalimentos = {
+                {"a","1"},
+                {"c","2"},
+        };
+        manager.createInitialJungle(8, arrayPlayers);
+        manager.createInitialJungle(8, arrayPlayers,arrayalimentos);
+        manager.getSquareInfo(1);
+        manager.getSquareInfo(2);
+        HashMap<Integer,String> tabuleiroAlimentos = new HashMap<>();
+
     }
 }

@@ -259,10 +259,11 @@ public class GameManager {
             info[0] = "finish.png";
             info[1] = "Meta";
         }else {
-
-
-            //retornar comida
-            info[1] = "Vazio";
+            if (alimento!=null) {
+                info[1] = alimento;
+            }else{
+                info[1] = "Vazio";
+            }
         }
 
         info[2] = ids.toString();
