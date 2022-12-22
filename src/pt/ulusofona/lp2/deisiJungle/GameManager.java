@@ -475,7 +475,7 @@ public class GameManager {
                 case "e" -> new Erva();
                 default -> null;
             };
-
+//
             if(alimento != null){
 
                 alimento.acontecimentoIngerir(jogador);
