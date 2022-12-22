@@ -220,7 +220,6 @@ public class GameManager {
 
         ArrayList<Player> jogadores = tabuleiro.get(squareNr);
         String alimento = tabuleiroAlimentos.get(squareNr);
-
         for (Player jogador : jogadores) {
 
             String especie = jogador.getEspecie().getNomeSigla();
@@ -243,14 +242,20 @@ public class GameManager {
 
             nrJogadorAtual++;
         }
-
+         Alimento tooltipalimento = null;
         if(alimento != null){
             switch (alimento){
-                case "e" ->  info[0] = "grass.png";
-                case "a" ->  info[0] = "water.png";
-                case "b" ->  info[0] = "bananas.png";
-                case "c" ->  info[0] = "meat.png";
-                case "m" ->  info[0] = "mushroom.png";
+                case "e" -> {info[0] = "grass.png";tooltipalimento= new Erva();             }
+
+                case "a" -> {info[0] = "water.png";tooltipalimento= new Agua();             }
+
+                case "b" -> {info[0] = "bananas.png";tooltipalimento= new CachoBananas();   }
+
+                case "c" -> {info[0] = "meat.png";tooltipalimento= new Carne();             }
+
+                case "m" -> {info[0] = "mushroom.png";tooltipalimento= new Cogumelo();      }
+
+
             }
         }
 
@@ -260,7 +265,9 @@ public class GameManager {
             info[1] = "Meta";
         }else {
             if (alimento!=null) {
-                info[1] = alimento;
+
+                assert tooltipalimento != null;
+                info[1] = tooltipalimento.toString();
             }else{
                 info[1] = "Vazio";
             }
