@@ -462,7 +462,8 @@ public class GameManager {
         }else{
             jogador.adicionaDistanciaViajada(nrSquares * -1);
         }
-
+        jogadasPassadas++;
+        mudarTurno();
 
 
         if(alimentoTabu != null){
@@ -483,8 +484,7 @@ public class GameManager {
                 return new MovementResult(CAUGHT_FOOD);
             }
         }
-        mudarTurno();
-        jogadasPassadas++;
+
         return new MovementResult(VALID_MOVEMENT);
 
     }
