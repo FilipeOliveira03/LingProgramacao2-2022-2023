@@ -254,7 +254,7 @@ public class GameManager {
 
                 case "a" -> {info[0] = "water.png";tooltipalimento= new Agua();             }
 
-                case "b" -> {info[0] = "bananas.png";tooltipalimento= new CachoBananas();   }
+                case "b" -> {info[0] = "bananas.png";tooltipalimento= bananas.get(squareNr);   }
 
                 case "c" -> {info[0] = "meat.png";tooltipalimento= new Carne();             }
 
@@ -328,7 +328,7 @@ public class GameManager {
     public String[] getCurrentPlayerEnergyInfo(int nrPositions){
 
 
-        // jogadores.sort(Comparator.comparing(Player::getID));
+        jogadores.sort(Comparator.comparing(Player::getID));
 
         String[] jogadorInfo = new String[2];
 
@@ -463,8 +463,7 @@ public class GameManager {
             jogador.adicionaDistanciaViajada(nrSquares * -1);
         }
 
-        mudarTurno();
-        jogadasPassadas++;
+
 
         if(alimentoTabu != null){
             Alimento alimento = switch (alimentoTabu) {
@@ -484,7 +483,8 @@ public class GameManager {
                 return new MovementResult(CAUGHT_FOOD);
             }
         }
-
+        mudarTurno();
+        jogadasPassadas++;
         return new MovementResult(VALID_MOVEMENT);
 
     }
