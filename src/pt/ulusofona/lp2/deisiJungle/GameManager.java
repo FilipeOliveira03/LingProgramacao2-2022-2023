@@ -22,12 +22,11 @@ public class GameManager {
     private final HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
     private final HashMap <Integer,String> tabuleiroAlimentos = new HashMap<>();
     private final ArrayList<Player> jogadores = new ArrayList<>();
-    private final ArrayList<Alimento> alimentos = new ArrayList<>();
+    private final HashMap <Integer,Alimento> bananas = new HashMap<>();
 
     private int meta;
     private int turno = 1;
     private static int jogadasPassadas = 0;
-    private static int countBananas = 3;
     public static int getJogadasPassadas() {
         return jogadasPassadas;
     }
@@ -94,6 +93,11 @@ public class GameManager {
         for (boolean verificar : verificarComida) {                                                     // verifica se a comida existe
             if (!verificar) {  return new InitializationError(INVALID_FOOD_DOES_NOT_EXIST); }
         }
+               for(int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++){
+                  if(Objects.equals(foodsInfo[countAlimentos][0], "b")){
+                      bananas.put(Integer.parseInt(foodsInfo[countAlimentos][1]),new CachoBananas());
+                  }
+               }
 
          for (int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++) {              //meter comida no tabuleri
              int posAlimentos = Integer.parseInt(foodsInfo[countAlimentos][1]);
@@ -465,7 +469,7 @@ public class GameManager {
         if(alimentoTabu != null){
             Alimento alimento = switch (alimentoTabu) {
                 case "a" -> new Agua();
-                case "b" -> new CachoBananas();
+                case "b" -> bananas.get(nrSquares);
                 case "c" -> new Carne();
                 case "m" -> new Cogumelo();
                 case "e" -> new Erva();
@@ -473,9 +477,7 @@ public class GameManager {
             };
 
             if(alimento != null){
-              if(alimentoTabu.equals("b")){
-                   countBananas--;
-                 }
+
                 alimento.acontecimentoIngerir(jogador);
                 MovementResult.mudaOutPutAlimento(alimento.getNome());
                 jogador.adicionaAlimentosIngeridos(alimentoTabu);
