@@ -321,8 +321,75 @@ public class TestGame {
         manager.moveCurrentPlayer(6, false);
         manager.moveCurrentPlayer(6, false);
         manager.moveCurrentPlayer(6, false);
-        MovementResult resultadoReal = manager.moveCurrentPlayer(0, false);
-    MovementResult resultadoEsperado = new MovementResult(NO_ENERGY);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(6, false);
+        MovementResult resultadoEsperado = new MovementResult(NO_ENERGY);
+
+        assertEquals("testPlayerStayWithFoodInPos", resultadoEsperado, resultadoReal);
+    }
+
+    @Test
+    public void testMoveBehindStart() {
+        GameManager manager = new GameManager();
+        String[][] arrayPlayers = {
+                {"11", "abc", "P"},
+                {"22", "cba", "E"},
+        };
+
+        String[][] arrayAlimentos = {
+                {"e","2"},
+                {"b","3"},
+        };
+
+        manager.createInitialJungle(40, arrayPlayers, arrayAlimentos);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(41, true);
+        MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
+
+        assertEquals("testPlayerStayWithFoodInPos", resultadoEsperado, resultadoReal);
+    }
+
+    @Test
+    public void testMovePlayersBeyondVelo() {
+        GameManager manager = new GameManager();
+        String[][] arrayPlayers = {
+                {"11", "abc", "P"},
+                {"22", "cba", "E"},
+        };
+
+        String[][] arrayAlimentos = {
+                {"e","2"},
+                {"b","3"},
+        };
+
+        manager.createInitialJungle(40, arrayPlayers, arrayAlimentos);
+
+
+        MovementResult resultadoReal = manager.moveCurrentPlayer(7, false);
+        MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
+
+        assertEquals("testPlayerStayWithFoodInPos", resultadoEsperado, resultadoReal);
+    }
+
+    @Test
+    public void testMovePlayersBeyondVeloNeg() {
+        GameManager manager = new GameManager();
+        String[][] arrayPlayers = {
+                {"11", "abc", "P"},
+                {"22", "cba", "E"},
+        };
+
+        String[][] arrayAlimentos = {
+                {"e","2"},
+                {"b","3"},
+        };
+
+        manager.createInitialJungle(40, arrayPlayers, arrayAlimentos);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(5, false);
+
+        MovementResult resultadoReal = manager.moveCurrentPlayer(-7, false);
+        MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
 
         assertEquals("testPlayerStayWithFoodInPos", resultadoEsperado, resultadoReal);
     }
