@@ -28,7 +28,7 @@ public class TestGame {
         InitializationError resultadoReal = manager.createInitialJungle(8, arrayPlayers, arrayFood);
         InitializationError resultadoEsperado = new InitializationError(INVALID_FOOD_POSITION_NOT_NUMBER);
 
-        assertEquals("testCreateJungle", resultadoEsperado, resultadoReal);
+        assertEquals("testCreateJungle1", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class TestGame {
         MovementResult resultadoReal = manager.moveCurrentPlayer(-2, false);
         MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
-        assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
+        assertEquals("testMoveCurrentPlayer2", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -106,7 +106,7 @@ public class TestGame {
         MovementResult resultadoReal = manager.moveCurrentPlayer(0, true);
         MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
-        assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
+        assertEquals("testMoveCurrentPlayer3", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -134,7 +134,7 @@ public class TestGame {
         MovementResult resultadoReal = manager.moveCurrentPlayer(6, false);
         MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
-        assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
+        assertEquals("testMoveCurrentPlayer4", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -153,7 +153,7 @@ public class TestGame {
         String[] resultadoReal = manager.getCurrentPlayerEnergyInfo(1);
         String[] resultadoEsperado = arrayEnergia;
 
-        assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
+        assertEquals("testGetCurrentPlayerEnergyInfo1", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -171,7 +171,7 @@ public class TestGame {
         String[] resultadoReal = manager.getCurrentPlayerEnergyInfo(1);
         String[] resultadoEsperado = arrayEnergia;
 
-        assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
+        assertEquals("testGetCurrentPlayerEnergyInfo2", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -195,7 +195,7 @@ public class TestGame {
         String[] resultadoReal = manager.getCurrentPlayerEnergyInfo(1);
         String[] resultadoEsperado = arrayEnergiaE;
 
-        assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
+        assertEquals("testGetCurrentPlayerEnergyInfo3", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -294,6 +294,36 @@ public class TestGame {
         MovementResult resultadoReal = manager.moveCurrentPlayer(0, false);
         MovementResult resultadoEsperado = new MovementResult(CAUGHT_FOOD);
 
-        assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
+        assertEquals("testPlayerStayWithFoodInPos", resultadoEsperado, resultadoReal);
+    }
+
+    @Test
+    public void testMovePlayerNoEnergy() {
+        GameManager manager = new GameManager();
+        String[][] arrayPlayers = {
+                {"11", "abc", "P"},
+                {"22", "cba", "E"},
+        };
+
+        String[][] arrayAlimentos = {
+                {"e","2"},
+                {"b","3"},
+        };
+
+        manager.createInitialJungle(40, arrayPlayers, arrayAlimentos);
+        manager.moveCurrentPlayer(6, false);
+        manager.moveCurrentPlayer(6, false);
+        manager.moveCurrentPlayer(6, false);
+        manager.moveCurrentPlayer(6, false);
+        manager.moveCurrentPlayer(6, false);
+        manager.moveCurrentPlayer(6, false);
+        manager.moveCurrentPlayer(6, false);
+        manager.moveCurrentPlayer(6, false);
+        manager.moveCurrentPlayer(6, false);
+        manager.moveCurrentPlayer(6, false);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(0, false);
+    MovementResult resultadoEsperado = new MovementResult(NO_ENERGY);
+
+        assertEquals("testPlayerStayWithFoodInPos", resultadoEsperado, resultadoReal);
     }
 }
