@@ -34,6 +34,7 @@ public class GameManager {
 
     public void mudarTurno(){
         if(turno == jogadores.size()){
+            jogadasPassadas++;
             turno = 1;
         }else{
             turno++;
@@ -109,6 +110,9 @@ public class GameManager {
     }
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
+
+        jogadores.clear();
+        tabuleiro.clear();
 
         int countNrTarzan = 0;
 
@@ -328,7 +332,6 @@ public class GameManager {
 
     public String[] getCurrentPlayerEnergyInfo(int nrPositions){
 
-
         jogadores.sort(Comparator.comparing(Player::getID));
 
         String[] jogadorInfo = new String[2];
@@ -463,7 +466,7 @@ public class GameManager {
         }else{
             jogador.adicionaDistanciaViajada(nrSquares * -1);
         }
-        jogadasPassadas++;
+
         mudarTurno();
 
 

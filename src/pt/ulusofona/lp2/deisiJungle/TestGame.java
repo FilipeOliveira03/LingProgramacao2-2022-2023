@@ -175,6 +175,30 @@ public class TestGame {
     }
 
     @Test
+    public void testGetCurrentPlayerEnergyInfo3() {
+        GameManager manager = new GameManager();
+        String[][] arrayPlayers = {
+                {"11", "abc", "T"},
+                {"22", "cba", "E"},
+        };
+
+
+        String[] arrayEnergiaT = {"1", "5"};
+        String[] arrayEnergiaE = {"4", "10"};
+
+        manager.createInitialJungle(40, arrayPlayers);
+        manager.moveCurrentPlayer(2, false);
+        manager.moveCurrentPlayer(2, false);
+        manager.moveCurrentPlayer(2, false);
+
+
+        String[] resultadoReal = manager.getCurrentPlayerEnergyInfo(1);
+        String[] resultadoEsperado = arrayEnergiaE;
+
+        assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
+    }
+
+    @Test
     public void testWater() {
 
         Player jogador = new Player(213, "SAD", new Tarzan());
@@ -224,6 +248,7 @@ public class TestGame {
         Alimento carne = new Carne();
         carne.acontecimentoIngerir(jogador);
     }
+
     @Test
     public void testTooltipalimentosSquareinfo() {
 
@@ -247,4 +272,5 @@ public class TestGame {
 
 
     }
+
 }

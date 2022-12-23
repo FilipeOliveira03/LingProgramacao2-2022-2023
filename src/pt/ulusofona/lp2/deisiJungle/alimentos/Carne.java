@@ -6,6 +6,8 @@ import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 
 public class Carne extends Alimento {
 
+    private final int jogadaAtual = GameManager.getJogadasPassadas();
+
     public Carne() {
         this.nome = "Carne";
         this.idAlimento = "c";
@@ -20,7 +22,7 @@ public class Carne extends Alimento {
 
         if(!tipoAlimen.equals("Herbívoro")){
 
-            if(GameManager.getJogadasPassadas() <= 12){
+            if(jogadaAtual <= 12){
 
                 if(tipoAlimen.equals("Carnívoro") || tipoAlimen.equals("Omnívoro")){
 
@@ -42,8 +44,8 @@ public class Carne extends Alimento {
     @Override
     public String toString() {
 
-        if(GameManager.getJogadasPassadas() <= 12){
-            return "Carne : +- 50 energia : " + GameManager.getJogadasPassadas() + " jogadas";
+        if(jogadaAtual <= 12){
+            return "Carne : +- 50 energia : " + jogadaAtual + " jogadas";
         }else{
             return "Carne toxica";
         }
