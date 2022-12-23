@@ -95,16 +95,15 @@ public class GameManager {
         for (boolean verificar : verificarComida) {                                                     // verifica se a comida existe
             if (!verificar) {  return new InitializationError(INVALID_FOOD_DOES_NOT_EXIST); }
         }
-               for(int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++){
-                  if(Objects.equals(foodsInfo[countAlimentos][0], "b")){
-                      bananas.put(Integer.parseInt(foodsInfo[countAlimentos][1]),new CachoBananas());
-                  }
-               }
 
-         for (int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++) {              //meter comida no tabuleri
-             int posAlimentos = Integer.parseInt(foodsInfo[countAlimentos][1]);
-             tabuleiroAlimentos.put(posAlimentos, foodsInfo[countAlimentos][0]);
-         }
+        for (int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++) {              //meter comida no tabuleri
+            int posAlimentos = Integer.parseInt(foodsInfo[countAlimentos][1]);
+            tabuleiroAlimentos.put(posAlimentos, foodsInfo[countAlimentos][0]);
+
+            if(Objects.equals(foodsInfo[countAlimentos][0], "b")){
+                bananas.put(Integer.parseInt(foodsInfo[countAlimentos][1]),new CachoBananas());
+            }
+        }
 
          return createInitialJungle(jungleSize, playersInfo);
     }
@@ -430,8 +429,8 @@ public class GameManager {
         }
 
         String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
-
         int energiaAtual = jogador.getEspecie().getEnergiaAtual();
+
 
         tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
 
@@ -486,6 +485,16 @@ public class GameManager {
                 MovementResult.mudaOutPutAlimento(alimento.getNome());
                 jogador.adicionaAlimentosIngeridos(alimentoTabu);
                 return new MovementResult(CAUGHT_FOOD);
+
+            }else if(alimentoTabu.equals("b")){
+
+                alimento = new CachoBananas();
+
+                alimento.acontecimentoIngerir(jogador);
+                MovementResult.mudaOutPutAlimento(alimento.getNome());
+                jogador.adicionaAlimentosIngeridos(alimentoTabu);
+                return new MovementResult(CAUGHT_FOOD);
+
             }
         }
 

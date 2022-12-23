@@ -262,6 +262,7 @@ public class TestGame {
                 {"b","2"},
                 {"b","3"},
         };
+
         CachoBananas bananas= new CachoBananas();
         Player jogador = new Player(213, "SAD", new Tarzan());
         manager.createInitialJungle(40, arrayPlayers,arrayalimentos);
@@ -273,4 +274,26 @@ public class TestGame {
 
     }
 
+
+    @Test
+    public void testPlayerStayWithFoodInPos() {
+        GameManager manager = new GameManager();
+        String[][] arrayPlayers = {
+                {"11", "abc", "T"},
+                {"22", "cba", "E"},
+        };
+
+        String[][] arrayAlimentos = {
+                {"e","2"},
+                {"b","3"},
+        };
+
+        manager.createInitialJungle(40, arrayPlayers, arrayAlimentos);
+        manager.moveCurrentPlayer(2, false);
+        manager.moveCurrentPlayer(2, false);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(0, false);
+        MovementResult resultadoEsperado = new MovementResult(CAUGHT_FOOD);
+
+        assertEquals("testMoveCurrentPlayer1", resultadoEsperado, resultadoReal);
+    }
 }
