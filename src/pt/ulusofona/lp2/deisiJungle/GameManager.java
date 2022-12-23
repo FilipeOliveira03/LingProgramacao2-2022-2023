@@ -88,8 +88,6 @@ public class GameManager {
                 return new InitializationError(INVALID_FOOD_POSITION);
             }
 
-
-
         }
 
         for (boolean verificar : verificarComida) {                                                     // verifica se a comida existe
@@ -101,7 +99,7 @@ public class GameManager {
             tabuleiroAlimentos.put(posAlimentos, foodsInfo[countAlimentos][0]);
 
             if(Objects.equals(foodsInfo[countAlimentos][0], "b")){
-                bananas.put(Integer.parseInt(foodsInfo[countAlimentos][1]),new CachoBananas());
+                bananas.put(posAlimentos, new CachoBananas());
             }
         }
 
@@ -472,7 +470,7 @@ public class GameManager {
         if(alimentoTabu != null){
             Alimento alimento = switch (alimentoTabu) {
                 case "a" -> new Agua();
-                case "b" -> bananas.get(nrSquares);
+                case "b" -> bananas.get(posJogadorTabuleiro);
                 case "c" -> new Carne();
                 case "m" -> new Cogumelo();
                 case "e" -> new Erva();
@@ -480,15 +478,6 @@ public class GameManager {
             };
 //
             if(alimento != null){
-
-                alimento.acontecimentoIngerir(jogador);
-                MovementResult.mudaOutPutAlimento(alimento.getNome());
-                jogador.adicionaAlimentosIngeridos(alimentoTabu);
-                return new MovementResult(CAUGHT_FOOD);
-
-            }else if(alimentoTabu.equals("b")){
-
-                alimento = new CachoBananas();
 
                 alimento.acontecimentoIngerir(jogador);
                 MovementResult.mudaOutPutAlimento(alimento.getNome());
