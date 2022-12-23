@@ -27,6 +27,7 @@ public class GameManager {
     private int meta;
     private int turno = 1;
     private static int jogadasPassadas = 0;
+
     public static int getJogadasPassadas() {
         return jogadasPassadas;
     }
@@ -596,3 +597,9 @@ public class GameManager {
     }
 
 }
+
+//        E -Herbívoro
+//        L -Carnívoro
+//        T -Omnívoro
+//        P -Omnívoro
+//        Z -Omnívoro
