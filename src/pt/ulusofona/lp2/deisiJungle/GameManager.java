@@ -373,6 +373,13 @@ public class GameManager {
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
+        if(!bypassValidations){
+            if(nrSquares < -6 || nrSquares > 6){
+                mudarTurno();
+                return new MovementResult(INVALID_MOVEMENT);
+            }
+        }
+
         int jogadorJoga = jogadores.get(turno - 1).getID();
 
         int posJogadorTabuleiro = 1;
@@ -396,24 +403,6 @@ public class GameManager {
         }
 
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
-
-        if(!bypassValidations){
-
-            String velocidade = jogador.getEspecie().getVelocidade();
-            int veloMax = Integer.parseInt(String.valueOf(velocidade.charAt(3)));
-            int veloMin = Integer.parseInt(String.valueOf(velocidade.charAt(0)));
-
-            if(nrSquares < -6 || nrSquares > 6){
-                mudarTurno();
-                return new MovementResult(INVALID_MOVEMENT);
-            }else if (nrSquares < veloMax || nrSquares > veloMin ){
-                mudarTurno();
-                return new MovementResult(INVALID_MOVEMENT);
-            }else if (nrSquares < veloMax * -1 || nrSquares > veloMin * -1 ){
-                mudarTurno();
-                return new MovementResult(INVALID_MOVEMENT);
-            }
-        }
 
         if(jogador.getPosicaoAtual() + nrSquares < 1 || posJogadorTabuleiro + nrSquares > meta){
             mudarTurno();
