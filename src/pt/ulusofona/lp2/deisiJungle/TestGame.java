@@ -1,5 +1,4 @@
 package pt.ulusofona.lp2.deisiJungle;
-import kotlin.reflect.jvm.internal.ReflectProperties;
 import org.junit.Test;
 import pt.ulusofona.lp2.deisiJungle.alimentos.*;
 import pt.ulusofona.lp2.deisiJungle.especies.Tarzan;
@@ -607,7 +606,7 @@ public class TestGame {
 
         manager.moveCurrentPlayer(0, false);
 
-        MovementResult resultadoReal = manager.moveCurrentPlayer(40, true);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(39, true);
         MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
         assertEquals("testInitialJungleVal", resultadoEsperado, resultadoReal);
