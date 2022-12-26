@@ -22,11 +22,7 @@ public class CachoBananas extends Alimento {
 
         if(countBanCacho > 0){
             countBanCacho--;
-            boolean jogadorComeu = false;
-
-            if(idsJogadoresComeram.contains(jogador.getID())){
-                jogadorComeu = true;
-            }
+            boolean jogadorComeu = idsJogadoresComeram.contains(jogador.getID());
 
             if(!jogadorComeu){
 
