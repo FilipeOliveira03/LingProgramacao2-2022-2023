@@ -478,9 +478,6 @@ public class GameManager {
             jogador.adicionaDistanciaViajada(nrSquares * -1);
         }
 
-        mudarTurno();
-
-
         if(alimentoTabu != null){
             Alimento alimento = switch (alimentoTabu) {
                 case "a" -> new Agua();
@@ -498,10 +495,12 @@ public class GameManager {
                 alimento.acontecimentoIngerir(jogador);
                 MovementResult.mudaOutPutAlimento(alimento.getNome());
                 jogador.adicionaAlimentosIngeridos(alimentoTabu);
+                mudarTurno();
                 return new MovementResult(CAUGHT_FOOD);
 
             }
         }
+        mudarTurno();
         return new MovementResult(VALID_MOVEMENT);
 
     }
