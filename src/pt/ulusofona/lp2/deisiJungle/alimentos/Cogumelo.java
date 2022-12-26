@@ -35,7 +35,7 @@ public class Cogumelo extends Alimento {
         int energiaPercentagem = (int) (energiaAtual * numeroPercentagem);
         int energiaFinal;
 
-        if(jogadaAtual % 2 == 0){
+        if((jogadaAtual - 1) % 2 == 0){
             energiaFinal = energiaAtual + energiaPercentagem;
 
         }else{
@@ -49,7 +49,7 @@ public class Cogumelo extends Alimento {
         }else if(energiaFinal < 0){
             especie.mudaEnergiaAtual(0);
         }else{
-            especie.mudaEnergiaAtual( energiaFinal);
+            especie.mudaEnergiaAtual(energiaFinal);
 
         }
     }

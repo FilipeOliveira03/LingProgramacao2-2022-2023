@@ -4,8 +4,9 @@ import pt.ulusofona.lp2.deisiJungle.alimentos.*;
 import pt.ulusofona.lp2.deisiJungle.alimentos.Alimento;
 import pt.ulusofona.lp2.deisiJungle.especies.*;
 import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.*;
-import pt.ulusofona.lp2.deisiJungle.jogador.Player;
-import pt.ulusofona.lp2.deisiJungle.outrasFuncoes.OtherFunctions;
+import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.*;
+import pt.ulusofona.lp2.deisiJungle.jogador.*;
+import pt.ulusofona.lp2.deisiJungle.outrasFuncoes.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,7 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.*;
+
 
 public class GameManager {
 
@@ -478,6 +479,8 @@ public class GameManager {
             jogador.adicionaDistanciaViajada(nrSquares * -1);
         }
 
+        mudarTurno();
+
         if(alimentoTabu != null){
             Alimento alimento = switch (alimentoTabu) {
                 case "a" -> new Agua();
@@ -495,12 +498,10 @@ public class GameManager {
                 alimento.acontecimentoIngerir(jogador);
                 MovementResult.mudaOutPutAlimento(alimento.getNome());
                 jogador.adicionaAlimentosIngeridos(alimentoTabu);
-                mudarTurno();
                 return new MovementResult(CAUGHT_FOOD);
 
             }
         }
-        mudarTurno();
         return new MovementResult(VALID_MOVEMENT);
 
     }
