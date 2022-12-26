@@ -490,7 +490,9 @@ public class GameManager {
             };
 
             if(alimento != null){
-
+                if(alimentoTabu.equals("c") && jogador.getEspecie().getTipoAlimentacao().equals("Herbívoro")){
+                    return new MovementResult(VALID_MOVEMENT);
+                }
                 alimento.acontecimentoIngerir(jogador);
                 MovementResult.mudaOutPutAlimento(alimento.getNome());
                 jogador.adicionaAlimentosIngeridos(alimentoTabu);

@@ -619,7 +619,7 @@ public class TestGame {
 
         String[][] arrayPlayers = {
                 {"11", "abc", "T"},
-                {"2", "Leão", "P"},
+                {"2", "Leão", "T"},
         };
 
         String[][] arrayalimentos = {
