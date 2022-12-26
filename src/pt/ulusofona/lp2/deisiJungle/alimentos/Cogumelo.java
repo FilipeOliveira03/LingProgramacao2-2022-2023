@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Cogumelo extends Alimento {
 
-    private final int numRandom;
+    private int numRandom;
     private final int jogadaAtual = GameManager.getJogadasPassadas();
 
 
@@ -30,16 +30,16 @@ public class Cogumelo extends Alimento {
         Especie especie = jogador.getEspecie();
         int energiaAtual = especie.getEnergiaAtual();
 
-        float numeroPercentagem = (numRandom);
+        float numeroPercentagem = numRandom / 100f;
 
-        //int energiaPercentagem = (int) (energiaAtual * numeroPercentagem);
+        int energiaPercentagem = (int) (energiaAtual * numeroPercentagem);
         int energiaFinal;
 
-        if((jogadaAtual - 1) % 2 == 0){
-            energiaFinal = energiaAtual + numRandom;
+        if(jogadaAtual % 2 == 0){
+            energiaFinal = energiaAtual + energiaPercentagem;
 
         }else{
-            energiaFinal = energiaAtual - numRandom;
+            energiaFinal = energiaAtual - energiaPercentagem;
 
         }
 
@@ -49,7 +49,7 @@ public class Cogumelo extends Alimento {
         }else if(energiaFinal < 0){
             especie.mudaEnergiaAtual(0);
         }else{
-            especie.mudaEnergiaAtual(energiaFinal);
+            especie.mudaEnergiaAtual( energiaFinal);
 
         }
     }
