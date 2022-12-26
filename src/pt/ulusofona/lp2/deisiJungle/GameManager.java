@@ -32,7 +32,12 @@ public class GameManager {
         return jogadasPassadas;
     }
 
+    public void mudaJogadasPassadas() {
+        jogadasPassadas = jogadasPassadas + 1;
+    }
+
     public void mudarTurno(){
+        mudaJogadasPassadas();
         if(turno == jogadores.size()){
             turno = 1;
         }else{
@@ -373,6 +378,7 @@ public class GameManager {
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
+        int jogadas = jogadasPassadas;
         int jogadorJoga = jogadores.get(turno - 1).getID();
 
         int posJogadorTabuleiro = 1;
@@ -471,7 +477,7 @@ public class GameManager {
         }
 
         mudarTurno();
-        jogadasPassadas++;
+
 
         if(alimentoTabu != null){
             Alimento alimento = switch (alimentoTabu) {
@@ -492,7 +498,6 @@ public class GameManager {
 
             }
         }
-
         return new MovementResult(VALID_MOVEMENT);
 
     }

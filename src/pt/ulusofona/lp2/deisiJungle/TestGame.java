@@ -4,8 +4,6 @@ import pt.ulusofona.lp2.deisiJungle.alimentos.*;
 import pt.ulusofona.lp2.deisiJungle.especies.Tarzan;
 import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 
-import java.util.HashMap;
-
 import static org.junit.Assert.assertEquals;
 import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.*;
 import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.*;
@@ -205,25 +203,19 @@ public class TestGame {
                 {"2", "Leão", "P"},
         };
 
-        manager.createInitialJungle(30, arrayPlayers);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(-1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(-1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(-1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(-1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(-1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(-1, false);
+        String[][] arrayalimentos = {
+                {"c","2"},
+        };
 
-        Player jogador = new Player(213, "SAD", new Tarzan());
-        jogador.getEspecie().mudaEnergiaAtual(78);
+        manager.createInitialJungle(30, arrayPlayers, arrayalimentos);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(-1, false);
+        manager.moveCurrentPlayer(-1, false);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(1, false);
+        MovementResult resultadoEsperado = new MovementResult(CAUGHT_FOOD);
 
-        Alimento carne = new Carne();
-        carne.acontecimentoIngerir(jogador);
+        assertEquals("testPlayerStayWithFoodInPos", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -246,8 +238,6 @@ public class TestGame {
         bananas.acontecimentoIngerir(jogador);
         manager.moveCurrentPlayer(1,false);
         manager.getSquareInfo(2);
-
-
 
     }
 
@@ -478,7 +468,7 @@ public class TestGame {
         InitializationError resultadoReal = manager.createInitialJungle(40, arrayPlayers);
         InitializationError resultadoEsperado = null;
 
-        assertEquals("testInitialJungleNumPlayersInval", resultadoEsperado, resultadoReal);
+        assertEquals("testInitialJungleVal", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -517,7 +507,7 @@ public class TestGame {
         MovementResult resultadoReal = manager.moveCurrentPlayer(2, false);
         MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
 
-        assertEquals("testInitialJungleNumPlayersInval", resultadoEsperado, resultadoReal);
+        assertEquals("testPlayersIDs", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -539,7 +529,7 @@ public class TestGame {
         MovementResult resultadoReal = manager.moveCurrentPlayer(-5, false);
         MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
-        assertEquals("testInitialJungleVal", resultadoEsperado, resultadoReal);
+        assertEquals("testMoveCurrentPlayerError", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -581,7 +571,7 @@ public class TestGame {
         MovementResult resultadoReal = manager.moveCurrentPlayer(0, false);
         MovementResult resultadoEsperado = new MovementResult(CAUGHT_FOOD);
 
-        assertEquals("testInitialJungleVal", resultadoEsperado, resultadoReal);
+        assertEquals("testMoveCurrentPlayerRest", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -591,7 +581,7 @@ public class TestGame {
         String resultadoReal = manager.whoIsTaborda();
         String resultadoEsperado = "professional wrestling";
 
-        assertEquals("testInitialJungleVal", resultadoEsperado, resultadoReal);
+        assertEquals("testTaborda", resultadoEsperado, resultadoReal);
     }
 
     @Test
@@ -619,7 +609,6 @@ public class TestGame {
         MovementResult resultadoReal = manager.moveCurrentPlayer(-4, false);
         MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
 
-        assertEquals("testInitialJungleVal", resultadoEsperado, resultadoReal);
+        assertEquals("testMove", resultadoEsperado, resultadoReal);
     }
-
 }
