@@ -8,13 +8,20 @@ import java.util.Random;
 
 public class Cogumelo extends Alimento {
 
-    private int numRandom;
+    private final int numRandom;
     private final int jogadaAtual = GameManager.getJogadasPassadas();
 
 
     public Cogumelo() {
         this.nome = "Cogumelo Magico";
         this.idAlimento = "m";
+        Random random = new Random();
+        int numMin = 10;
+        int numMax = 50;
+
+        float numeroRandom = random.nextInt(numMax - numMin) + numMin;
+        numRandom = (int) numeroRandom;
+
     }
 
     @Override
@@ -23,25 +30,22 @@ public class Cogumelo extends Alimento {
         Especie especie = jogador.getEspecie();
         int energiaAtual = especie.getEnergiaAtual();
 
-        Random random = new Random();
-        int numMin = 10;
-        int numMax = 50;
+        int numeroPercentagem = numRandom / 100;
 
-        float numeroRandom = random.nextInt(numMax - numMin) + numMin;
-        numRandom = (int) numeroRandom;
-
+        int energiaPercentagem = (energiaAtual * numeroPercentagem);
         int energiaFinal;
 
         if(jogadaAtual % 2 == 0){
-            energiaFinal = energiaAtual + numRandom;
+            energiaFinal = energiaAtual + energiaPercentagem;
 
         }else{
-            energiaFinal = energiaAtual - numRandom;
+            energiaFinal = energiaAtual - energiaPercentagem;
 
         }
 
         if(energiaFinal > 200){
             especie.mudaEnergiaAtual(200);
+
         }else if(energiaFinal < 0){
             especie.mudaEnergiaAtual(0);
         }else{
