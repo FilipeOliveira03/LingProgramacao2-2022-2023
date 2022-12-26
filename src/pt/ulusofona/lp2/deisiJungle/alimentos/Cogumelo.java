@@ -30,16 +30,16 @@ public class Cogumelo extends Alimento {
         Especie especie = jogador.getEspecie();
         int energiaAtual = especie.getEnergiaAtual();
 
-        float numeroPercentagem = (numRandom / 100f);
+        float numeroPercentagem = (numRandom);
 
-        int energiaPercentagem = (int) (energiaAtual * numeroPercentagem);
+        //int energiaPercentagem = (int) (energiaAtual * numeroPercentagem);
         int energiaFinal;
 
         if((jogadaAtual - 1) % 2 == 0){
-            energiaFinal = energiaAtual + energiaPercentagem;
+            energiaFinal = energiaAtual + numRandom;
 
         }else{
-            energiaFinal = energiaAtual - energiaPercentagem;
+            energiaFinal = energiaAtual - numRandom;
 
         }
 
