@@ -249,7 +249,8 @@ public class GameManager {
             nrJogadorAtual++;
         }
 
-         Alimento tooltipalimento=null;
+        Alimento tooltipalimento = null;
+
         if(alimento != null){
             switch (alimento){
                 case "e" -> {info[0] = "grass.png";tooltipalimento= new Erva();             }
@@ -403,16 +404,15 @@ public class GameManager {
             int veloMax = Integer.parseInt(String.valueOf(velocidade.charAt(3)));
             int veloMin = Integer.parseInt(String.valueOf(velocidade.charAt(0)));
 
-            if (nrSquares > 0 && (nrSquares > veloMax || nrSquares < veloMin) ){
-                mudarTurno();
-                return new MovementResult(INVALID_MOVEMENT);
-            }else if (nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1) ){
+            if ((nrSquares > 0 && (nrSquares > veloMax || nrSquares < veloMin)) ||
+                    (nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1))){
                 mudarTurno();
                 return new MovementResult(INVALID_MOVEMENT);
             }
         }
 
-        if(jogador.getPosicaoAtual() + nrSquares < 1 || posJogadorTabuleiro + nrSquares > meta){
+
+        if(jogador.getPosicaoAtual() + nrSquares < 1){
             mudarTurno();
             return new MovementResult(INVALID_MOVEMENT);
         }
@@ -450,8 +450,7 @@ public class GameManager {
             jogador.getEspecie().mudaEnergiaAtual(energiaAtual - energiaConsumidaMov);
 
         }else{
-            int energiaDescanso = jogador.getEspecie().getGanhoEnerDescanso();
-            int energiaGanha = energiaAtual + energiaDescanso;
+            int energiaGanha = energiaAtual + jogador.getEspecie().getGanhoEnerDescanso();
 
             if(energiaGanha > 200){
                 jogador.getEspecie().mudaEnergiaAtual(200);
@@ -602,9 +601,3 @@ public class GameManager {
     }
 
 }
-
-//        E -Herbívoro
-//        L -Carnívoro
-//        T -Omnívoro
-//        P -Omnívoro
-//        Z -Omnívoro
