@@ -28,17 +28,15 @@ public class Cogumelo extends Alimento {
         int numMax = 50;
 
         float numeroRandom = random.nextInt(numMax - numMin) + numMin;
-        float numeroPercentagem = numeroRandom / 100;
         numRandom = (int) numeroRandom;
 
-        int energiaPercentagem = (int) (energiaAtual * numeroPercentagem);
         int energiaFinal;
 
         if(jogadaAtual % 2 == 0){
-            energiaFinal = energiaAtual + energiaPercentagem;
+            energiaFinal = energiaAtual + numRandom;
 
         }else{
-            energiaFinal = energiaAtual - energiaPercentagem;
+            energiaFinal = energiaAtual - numRandom;
 
         }
 
