@@ -67,6 +67,7 @@ public class GameManager {
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
 
+        jogadasPassadas = 0;
         tabuleiroAlimentos.clear();
 
         boolean[] verificarComida = new boolean[foodsInfo.length];
