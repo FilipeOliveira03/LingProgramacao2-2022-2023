@@ -318,8 +318,17 @@ public class TestGame {
         };
 
         manager.createInitialJungle(40, arrayPlayers, arrayAlimentos);
-        MovementResult resultadoReal = manager.moveCurrentPlayer(41, true);
-        MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
+        manager.moveCurrentPlayer(0, true);
+        manager.moveCurrentPlayer(0, true);
+        manager.moveCurrentPlayer(20, true);
+        manager.moveCurrentPlayer(20, true);
+        manager.moveCurrentPlayer(0, true);
+        manager.moveCurrentPlayer(0, true);
+        manager.moveCurrentPlayer(0, true);
+        manager.moveCurrentPlayer(0, true);
+        manager.moveCurrentPlayer(23, true);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(23, true);
+        MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
         assertEquals("testPlayerStayWithFoodInPos", resultadoEsperado, resultadoReal);
     }
@@ -604,10 +613,11 @@ public class TestGame {
 
         manager.createInitialJungle(40, arrayPlayers, arrayAlimentos);
 
+        manager.moveCurrentPlayer(3, false);
         manager.moveCurrentPlayer(0, false);
 
-        MovementResult resultadoReal = manager.moveCurrentPlayer(39, true);
-        MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(-4, false);
+        MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
 
         assertEquals("testInitialJungleVal", resultadoEsperado, resultadoReal);
     }

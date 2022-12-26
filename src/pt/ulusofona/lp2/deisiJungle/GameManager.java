@@ -34,7 +34,6 @@ public class GameManager {
 
     public void mudarTurno(){
         if(turno == jogadores.size()){
-            jogadasPassadas++;
             turno = 1;
         }else{
             turno++;
@@ -412,7 +411,7 @@ public class GameManager {
         }
 
 
-        if(jogador.getPosicaoAtual() + nrSquares < 1){
+        if(jogador.getPosicaoAtual() + nrSquares < 1 ){
             mudarTurno();
             return new MovementResult(INVALID_MOVEMENT);
         }
@@ -440,7 +439,11 @@ public class GameManager {
 
         tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
 
-        posJogadorTabuleiro += nrSquares;
+        if(posJogadorTabuleiro + nrSquares > meta){
+            posJogadorTabuleiro = meta;
+        }else{
+            posJogadorTabuleiro += nrSquares;
+        }
 
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
@@ -468,7 +471,7 @@ public class GameManager {
         }
 
         mudarTurno();
-
+        jogadasPassadas++;
 
         if(alimentoTabu != null){
             Alimento alimento = switch (alimentoTabu) {
