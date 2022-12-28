@@ -4,8 +4,9 @@ import pt.ulusofona.lp2.deisiJungle.alimentos.*;
 import pt.ulusofona.lp2.deisiJungle.alimentos.Alimento;
 import pt.ulusofona.lp2.deisiJungle.especies.*;
 import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.*;
-import pt.ulusofona.lp2.deisiJungle.jogador.Player;
-import pt.ulusofona.lp2.deisiJungle.outrasFuncoes.OtherFunctions;
+import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.*;
+import pt.ulusofona.lp2.deisiJungle.jogador.*;
+import pt.ulusofona.lp2.deisiJungle.outrasFuncoes.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,7 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.*;
+
 
 public class GameManager {
 
@@ -27,11 +28,17 @@ public class GameManager {
     private int meta;
     private int turno = 1;
     private static int jogadasPassadas = 0;
+
     public static int getJogadasPassadas() {
         return jogadasPassadas;
     }
 
+    public void mudaJogadasPassadas() {
+        jogadasPassadas = jogadasPassadas + 1;
+    }
+
     public void mudarTurno(){
+        mudaJogadasPassadas();
         if(turno == jogadores.size()){
             turno = 1;
         }else{
@@ -61,7 +68,9 @@ public class GameManager {
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
 
+        jogadasPassadas = 0;
         tabuleiroAlimentos.clear();
+        bananas.clear();
 
         boolean[] verificarComida = new boolean[foodsInfo.length];
 
@@ -86,28 +95,29 @@ public class GameManager {
                 return new InitializationError(INVALID_FOOD_POSITION);
             }
 
-
-
         }
 
         for (boolean verificar : verificarComida) {                                                     // verifica se a comida existe
             if (!verificar) {  return new InitializationError(INVALID_FOOD_DOES_NOT_EXIST); }
         }
-               for(int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++){
-                  if(Objects.equals(foodsInfo[countAlimentos][0], "b")){
-                      bananas.put(Integer.parseInt(foodsInfo[countAlimentos][1]),new CachoBananas());
-                  }
-               }
 
-         for (int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++) {              //meter comida no tabuleri
-             int posAlimentos = Integer.parseInt(foodsInfo[countAlimentos][1]);
-             tabuleiroAlimentos.put(posAlimentos, foodsInfo[countAlimentos][0]);
-         }
+        for (int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++) {              //meter comida no tabuleri
+            int posAlimentos = Integer.parseInt(foodsInfo[countAlimentos][1]);
+            tabuleiroAlimentos.put(posAlimentos, foodsInfo[countAlimentos][0]);
+
+            if(Objects.equals(foodsInfo[countAlimentos][0], "b")){
+                bananas.put(posAlimentos, new CachoBananas());
+            }
+        }
 
          return createInitialJungle(jungleSize, playersInfo);
     }
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
+
+        jogadores.clear();
+        tabuleiro.clear();
+
 
         int countNrTarzan = 0;
 
@@ -247,7 +257,8 @@ public class GameManager {
             nrJogadorAtual++;
         }
 
-         Alimento tooltipalimento=null;
+        Alimento tooltipalimento = null;
+
         if(alimento != null){
             switch (alimento){
                 case "e" -> {info[0] = "grass.png";tooltipalimento= new Erva();             }
@@ -327,7 +338,6 @@ public class GameManager {
 
     public String[] getCurrentPlayerEnergyInfo(int nrPositions){
 
-
         jogadores.sort(Comparator.comparing(Player::getID));
 
         String[] jogadorInfo = new String[2];
@@ -372,13 +382,6 @@ public class GameManager {
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations){
 
-        if(!bypassValidations){
-            if(nrSquares < -6 || nrSquares > 6){
-                mudarTurno();
-                return new MovementResult(INVALID_MOVEMENT);
-            }
-        }
-
         int jogadorJoga = jogadores.get(turno - 1).getID();
 
         int posJogadorTabuleiro = 1;
@@ -403,7 +406,21 @@ public class GameManager {
 
         Player jogador = tabuleiro.get(posJogadorTabuleiro).get(posJogadorCasaArray);
 
-        if(jogador.getPosicaoAtual() + nrSquares < 1 || posJogadorTabuleiro + nrSquares > meta){
+        if(!bypassValidations){
+
+            String velocidade = jogador.getEspecie().getVelocidade();
+            int veloMax = Integer.parseInt(String.valueOf(velocidade.charAt(3)));
+            int veloMin = Integer.parseInt(String.valueOf(velocidade.charAt(0)));
+
+            if ((nrSquares > 0 && (nrSquares > veloMax || nrSquares < veloMin)) ||
+                    (nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1))){
+                mudarTurno();
+                return new MovementResult(INVALID_MOVEMENT);
+            }
+        }
+
+
+        if(jogador.getPosicaoAtual() + nrSquares < 1 ){
             mudarTurno();
             return new MovementResult(INVALID_MOVEMENT);
         }
@@ -426,27 +443,26 @@ public class GameManager {
         }
 
         String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
-
         int energiaAtual = jogador.getEspecie().getEnergiaAtual();
+
 
         tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
 
-        posJogadorTabuleiro += nrSquares;
+        if(posJogadorTabuleiro + nrSquares > meta){
+            posJogadorTabuleiro = meta;
+        }else{
+            posJogadorTabuleiro += nrSquares;
+        }
 
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
         jogador.mudaPosicaoAtual(posJogadorTabuleiro);
 
         if(nrSquares != 0 ){
-            if(energiaConsumidaMov < 0){
-                jogador.getEspecie().mudaEnergiaAtual((energiaAtual - energiaConsumidaMov) * -1);
-            }else{
-                jogador.getEspecie().mudaEnergiaAtual(energiaAtual - energiaConsumidaMov);
-            }
+            jogador.getEspecie().mudaEnergiaAtual(energiaAtual - energiaConsumidaMov);
 
         }else{
-            int energiaDescanso = jogador.getEspecie().getGanhoEnerDescanso();
-            int energiaGanha = energiaAtual + energiaDescanso;
+            int energiaGanha = energiaAtual + jogador.getEspecie().getGanhoEnerDescanso();
 
             if(energiaGanha > 200){
                 jogador.getEspecie().mudaEnergiaAtual(200);
@@ -462,29 +478,30 @@ public class GameManager {
         }else{
             jogador.adicionaDistanciaViajada(nrSquares * -1);
         }
-        jogadasPassadas++;
-        mudarTurno();
 
+        mudarTurno();
 
         if(alimentoTabu != null){
             Alimento alimento = switch (alimentoTabu) {
                 case "a" -> new Agua();
-                case "b" -> bananas.get(nrSquares);
+                case "b" -> bananas.get(posJogadorTabuleiro);
                 case "c" -> new Carne();
                 case "m" -> new Cogumelo();
                 case "e" -> new Erva();
                 default -> null;
             };
-//
-            if(alimento != null){
 
+            if(alimento != null){
+                if(alimentoTabu.equals("c") && jogador.getEspecie().getTipoAlimentacao().equals("Herbívoro")){
+                    return new MovementResult(VALID_MOVEMENT);
+                }
                 alimento.acontecimentoIngerir(jogador);
                 MovementResult.mudaOutPutAlimento(alimento.getNome());
                 jogador.adicionaAlimentosIngeridos(alimentoTabu);
                 return new MovementResult(CAUGHT_FOOD);
+
             }
         }
-
         return new MovementResult(VALID_MOVEMENT);
 
     }

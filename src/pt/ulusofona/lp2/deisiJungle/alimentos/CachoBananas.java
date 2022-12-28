@@ -22,11 +22,7 @@ public class CachoBananas extends Alimento {
 
         if(countBanCacho > 0){
             countBanCacho--;
-            boolean jogadorComeu = false;
-
-            if(idsJogadoresComeram.contains(jogador.getID())){
-                jogadorComeu = true;
-            }
+            boolean jogadorComeu = idsJogadoresComeram.contains(jogador.getID());
 
             if(!jogadorComeu){
 
@@ -39,21 +35,20 @@ public class CachoBananas extends Alimento {
 
             }else{
 
-                if(energiaAtual > 40){
+                if(energiaAtual < 40){
                     especie.mudaEnergiaAtual(0);
 
                 }else{
                     especie.mudaEnergiaAtual(energiaAtual - 40);
                 }
             }
+            idsJogadoresComeram.add(jogador.getID());
         }
-
-        idsJogadoresComeram.add(jogador.getID());
     }
 
     @Override
     public String toString() {
-        int countBananas = 3;
-        return "Bananas : " + countBananas + " : + 40 energia" ;
+
+        return "Bananas : " + countBanCacho + " : + 40 energia" ;
     }
 }
