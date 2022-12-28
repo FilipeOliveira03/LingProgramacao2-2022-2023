@@ -11,7 +11,6 @@ public class Cogumelo extends Alimento {
     private int numRandom;
     private final int jogadaAtual = GameManager.getJogadasPassadas();
 
-
     public Cogumelo() {
         this.nome = "Cogumelo Magico";
         this.idAlimento = "m";
@@ -22,6 +21,14 @@ public class Cogumelo extends Alimento {
 
         float numeroRandom = random.nextInt(numMax - numMin) + numMin;
         numRandom = (int) numeroRandom;
+    }
+
+    public int getNumRandom() {
+        return numRandom;
+    }
+
+    public int mudaNumRandom(int numero) {
+        return this.numRandom = numero;
     }
 
     @Override

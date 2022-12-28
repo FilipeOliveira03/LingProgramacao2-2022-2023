@@ -25,6 +25,7 @@ public class GameManager {
     private final HashMap <Integer,String> tabuleiroAlimentos = new HashMap<>();
     private final ArrayList<Player> jogadores = new ArrayList<>();
     private final HashMap <Integer,CachoBananas> bananas = new HashMap<>();
+    private final HashMap <Integer,Cogumelo> cogumelos = new HashMap<>();
 
     private int meta;
     private int turno = 1;
@@ -72,6 +73,7 @@ public class GameManager {
         jogadasPassadas = 0;
         tabuleiroAlimentos.clear();
         bananas.clear();
+        cogumelos.clear();
 
         boolean[] verificarComida = new boolean[foodsInfo.length];
 
@@ -108,6 +110,10 @@ public class GameManager {
 
             if(Objects.equals(foodsInfo[countAlimentos][0], "b")){
                 bananas.put(posAlimentos, new CachoBananas());
+            }
+
+            if(Objects.equals(foodsInfo[countAlimentos][0], "m")){
+                cogumelos.put(posAlimentos, new Cogumelo());
             }
         }
 
@@ -270,7 +276,7 @@ public class GameManager {
 
                 case "c" -> {info[0] = "meat.png";tooltipalimento= new Carne();             }
 
-                case "m" -> {info[0] = "mushroom.png";tooltipalimento= new Cogumelo();      }
+                case "m" -> {info[0] = "mushroom.png";tooltipalimento= cogumelos.get(squareNr);      }
 
 
             }
@@ -487,7 +493,7 @@ public class GameManager {
                 case "a" -> new Agua();
                 case "b" -> bananas.get(posJogadorTabuleiro);
                 case "c" -> new Carne();
-                case "m" -> new Cogumelo();
+                case "m" -> cogumelos.get(posJogadorTabuleiro);
                 case "e" -> new Erva();
                 default -> null;
             };
@@ -636,20 +642,22 @@ public class GameManager {
         return "professional wrestling";
     }
 
-    //final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt";
+    final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt";
 
     public boolean saveGame(File file){
 
-        //File file1 = new File(outputFilePath);
+        File file1 = new File(outputFilePath);
 
         BufferedWriter bf = null;
 
         try {
 
-        	bf = new BufferedWriter(new FileWriter(file));
+        	bf = new BufferedWriter(new FileWriter(file1));
 
-            for(Map.Entry<Integer, ArrayList<Player>> entry : tabuleiro.entrySet())
-            bf.write(entry.getKey() + ":" + entry.getValue());
+            for(Map.Entry<Integer, ArrayList<Player>> entry : tabuleiro.entrySet()){
+                bf.write(entry.getKey() + ":" + entry.getValue());
+            }
+
             bf.newLine();
 
             bf.write(String.valueOf(tabuleiroAlimentos));
@@ -658,9 +666,15 @@ public class GameManager {
             bf.write(String.valueOf(jogadores));
             bf.newLine();
 
-            for(Map.Entry<Integer, CachoBananas> entry2 : bananas.entrySet())
-            bf.write(entry2.getKey() + ":" + entry2.getValue().getCountBanCacho()
-            + "-" + entry2.getValue().getIdsJogadoresComeram());
+            for(Map.Entry<Integer, CachoBananas> entry2 : bananas.entrySet()){
+                bf.write(entry2.getKey() + ":" + entry2.getValue().getCountBanCacho()
+                        + "-" + entry2.getValue().getIdsJogadoresComeram());
+            }
+            bf.newLine();
+
+            for(Map.Entry<Integer, Cogumelo> entry2 : cogumelos.entrySet()){
+                bf.write(entry2.getKey() + ":" + entry2.getValue().getNumRandom());
+            }
             bf.newLine();
 
             bf.write(String.valueOf(meta));
