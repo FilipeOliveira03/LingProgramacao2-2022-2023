@@ -594,7 +594,7 @@ public class GameManager {
                 infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergiaAtual());
 
             }
-            return infojogadorvencedor;
+            return infojogadorvencedor;//2
         }else{
             return null;
         }
