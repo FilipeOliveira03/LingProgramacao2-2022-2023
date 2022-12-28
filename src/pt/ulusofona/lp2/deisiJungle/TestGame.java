@@ -648,4 +648,22 @@ public class TestGame {
 
         assertEquals("testPlayerStayWithFoodInPos", resultadoEsperado, resultadoReal);
     }
+
+    @Test
+    public void testWinner() {
+
+        GameManager manager = new GameManager();
+
+        String[][] arrayPlayers = {
+                {"11", "abc", "T"},
+                {"22", "Leão", "Z"},
+        };
+
+
+
+        manager.createInitialJungle(10, arrayPlayers);
+        manager.moveCurrentPlayer(9, true);
+        manager.getWinnerInfo();
+
+    }
 }
