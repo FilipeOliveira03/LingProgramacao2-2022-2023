@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.io.*;
 
 
 
@@ -635,15 +636,49 @@ public class GameManager {
         return "professional wrestling";
     }
 
+    final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2";
+
     public boolean saveGame(File file){
 
+        File file1 = new File(outputFilePath);
 
+        BufferedWriter bf = null;
+
+        try {
+
+        	bf = new BufferedWriter(new FileWriter(file1));
+
+        	for (Map.Entry<Integer, ArrayList<Player>> entry : tabuleiro.entrySet()) {
+
+        				// put key and value separated by a colon
+        			bf.write(entry.getKey() + ":" + entry.getValue());
+                   //1;cona.2;tona
+
+        	}
+
+        	bf.newLine();
+
+        	bf.flush();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+
+        	try {
+
+        		bf.close();
+        		}
+        	    catch (Exception e) {
+        		}
+        	}
 
         return true;
     }
 
     public boolean loadGame(File file){
+
         return true;
     }
 
-}
+    private class Entry<T, T1> { }}
