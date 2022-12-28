@@ -24,7 +24,7 @@ public class GameManager {
     private final HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
     private final HashMap <Integer,String> tabuleiroAlimentos = new HashMap<>();
     private final ArrayList<Player> jogadores = new ArrayList<>();
-    private final HashMap <Integer,Alimento> bananas = new HashMap<>();
+    private final HashMap <Integer,CachoBananas> bananas = new HashMap<>();
 
     private int meta;
     private int turno = 1;
@@ -636,27 +636,41 @@ public class GameManager {
         return "professional wrestling";
     }
 
-    final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2";
+    //final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt";
 
     public boolean saveGame(File file){
 
-        File file1 = new File(outputFilePath);
+        //File file1 = new File(outputFilePath);
 
         BufferedWriter bf = null;
 
         try {
 
-        	bf = new BufferedWriter(new FileWriter(file1));
+        	bf = new BufferedWriter(new FileWriter(file));
 
-        	for (Map.Entry<Integer, ArrayList<Player>> entry : tabuleiro.entrySet()) {
+            for(Map.Entry<Integer, ArrayList<Player>> entry : tabuleiro.entrySet())
+            bf.write(entry.getKey() + ":" + entry.getValue());
+            bf.newLine();
 
-        				// put key and value separated by a colon
-        			bf.write(entry.getKey() + ":" + entry.getValue());
-                   //1;cona.2;tona
-
-        	}
-
+            bf.write(String.valueOf(tabuleiroAlimentos));
         	bf.newLine();
+
+            bf.write(String.valueOf(jogadores));
+            bf.newLine();
+
+            for(Map.Entry<Integer, CachoBananas> entry2 : bananas.entrySet())
+            bf.write(entry2.getKey() + ":" + entry2.getValue().getCountBanCacho()
+            + "-" + entry2.getValue().getIdsJogadoresComeram());
+            bf.newLine();
+
+            bf.write(String.valueOf(meta));
+            bf.newLine();
+
+            bf.write(String.valueOf(turno));
+            bf.newLine();
+
+            bf.write(String.valueOf(jogadasPassadas));
+            bf.newLine();
 
         	bf.flush();
         }
@@ -667,18 +681,65 @@ public class GameManager {
 
         	try {
 
-        		bf.close();
+                assert bf != null;
+                bf.close();
         		}
-        	    catch (Exception e) {
+        	    catch (Exception ignored) {
         		}
-        	}
+        }
 
         return true;
     }
 
     public boolean loadGame(File file){
 
-        return true;
-    }
+        tabuleiro.clear();
 
-    private class Entry<T, T1> { }}
+        BufferedReader reader = null;
+
+        try{
+            reader =  new BufferedReader(new FileReader(file));
+
+            String linha = null;
+
+            linha = reader.readLine();
+            String[] parts = linha.split(",");
+
+//            for(String part : parts){
+//
+//                String[] data = part.split(":");
+//
+//                int pos = Integer.parseInt(data[0].trim());
+//                ArrayList<Player> array = data[1].;
+//                Class<? extends String> cont = data[1].getClass();
+//                array.add(cont)
+//                tabuleiro.put(pos, cont);
+//            }
+
+
+
+            reader.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        finally {
+
+            try {
+
+                assert reader != null;
+                reader.close();
+            }
+            catch (Exception ignored) {
+            }
+        }
+
+//        String linha = null;
+//        while((linha = reader.readLine()) != null) {
+//
+//            reader.close();
+//        }
+
+            return true;
+    }
+}

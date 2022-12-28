@@ -14,6 +14,14 @@ public class CachoBananas extends Alimento {
         this.idAlimento = "b";
     }
 
+    public int getCountBanCacho() {
+        return countBanCacho;
+    }
+
+    public ArrayList<Integer> getIdsJogadoresComeram() {
+        return idsJogadoresComeram;
+    }
+
     @Override
     public void acontecimentoIngerir(Player jogador) {
 

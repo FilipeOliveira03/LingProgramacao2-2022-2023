@@ -40,6 +40,4 @@ public abstract class Especie {
         return this.energiaAtual = energia;
     }
 
-    
-
 }

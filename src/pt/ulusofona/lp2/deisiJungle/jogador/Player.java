@@ -59,4 +59,12 @@ public class Player {
         }
         return distanciaViajada += distancia;
     }
+
+    @Override
+    public String toString() {
+        return id + "|" + nome + "|" + posicaoAtual + "|" +
+                distanciaViajada + "|" + alimentosIngeridos + "|" +
+                especie.getNomeSigla() + "|" + especie.getEnergiaAtual();
+
+    }
 }

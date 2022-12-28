@@ -666,4 +666,34 @@ public class TestGame {
         manager.getWinnerInfo();
 
     }
+
+    @Test
+    public void testSave() {
+
+        GameManager manager = new GameManager();
+
+        String[][] arrayPlayers = {
+                {"11", "abc", "T"},
+                {"22", "Leão", "Z"},
+        };
+
+        String[][] arrayalimentos = {
+                {"m","2"},
+                {"a","3"},
+                {"b","5"},
+                {"b","6"},
+        };
+
+        manager.createInitialJungle(40, arrayPlayers, arrayalimentos);
+        manager.moveCurrentPlayer(1, true);
+        manager.moveCurrentPlayer(1, true);
+        manager.moveCurrentPlayer(1, true);
+        manager.moveCurrentPlayer(1, true);
+        manager.moveCurrentPlayer(2, true);
+        manager.moveCurrentPlayer(2, true);
+        manager.moveCurrentPlayer(6, true);
+        manager.moveCurrentPlayer(7, true);
+        manager.saveGame(null);
+
+    }
 }
