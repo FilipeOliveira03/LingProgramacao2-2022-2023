@@ -662,7 +662,7 @@ public class TestGame {
 
 
         manager.createInitialJungle(10, arrayPlayers);
-        manager.moveCurrentPlayer(9, true);
+        manager.moveCurrentPlayer(7, true);
         manager.getWinnerInfo();
 
     }

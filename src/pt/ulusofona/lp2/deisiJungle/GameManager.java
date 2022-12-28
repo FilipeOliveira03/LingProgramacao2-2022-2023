@@ -95,8 +95,6 @@ public class GameManager {
                 return new InitializationError(INVALID_FOOD_POSITION);
             }
 
-
-
         }
 
         for (boolean verificar : verificarComida) {                                                     // verifica se a comida existe
@@ -513,17 +511,29 @@ public class GameManager {
         int jogoAcabadoMeta = 0;
         int jogoAcabadoCapote = 0;
 
-        for (Player jogadore : jogadores) {
+        int[] posicoes = new int[jogadores.size()];
 
-            if (jogadore.getPosicaoAtual() == meta) {
-                jogoAcabadoMeta++;
-            }
 
+        for (int countJogadores = 0; countJogadores < jogadores.size(); countJogadores++) {
+
+               if(jogadores.get(countJogadores).getPosicaoAtual() == meta) {
+
+                 jogoAcabadoMeta++;
+               }
+
+               posicoes[countJogadores] = jogadores.get(countJogadores).getPosicaoAtual();
         }
 
+        Arrays.sort(posicoes);
 
+        int distanciaMetade = meta / 2;
 
+        int primeiro = posicoes[posicoes.length - 1];
+        int segundo = posicoes[posicoes.length - 2];
 
+        if(primeiro - distanciaMetade > segundo){
+            jogoAcabadoCapote++;
+        }
 
         for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
             tabuleiro.get(countTabuleiro).sort(Comparator.comparing(Player::getID));
@@ -554,7 +564,19 @@ public class GameManager {
             return infojogadorvencedor;
         }
 
+        if(jogoAcabadoCapote != 0){
 
+            Player jogadorVencedor =  tabuleiro.get(segundo).get(0);
+
+            String[] infojogadorvencedor = new String[4];
+
+            infojogadorvencedor[0] = String.valueOf(jogadorVencedor.getID());
+            infojogadorvencedor[1] = jogadorVencedor.getNome();
+            infojogadorvencedor[2] = jogadorVencedor.getEspecie().getNomeSigla();
+            infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergiaAtual());
+
+            return infojogadorvencedor;
+        }
 
         return null;
     }
