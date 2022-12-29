@@ -9,7 +9,7 @@ import java.util.Random;
 public class Cogumelo extends Alimento {
 
     private int numRandom;
-    private final int jogadaAtual = GameManager.getJogadasPassadas();
+    private int jogadaAtual = GameManager.getJogadasPassadas();
 
     public Cogumelo() {
         this.nome = "Cogumelo Magico";
@@ -33,6 +33,8 @@ public class Cogumelo extends Alimento {
 
     @Override
     public void acontecimentoIngerir(Player jogador) {
+
+        jogadaAtual = GameManager.getJogadasPassadas();
 
         Especie especie = jogador.getEspecie();
         int energiaAtual = especie.getEnergiaAtual();

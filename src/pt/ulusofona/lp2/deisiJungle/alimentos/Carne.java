@@ -6,7 +6,7 @@ import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 
 public class Carne extends Alimento {
 
-    private final int jogadaAtual = GameManager.getJogadasPassadas();
+    private int jogadaAtual = GameManager.getJogadasPassadas();
 
     public Carne() {
         this.nome = "Carne";
