@@ -36,6 +36,8 @@ public abstract class Especie {
         return ganhoEnerDescanso;
     }
 
+
+
     public int mudaEnergiaAtual(int energia){
         return this.energiaAtual = energia;
     }

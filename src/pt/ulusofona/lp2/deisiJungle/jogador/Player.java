@@ -45,12 +45,32 @@ public class Player {
         return distanciaViajada;
     }
 
-    public void adicionaAlimentosIngeridos(String nomeAlimento) {
-        alimentosIngeridos.add(nomeAlimento);
+    public void mudaId(int id) {
+        this.id = id;
+    }
+
+    public void mudaNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void mudaEspecie(Especie especie) {
+        this.especie = especie;
+    }
+
+    public void mudaDistanciaViajada(int distanciaViajada) {
+        this.distanciaViajada = distanciaViajada;
+    }
+
+    public void mudaAlimentosIngeridos(ArrayList<String> alimentosIngeridos) {
+        this.alimentosIngeridos = alimentosIngeridos;
     }
 
     public void mudaPosicaoAtual(int posicaoAtualMudada){
         this.posicaoAtual = posicaoAtualMudada;
+    }
+
+    public void adicionaAlimentosIngeridos(String nomeAlimento) {
+        alimentosIngeridos.add(nomeAlimento);
     }
 
     public int adicionaDistanciaViajada(int distancia) {
@@ -62,9 +82,9 @@ public class Player {
 
     @Override
     public String toString() {
-        return id + "|" + nome + "|" + posicaoAtual + "|" +
-                distanciaViajada + "|" + alimentosIngeridos + "|" +
-                especie.getNomeSigla() + "|" + especie.getEnergiaAtual();
+        return id + "'" + nome + "'" + posicaoAtual + "'" +
+                distanciaViajada + "'" + alimentosIngeridos + "'" +
+                especie.getNomeSigla() + "'" + especie.getEnergiaAtual() + ";";
 
     }
 }

@@ -17,13 +17,11 @@ import java.io.IOException;
 import java.util.*;
 import java.io.*;
 
-
-
 public class GameManager {
 
     private final HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
-    private final HashMap <Integer,String> tabuleiroAlimentos = new HashMap<>();
     private final ArrayList<Player> jogadores = new ArrayList<>();
+    private final HashMap <Integer,String> tabuleiroAlimentos = new HashMap<>();
     private final HashMap <Integer,CachoBananas> bananas = new HashMap<>();
     private final HashMap <Integer,Cogumelo> cogumelos = new HashMap<>();
 
@@ -642,38 +640,37 @@ public class GameManager {
         return "professional wrestling";
     }
 
-    final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt";
+    //final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt";
 
     public boolean saveGame(File file){
 
-        File file1 = new File(outputFilePath);
+        //File file1 = new File(outputFilePath);
 
         BufferedWriter bf = null;
 
         try {
 
-        	bf = new BufferedWriter(new FileWriter(file1));
+        	bf = new BufferedWriter(new FileWriter(file));
 
             for(Map.Entry<Integer, ArrayList<Player>> entry : tabuleiro.entrySet()){
-                bf.write(entry.getKey() + ":" + entry.getValue());
+                bf.write(entry.getKey() + ":" + entry.getValue() + "-");
             }
+            bf.newLine();
 
+            bf.write(String.valueOf(jogadores));
             bf.newLine();
 
             bf.write(String.valueOf(tabuleiroAlimentos));
         	bf.newLine();
 
-            bf.write(String.valueOf(jogadores));
-            bf.newLine();
-
             for(Map.Entry<Integer, CachoBananas> entry2 : bananas.entrySet()){
                 bf.write(entry2.getKey() + ":" + entry2.getValue().getCountBanCacho()
-                        + "-" + entry2.getValue().getIdsJogadoresComeram());
+                        + "-" + entry2.getValue().getIdsJogadoresComeram() + "=");
             }
             bf.newLine();
 
             for(Map.Entry<Integer, Cogumelo> entry2 : cogumelos.entrySet()){
-                bf.write(entry2.getKey() + ":" + entry2.getValue().getNumRandom());
+                bf.write(entry2.getKey() + ":" + entry2.getValue().getNumRandom() + "=");
             }
             bf.newLine();
 
@@ -690,6 +687,7 @@ public class GameManager {
         }
         catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
         finally {
 
@@ -708,34 +706,143 @@ public class GameManager {
     public boolean loadGame(File file){
 
         tabuleiro.clear();
+        jogadores.clear();
+        tabuleiroAlimentos.clear();
+        bananas.clear();
+        cogumelos.clear();
+
+       // File file1 = new File(outputFilePath);
 
         BufferedReader reader = null;
 
         try{
             reader =  new BufferedReader(new FileReader(file));
 
-            String linha = null;
+            String linha;
 
             linha = reader.readLine();
-            String[] parts = linha.split(",");
 
-//            for(String part : parts){
-//
-//                String[] data = part.split(":");
-//
-//                int pos = Integer.parseInt(data[0].trim());
-//                ArrayList<Player> array = data[1].;
-//                Class<? extends String> cont = data[1].getClass();
-//                array.add(cont)
-//                tabuleiro.put(pos, cont);
-//            }
+            String[] parts = linha.split("-");
 
+            for (int countEach = 0; countEach < parts.length; countEach++) {
 
+                String[] cadaParte = parts[countEach].split(":");
+
+                ArrayList<Player> jog = new ArrayList<>();
+                tabuleiro.put(Integer.parseInt(cadaParte[0]), jog);
+
+            }
+
+            linha = reader.readLine();
+            int countJogador = 0;
+            String mudado = (linha.replace("[", "").replace("]", ""));
+            String[] jogadoresDiv = mudado.split(";");
+
+            for (int countCadaJog = 0; countCadaJog < jogadoresDiv.length; countCadaJog++) {
+
+                if(!jogadoresDiv[countCadaJog].equals("")){
+
+                    Player jogador = new Player();
+
+                    String[] dados = jogadoresDiv[countCadaJog].split("'");
+
+                    if(countJogador == 0){
+                        jogador.mudaId(Integer.parseInt(dados[0].trim()));
+                        countJogador++;
+                    }else{
+                        jogador.mudaId(Integer.parseInt(dados[0].replace(",", "").trim()));
+                    }
+
+                    jogador.mudaNome(dados[1]);
+                    jogador.mudaPosicaoAtual(Integer.parseInt(dados[2]));
+                    jogador.mudaDistanciaViajada(Integer.parseInt(dados[3]));
+
+                    String mudar = (dados[4].replace("[", "")).replace("]", "");
+                    String[] comida = mudar.split(",");
+                    jogador.mudaAlimentosIngeridos(new ArrayList<>(Arrays.asList(comida)));
+
+                    Especie especie = switch (dados[5]){
+                        case "E" -> new Elefante();
+                        case "L" -> new Leao();
+                        case "T" -> new Tartaruga();
+                        case "P" -> new Passaro();
+                        case "Z" -> new Tarzan();
+                        default -> null;
+                    };
+
+                    assert especie != null;
+                    especie.mudaEnergiaAtual(Integer.parseInt(dados[6]));
+
+                    jogador.mudaEspecie(especie);
+
+                    jogadores.add(jogador);
+                    tabuleiro.get(jogador.getPosicaoAtual()).add(jogador);
+
+                }
+            }
+
+            linha = reader.readLine();
+            String comida = (linha.replace("{", "")).replace("}", "");
+            String[] comidaTabu = comida.split(",");
+
+            for (int countComida = 0; countComida < comidaTabu.length; countComida++) {
+                if(!comidaTabu[countComida].equals("")){
+                    String[] cada = comidaTabu[countComida].split("=");
+                    tabuleiroAlimentos.put(Integer.parseInt(cada[0].trim()), cada[1]);
+                }
+
+            }
+
+            linha = reader.readLine();
+            String[] cadaAli = linha.split("=");
+            for (int countAlim = 0; countAlim < cadaAli.length; countAlim++) {
+
+                CachoBananas banana = new CachoBananas();
+                String[] alim = cadaAli[countAlim].split(":");
+                if(!alim[0].equals("")){
+                    int posicaoAlim = Integer.parseInt(alim[0]);
+                    String[] dados = alim[1].split("-");
+                    banana.setCountBanCacho(Integer.parseInt(dados[0]));
+                    String jogCom = (dados[1].replace("[", "")).replace("]", "");
+                    String[] jogadoresCom = jogCom.split(",");
+                    ArrayList<Integer> arrayComeram = new ArrayList<>();
+                    for (int countJogCom = 0; countJogCom < jogadoresCom.length; countJogCom++) {
+                        if(!jogadoresCom[countJogCom].equals("")){
+                            arrayComeram.add(Integer.valueOf(jogadoresCom[countJogCom].trim()));
+                        }
+
+                    }
+                    banana.setIdsJogadoresComeram(arrayComeram);
+                    bananas.put(posicaoAlim, banana);
+                }
+
+            }
+
+            linha = reader.readLine();
+            String[] dados = linha.split("=");
+            for (int countCugas = 0; countCugas < dados.length; countCugas++) {
+                Cogumelo cogumelo = new Cogumelo();
+                String[] cugas = dados[countCugas].split(":");
+                cogumelo.setNumRandom(Integer.parseInt(cugas[1]));
+                cogumelos.put(Integer.parseInt(cugas[0]), cogumelo);
+            }
+
+            linha = reader.readLine();
+            meta = Integer.parseInt(linha);
+
+            linha = reader.readLine();
+            turno = Integer.parseInt(linha);
+
+            linha = reader.readLine();
+            jogadasPassadas = Integer.parseInt(linha);
+
+            //C:\Users\filip\IdeaProjects\ProjetoLP2
 
             reader.close();
         }
         catch (IOException e){
             e.printStackTrace();
+            return false;
         }
         finally {
 
@@ -748,11 +855,6 @@ public class GameManager {
             }
         }
 
-//        String linha = null;
-//        while((linha = reader.readLine()) != null) {
-//
-//            reader.close();
-//        }
 
             return true;
     }

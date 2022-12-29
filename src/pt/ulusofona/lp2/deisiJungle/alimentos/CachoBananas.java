@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class CachoBananas extends Alimento {
     private int countBanCacho = 3;
-    private final ArrayList<Integer> idsJogadoresComeram = new ArrayList<>();
+    private ArrayList<Integer> idsJogadoresComeram = new ArrayList<>();
 
     public CachoBananas() {
         this.nome = "Bananas";
@@ -20,6 +20,14 @@ public class CachoBananas extends Alimento {
 
     public ArrayList<Integer> getIdsJogadoresComeram() {
         return idsJogadoresComeram;
+    }
+
+    public void setCountBanCacho(int countBanCacho) {
+        this.countBanCacho = countBanCacho;
+    }
+
+    public void setIdsJogadoresComeram(ArrayList<Integer> jog ) {
+        this.idsJogadoresComeram = jog;
     }
 
     @Override
