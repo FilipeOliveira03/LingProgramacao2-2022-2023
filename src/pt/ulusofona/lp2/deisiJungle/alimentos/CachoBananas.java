@@ -48,7 +48,7 @@ public class CachoBananas extends Alimento {
                 }else{
                     especie.mudaEnergiaAtual(energiaAtual + 40);
                 }
-
+                idsJogadoresComeram.add(jogador.getID());
             }else{
 
                 if(energiaAtual < 40){
@@ -58,7 +58,6 @@ public class CachoBananas extends Alimento {
                     especie.mudaEnergiaAtual(energiaAtual - 40);
                 }
             }
-            idsJogadoresComeram.add(jogador.getID());
         }
     }
 
