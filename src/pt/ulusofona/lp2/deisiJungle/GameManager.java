@@ -33,10 +33,6 @@ public class GameManager {
         return jogadasPassadas;
     }
 
-    public static int incrementaJogadasPassadas(int valor) {
-        return jogadasPassadas += valor;
-    }
-
     public void mudarTurno(){
         if(turno == jogadores.size()){
             turno = 1;
@@ -436,7 +432,7 @@ public class GameManager {
             energiaConsumidaMov = energiaConsumidaMov * -1;
         }
 
-        if(jogador.getEspecie().getEnergiaAtual() - energiaConsumidaMov < 0 ){
+        if(jogador.getEspecie().getEnergiaAtual() - energiaConsumidaMov <= 0 ){
             mudarTurno();
             return new MovementResult(NO_ENERGY);
         }
