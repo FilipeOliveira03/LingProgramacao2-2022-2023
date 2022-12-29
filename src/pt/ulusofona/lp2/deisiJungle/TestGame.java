@@ -702,7 +702,7 @@ public class TestGame {
     public void testMovePlayer() {
         GameManager manager = new GameManager();
         String[][] arrayPlayers = {
-                {"11", "abc", "Z"},
+                {"11", "abc", "P"},
                 {"22", "cba", "E"},
         };
 
@@ -711,13 +711,9 @@ public class TestGame {
 
         };
 
-        manager.createInitialJungle(40, arrayPlayers, arrayAlimentos);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(2, false);
-        MovementResult resultadoReal = manager.moveCurrentPlayer(-1, false);
-        MovementResult resultadoEsperado = new MovementResult(CAUGHT_FOOD);
+        manager.createInitialJungle(40, arrayPlayers);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(-6, false);
+        MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
         assertEquals("testPlayerStayWithFoodInPos", resultadoEsperado, resultadoReal);
     }

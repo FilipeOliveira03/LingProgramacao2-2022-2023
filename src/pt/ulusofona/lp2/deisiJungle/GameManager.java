@@ -413,18 +413,16 @@ public class GameManager {
             int veloMax = Integer.parseInt(String.valueOf(velocidade.charAt(3)));
             int veloMin = Integer.parseInt(String.valueOf(velocidade.charAt(0)));
 
-            if ((nrSquares > 0 && (nrSquares > veloMax || nrSquares < veloMin)) ||
-                    (nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1))){
+            if (nrSquares > 0 && (nrSquares > veloMax || nrSquares < veloMin)){
+                mudarTurno();
+                return new MovementResult(INVALID_MOVEMENT);
+            }
+
+            if(nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1)){
                 mudarTurno();
                 return new MovementResult(INVALID_MOVEMENT);
             }
         }
-
-
-//        if(jogador.getPosicaoAtual() + nrSquares < 1 ){
-//            mudarTurno();
-//            return new MovementResult(INVALID_MOVEMENT);
-//        }
 
         int energiaConsumidaMov = nrSquares * jogador.getEspecie().getConsumoEnergetico();
 
@@ -451,6 +449,8 @@ public class GameManager {
 
         if(posJogadorTabuleiro + nrSquares > meta){
             posJogadorTabuleiro = meta;
+        }else if (posJogadorTabuleiro + nrSquares < 1){
+            posJogadorTabuleiro = 1;
         }else{
             posJogadorTabuleiro += nrSquares;
         }
