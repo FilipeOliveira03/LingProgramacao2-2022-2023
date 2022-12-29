@@ -387,8 +387,7 @@ public class GameManager {
 
         int jogadorJoga = jogadores.get(turno - 1).getID();
 
-        int posJogadorTabuleiro = 1;
-        int posJogadorCasaArray = 0;
+        int posJogadorTabuleiro = 1; int posJogadorCasaArray = 0;
 
         for (int countCasa = 1; countCasa <= tabuleiro.size(); countCasa++) {
 
@@ -416,71 +415,48 @@ public class GameManager {
             int veloMin = Integer.parseInt(String.valueOf(velocidade.charAt(0)));
 
             if (nrSquares > 0 && (nrSquares > veloMax || nrSquares < veloMin)){
-                mudarTurno();
-                return new MovementResult(INVALID_MOVEMENT);
-            }
+                mudarTurno(); return new MovementResult(INVALID_MOVEMENT); }
 
             if(nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1)){
-                mudarTurno();
-                return new MovementResult(INVALID_MOVEMENT);
-            }
+                mudarTurno(); return new MovementResult(INVALID_MOVEMENT); }
         }
 
         int energiaConsumidaMov = nrSquares * jogador.getEspecie().getConsumoEnergetico();
 
-        if(energiaConsumidaMov < 0){
-            energiaConsumidaMov = energiaConsumidaMov * -1;
-        }
+        if(energiaConsumidaMov < 0){ energiaConsumidaMov = energiaConsumidaMov * -1; }
 
         if(jogador.getEspecie().getEnergiaAtual() - energiaConsumidaMov < 0 ){
-            mudarTurno();
-            return new MovementResult(NO_ENERGY);
-        }
+            mudarTurno(); return new MovementResult(NO_ENERGY); }
 
         int posicaoAtual = jogador.getPosicaoAtual() + nrSquares;
 
-        if(posicaoAtual < 0){
-            posicaoAtual = posicaoAtual * -1;
-        }
+        if(posicaoAtual < 0){ posicaoAtual = posicaoAtual * -1; }
 
         String alimentoTabu = tabuleiroAlimentos.get(posicaoAtual);
         int energiaAtual = jogador.getEspecie().getEnergiaAtual();
 
-
         tabuleiro.get(posJogadorTabuleiro).remove(posJogadorCasaArray);
 
-        if(posJogadorTabuleiro + nrSquares > meta){
-            posJogadorTabuleiro = meta;
-        }else if (posJogadorTabuleiro + nrSquares < 1){
-            posJogadorTabuleiro = 1;
-        }else{
-            posJogadorTabuleiro += nrSquares;
-        }
+        if(posJogadorTabuleiro + nrSquares > meta){ posJogadorTabuleiro = meta;
+        }else if (posJogadorTabuleiro + nrSquares < 1){ posJogadorTabuleiro = 1;
+        }else{ posJogadorTabuleiro += nrSquares; }
 
         tabuleiro.get(posJogadorTabuleiro).add(jogador);
 
         jogador.mudaPosicaoAtual(posJogadorTabuleiro);
 
-        if(nrSquares != 0 ){
-            jogador.getEspecie().mudaEnergiaAtual(energiaAtual - energiaConsumidaMov);
-
+        if(nrSquares != 0 ){jogador.getEspecie().mudaEnergiaAtual(energiaAtual - energiaConsumidaMov);
         }else{
             int energiaGanha = energiaAtual + jogador.getEspecie().getGanhoEnerDescanso();
 
-            if(energiaGanha > 200){
-                jogador.getEspecie().mudaEnergiaAtual(200);
-            }else{
-                jogador.getEspecie().mudaEnergiaAtual(energiaGanha);
-            }
+            jogador.getEspecie().mudaEnergiaAtual(Math.min(energiaGanha, 200));
+            //muda a energia e fica com um minimo de energiaGanha e um máximo de 200, indo buscar o menor valor
         }
 
         tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing(Player::getID));
 
-        if(nrSquares > 0){
-            jogador.adicionaDistanciaViajada(nrSquares);
-        }else{
-            jogador.adicionaDistanciaViajada(nrSquares * -1);
-        }
+        if(nrSquares > 0){ jogador.adicionaDistanciaViajada(nrSquares);
+        }else{ jogador.adicionaDistanciaViajada(nrSquares * -1); }
 
         mudarTurno();
 
@@ -705,6 +681,73 @@ public class GameManager {
         try{
             reader =  new BufferedReader(new FileReader(file));
 
+            loadGameTabu(reader);
+
+            String linha;
+            reader.readLine();
+            reader.readLine();
+
+            linha = reader.readLine();
+            String[] cadaAli = linha.split("=");
+            for (int countAlim = 0; countAlim < cadaAli.length; countAlim++) {
+
+                CachoBananas banana = new CachoBananas();
+                String[] alim = cadaAli[countAlim].split(":");
+                if(!alim[0].equals("")){
+                    int posicaoAlim = Integer.parseInt(alim[0]);
+                    String[] dados = alim[1].split("-");
+                    banana.setCountBanCacho(Integer.parseInt(dados[0]));
+                    String jogCom = (dados[1].replace("[", "")).replace("]", "");
+                    String[] jogadoresCom = jogCom.split(",");
+                    ArrayList<Integer> arrayComeram = new ArrayList<>();
+                    for (int countJogCom = 0; countJogCom < jogadoresCom.length; countJogCom++) {
+                        if(!jogadoresCom[countJogCom].equals("")){
+                            arrayComeram.add(Integer.valueOf(jogadoresCom[countJogCom].trim()));
+                        }
+
+                    }
+                    banana.setIdsJogadoresComeram(arrayComeram);
+                    bananas.put(posicaoAlim, banana);
+                }
+
+            }
+
+            linha = reader.readLine();
+            String[] dados = linha.split("=");
+
+            for (int countCugas = 0; countCugas < dados.length; countCugas++) {
+                if(!dados[countCugas].equals("")){
+                    Cogumelo cogumelo = new Cogumelo();
+                    String[] cugas = dados[countCugas].split(":");
+                    cogumelo.setNumRandom(Integer.parseInt(cugas[1]));
+                    cogumelos.put(Integer.parseInt(cugas[0]), cogumelo);
+                }
+
+            }
+
+            linha = reader.readLine();
+            meta = Integer.parseInt(linha);
+
+            linha = reader.readLine();
+            turno = Integer.parseInt(linha);
+
+            linha = reader.readLine();
+            jogadasPassadas = Integer.parseInt(linha);
+
+            //C:\Users\filip\IdeaProjects\ProjetoLP2
+
+            reader.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+            return false;
+        }
+            return true;
+    }
+
+    public void loadGameTabu(BufferedReader reader){
+
+        try{
             String linha;
 
             linha = reader.readLine();
@@ -782,62 +825,11 @@ public class GameManager {
                 }
 
             }
-
-            linha = reader.readLine();
-            String[] cadaAli = linha.split("=");
-            for (int countAlim = 0; countAlim < cadaAli.length; countAlim++) {
-
-                CachoBananas banana = new CachoBananas();
-                String[] alim = cadaAli[countAlim].split(":");
-                if(!alim[0].equals("")){
-                    int posicaoAlim = Integer.parseInt(alim[0]);
-                    String[] dados = alim[1].split("-");
-                    banana.setCountBanCacho(Integer.parseInt(dados[0]));
-                    String jogCom = (dados[1].replace("[", "")).replace("]", "");
-                    String[] jogadoresCom = jogCom.split(",");
-                    ArrayList<Integer> arrayComeram = new ArrayList<>();
-                    for (int countJogCom = 0; countJogCom < jogadoresCom.length; countJogCom++) {
-                        if(!jogadoresCom[countJogCom].equals("")){
-                            arrayComeram.add(Integer.valueOf(jogadoresCom[countJogCom].trim()));
-                        }
-
-                    }
-                    banana.setIdsJogadoresComeram(arrayComeram);
-                    bananas.put(posicaoAlim, banana);
-                }
-
-            }
-
-            linha = reader.readLine();
-            String[] dados = linha.split("=");
-
-            for (int countCugas = 0; countCugas < dados.length; countCugas++) {
-                if(!dados[countCugas].equals("")){
-                    Cogumelo cogumelo = new Cogumelo();
-                    String[] cugas = dados[countCugas].split(":");
-                    cogumelo.setNumRandom(Integer.parseInt(cugas[1]));
-                    cogumelos.put(Integer.parseInt(cugas[0]), cogumelo);
-                }
-
-            }
-
-            linha = reader.readLine();
-            meta = Integer.parseInt(linha);
-
-            linha = reader.readLine();
-            turno = Integer.parseInt(linha);
-
-            linha = reader.readLine();
-            jogadasPassadas = Integer.parseInt(linha);
-
-            //C:\Users\filip\IdeaProjects\ProjetoLP2
-
-            reader.close();
-        }
-        catch (IOException e){
+        }catch (IOException e){
             e.printStackTrace();
-            return false;
         }
-            return true;
+
+
     }
+
 }

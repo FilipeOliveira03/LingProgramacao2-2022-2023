@@ -729,19 +729,15 @@ public class TestGame {
         };
 
         String[][] arrayalimentos = {
-//                {"m","2"},
-//                {"m","7"},
-//                {"a","3"},
-//                {"b","5"},
-//                {"b","6"},
+                {"m","2"},
+                {"m","7"},
+                {"a","3"},
+                {"b","5"},
+                {"b","6"},
         };
 
         manager.createInitialJungle(40, arrayPlayers, arrayalimentos);
-        manager.saveGame(null);
-        manager.loadGame(null);
-        manager.moveCurrentPlayer(7, true);
-        manager.moveCurrentPlayer(7, true);
-        manager.moveCurrentPlayer(7, true);
+        manager.getSquareInfo(2);
 
     }
 }
