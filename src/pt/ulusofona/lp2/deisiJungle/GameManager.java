@@ -398,11 +398,7 @@ public class GameManager {
                 Player jogador = array.get(countPlayerPos);
 
                 if(jogadorJoga == jogador.getID()){
-
-                    posJogadorTabuleiro = countCasa;
-                    posJogadorCasaArray = countPlayerPos;
-
-                }
+                    posJogadorTabuleiro = countCasa; posJogadorCasaArray = countPlayerPos;}
             }
         }
 
@@ -414,11 +410,10 @@ public class GameManager {
             int veloMax = Integer.parseInt(String.valueOf(velocidade.charAt(3)));
             int veloMin = Integer.parseInt(String.valueOf(velocidade.charAt(0)));
 
-            if (nrSquares > 0 && (nrSquares > veloMax || nrSquares < veloMin)){
+            if ((nrSquares > 0 && (nrSquares > veloMax || nrSquares < veloMin)) ||
+                    (nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1))){
                 mudarTurno(); return new MovementResult(INVALID_MOVEMENT); }
 
-            if(nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1)){
-                mudarTurno(); return new MovementResult(INVALID_MOVEMENT); }
         }
 
         int energiaConsumidaMov = nrSquares * jogador.getEspecie().getConsumoEnergetico();
@@ -446,12 +441,10 @@ public class GameManager {
         jogador.mudaPosicaoAtual(posJogadorTabuleiro);
 
         if(nrSquares != 0 ){jogador.getEspecie().mudaEnergiaAtual(energiaAtual - energiaConsumidaMov);
-        }else{
-            int energiaGanha = energiaAtual + jogador.getEspecie().getGanhoEnerDescanso();
-
-            jogador.getEspecie().mudaEnergiaAtual(Math.min(energiaGanha, 200));
+        }else{ int energiaGanha = energiaAtual + jogador.getEspecie().getGanhoEnerDescanso();
+            jogador.getEspecie().mudaEnergiaAtual(Math.min(energiaGanha, 200)); }
             //muda a energia e fica com um minimo de energiaGanha e um máximo de 200, indo buscar o menor valor
-        }
+
 
         tabuleiro.get(posJogadorTabuleiro).sort(Comparator.comparing(Player::getID));
 
@@ -467,8 +460,7 @@ public class GameManager {
                 case "c" -> new Carne();
                 case "m" -> cogumelos.get(posJogadorTabuleiro);
                 case "e" -> new Erva();
-                default -> null;
-            };
+                default -> null; };
 
             if(alimento != null){
                 if(alimentoTabu.equals("c") && jogador.getEspecie().getTipoAlimentacao().equals("Herbívoro")){
@@ -614,7 +606,7 @@ public class GameManager {
         return "professional wrestling";
     }
 
-    //final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt";
+   // final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt";
 
     public boolean saveGame(File file){
 
@@ -684,8 +676,6 @@ public class GameManager {
             loadGameTabu(reader);
 
             String linha;
-            reader.readLine();
-            reader.readLine();
 
             linha = reader.readLine();
             String[] cadaAli = linha.split("=");
