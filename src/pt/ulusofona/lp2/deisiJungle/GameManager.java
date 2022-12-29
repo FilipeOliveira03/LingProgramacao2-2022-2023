@@ -480,30 +480,28 @@ public class GameManager {
             jogador.adicionaDistanciaViajada(nrSquares * -1);
         }
 
-
-        if(alimentoTabu.equals("c") && jogador.getEspecie().getTipoAlimentacao().equals("Herbívoro")){
-            mudarTurno();
-            return new MovementResult(VALID_MOVEMENT);
-        }
-
         mudarTurno();
 
-        Alimento alimento = switch (alimentoTabu) {
-            case "a" -> new Agua();
-            case "b" -> bananas.get(posJogadorTabuleiro);
-            case "c" -> new Carne();
-            case "m" -> cogumelos.get(posJogadorTabuleiro);
-            case "e" -> new Erva();
-            default -> null;
-        };
+        if(alimentoTabu != null){
+            Alimento alimento = switch (alimentoTabu) {
+                case "a" -> new Agua();
+                case "b" -> bananas.get(posJogadorTabuleiro);
+                case "c" -> new Carne();
+                case "m" -> cogumelos.get(posJogadorTabuleiro);
+                case "e" -> new Erva();
+                default -> null;
+            };
 
-        if(alimento != null){
+            if(alimento != null){
+                if(alimentoTabu.equals("c") && jogador.getEspecie().getTipoAlimentacao().equals("Herbívoro")){
+                    return new MovementResult(VALID_MOVEMENT);
+                }
+                alimento.acontecimentoIngerir(jogador);
+                MovementResult.mudaOutPutAlimento(alimento.getNome());
+                jogador.adicionaAlimentosIngeridos(alimentoTabu);
+                return new MovementResult(CAUGHT_FOOD);
 
-            alimento.acontecimentoIngerir(jogador);
-            MovementResult.mudaOutPutAlimento(alimento.getNome());
-            jogador.adicionaAlimentosIngeridos(alimentoTabu);
-            return new MovementResult(CAUGHT_FOOD);
-
+            }
         }
         return new MovementResult(VALID_MOVEMENT);
 
