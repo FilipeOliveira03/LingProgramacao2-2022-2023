@@ -421,10 +421,10 @@ public class GameManager {
         }
 
 
-        if(jogador.getPosicaoAtual() + nrSquares < 1 ){
-            mudarTurno();
-            return new MovementResult(INVALID_MOVEMENT);
-        }
+//        if(jogador.getPosicaoAtual() + nrSquares < 1 ){
+//            mudarTurno();
+//            return new MovementResult(INVALID_MOVEMENT);
+//        }
 
         int energiaConsumidaMov = nrSquares * jogador.getEspecie().getConsumoEnergetico();
 
