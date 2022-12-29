@@ -65,7 +65,6 @@ public class GameManager {
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
 
         jogadasPassadas = 0;
-        turno = 1;
         tabuleiroAlimentos.clear();
         bananas.clear();
         cogumelos.clear();
@@ -119,7 +118,6 @@ public class GameManager {
 
         jogadores.clear();
         tabuleiro.clear();
-
 
         int countNrTarzan = 0;
 
@@ -199,6 +197,9 @@ public class GameManager {
             jogadores.add(jogador);
             tabuleiro.get(1).add(jogador);
         }
+
+        jogadores.sort(Comparator.comparing(Player::getID));
+
         return null;
     }
 
