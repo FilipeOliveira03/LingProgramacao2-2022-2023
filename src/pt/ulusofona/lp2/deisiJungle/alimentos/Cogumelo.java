@@ -27,8 +27,8 @@ public class Cogumelo extends Alimento {
         return numRandom;
     }
 
-    public int mudaNumRandom(int numero) {
-        return this.numRandom = numero;
+    public void setNumRandom(int numRandom) {
+        this.numRandom = numRandom;
     }
 
     @Override

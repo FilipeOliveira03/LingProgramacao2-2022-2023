@@ -678,10 +678,11 @@ public class TestGame {
         };
 
         String[][] arrayalimentos = {
-                {"m","2"},
-                {"a","3"},
-                {"b","5"},
-                {"b","6"},
+//                {"m","2"},
+//                {"m","7"},
+//                {"a","3"},
+//                {"b","5"},
+//                {"b","6"},
         };
 
         manager.createInitialJungle(40, arrayPlayers, arrayalimentos);
@@ -694,6 +695,6 @@ public class TestGame {
         manager.moveCurrentPlayer(6, true);
         manager.moveCurrentPlayer(7, true);
         manager.saveGame(null);
-
+        manager.loadGame(null);
     }
 }
