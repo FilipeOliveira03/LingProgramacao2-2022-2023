@@ -413,11 +413,6 @@ public class GameManager {
             int veloMax = Integer.parseInt(String.valueOf(velocidade.charAt(3)));
             int veloMin = Integer.parseInt(String.valueOf(velocidade.charAt(0)));
 
-            if(nrSquares < -6 || nrSquares > 6){
-                mudarTurno();
-                return new MovementResult(INVALID_MOVEMENT);
-            }
-
             if ((nrSquares > 0 && (nrSquares > veloMax || nrSquares < veloMin)) ||
                     (nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1))){
                 mudarTurno();
@@ -485,28 +480,30 @@ public class GameManager {
             jogador.adicionaDistanciaViajada(nrSquares * -1);
         }
 
+
+        if(alimentoTabu.equals("c") && jogador.getEspecie().getTipoAlimentacao().equals("Herbívoro")){
+            mudarTurno();
+            return new MovementResult(VALID_MOVEMENT);
+        }
+
         mudarTurno();
 
-        if(alimentoTabu != null){
-            Alimento alimento = switch (alimentoTabu) {
-                case "a" -> new Agua();
-                case "b" -> bananas.get(posJogadorTabuleiro);
-                case "c" -> new Carne();
-                case "m" -> cogumelos.get(posJogadorTabuleiro);
-                case "e" -> new Erva();
-                default -> null;
-            };
+        Alimento alimento = switch (alimentoTabu) {
+            case "a" -> new Agua();
+            case "b" -> bananas.get(posJogadorTabuleiro);
+            case "c" -> new Carne();
+            case "m" -> cogumelos.get(posJogadorTabuleiro);
+            case "e" -> new Erva();
+            default -> null;
+        };
 
-            if(alimento != null){
-                if(alimentoTabu.equals("c") && jogador.getEspecie().getTipoAlimentacao().equals("Herbívoro")){
-                    return new MovementResult(VALID_MOVEMENT);
-                }
-                alimento.acontecimentoIngerir(jogador);
-                MovementResult.mudaOutPutAlimento(alimento.getNome());
-                jogador.adicionaAlimentosIngeridos(alimentoTabu);
-                return new MovementResult(CAUGHT_FOOD);
+        if(alimento != null){
 
-            }
+            alimento.acontecimentoIngerir(jogador);
+            MovementResult.mudaOutPutAlimento(alimento.getNome());
+            jogador.adicionaAlimentosIngeridos(alimentoTabu);
+            return new MovementResult(CAUGHT_FOOD);
+
         }
         return new MovementResult(VALID_MOVEMENT);
 
