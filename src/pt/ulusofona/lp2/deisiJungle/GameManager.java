@@ -432,7 +432,7 @@ public class GameManager {
             energiaConsumidaMov = energiaConsumidaMov * -1;
         }
 
-        if(jogador.getEspecie().getEnergiaAtual() - energiaConsumidaMov <= 0 ){
+        if(jogador.getEspecie().getEnergiaAtual() - energiaConsumidaMov < 0 ){
             mudarTurno();
             return new MovementResult(NO_ENERGY);
         }
