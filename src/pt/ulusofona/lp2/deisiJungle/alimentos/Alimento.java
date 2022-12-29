@@ -13,11 +13,6 @@ public abstract class Alimento {
         return nome;
     }
 
-    public Alimento(String nome, String idAlimento) {
-        this.nome = nome;
-        this.idAlimento = idAlimento;
-    }
-
     public abstract void acontecimentoIngerir(Player jogador);
 
 }

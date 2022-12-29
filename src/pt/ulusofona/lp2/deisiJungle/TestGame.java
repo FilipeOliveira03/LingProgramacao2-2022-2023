@@ -4,6 +4,8 @@ import pt.ulusofona.lp2.deisiJungle.alimentos.*;
 import pt.ulusofona.lp2.deisiJungle.especies.Tarzan;
 import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 
+import java.io.File;
+
 import static org.junit.Assert.assertEquals;
 import static pt.ulusofona.lp2.deisiJungle.InitializationErrorCode.*;
 import static pt.ulusofona.lp2.deisiJungle.MovementResultCode.*;
@@ -199,9 +201,6 @@ public class TestGame {
 
         manager.createInitialJungle(30, arrayPlayers, arrayalimentos);
         manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(-1, false);
-        manager.moveCurrentPlayer(-1, false);
         MovementResult resultadoReal = manager.moveCurrentPlayer(1, false);
         MovementResult resultadoEsperado = new MovementResult(CAUGHT_FOOD);
 
@@ -493,6 +492,11 @@ public class TestGame {
         manager.getPlayerInfo(11);
         manager.getPlayerInfo(0);
         manager.getCurrentPlayerInfo();
+        manager.getCurrentPlayerEnergyInfo(4);
+        manager.getCurrentPlayerEnergyInfo(-4);
+        manager.getPlayersInfo();
+        manager.getWinnerInfo();
+        manager.getGameResults();
 
         MovementResult resultadoReal = manager.moveCurrentPlayer(2, false);
         MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
@@ -597,7 +601,7 @@ public class TestGame {
         manager.moveCurrentPlayer(0, false);
 
         MovementResult resultadoReal = manager.moveCurrentPlayer(-4, false);
-        MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
+        MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
         assertEquals("testMove", resultadoEsperado, resultadoReal);
     }
@@ -678,11 +682,11 @@ public class TestGame {
         };
 
         String[][] arrayalimentos = {
-//                {"m","2"},
-//                {"m","7"},
-//                {"a","3"},
-//                {"b","5"},
-//                {"b","6"},
+                {"m","2"},
+                {"m","7"},
+                {"a","3"},
+                {"b","5"},
+                {"b","6"},
         };
 
         manager.createInitialJungle(40, arrayPlayers, arrayalimentos);
@@ -694,8 +698,8 @@ public class TestGame {
         manager.moveCurrentPlayer(2, true);
         manager.moveCurrentPlayer(6, true);
         manager.moveCurrentPlayer(7, true);
-        manager.saveGame(null);
-        manager.loadGame(null);
+        manager.saveGame(new File("C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt"));
+        manager.loadGame(new File("C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt"));
     }
 
     @Test
@@ -713,7 +717,7 @@ public class TestGame {
 
         manager.createInitialJungle(40, arrayPlayers);
         MovementResult resultadoReal = manager.moveCurrentPlayer(-7, false);
-        MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
+        MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
 
         assertEquals("testPlayerStayWithFoodInPos", resultadoEsperado, resultadoReal);
     }
@@ -739,5 +743,106 @@ public class TestGame {
         manager.createInitialJungle(40, arrayPlayers, arrayalimentos);
         manager.getSquareInfo(2);
 
+    }
+
+    @Test
+    public void testMoveCurrentPlayerErva() {
+
+        GameManager manager = new GameManager();
+
+        String[][] arrayPlayers = {
+                {"11", "abc", "L"},
+                {"22", "Leão", "L"},
+        };
+
+        String[][] arrayalimentos = {
+                {"e","6"},
+        };
+
+        manager.createInitialJungle(10, arrayPlayers, arrayalimentos);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(-5, false);
+        manager.moveCurrentPlayer(-5, false);
+        manager.moveCurrentPlayer(0, false);
+        manager.moveCurrentPlayer(0, false);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(-5, false);
+        manager.moveCurrentPlayer(-5, false);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(5, false);
+        MovementResult resultadoEsperado = new MovementResult(CAUGHT_FOOD);
+
+        assertEquals("testMoveCurrentPlayer5", resultadoEsperado, resultadoReal);
+    }
+
+    @Test
+    public void testMoveCurrentPlayerCogumelo() {
+
+        GameManager manager = new GameManager();
+
+        String[][] arrayPlayers = {
+                {"11", "abc", "L"},
+                {"22", "Leão", "L"},
+        };
+
+        String[][] arrayalimentos = {
+                {"c","6"},
+        };
+
+        manager.createInitialJungle(10, arrayPlayers, arrayalimentos);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(-5, false);
+        manager.moveCurrentPlayer(-5, false);
+        manager.moveCurrentPlayer(0, false);
+        manager.moveCurrentPlayer(0, false);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(-5, false);
+        manager.moveCurrentPlayer(-5, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(1, false);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(5, false);
+        MovementResult resultadoEsperado = new MovementResult(CAUGHT_FOOD);
+
+        assertEquals("testMoveCurrentPlayer5", resultadoEsperado, resultadoReal);
+    }
+
+    @Test
+    public void testMoveCurrentPlayerCarne() {
+
+        GameManager manager = new GameManager();
+
+        String[][] arrayPlayers = {
+                {"11", "abc", "L"},
+                {"22", "Leão", "L"},
+        };
+
+        String[][] arrayalimentos = {
+                {"c","6"},
+                {"c","11"},
+                {"c","16"},
+                {"c","21"},
+        };
+
+        manager.createInitialJungle(30, arrayPlayers, arrayalimentos);
+        manager.moveCurrentPlayer(5, true);
+        manager.moveCurrentPlayer(5, true);
+        manager.moveCurrentPlayer(5, true);
+        manager.moveCurrentPlayer(5, true);
+        manager.moveCurrentPlayer(5, true);
+        manager.moveCurrentPlayer(5, true);
+        manager.moveCurrentPlayer(5, true);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(5, true);
+        MovementResult resultadoEsperado = new MovementResult(CAUGHT_FOOD);
+
+        assertEquals("testMoveCurrentPlayer5", resultadoEsperado, resultadoReal);
     }
 }
