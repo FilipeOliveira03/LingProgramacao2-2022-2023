@@ -761,10 +761,13 @@ public class GameManager {
                     jogador.mudaEspecie(especie);
 
                     jogadores.add(jogador);
+
                     tabuleiro.get(jogador.getPosicaoAtual()).add(jogador);
 
                 }
             }
+
+            jogadores.sort(Comparator.comparing(Player::getID));
 
             linha = reader.readLine();
             String comida = (linha.replace("{", "")).replace("}", "");
