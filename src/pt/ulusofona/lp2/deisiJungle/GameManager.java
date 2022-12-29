@@ -65,6 +65,7 @@ public class GameManager {
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
 
         jogadasPassadas = 0;
+        turno = 1;
         tabuleiroAlimentos.clear();
         bananas.clear();
         cogumelos.clear();
@@ -636,17 +637,17 @@ public class GameManager {
         return "professional wrestling";
     }
 
-    //final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt";
+    final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt";
 
     public boolean saveGame(File file){
 
-       // File file1 = new File(outputFilePath);
+       File file1 = new File(outputFilePath);
 
         BufferedWriter bf;
 
         try {
 
-        	bf = new BufferedWriter(new FileWriter(file));
+        	bf = new BufferedWriter(new FileWriter(file1));
 
             for(Map.Entry<Integer, ArrayList<Player>> entry : tabuleiro.entrySet()){
                 bf.write(entry.getKey() + ":" + entry.getValue() + "-");
@@ -696,12 +697,12 @@ public class GameManager {
         bananas.clear();
         cogumelos.clear();
 
-       //File file1 = new File(outputFilePath);
+       File file1 = new File(outputFilePath);
 
         BufferedReader reader;
 
         try{
-            reader =  new BufferedReader(new FileReader(file));
+            reader =  new BufferedReader(new FileReader(file1));
 
             String linha;
 
