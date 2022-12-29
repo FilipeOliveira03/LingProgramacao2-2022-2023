@@ -640,17 +640,17 @@ public class GameManager {
         return "professional wrestling";
     }
 
-    final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt";
+    //final static String outputFilePath = "C:/Users/filip/IdeaProjects/ProjetoLP2/write.txt";
 
     public boolean saveGame(File file){
 
-        File file1 = new File(outputFilePath);
+       // File file1 = new File(outputFilePath);
 
         BufferedWriter bf = null;
 
         try {
 
-        	bf = new BufferedWriter(new FileWriter(file1));
+        	bf = new BufferedWriter(new FileWriter(file));
 
             for(Map.Entry<Integer, ArrayList<Player>> entry : tabuleiro.entrySet()){
                 bf.write(entry.getKey() + ":" + entry.getValue() + "-");
@@ -711,12 +711,12 @@ public class GameManager {
         bananas.clear();
         cogumelos.clear();
 
-       File file1 = new File(outputFilePath);
+       //File file1 = new File(outputFilePath);
 
         BufferedReader reader = null;
 
         try{
-            reader =  new BufferedReader(new FileReader(file1));
+            reader =  new BufferedReader(new FileReader(file));
 
             String linha;
 
@@ -820,6 +820,7 @@ public class GameManager {
 
             linha = reader.readLine();
             String[] dados = linha.split("=");
+
             for (int countCugas = 0; countCugas < dados.length; countCugas++) {
                 if(!dados[countCugas].equals("")){
                     Cogumelo cogumelo = new Cogumelo();
