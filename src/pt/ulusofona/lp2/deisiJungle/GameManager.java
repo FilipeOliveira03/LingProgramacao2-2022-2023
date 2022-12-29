@@ -418,10 +418,10 @@ public class GameManager {
                 return new MovementResult(INVALID_MOVEMENT);
             }
 
-//            if(nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1)){
-//                mudarTurno();
-//                return new MovementResult(INVALID_MOVEMENT);
-//            }
+            if(nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1)){
+                mudarTurno();
+                return new MovementResult(INVALID_MOVEMENT);
+            }
         }
 
         int energiaConsumidaMov = nrSquares * jogador.getEspecie().getConsumoEnergetico();
