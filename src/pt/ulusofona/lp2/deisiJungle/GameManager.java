@@ -33,17 +33,17 @@ public class GameManager {
         return jogadasPassadas;
     }
 
-    public void mudaJogadasPassadas() {
-        jogadasPassadas = jogadasPassadas + 1;
+    public static int incrementaJogadasPassadas(int valor) {
+        return jogadasPassadas += valor;
     }
 
     public void mudarTurno(){
-        mudaJogadasPassadas();
         if(turno == jogadores.size()){
             turno = 1;
         }else{
             turno++;
         }
+        jogadasPassadas++;
     }
 
     public String[][] getSpecies(){
@@ -646,7 +646,7 @@ public class GameManager {
 
        // File file1 = new File(outputFilePath);
 
-        BufferedWriter bf = null;
+        BufferedWriter bf;
 
         try {
 
@@ -689,17 +689,6 @@ public class GameManager {
             e.printStackTrace();
             return false;
         }
-        finally {
-
-        	try {
-
-                assert bf != null;
-                bf.close();
-        		}
-        	    catch (Exception ignored) {
-        		}
-        }
-
         return true;
     }
 
@@ -713,7 +702,7 @@ public class GameManager {
 
        //File file1 = new File(outputFilePath);
 
-        BufferedReader reader = null;
+        BufferedReader reader;
 
         try{
             reader =  new BufferedReader(new FileReader(file));
@@ -848,18 +837,6 @@ public class GameManager {
             e.printStackTrace();
             return false;
         }
-        finally {
-
-            try {
-
-                assert reader != null;
-                reader.close();
-            }
-            catch (Exception ignored) {
-            }
-        }
-
-
             return true;
     }
 }
