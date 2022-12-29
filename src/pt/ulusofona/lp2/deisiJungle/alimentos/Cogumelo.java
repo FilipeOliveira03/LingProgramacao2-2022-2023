@@ -55,7 +55,9 @@ public class Cogumelo extends Alimento {
         if(energiaFinal > 200){
             especie.mudaEnergiaAtual(200);
 
-        }else especie.mudaEnergiaAtual(Math.max(energiaFinal, 0));
+        }else {
+            especie.mudaEnergiaAtual(Math.max(energiaFinal, 0));
+        }
     }
 
     @Override
