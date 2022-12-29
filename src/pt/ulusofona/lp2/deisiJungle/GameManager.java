@@ -413,6 +413,11 @@ public class GameManager {
             int veloMax = Integer.parseInt(String.valueOf(velocidade.charAt(3)));
             int veloMin = Integer.parseInt(String.valueOf(velocidade.charAt(0)));
 
+            if(nrSquares < -6 || nrSquares > 6){
+                mudarTurno();
+                return new MovementResult(INVALID_MOVEMENT);
+            }
+
             if ((nrSquares > 0 && (nrSquares > veloMax || nrSquares < veloMin)) ||
                     (nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1))){
                 mudarTurno();
