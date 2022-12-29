@@ -712,7 +712,7 @@ public class TestGame {
         };
 
         manager.createInitialJungle(40, arrayPlayers);
-        MovementResult resultadoReal = manager.moveCurrentPlayer(-6, false);
+        MovementResult resultadoReal = manager.moveCurrentPlayer(-7, false);
         MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
         assertEquals("testPlayerStayWithFoodInPos", resultadoEsperado, resultadoReal);
