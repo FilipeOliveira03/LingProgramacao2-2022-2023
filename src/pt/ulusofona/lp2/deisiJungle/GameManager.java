@@ -28,7 +28,7 @@ public class GameManager {
     private int meta;
     private int turno = 1;
     private static int jogadasPassadas = 0;
-    private boolean capote = false;
+    private int capote = 0;
 
     public static int getJogadasPassadas() {
         return jogadasPassadas;
@@ -119,7 +119,7 @@ public class GameManager {
 
         jogadores.clear();
         tabuleiro.clear();
-        capote = false;
+        capote = 0;
 
         int countNrTarzan = 0;
 
@@ -505,7 +505,7 @@ public class GameManager {
 
         if(primeiro - distanciaMetade > segundo){
             jogoAcabadoCapote++;
-            capote = true;
+            capote++;
         }
 
         for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
@@ -588,12 +588,12 @@ public class GameManager {
             }
         }
 
-        if(capote){
+        if(capote >= 1){
 
             ArrayList<String> resultadoJogoCapote = new ArrayList<>();
 
-            String primeiro = resultadoJogo.get(0);
-            String segundo =  resultadoJogo.get(1);
+            String primeiro = resultadoJogo.get(0).replace("1", "2");
+            String segundo =  resultadoJogo.get(1).replace("2", "1");
 
             resultadoJogoCapote.add(segundo);
             resultadoJogoCapote.add(primeiro);
