@@ -787,28 +787,19 @@ public class TestGame {
         };
 
         String[][] arrayalimentos = {
-                {"c","6"},
+                {"b","6"},
+                {"b","11"},
         };
 
-        manager.createInitialJungle(10, arrayPlayers, arrayalimentos);
+        manager.createInitialJungle(20, arrayPlayers, arrayalimentos);
         manager.moveCurrentPlayer(5, false);
         manager.moveCurrentPlayer(5, false);
-        manager.moveCurrentPlayer(-5, false);
-        manager.moveCurrentPlayer(-5, false);
         manager.moveCurrentPlayer(0, false);
         manager.moveCurrentPlayer(0, false);
         manager.moveCurrentPlayer(5, false);
         manager.moveCurrentPlayer(5, false);
         manager.moveCurrentPlayer(-5, false);
         manager.moveCurrentPlayer(-5, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(1, false);
-        manager.moveCurrentPlayer(1, false);
         MovementResult resultadoReal = manager.moveCurrentPlayer(5, false);
         MovementResult resultadoEsperado = new MovementResult(CAUGHT_FOOD);
 
