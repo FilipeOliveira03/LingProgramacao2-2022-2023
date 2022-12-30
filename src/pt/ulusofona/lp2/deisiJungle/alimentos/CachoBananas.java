@@ -36,11 +36,19 @@ public class CachoBananas extends Alimento {
         Especie especie = jogador.getEspecie();
         int energiaAtual = especie.getEnergiaAtual();
 
+        boolean comeu = false;
+
         if(countBanCacho > 0){
             countBanCacho--;
-            boolean jogadorComeu = idsJogadoresComeram.contains(jogador.getID());
 
-            if(!jogadorComeu){
+            for (Integer integer : idsJogadoresComeram) {
+                if (jogador.getID() == integer) {
+                    comeu = true;
+                    break;
+                }
+            }
+
+            if(!comeu){
 
                 if(energiaAtual > 160){
                     especie.mudaEnergiaAtual(200);
@@ -48,17 +56,16 @@ public class CachoBananas extends Alimento {
                 }else{
                     especie.mudaEnergiaAtual(energiaAtual + 40);
                 }
-                idsJogadoresComeram.add(jogador.getID());
+            }else{
+
+                if(energiaAtual < 40){
+                    especie.mudaEnergiaAtual(0);
+
+                }else{
+                    especie.mudaEnergiaAtual(energiaAtual - 40);
+                }
             }
-//            else{
-//
-//                if(energiaAtual < 40){
-//                    especie.mudaEnergiaAtual(0);
-//
-//                }else{
-//                    especie.mudaEnergiaAtual(energiaAtual - 40);
-//                }
-//            }
+            idsJogadoresComeram.add(jogador.getID());
         }
     }
 
