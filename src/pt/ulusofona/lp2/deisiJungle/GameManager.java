@@ -28,6 +28,7 @@ public class GameManager {
     private int meta;
     private int turno = 1;
     private static int jogadasPassadas = 0;
+    private boolean capote = false;
 
     public static int getJogadasPassadas() {
         return jogadasPassadas;
@@ -118,6 +119,7 @@ public class GameManager {
 
         jogadores.clear();
         tabuleiro.clear();
+        capote = false;
 
         int countNrTarzan = 0;
 
@@ -503,6 +505,7 @@ public class GameManager {
 
         if(primeiro - distanciaMetade > segundo){
             jogoAcabadoCapote++;
+            capote = true;
         }
 
         for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
@@ -553,51 +556,9 @@ public class GameManager {
 
     public ArrayList<String> getGameResults(){
 
-        String[] vencedor = getWinnerInfo();
-        int idVencedor = Integer.parseInt(vencedor[0]);
-
         ArrayList<String> resultadoJogo= new ArrayList<>();
 
-        for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
-            tabuleiro.get(countTabuleiro).sort(Comparator.comparing(Player::getID));
-        }
-
         int pos = 1;
-
-
-        for (int countVencedor = 0; countVencedor < tabuleiro.size(); countVencedor++) {
-
-            ArrayList<Player> array = tabuleiro.get(countVencedor);
-
-            if(array != null && !array.isEmpty()){
-
-                for (Player jogador : array) {
-
-                    if (jogador.getID() == idVencedor) {
-
-                        String especie = "";
-
-                        switch (jogador.getEspecie().getNomeSigla()) {
-                            case "L" -> especie = "Leao";
-                            case "E" -> especie = "Elefante";
-                            case "T" -> especie = "Tartaruga";
-                            case "P" -> especie = "Passaro";
-                            case "Z" -> especie = "Tarzan";
-                        }
-
-                        resultadoJogo.add("#" + pos + " " + jogador.getNome() + ", " + especie + ", " +
-                                jogador.getPosicaoAtual() + ", " + jogador.getDistanciaViajada() +
-                                ", " + jogador.getAlimentosIngeridos().size());
-                        pos++;
-
-                    }
-
-                }
-            }
-
-            
-        }
-        
 
         for (int countJogadores = tabuleiro.size(); countJogadores >= 1; countJogadores--) {
 
@@ -606,25 +567,46 @@ public class GameManager {
             if(!array.isEmpty()){
 
                 for (Player jogador : array) {
-                    if(!(jogador.getID() == idVencedor)){
-                        String especie = "";
 
-                        switch (jogador.getEspecie().getNomeSigla()) {
-                            case "L" -> especie = "Leao";
-                            case "E" -> especie = "Elefante";
-                            case "T" -> especie = "Tartaruga";
-                            case "P" -> especie = "Passaro";
-                            case "Z" -> especie = "Tarzan";
-                        }
+                    String especie = "";
 
-                        resultadoJogo.add("#" + pos + " " + jogador.getNome() + ", " + especie + ", " +
-                                jogador.getPosicaoAtual() + ", " + jogador.getDistanciaViajada() +
-                                ", " + jogador.getAlimentosIngeridos().size());
-                        pos++;
+                    switch (jogador.getEspecie().getNomeSigla()) {
+
+                        case "L" -> especie = "Leao";
+                        case "E" -> especie = "Elefante";
+                        case "T" -> especie = "Tartaruga";
+                        case "P" -> especie = "Passaro";
+                        case "Z" -> especie = "Tarzan";
                     }
+
+                    resultadoJogo.add("#" + pos + " " + jogador.getNome() + ", " + especie + ", " +
+                            jogador.getPosicaoAtual() + ", " + jogador.getDistanciaViajada() +
+                            ", " + jogador.getAlimentosIngeridos().size());
+
+                    pos++;
                 }
             }
         }
+
+        if(capote){
+
+            ArrayList<String> resultadoJogoCapote = new ArrayList<>();
+
+            String primeiro = resultadoJogo.get(0);
+            String segundo =  resultadoJogo.get(1);
+
+            resultadoJogoCapote.add(segundo);
+            resultadoJogoCapote.add(primeiro);
+
+            for (int countJog = 2; countJog < resultadoJogo.size(); countJog++) {
+                resultadoJogoCapote.add(resultadoJogo.get(countJog));
+
+            }
+
+            resultadoJogo = resultadoJogoCapote;
+
+        }
+
         return resultadoJogo;
     }
 
