@@ -501,14 +501,6 @@ public class GameManager {
 
         int distanciaMetade = meta / 2;
 
-        int primeiro = posicoes[posicoes.length - 1];
-        int segundo = posicoes[posicoes.length - 2];
-
-        if(primeiro - distanciaMetade > segundo){
-            jogoAcabadoCapote++;
-            capote++;
-        }
-
         for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
             tabuleiro.get(countTabuleiro).sort(Comparator.comparing(Player::getID));
         }
@@ -536,6 +528,14 @@ public class GameManager {
             infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergiaAtual());
 
             return infojogadorvencedor;
+        }
+
+        int primeiro = posicoes[posicoes.length - 1];
+        int segundo = posicoes[posicoes.length - 2];
+
+        if(primeiro - distanciaMetade > segundo){
+            jogoAcabadoCapote++;
+            capote++;
         }
 
         if(jogoAcabadoCapote != 0){

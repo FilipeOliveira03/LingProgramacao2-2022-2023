@@ -845,4 +845,30 @@ public class TestGame {
 
         assertEquals("testMoveCurrentPlayer5", resultadoEsperado, resultadoReal);
     }
+
+    @Test
+    public void testWinner2() {
+
+        GameManager manager = new GameManager();
+
+        String[][] arrayPlayers = {
+                {"11", "abc", "E"},
+                {"22", "Leão", "L"},
+                {"33", "cba", "Z"},
+                {"44", "es", "T"},
+        };
+
+        String[][] arrayalimentos = {
+                {"c","6"},
+                {"c","11"},
+                {"c","16"},
+                {"c","21"},
+        };
+
+        manager.createInitialJungle(10, arrayPlayers);
+        manager.moveCurrentPlayer(9, true);
+        manager.getWinnerInfo();
+        manager.getGameResults();
+
+    }
 }
