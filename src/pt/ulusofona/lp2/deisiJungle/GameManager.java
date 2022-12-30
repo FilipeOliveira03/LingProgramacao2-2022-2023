@@ -569,7 +569,7 @@ public class GameManager {
 
             ArrayList<Player> array = tabuleiro.get(countVencedor);
 
-            if(!array.isEmpty()){
+            if(array != null && !array.isEmpty()){
 
                 for (Player jogador : array) {
 
