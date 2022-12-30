@@ -536,7 +536,7 @@ public class GameManager {
 
         if(jogoAcabadoCapote != 0){
 
-            Player jogadorVencedor =  tabuleiro.get(segundo).get(0);
+            Player jogadorVencedor =  tabuleiro.get(primeiro).get(0);
 
             String[] infojogadorvencedor = new String[4];
 
