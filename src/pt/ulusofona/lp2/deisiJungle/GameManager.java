@@ -482,6 +482,7 @@ public class GameManager {
 
         int jogoAcabadoMeta = 0;
         int jogoAcabadoCapote = 0;
+        capote = 0;
 
         int[] posicoes = new int[jogadores.size()];
 
@@ -592,8 +593,8 @@ public class GameManager {
 
             ArrayList<String> resultadoJogoCapote = new ArrayList<>();
 
-            String primeiro = resultadoJogo.get(0).replace("1", "2");
-            String segundo =  resultadoJogo.get(1).replace("2", "1");
+            String primeiro = resultadoJogo.get(0).replaceFirst("1", "2");
+            String segundo =  resultadoJogo.get(1).replaceFirst("2", "1");
 
             resultadoJogoCapote.add(segundo);
             resultadoJogoCapote.add(primeiro);
