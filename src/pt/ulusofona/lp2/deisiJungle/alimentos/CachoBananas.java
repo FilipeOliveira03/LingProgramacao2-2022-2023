@@ -6,12 +6,14 @@ import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 import java.util.ArrayList;
 
 public class CachoBananas extends Alimento {
-    private int countBanCacho = 3;
-    private ArrayList<Integer> idsJogadoresComeram = new ArrayList<>();
+    private int countBanCacho;
+    private ArrayList<Integer> idsJogadoresComeram;
 
     public CachoBananas() {
         this.nome = "Bananas";
         this.idAlimento = "b";
+        this.countBanCacho = 3;
+        this.idsJogadoresComeram = new ArrayList<>();
     }
 
     public int getCountBanCacho() {
@@ -36,19 +38,11 @@ public class CachoBananas extends Alimento {
         Especie especie = jogador.getEspecie();
         int energiaAtual = especie.getEnergiaAtual();
 
-        boolean comeu = false;
-
         if(countBanCacho > 0){
             countBanCacho--;
+            boolean jogadorComeu = idsJogadoresComeram.contains(jogador.getID());
 
-            for (Integer integer : idsJogadoresComeram) {
-                if (jogador.getID() == integer) {
-                    comeu = true;
-                    break;
-                }
-            }
-
-            if(!comeu){
+            if(!jogadorComeu){
 
                 if(energiaAtual > 160){
                     especie.mudaEnergiaAtual(200);
@@ -56,6 +50,7 @@ public class CachoBananas extends Alimento {
                 }else{
                     especie.mudaEnergiaAtual(energiaAtual + 40);
                 }
+                idsJogadoresComeram.add(jogador.getID());
             }else{
 
                 if(energiaAtual < 40){
@@ -65,7 +60,6 @@ public class CachoBananas extends Alimento {
                     especie.mudaEnergiaAtual(energiaAtual - 40);
                 }
             }
-            idsJogadoresComeram.add(jogador.getID());
         }
     }
 

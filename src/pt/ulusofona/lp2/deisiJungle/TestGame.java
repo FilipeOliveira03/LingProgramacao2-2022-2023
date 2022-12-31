@@ -789,9 +789,15 @@ public class TestGame {
         String[][] arrayalimentos = {
                 {"b","6"},
                 {"b","11"},
+                {"b","16"},
+                {"b","21"},
         };
 
         manager.createInitialJungle(20, arrayPlayers, arrayalimentos);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(5, false);
+        manager.moveCurrentPlayer(5, false);
         manager.moveCurrentPlayer(5, false);
         manager.moveCurrentPlayer(5, false);
         manager.moveCurrentPlayer(0, false);
