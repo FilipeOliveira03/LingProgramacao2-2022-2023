@@ -36,7 +36,7 @@ public class CachoBananas extends Alimento {
         Especie especie = jogador.getEspecie();
         int energiaAtual = especie.getEnergiaAtual();
 
-        if(countBanCacho >= 0){
+        if(countBanCacho > 0){
             countBanCacho--;
             boolean jogadorComeu = idsJogadoresComeram.contains(jogador.getID());
 
