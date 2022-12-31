@@ -790,7 +790,6 @@ public class TestGame {
                 {"b","6"},
                 {"b","11"},
                 {"b","16"},
-                {"b","21"},
         };
 
         manager.createInitialJungle(20, arrayPlayers, arrayalimentos);
@@ -807,7 +806,7 @@ public class TestGame {
         manager.moveCurrentPlayer(-5, false);
         manager.moveCurrentPlayer(-5, false);
         MovementResult resultadoReal = manager.moveCurrentPlayer(5, false);
-        MovementResult resultadoEsperado = new MovementResult(CAUGHT_FOOD);
+        MovementResult resultadoEsperado = new MovementResult(VALID_MOVEMENT);
 
         assertEquals("testMoveCurrentPlayer5", resultadoEsperado, resultadoReal);
     }
