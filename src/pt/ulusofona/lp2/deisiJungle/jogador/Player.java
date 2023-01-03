@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle.jogador;
 
+import pt.ulusofona.lp2.deisiJungle.alimentos.CachoBananas;
 import pt.ulusofona.lp2.deisiJungle.especies.Especie;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class Player {
     private Especie especie;
     private int distanciaViajada = 0;
     private ArrayList<String> alimentosIngeridos;
+    private boolean comeuBananas = false;
 
     public Player(){
     }
@@ -43,6 +45,14 @@ public class Player {
 
     public int getDistanciaViajada() {
         return distanciaViajada;
+    }
+
+    public boolean isComeuBananas() {
+        return comeuBananas;
+    }
+
+    public void mudaEstadoBanana(boolean comeu){
+        this.comeuBananas = comeu;
     }
 
     public void mudaId(int id) {
@@ -79,6 +89,8 @@ public class Player {
         }
         return distanciaViajada += distancia;
     }
+
+
 
     @Override
     public String toString() {

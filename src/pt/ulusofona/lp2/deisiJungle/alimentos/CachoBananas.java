@@ -40,7 +40,7 @@ public class CachoBananas extends Alimento {
 
         if(countBanCacho > 0){
             countBanCacho--;
-            boolean jogadorComeu = idsJogadoresComeram.contains(jogador.getID());
+            boolean jogadorComeu = jogador.isComeuBananas();
 
             if(!jogadorComeu){
 
@@ -59,7 +59,7 @@ public class CachoBananas extends Alimento {
                     especie.mudaEnergiaAtual(energiaAtual - 40);
                 }
             }
-            idsJogadoresComeram.add(jogador.getID());
+            jogador.mudaEstadoBanana(true);
         }
     }
 

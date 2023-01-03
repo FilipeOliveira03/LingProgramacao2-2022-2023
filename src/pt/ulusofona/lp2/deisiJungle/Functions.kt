@@ -20,20 +20,22 @@ fun comandoGet (manager: GameManager, args: List<String>) : String?{
         "PLAYERS_BY_SPECIE" -> return getPlayersBySpecie(manager, args)
         "MOST_TRAVELED" -> return getMostTraveled(manager,args)
     }
-    return ""
+    return null
 }
 
 fun comandoPost (manager: GameManager, args: List<String>) : String?{
-    return ""
+    return null
 }
 
 fun getPlayerInfo(manager: GameManager, args: List<String>): String? {
 
-    val player : Player = manager.jogadores.filter { it.nome.equals(args[1]) }[0]
+    val players : List<Player> = manager.jogadores.filter { it.nome.equals(args[1]) }
 
-    if(player.equals(null)){
+    if(players.isEmpty()){
         return "Inexistent player"
     }
+
+    val player = players[0]
 
     val id : Int = player.id
     val nome : String = player.nome
