@@ -17,6 +17,7 @@ fun criaFuncaoComando (commandType: CommandType) : Function2<GameManager,List<St
 fun comandoGet (manager: GameManager, args: List<String>) : String?{
     when(args[0]){
         "PLAYER_INFO" -> return getPlayerInfo(manager, args)
+        "PLAYERS_BY_SPECIE" -> return getPlayersBySpecie(manager, args)
     }
     return ""
 }
@@ -36,19 +37,22 @@ fun getPlayerInfo(manager: GameManager, args: List<String>): String? {
     val id : Int = player.id
     val nome : String = player.nome
     val nomeEspecie : String = player.especie.nomeSigla
-
-    when (nomeEspecie){
-        "E" -> nomeEspecie == "Elefante"
-        "L" -> nomeEspecie == "Leão"
-        "T" -> nomeEspecie == "Tartaruga"
-        "P" -> nomeEspecie == "Passáro"
-        "Z" -> nomeEspecie == "Tarzan"
-    }
-
     val energia : Int = player.especie.energiaAtual
     val posicao : Int = player.posicaoAtual
 
-    return " $id | $nome | $nomeEspecie | $energia | $posicao"
+    return "$id | $nome | $nomeEspecie | $energia | $posicao"
+}
+
+fun getPlayersBySpecie(manager: GameManager, args: List<String>): String? {
+    return if(manager.jogadores.none { it.especie.nomeSigla.equals(args[1]) }){
+        ""
+    }else{
+        manager.jogadores.filter { it.especie.nomeSigla.equals(args[1]) }
+            .map { it.especie.nomeSigla }
+            .sortedWith {s1, s2 -> s1.compareTo(s2)}
+            .joinToString { "," }
+    }
+
 }
 
 fun main() {
