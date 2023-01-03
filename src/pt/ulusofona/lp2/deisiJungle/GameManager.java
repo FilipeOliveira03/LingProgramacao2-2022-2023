@@ -34,6 +34,10 @@ public class GameManager {
         return jogadasPassadas;
     }
 
+    public ArrayList<Player> getJogadores() {
+        return jogadores;
+    }
+
     public void mudarTurno(){
         if(turno == jogadores.size()){
             turno = 1;
@@ -63,7 +67,8 @@ public class GameManager {
         };
     }
 
-    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo){
+    public void createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo)
+            throws InvalidInitialJungleException {
 
         jogadasPassadas = 0;
         tabuleiroAlimentos.clear();
@@ -84,19 +89,22 @@ public class GameManager {
             }
 
             if(!OtherFunctions.isNumeric(foodsInfo[countAlimentos][1])){
-                return new InitializationError(INVALID_FOOD_POSITION_NOT_NUMBER);
+                throw new InvalidInitialJungleException("A posição da comida não é um número");
+               // return new InitializationError(INVALID_FOOD_POSITION_NOT_NUMBER);
             }
 
             int posicaoComida = Integer.parseInt(foodsInfo[countAlimentos][1]);
 
             if( posicaoComida <= 1 || posicaoComida >= jungleSize){
-                return new InitializationError(INVALID_FOOD_POSITION);
+                throw new InvalidInitialJungleException("A posição da comida é inválida");
+               // return new InitializationError(INVALID_FOOD_POSITION);
             }
 
         }
 
         for (boolean verificar : verificarComida) {                                                     // verifica se a comida existe
-            if (!verificar) {  return new InitializationError(INVALID_FOOD_DOES_NOT_EXIST); }
+            if (!verificar) {  throw new InvalidInitialJungleException("A comida não existe"); }
+                //return new InitializationError(INVALID_FOOD_DOES_NOT_EXIST); }
         }
 
         for (int countAlimentos = 0; countAlimentos < foodsInfo.length; countAlimentos++) {              //meter comida no tabuleri
@@ -112,10 +120,10 @@ public class GameManager {
             }
         }
 
-         return createInitialJungle(jungleSize, playersInfo);
+        createInitialJungle(jungleSize, playersInfo);
     }
 
-    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
+    public void createInitialJungle(int jungleSize, String[][] playersInfo) throws InvalidInitialJungleException {
 
         jogadores.clear();
         tabuleiro.clear();
@@ -132,16 +140,19 @@ public class GameManager {
                 if(countPlayer1 != countPlayer2){ // jogadores iguais
 
                     if(!OtherFunctions.isNumeric(playersInfo[countPlayer1][0]) || !OtherFunctions.isNumeric(playersInfo[countPlayer2][0])){
-                        return new InitializationError(INVALID_ID_WITHOUT_NUMBERS);
+                        throw new InvalidInitialJungleException("O id de um dos utilizadores não têm números");
+                        //return new InitializationError(INVALID_ID_WITHOUT_NUMBERS);
                     } // se são numeros
 
                     int jogador1Int = Integer.parseInt(playersInfo[countPlayer1][0]);
-                    if(jogador1Int < 0){ return new InitializationError(INVALID_ID_WITH_NEGATIVE_NUMBERS); } // false nao podem ser negativos
+                    if(jogador1Int < 0){ throw new InvalidInitialJungleException("O id de um dos utilizadores têm números negativos"); }
+                        //return new InitializationError(INVALID_ID_WITH_NEGATIVE_NUMBERS);  // false nao podem ser negativos
 
                     int jogador2Int = Integer.parseInt(playersInfo[countPlayer2][0]);
-                    if(jogador2Int < 0){ return new InitializationError(INVALID_ID_WITH_NEGATIVE_NUMBERS);} // false nao podem ser negativos
-
-                    if(jogador1Int == jogador2Int){ return new InitializationError(INVALID_PLAYERS_WITH_SAME_ID); }// false //verifica se o id é igual
+                    if(jogador2Int < 0){ throw new InvalidInitialJungleException("O id de um dos utilizadores têm números negativos"); } // false nao podem ser negativos
+                    //return new InitializationError(INVALID_ID_WITH_NEGATIVE_NUMBERS);
+                    if(jogador1Int == jogador2Int){ throw new InvalidInitialJungleException("Existem dois jogadores com o mesmo id"); }
+                    //return new InitializationError(INVALID_PLAYERS_WITH_SAME_ID);
                 }
             }
         }
@@ -149,7 +160,8 @@ public class GameManager {
         for (int countPlayer = 0; countPlayer < playersInfo.length; countPlayer++) {
 
             if(playersInfo[countPlayer][1] == null || playersInfo[countPlayer][1].equals("")){
-                return new InitializationError(INVALID_PLAYER_NAME); } // false //nome null ou vazio
+                throw new InvalidInitialJungleException("Um dos utilizadores têm um nome inválido"); }
+            // return new InitializationError(INVALID_PLAYER_NAME);
 
             if(playersInfo[countPlayer][2].equals("Z")){ countNrTarzan++;}// so pode existir 1 tarzan
 
@@ -164,16 +176,19 @@ public class GameManager {
         }
 
         if(countNrTarzan > 1 || playersInfo.length * 2 > jungleSize){
-             return new InitializationError(INVALID_JUST_ONE_TARZAN); }// false  // verifica se só há 1
+            throw new InvalidInitialJungleException("Existe mais do que um tarzan"); }
+        //return new InitializationError(INVALID_JUST_ONE_TARZAN);
 
         int jogadoresMinimos = 2;
         int jogadoresMaximos = 4;
 
         if(playersInfo.length < jogadoresMinimos || playersInfo.length > jogadoresMaximos) {
-            return new InitializationError(INVALID_NUMBER_OF_PLAYERS); }// false // verifica o numero de jogadores
+            throw new InvalidInitialJungleException("O número de jogadores em jogo é inválido"); }
+        //return new InitializationError(INVALID_NUMBER_OF_PLAYERS);
 
         for (boolean verificar : verificarEspecie) { // verifica se a especie existe
-            if (!verificar) {  return new InitializationError(INVALID_SPECIE_INEXISTANTE); }// false
+            if (!verificar) { throw new InvalidInitialJungleException("A espécie não existe"); }
+           // return new InitializationError(INVALID_SPECIE_INEXISTANTE);
         }
 
         for (int preencherHash = 1; preencherHash <= jungleSize; preencherHash++) {
@@ -202,7 +217,6 @@ public class GameManager {
 
         jogadores.sort(Comparator.comparing(Player::getID));
 
-        return null;
     }
 
     public int[] getPlayerIds(int squareNr) {
