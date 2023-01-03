@@ -37,6 +37,15 @@ fun getPlayerInfo(manager: GameManager, args: List<String>): String? {
     val id : Int = player.id
     val nome : String = player.nome
     val nomeEspecie : String = player.especie.nomeSigla
+
+    when (nomeEspecie){
+        "E" -> nomeEspecie == "Elefante"
+        "L" -> nomeEspecie == "Leão"
+        "T" -> nomeEspecie == "Tartaruga"
+        "P" -> nomeEspecie == "Passáro"
+        "Z" -> nomeEspecie == "Tarzan"
+    }
+
     val energia : Int = player.especie.energiaAtual
     val posicao : Int = player.posicaoAtual
 
@@ -44,20 +53,35 @@ fun getPlayerInfo(manager: GameManager, args: List<String>): String? {
 }
 
 fun getPlayersBySpecie(manager: GameManager, args: List<String>): String? {
-    return if(manager.jogadores.none { it.especie.nomeSigla.equals(args[1]) }){
-        ""
-    }else{
-        manager.jogadores.filter { it.especie.nomeSigla.equals(args[1]) }
-            .map { it.especie.nomeSigla }
+
+    val jogadores : List<Player> = manager.jogadores.filter { it.especie.nomeSigla.equals(args[1]) }
+
+    return if(jogadores.isNotEmpty()) {
+        jogadores
+            .map { it.nome }
             .sortedWith {s1, s2 -> s1.compareTo(s2)}
-            .joinToString { "," }
+            .reversed()
+            .joinToString(",")
+    }else{
+        ""
     }
+
+
 
 }
 
 fun main() {
-//    val routerFn = router()
-//    val commandGetFn = routerFn.invoke(CommandType.GET)
-//    val result = commandGetFn.invoke(manager, listOf("PLAYER_INFO", "Pedro"))
 
+    val manager = GameManager()
+
+    val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "P"), arrayOf("22", "Tomas", "E"), arrayOf("112", "Joao", "P"))
+
+    val arrayAlimentos = arrayOf(arrayOf("e", "2"), arrayOf("b", "3"))
+
+    manager.createInitialJungle(30, arrayPlayers, arrayAlimentos)
+
+    val routerFn = router()
+    val commandGetFn = routerFn.invoke(CommandType.GET)
+    val result = commandGetFn.invoke(manager, listOf("PLAYERS_BY_SPECIE", "P"))
+    println(result)
 }
