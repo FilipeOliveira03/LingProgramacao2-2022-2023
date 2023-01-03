@@ -9,6 +9,7 @@ public class Tarzan extends Especie {
         this.ganhoEnerDescanso = 20;
         this.velocidade = "1..6";
         this.tipoAlimentacao = "Omnívoro";
+        this.nomeEspecie = "Tarzan";
     }
 
 }

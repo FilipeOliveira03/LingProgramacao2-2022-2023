@@ -18,6 +18,7 @@ fun comandoGet (manager: GameManager, args: List<String>) : String?{
     when(args[0]){
         "PLAYER_INFO" -> return getPlayerInfo(manager, args)
         "PLAYERS_BY_SPECIE" -> return getPlayersBySpecie(manager, args)
+        "MOST_TRAVELED" -> return getMostTraveled(manager,args)
     }
     return ""
 }
@@ -36,16 +37,7 @@ fun getPlayerInfo(manager: GameManager, args: List<String>): String? {
 
     val id : Int = player.id
     val nome : String = player.nome
-    val nomeEspecie : String = player.especie.nomeSigla
-
-    when (nomeEspecie){
-        "E" -> nomeEspecie == "Elefante"
-        "L" -> nomeEspecie == "Leão"
-        "T" -> nomeEspecie == "Tartaruga"
-        "P" -> nomeEspecie == "Passáro"
-        "Z" -> nomeEspecie == "Tarzan"
-    }
-
+    val nomeEspecie : String = player.especie.nomeEspecie
     val energia : Int = player.especie.energiaAtual
     val posicao : Int = player.posicaoAtual
 
@@ -62,26 +54,34 @@ fun getPlayersBySpecie(manager: GameManager, args: List<String>): String? {
             .sortedWith {s1, s2 -> s1.compareTo(s2)}
             .reversed()
             .joinToString(",")
-    }else{
-        ""
-    }
+    }else{ "" }
+}
 
+fun getMostTraveled(manager: GameManager, args: List<String>): String? {
+    val total = manager.jogadores.map { it.distanciaViajada }
+        .sortedWith { s1, s2 -> s1.compareTo(s2) }.sum()
 
+    manager.jogadores.sortByDescending { it.distanciaViajada }
 
+    return manager.jogadores.joinToString(separator = "\n")
+    { "${it.nome}:${it.especie.nomeEspecie}:${it.distanciaViajada}" }.plus("\nTotal:$total")
 }
 
 fun main() {
 
     val manager = GameManager()
 
-    val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "P"), arrayOf("22", "Tomas", "E"), arrayOf("112", "Joao", "P"))
+    val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "E"), arrayOf("22", "Tomas", "E"), arrayOf("112", "Joao", "E"))
 
     val arrayAlimentos = arrayOf(arrayOf("e", "2"), arrayOf("b", "3"))
 
     manager.createInitialJungle(30, arrayPlayers, arrayAlimentos)
+    manager.moveCurrentPlayer(3,false)
+    manager.moveCurrentPlayer(4,false)
+    manager.moveCurrentPlayer(2,false)
 
     val routerFn = router()
     val commandGetFn = routerFn.invoke(CommandType.GET)
-    val result = commandGetFn.invoke(manager, listOf("PLAYERS_BY_SPECIE", "P"))
+    val result = commandGetFn.invoke(manager, listOf("MOST_TRAVELED", "Pedro"))
     println(result)
 }

@@ -9,5 +9,6 @@ public class Leao extends Especie {
         this.ganhoEnerDescanso = 10;
         this.velocidade = "4..6";
         this.tipoAlimentacao = "Carnívoro";
+        this.nomeEspecie = "Leão";
     }
 }

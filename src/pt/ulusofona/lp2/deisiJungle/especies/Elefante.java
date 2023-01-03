@@ -9,6 +9,7 @@ public class Elefante extends Especie {
         this.ganhoEnerDescanso = 10;
         this.velocidade = "1..6";
         this.tipoAlimentacao = "Herbívoro";
+        this.nomeEspecie = "Elefante";
     }
 
 }

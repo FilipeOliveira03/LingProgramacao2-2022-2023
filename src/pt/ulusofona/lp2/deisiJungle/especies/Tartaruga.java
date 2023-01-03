@@ -9,5 +9,6 @@ public class Tartaruga extends Especie {
         this.ganhoEnerDescanso = 5;
         this.velocidade = "1..3";
         this.tipoAlimentacao = "Omnívoro";
+        this.nomeEspecie = "Tartaruga";
     }
 }

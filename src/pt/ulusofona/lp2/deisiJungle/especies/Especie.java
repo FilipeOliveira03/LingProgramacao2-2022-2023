@@ -8,6 +8,7 @@ public abstract class Especie {
     protected int ganhoEnerDescanso;
     protected String velocidade;
     protected String tipoAlimentacao;
+    protected String nomeEspecie;
 
     public Especie(){
     }
@@ -36,7 +37,9 @@ public abstract class Especie {
         return ganhoEnerDescanso;
     }
 
-
+    public String getNomeEspecie() {
+        return nomeEspecie;
+    }
 
     public int mudaEnergiaAtual(int energia){
         return this.energiaAtual = energia;

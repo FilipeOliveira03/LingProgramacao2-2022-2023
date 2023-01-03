@@ -9,5 +9,6 @@ public class Passaro extends Especie {
         this.ganhoEnerDescanso = 50;
         this.velocidade = "5..6";
         this.tipoAlimentacao = "Omnívoro";
+        this.nomeEspecie = "Pássaro";
     }
 }
