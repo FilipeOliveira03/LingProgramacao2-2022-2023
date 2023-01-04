@@ -19,6 +19,7 @@ fun comandoGet (manager: GameManager, args: List<String>) : String?{
         "PLAYER_INFO" -> return getPlayerInfo(manager, args)
         "PLAYERS_BY_SPECIE" -> return getPlayersBySpecie(manager, args)
         "MOST_TRAVELED" -> return getMostTraveled(manager,args)
+        "TOP_ENERGETIC_OMNIVORES" -> return getTopEnergeticOmniveres(manager,args)
     }
     return null
 }
@@ -66,14 +67,25 @@ fun getMostTraveled(manager: GameManager, args: List<String>): String? {
     manager.jogadores.sortByDescending { it.distanciaViajada }
 
     return manager.jogadores.joinToString(separator = "\n")
-    { "${it.nome}:${it.especie.nomeEspecie}:${it.distanciaViajada}" }.plus("\nTotal:$total")
+    { "${it.nome}:${it.especie.nomeSigla}:${it.distanciaViajada}" }.plus("\nTotal:$total")
+}
+
+fun getTopEnergeticOmniveres(manager: GameManager, args: List<String>): String? {
+
+    manager.jogadores.sortByDescending { it.especie.energiaAtual }
+
+    return manager.jogadores.filter { it.especie.tipoAlimentacao.equals("Omnívoro") }
+        .take(args[1].toInt())
+        .joinToString(separator = "\n") { "${it.nome}:${it.especie.energiaAtual}" }
+
 }
 
 fun main() {
 
     val manager = GameManager()
 
-    val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "E"), arrayOf("22", "Tomas", "E"), arrayOf("112", "Joao", "E"))
+    val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "Z"), arrayOf("22", "Tomas", "T"),
+        arrayOf("112", "Joao", "E"), arrayOf("12", "Lucas", "T"))
 
     val arrayAlimentos = arrayOf(arrayOf("e", "2"), arrayOf("b", "3"))
 
@@ -81,9 +93,11 @@ fun main() {
     manager.moveCurrentPlayer(3,false)
     manager.moveCurrentPlayer(4,false)
     manager.moveCurrentPlayer(2,false)
+    manager.moveCurrentPlayer(2,false)
+    manager.moveCurrentPlayer(2,false)
 
     val routerFn = router()
     val commandGetFn = routerFn.invoke(CommandType.GET)
-    val result = commandGetFn.invoke(manager, listOf("MOST_TRAVELED", "Pedro"))
+    val result = commandGetFn.invoke(manager, listOf("TOP_ENERGETIC_OMNIVORES", "2"))
     println(result)
 }
