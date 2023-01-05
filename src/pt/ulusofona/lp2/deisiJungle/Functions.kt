@@ -94,7 +94,7 @@ fun getConsumedFoods(manager: GameManager, args: List<String>): String? {
             "e" -> comidaFinal.add("Erva")
             "a" -> comidaFinal.add("Agua")
             "c" -> comidaFinal.add("Carne")
-            "m" -> comidaFinal.add("Cogumelos magicos")
+            "m" -> comidaFinal.add("Cogumelo magico")
             "b" -> comidaFinal.add("Cacho de bananas")
         }
     }
