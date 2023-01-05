@@ -16,6 +16,7 @@ public class Player {
 
     public Player(){
     }
+
     public Player(int id, String nome, Especie especie){
         this.id = id;
         this.nome = nome;

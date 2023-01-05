@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle
 
 import pt.ulusofona.lp2.deisiJungle.jogador.Player
+import java.util.TreeSet
 
 fun router(): Function1<CommandType, Function2<GameManager,List<String>, String? >> {
     return :: criaFuncaoComando
@@ -20,6 +21,7 @@ fun comandoGet (manager: GameManager, args: List<String>) : String?{
         "PLAYERS_BY_SPECIE" -> return getPlayersBySpecie(manager, args)
         "MOST_TRAVELED" -> return getMostTraveled(manager,args)
         "TOP_ENERGETIC_OMNIVORES" -> return getTopEnergeticOmniveres(manager,args)
+        "CONSUMED_FOODS" -> return getConsumedFoods(manager, args)
     }
     return null
 }
@@ -80,6 +82,30 @@ fun getTopEnergeticOmniveres(manager: GameManager, args: List<String>): String? 
 
 }
 
+fun getConsumedFoods(manager: GameManager, args: List<String>): String? {
+
+    var comida : TreeSet<String> = TreeSet<String>()
+    var comidaFinal = ArrayList<String>()
+
+    manager.jogadores.forEach { comida.addAll(it.alimentosIngeridos) }
+
+    comida.forEach{
+        when(it) {
+            "e" -> comidaFinal.add("Erva")
+            "a" -> comidaFinal.add("Agua")
+            "c" -> comidaFinal.add("Carne")
+            "m" -> comidaFinal.add("Cogumelos magicos")
+            "b" -> comidaFinal.add("Cacho de bananas")
+        }
+    }
+
+    return comidaFinal
+        .sortedWith {s1, s2 -> s1.compareTo(s2)}
+        .joinToString(separator = "\n") { it }
+
+
+}
+
 fun main() {
 
     val manager = GameManager()
@@ -87,17 +113,38 @@ fun main() {
     val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "Z"), arrayOf("22", "Tomas", "T"),
         arrayOf("112", "Joao", "E"), arrayOf("12", "Lucas", "T"))
 
-    val arrayAlimentos = arrayOf(arrayOf("e", "2"), arrayOf("b", "3"))
+    val arrayAlimentos = arrayOf(arrayOf("c", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
 
     manager.createInitialJungle(30, arrayPlayers, arrayAlimentos)
-    manager.moveCurrentPlayer(3,false)
-    manager.moveCurrentPlayer(4,false)
-    manager.moveCurrentPlayer(2,false)
-    manager.moveCurrentPlayer(2,false)
-    manager.moveCurrentPlayer(2,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
+    manager.moveCurrentPlayer(1,false)
 
     val routerFn = router()
     val commandGetFn = routerFn.invoke(CommandType.GET)
-    val result = commandGetFn.invoke(manager, listOf("TOP_ENERGETIC_OMNIVORES", "2"))
+    val result = commandGetFn.invoke(manager, listOf("CONSUMED_FOODS", "2"))
     println(result)
 }
