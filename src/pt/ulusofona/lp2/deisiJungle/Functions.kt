@@ -27,6 +27,9 @@ fun comandoGet (manager: GameManager, args: List<String>) : String?{
 }
 
 fun comandoPost (manager: GameManager, args: List<String>) : String?{
+    when(args[0]){
+
+    }
     return null
 }
 
@@ -102,8 +105,6 @@ fun getConsumedFoods(manager: GameManager, args: List<String>): String? {
     return comidaFinal
         .sortedWith {s1, s2 -> s1.compareTo(s2)}
         .joinToString(separator = "\n") { it }
-
-
 }
 
 fun main() {
