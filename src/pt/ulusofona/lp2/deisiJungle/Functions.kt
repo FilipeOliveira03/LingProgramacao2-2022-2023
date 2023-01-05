@@ -84,8 +84,8 @@ fun getTopEnergeticOmniveres(manager: GameManager, args: List<String>): String? 
 
 fun getConsumedFoods(manager: GameManager, args: List<String>): String? {
 
-    var comida : TreeSet<String> = TreeSet<String>()
-    var comidaFinal = ArrayList<String>()
+    val comida : TreeSet<String> = TreeSet<String>()
+    val comidaFinal = ArrayList<String>()
 
     manager.jogadores.forEach { comida.addAll(it.alimentosIngeridos) }
 
@@ -94,7 +94,7 @@ fun getConsumedFoods(manager: GameManager, args: List<String>): String? {
             "e" -> comidaFinal.add("Erva")
             "a" -> comidaFinal.add("Agua")
             "c" -> comidaFinal.add("Carne")
-            "m" -> comidaFinal.add("Cogumelo magico")
+            "m" -> comidaFinal.add("Cogumelo Magico")
             "b" -> comidaFinal.add("Cacho de bananas")
         }
     }
