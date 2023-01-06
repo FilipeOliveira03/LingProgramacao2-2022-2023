@@ -119,8 +119,9 @@ fun postmove(manager: GameManager,args: List<String>):String?{
         return "Sem energia"
     }
     var checkComida = manager.getSquareInfo(posicaoPrevista)[1].toString()
-    var arrayMetaVazio = arrayOf("Meta","Vazio")
-    if(checkComida == arrayMetaVazio[0] || checkComida == arrayMetaVazio[1]){
+    var arrayVazio = arrayOf("Vazio")
+    var arrayMeta = arrayOf("Meta")
+    if(checkComida == arrayVazio[0] || checkComida == arrayMeta[0]){
           manager.moveCurrentPlayer(args[1].toInt(),true)
         return "OK"
     }else{
