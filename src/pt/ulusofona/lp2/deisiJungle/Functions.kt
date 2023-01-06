@@ -1,8 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle
-
 import pt.ulusofona.lp2.deisiJungle.jogador.Player
 import java.util.TreeSet
-
 fun router(): Function1<CommandType, Function2<GameManager,List<String>, String? >> {
     return :: criaFuncaoComando
 }
@@ -28,7 +26,7 @@ fun comandoGet (manager: GameManager, args: List<String>) : String?{
 
 fun comandoPost (manager: GameManager, args: List<String>) : String?{
     when(args[0]){
-
+         "MOVE" -> return postmove(manager,args)
     }
     return null
 }
@@ -105,6 +103,32 @@ fun getConsumedFoods(manager: GameManager, args: List<String>): String? {
     return comidaFinal
         .sortedWith {s1, s2 -> s1.compareTo(s2)}
         .joinToString(separator = "\n") { it }
+}
+
+fun postmove(manager: GameManager,args: List<String>):String?{
+
+    val infojogador = manager.currentPlayerInfo
+    val jogadores : List<Player> = manager.jogadores.filter { it.nome.equals(infojogador[1]) }
+    val posicaoAtual = jogadores[0].posicaoAtual
+    val posicaoPrevista = posicaoAtual + args[1].toInt()
+    if (manager.getSquareInfo(posicaoPrevista)==null){
+        return "Movimento invalido"
+    }
+
+    if(manager.getCurrentPlayerEnergyInfo(posicaoPrevista)[0].toInt()> jogadores[0].especie.energiaAtual){
+        return "Sem energia"
+    }
+    if(manager.getSquareInfo(posicaoPrevista)[1] == "Meta" || manager.getSquareInfo(posicaoPrevista)[1] == "Vazio"){
+          manager.moveCurrentPlayer(posicaoPrevista,true)
+        return "OK"
+    }else{
+        manager.moveCurrentPlayer(posicaoPrevista,true)
+        return "Apanhou comida"
+    }
+
+
+
+
 }
 
 fun main() {
