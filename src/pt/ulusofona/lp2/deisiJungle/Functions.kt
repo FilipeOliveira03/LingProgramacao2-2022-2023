@@ -118,10 +118,12 @@ fun postmove(manager: GameManager,args: List<String>):String?{
     if(manager.getCurrentPlayerEnergyInfo(args[1].toInt())[0].toInt()> jogadores[0].especie.energiaAtual){
         return "Sem energia"
     }
-    var checkComida = manager.getSquareInfo(posicaoPrevista)[1].toString()
-    var arrayVazio = arrayOf("Vazio")
-    var arrayMeta = arrayOf("Meta")
-    if(checkComida == arrayVazio[0] || checkComida == arrayMeta[0]){
+    val checkComida = manager.getSquareInfo(posicaoPrevista)[1].toString()
+    val arrayVazio = arrayOf("Vazio")
+    val arrayMeta = arrayOf("Meta")
+    val vazio = arrayVazio[0]
+    val meta = arrayMeta[0]
+    if(checkComida == vazio || checkComida == meta){
           manager.moveCurrentPlayer(args[1].toInt(),true)
         return "OK"
     }else{
