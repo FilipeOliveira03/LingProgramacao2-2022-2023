@@ -118,7 +118,7 @@ fun postmove(manager: GameManager,args: List<String>):String?{
     if(manager.getCurrentPlayerEnergyInfo(posicaoPrevista)[0].toInt()> jogadores[0].especie.energiaAtual){
         return "Sem energia"
     }
-    if(manager.getSquareInfo(posicaoPrevista)[1] == "Meta" || manager.getSquareInfo(posicaoPrevista)[1] == "Vazio"){
+    if(manager.getSquareInfo(posicaoPrevista)[1].toString() == "Meta" || manager.getSquareInfo(posicaoPrevista)[1].toString() == "Vazio"){
           manager.moveCurrentPlayer(posicaoPrevista,true)
         return "OK"
     }else{
