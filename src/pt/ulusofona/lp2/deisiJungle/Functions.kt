@@ -115,14 +115,16 @@ fun postmove(manager: GameManager,args: List<String>):String?{
         return "Movimento invalido"
     }
 
-    if(manager.getCurrentPlayerEnergyInfo(posicaoPrevista)[0].toInt()> jogadores[0].especie.energiaAtual){
+    if(manager.getCurrentPlayerEnergyInfo(args[1].toInt())[0].toInt()> jogadores[0].especie.energiaAtual){
         return "Sem energia"
     }
-    if(manager.getSquareInfo(posicaoPrevista)[1].toString() == "Meta" || manager.getSquareInfo(posicaoPrevista)[1].toString() == "Vazio"){
-          manager.moveCurrentPlayer(posicaoPrevista,true)
+    var checkComida = manager.getSquareInfo(posicaoPrevista)[1].toString()
+    var arrayMetaVazio = arrayOf("Meta","Vazio")
+    if(checkComida == arrayMetaVazio[0] || checkComida == arrayMetaVazio[1]){
+          manager.moveCurrentPlayer(args[1].toInt(),true)
         return "OK"
     }else{
-        manager.moveCurrentPlayer(posicaoPrevista,true)
+        manager.moveCurrentPlayer(args[1].toInt(),true)
         return "Apanhou comida"
     }
 
