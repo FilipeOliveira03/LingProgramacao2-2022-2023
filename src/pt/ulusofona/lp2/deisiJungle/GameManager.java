@@ -37,6 +37,9 @@ public class GameManager {
     public ArrayList<Player> getJogadores() {
         return jogadores;
     }
+    public HashMap <Integer,String> getTabuleiroAlimentos() {
+        return tabuleiroAlimentos;
+    }
 
     public void mudarTurno(){
         if(turno == jogadores.size()){
