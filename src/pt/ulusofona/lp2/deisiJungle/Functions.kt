@@ -150,7 +150,8 @@ fun main() {
     val commandGetFn = routerFn.invoke(CommandType.POST)
     manager.moveCurrentPlayer(1,true)
     manager.moveCurrentPlayer(1,true)
-    manager.moveCurrentPlayer(1,true)
-    val result = commandGetFn.invoke(manager, listOf("MOVE", "1"))
+    manager.moveCurrentPlayer(20,true)
+    manager.winnerInfo
+    val result = commandGetFn.invoke(manager, listOf("MOVE", "6"))
     println(result)
 }

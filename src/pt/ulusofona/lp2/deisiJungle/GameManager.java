@@ -552,6 +552,7 @@ public class GameManager {
             infojogadorvencedor[2] = jogadorVencedor.getEspecie().getNomeSigla();
             infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergiaAtual());
 
+            mudarTurno();
             return infojogadorvencedor;
         }
 
@@ -574,6 +575,7 @@ public class GameManager {
             infojogadorvencedor[2] = jogadorVencedor.getEspecie().getNomeSigla();
             infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergiaAtual());
 
+            mudarTurno();
             return infojogadorvencedor;
         }
 
