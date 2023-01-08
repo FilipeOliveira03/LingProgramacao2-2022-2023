@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle
 import pt.ulusofona.lp2.deisiJungle.jogador.Player
-import java.util.TreeSet
+import java.util.*
+
 fun router(): Function1<CommandType, Function2<GameManager,List<String>, String? >> {
     return :: criaFuncaoComando
 }
@@ -111,23 +112,27 @@ fun postmove(manager: GameManager,args: List<String>):String?{
     val jogadores : List<Player> = manager.jogadores.filter { it.nome.equals(infojogador[1]) }
     val posicaoAtual = jogadores[0].posicaoAtual
     val posicaoPrevista = posicaoAtual + args[1].toInt()
+
     if (manager.getSquareInfo(posicaoPrevista)==null){
         return "Movimento invalido"
     }
 
-    if(manager.getCurrentPlayerEnergyInfo(args[1].toInt())[0].toInt()> jogadores[0].especie.energiaAtual){ return "Sem energia" }
-
-   val temAlimento= manager.tabuleiroAlimentos.containsKey(posicaoPrevista)
-
-    if(!temAlimento){
-          manager.moveCurrentPlayer(args[1].toInt(),true)
-        return "OK"
-    }else{
-        manager.moveCurrentPlayer(args[1].toInt(),true)
-        return "Apanhou comida"
+    if(manager.getCurrentPlayerEnergyInfo(args[1].toInt())[0].toInt() > jogadores[0].especie.energiaAtual){
+        return "Sem energia"
     }
 
+    val temAlimento = manager.tabuleiroAlimentos.containsKey(posicaoPrevista)
+    manager.moveCurrentPlayer(args[1].toInt(),true)
 
+    if(manager.tabuleiroAlimentos[posicaoPrevista].equals("c") && jogadores[0].especie.tipoAlimentacao.equals("Herbívoro")){
+        return "OK"
+    }
+
+    return if(!temAlimento){
+        "OK"
+    }else{
+        "Apanhou comida"
+    }
 
 
 }
@@ -142,35 +147,9 @@ fun main() {
     val arrayAlimentos = arrayOf(arrayOf("c", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
 
     manager.createInitialJungle(30, arrayPlayers, arrayAlimentos)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
-    manager.moveCurrentPlayer(1,false)
 
     val routerFn = router()
-    val commandGetFn = routerFn.invoke(CommandType.GET)
-    val result = commandGetFn.invoke(manager, listOf("CONSUMED_FOODS", "2"))
+    val commandGetFn = routerFn.invoke(CommandType.POST)
+    val result = commandGetFn.invoke(manager, listOf("MOVE", "1"))
     println(result)
 }
