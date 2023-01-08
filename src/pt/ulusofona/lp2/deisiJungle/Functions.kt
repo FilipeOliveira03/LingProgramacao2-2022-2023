@@ -107,15 +107,31 @@ fun getConsumedFoods(manager: GameManager, args: List<String>): String? {
 }
 
 fun postmove(manager: GameManager,args: List<String>):String?{
+
+    val infojogador = manager.currentPlayerInfo
+    val jogadores : List<Player> = manager.jogadores.filter { it.nome.equals(infojogador[1]) }
+    val posicaoAtual = jogadores[0].posicaoAtual
+    val posicaoPrevista = posicaoAtual + args[1].toInt()
+
     if(args[1].toInt() < 1 || args[1].toInt() > manager.meta){
         return "Movimento invalido"
     }
+
+    if(manager.tabuleiroAlimentos[posicaoPrevista].equals("b") && manager.bananas[posicaoPrevista]?.countBanCacho?.equals(0) == true){
+        return "OK"
+    }
+
+
+
+    if(args[1].toInt() < 1 || args[1].toInt() > manager.meta){
+        return "Movimento invalido"
+    }
+
     return when(manager.moveCurrentPlayer(args[1].toInt(),true)){
         MovementResult(MovementResultCode.CAUGHT_FOOD) -> "Apanhou comida"
         MovementResult(MovementResultCode.VALID_MOVEMENT) -> "OK"
         MovementResult(MovementResultCode.NO_ENERGY) -> "Sem energia"
         else -> "Movimento invalido"
-        //move
     }
 }
 

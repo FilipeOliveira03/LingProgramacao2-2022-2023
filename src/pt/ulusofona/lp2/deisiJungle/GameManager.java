@@ -30,9 +30,6 @@ public class GameManager {
     private static int jogadasPassadas = 0;
     private int capote = 0;
 
-    public int getMeta() {
-        return meta;
-    }
 
     public static int getJogadasPassadas() {
         return jogadasPassadas;
@@ -48,6 +45,7 @@ public class GameManager {
     public HashMap<Integer, CachoBananas> getBananas() {
         return bananas;
     }
+
     public int getMeta() {
         return meta;
     }
