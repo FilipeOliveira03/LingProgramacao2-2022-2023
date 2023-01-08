@@ -113,6 +113,7 @@ fun postmove(manager: GameManager,args: List<String>):String?{
         MovementResult(MovementResultCode.VALID_MOVEMENT) -> "OK"
         MovementResult(MovementResultCode.NO_ENERGY) -> "Sem energia"
         else -> "Movimento invalido"
+        //move
     }
 }
 
