@@ -108,37 +108,12 @@ fun getConsumedFoods(manager: GameManager, args: List<String>): String? {
 
 fun postmove(manager: GameManager,args: List<String>):String?{
 
-    val infojogador = manager.currentPlayerInfo
-    val jogadores : List<Player> = manager.jogadores.filter { it.nome.equals(infojogador[1]) }
-    val posicaoAtual = jogadores[0].posicaoAtual
-    val posicaoPrevista = posicaoAtual + args[1].toInt()
-
-    if (manager.getSquareInfo(posicaoPrevista)==null){
-        return "Movimento invalido"
+    return when(manager.moveCurrentPlayer(args[1].toInt(),true)){
+        MovementResult(MovementResultCode.CAUGHT_FOOD) -> "Apanhou comida"
+        MovementResult(MovementResultCode.VALID_MOVEMENT) -> "OK"
+        MovementResult(MovementResultCode.NO_ENERGY) -> "Sem energia"
+        else -> "Movimento invalido"
     }
-
-    if(manager.getCurrentPlayerEnergyInfo(args[1].toInt())[0].toInt() > jogadores[0].especie.energiaAtual){
-        return "Sem energia"
-    }
-
-    val temAlimento = manager.tabuleiroAlimentos.containsKey(posicaoPrevista)
-    manager.moveCurrentPlayer(args[1].toInt(),true)
-
-    if(manager.tabuleiroAlimentos[posicaoPrevista].equals("c") && jogadores[0].especie.tipoAlimentacao.equals("Herbívoro")){
-        return "OK"
-    }
-
-    if(manager.tabuleiroAlimentos[posicaoPrevista].equals("b") && manager.bananas[posicaoPrevista]?.countBanCacho?.equals(0) == true){
-        return "OK"
-    }
-
-    return if(!temAlimento){
-        "OK"
-    }else{
-        "Apanhou comida"
-    }
-
-
 }
 
 fun main() {
