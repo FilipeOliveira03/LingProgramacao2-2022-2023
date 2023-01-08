@@ -44,7 +44,9 @@ public class GameManager {
     public HashMap<Integer, CachoBananas> getBananas() {
         return bananas;
     }
-
+    public int getMeta() {
+        return meta;
+    }
     public void mudarTurno(){
         if(turno == jogadores.size()){
             turno = 1;

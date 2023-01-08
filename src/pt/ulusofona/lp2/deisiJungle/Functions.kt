@@ -107,7 +107,9 @@ fun getConsumedFoods(manager: GameManager, args: List<String>): String? {
 }
 
 fun postmove(manager: GameManager,args: List<String>):String?{
-
+    if(args[1].toInt() < 1 || args[1].toInt() > manager.meta){
+        return "Movimento invalido"
+    }
     return when(manager.moveCurrentPlayer(args[1].toInt(),true)){
         MovementResult(MovementResultCode.CAUGHT_FOOD) -> "Apanhou comida"
         MovementResult(MovementResultCode.VALID_MOVEMENT) -> "OK"
