@@ -41,6 +41,10 @@ public class GameManager {
         return tabuleiroAlimentos;
     }
 
+    public HashMap<Integer, CachoBananas> getBananas() {
+        return bananas;
+    }
+
     public void mudarTurno(){
         if(turno == jogadores.size()){
             turno = 1;

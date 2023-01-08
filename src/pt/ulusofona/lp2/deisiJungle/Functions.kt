@@ -128,6 +128,10 @@ fun postmove(manager: GameManager,args: List<String>):String?{
         return "OK"
     }
 
+    if(manager.tabuleiroAlimentos[posicaoPrevista].equals("b") && manager.bananas[posicaoPrevista]?.countBanCacho?.equals(0) == true){
+        return "OK"
+    }
+
     return if(!temAlimento){
         "OK"
     }else{
@@ -141,15 +145,18 @@ fun main() {
 
     val manager = GameManager()
 
-    val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "Z"), arrayOf("22", "Tomas", "T"),
+    val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "E"), arrayOf("22", "Tomas", "T"),
         arrayOf("112", "Joao", "E"), arrayOf("12", "Lucas", "T"))
 
-    val arrayAlimentos = arrayOf(arrayOf("c", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
+    val arrayAlimentos = arrayOf(arrayOf("b", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
 
     manager.createInitialJungle(30, arrayPlayers, arrayAlimentos)
 
     val routerFn = router()
     val commandGetFn = routerFn.invoke(CommandType.POST)
+    manager.moveCurrentPlayer(1,true)
+    manager.moveCurrentPlayer(1,true)
+    manager.moveCurrentPlayer(1,true)
     val result = commandGetFn.invoke(manager, listOf("MOVE", "1"))
     println(result)
 }
