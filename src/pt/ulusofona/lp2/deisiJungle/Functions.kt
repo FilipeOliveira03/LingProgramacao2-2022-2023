@@ -115,9 +115,7 @@ fun postmove(manager: GameManager,args: List<String>):String?{
         return "Movimento invalido"
     }
 
-    if(manager.getCurrentPlayerEnergyInfo(args[1].toInt())[0].toInt()> jogadores[0].especie.energiaAtual){
-        return "Sem energia"
-    }
+    if(manager.getCurrentPlayerEnergyInfo(args[1].toInt())[0].toInt()> jogadores[0].especie.energiaAtual){ return "Sem energia" }
 
    val temAlimento= manager.tabuleiroAlimentos.containsKey(posicaoPrevista)
 
