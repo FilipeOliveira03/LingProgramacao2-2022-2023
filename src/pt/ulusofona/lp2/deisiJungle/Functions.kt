@@ -114,13 +114,7 @@ fun postMove(manager: GameManager,args: List<String>):String?{
     val posicaoAtual = jogador[0].posicaoAtual
     val posicaoPrevista = posicaoAtual + args[1].toInt()
 
-    var energiaConsumidaMov: Int = args[1].toInt() * jogador[0].especie.consumoEnergetico
-
-    if (energiaConsumidaMov < 0) {
-        energiaConsumidaMov *= -1
-    }
-
-    if(args[1].toInt() < 1){
+    if(args[1].toInt() < 1 || args[1].toInt() > manager.meta ){
         manager.mudarTurno()
         return "Movimento invalido"
     }
