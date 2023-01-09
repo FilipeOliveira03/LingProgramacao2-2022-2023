@@ -190,6 +190,166 @@ class TestFunctions(){
                 "Erva"
         assertEquals( resultadoEsperado, resultadoReal)
     }
+
+    @Test
+    fun testPostMove1(){
+
+        val manager = GameManager()
+
+        val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "E"), arrayOf("22", "Tomas", "T"),
+            arrayOf("112", "Joao", "E"), arrayOf("12", "Lucas", "T"))
+
+        val arrayAlimentos = arrayOf(arrayOf("b", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
+
+        manager.createInitialJungle(30, arrayPlayers, arrayAlimentos)
+
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+        manager.moveCurrentPlayer(1,true)
+        manager.moveCurrentPlayer(1,true)
+        manager.moveCurrentPlayer(20,true)
+        val resultadoReal = commandGetFn.invoke(manager, listOf("MOVE", "2"))
+        val resultadoEsperado = "Apanhou comida"
+        assertEquals( resultadoEsperado, resultadoReal)
+    }
+
+    @Test
+    fun testPostMove2(){
+
+        val manager = GameManager()
+
+        val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "E"), arrayOf("22", "Tomas", "T"),
+            arrayOf("112", "Joao", "E"), arrayOf("12", "Lucas", "T"))
+
+        val arrayAlimentos = arrayOf(arrayOf("b", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
+
+        manager.createInitialJungle(30, arrayPlayers, arrayAlimentos)
+
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+        manager.moveCurrentPlayer(1,true)
+        manager.moveCurrentPlayer(1,true)
+        manager.moveCurrentPlayer(20,true)
+        val resultadoReal = commandGetFn.invoke(manager, listOf("MOVE", "100"))
+        val resultadoEsperado = "Movimento invalido"
+        assertEquals( resultadoEsperado, resultadoReal)
+    }
+
+    @Test
+    fun testPostMove3(){
+
+        val manager = GameManager()
+
+        val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "E"), arrayOf("22", "Tomas", "T"),
+            arrayOf("112", "Joao", "E"), arrayOf("12", "Lucas", "T"))
+
+        val arrayAlimentos = arrayOf(arrayOf("b", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
+
+        manager.createInitialJungle(30, arrayPlayers, arrayAlimentos)
+
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+        manager.moveCurrentPlayer(1,true)
+        manager.moveCurrentPlayer(1,true)
+        manager.moveCurrentPlayer(1,true)
+        val resultadoReal = commandGetFn.invoke(manager, listOf("MOVE", "1"))
+        val resultadoEsperado = "OK"
+        assertEquals( resultadoEsperado, resultadoReal)
+    }
+
+    @Test
+    fun testPostMove4(){
+
+        val manager = GameManager()
+
+        val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "E"), arrayOf("22", "Tomas", "T"),
+            arrayOf("112", "Joao", "E"), arrayOf("12", "Lucas", "T"))
+
+        //val arrayAlimentos = arrayOf(arrayOf("b", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
+
+        manager.createInitialJungle(30, arrayPlayers)
+
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+        manager.moveCurrentPlayer(1,true)
+        manager.moveCurrentPlayer(1,true)
+        manager.moveCurrentPlayer(1,true)
+        val resultadoReal = commandGetFn.invoke(manager, listOf("MOVE", "1"))
+        val resultadoEsperado = "OK"
+        assertEquals( resultadoEsperado, resultadoReal)
+    }
+
+    @Test
+    fun testPostMove5(){
+
+        val manager = GameManager()
+
+        val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "E"), arrayOf("22", "Tomas", "T"),)
+
+        //val arrayAlimentos = arrayOf(arrayOf("b", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
+
+        manager.createInitialJungle(30, arrayPlayers)
+
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+        manager.moveCurrentPlayer(20,true)
+        manager.moveCurrentPlayer(20,true)
+        manager.moveCurrentPlayer(-20,true)
+        manager.moveCurrentPlayer(-20,true)
+        manager.moveCurrentPlayer(1,true)
+        manager.moveCurrentPlayer(1,true)
+        val resultadoReal = commandGetFn.invoke(manager, listOf("MOVE", "20"))
+        val resultadoEsperado = "Sem energia"
+        assertEquals( resultadoEsperado, resultadoReal)
+    }
+
+    @Test
+    fun testGetNull(){
+
+        val manager = GameManager()
+
+        val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "E"), arrayOf("22", "Tomas", "T"),)
+
+        //val arrayAlimentos = arrayOf(arrayOf("b", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
+
+        manager.createInitialJungle(30, arrayPlayers)
+
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.GET)
+        manager.moveCurrentPlayer(20,true)
+        manager.moveCurrentPlayer(20,true)
+        manager.moveCurrentPlayer(-20,true)
+        manager.moveCurrentPlayer(-20,true)
+        manager.moveCurrentPlayer(1,true)
+        manager.moveCurrentPlayer(1,true)
+        val resultadoReal = commandGetFn.invoke(manager, listOf("A", "20"))
+        val resultadoEsperado = null
+        assertEquals( resultadoEsperado, resultadoReal)
+    }
+
+    @Test
+    fun testPostNull(){
+
+        val manager = GameManager()
+
+        val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "E"), arrayOf("22", "Tomas", "T"),)
+
+        //val arrayAlimentos = arrayOf(arrayOf("b", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
+
+        manager.createInitialJungle(30, arrayPlayers)
+
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+        manager.moveCurrentPlayer(20,true)
+        manager.moveCurrentPlayer(20,true)
+        manager.moveCurrentPlayer(-20,true)
+        manager.moveCurrentPlayer(-20,true)
+        manager.moveCurrentPlayer(1,true)
+        manager.moveCurrentPlayer(1,true)
+        val resultadoReal = commandGetFn.invoke(manager, listOf("A", "20"))
+        val resultadoEsperado = null
+        assertEquals( resultadoEsperado, resultadoReal)
+    }
 }
 
 

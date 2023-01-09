@@ -27,7 +27,7 @@ fun comandoGet (manager: GameManager, args: List<String>) : String?{
 
 fun comandoPost (manager: GameManager, args: List<String>) : String?{
     when(args[0]){
-         "MOVE" -> return postmove(manager,args)
+         "MOVE" -> return postMove(manager,args)
     }
     return null
 }
@@ -106,7 +106,7 @@ fun getConsumedFoods(manager: GameManager, args: List<String>): String? {
         .joinToString(separator = "\n") { it }
 }
 
-fun postmove(manager: GameManager,args: List<String>):String?{
+fun postMove(manager: GameManager,args: List<String>):String?{
 
     val infojogador = manager.currentPlayerInfo
     val jogadores : List<Player> = manager.jogadores.filter { it.nome.equals(infojogador[1]) }
@@ -121,17 +121,9 @@ fun postmove(manager: GameManager,args: List<String>):String?{
         return "OK"
     }
 
-
-
-    if(args[1].toInt() < 1 || args[1].toInt() > manager.meta){
-        return "Movimento invalido"
-    }
-
     return when(manager.moveCurrentPlayer(args[1].toInt(),true)){
         MovementResult(MovementResultCode.CAUGHT_FOOD) -> "Apanhou comida"
         MovementResult(MovementResultCode.VALID_MOVEMENT) -> "OK"
-        MovementResult(MovementResultCode.NO_ENERGY) -> "Sem energia"
-        else -> "Movimento invalido"
+        else -> "Sem energia"
     }
 }
-

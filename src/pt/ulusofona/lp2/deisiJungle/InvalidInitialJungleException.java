@@ -14,11 +14,11 @@ public class InvalidInitialJungleException extends Exception{
 
     public boolean isInvalidPlayer(){
 
-        return message.equals("");
+        return !message.equals("");
     }
 
     public boolean isInvalidFood(){
 
-        return !message.equals("");
+        return message.equals("");
     }
 }
