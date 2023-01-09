@@ -37,6 +37,11 @@ public class GameManager {
     public ArrayList<Player> getJogadores() {
         return jogadores;
     }
+
+    public HashMap<Integer, ArrayList<Player>> getTabuleiro() {
+        return tabuleiro;
+    }
+
     public HashMap <Integer,String> getTabuleiroAlimentos() {
         return tabuleiroAlimentos;
     }
@@ -443,6 +448,8 @@ public class GameManager {
                 mudarTurno(); return new MovementResult(INVALID_MOVEMENT); }
 
         }
+
+
 
         int energiaConsumidaMov = nrSquares * jogador.getEspecie().getConsumoEnergetico();
 

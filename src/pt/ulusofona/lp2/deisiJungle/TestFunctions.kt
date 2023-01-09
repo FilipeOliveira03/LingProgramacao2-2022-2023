@@ -370,6 +370,25 @@ class TestFunctions(){
         manager.currentPlayerInfo
 
     }
+
+    @Test
+    fun testMove2(){
+
+        val manager = GameManager()
+
+        val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "P"), arrayOf("22", "Tomas", "T"),arrayOf("33", "Joao", "T"))
+
+        //val arrayAlimentos = arrayOf(arrayOf("b", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
+
+        manager.createInitialJungle(30, arrayPlayers)
+
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+        val result = commandGetFn.invoke(manager, listOf("MOVE", "60"))
+        println(result)
+        manager.currentPlayerInfo
+
+    }
 }
 
 

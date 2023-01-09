@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle
 import pt.ulusofona.lp2.deisiJungle.jogador.Player
 import java.util.*
+import kotlin.system.measureNanoTime
 
 fun router(): Function1<CommandType, Function2<GameManager,List<String>, String? >> {
     return :: criaFuncaoComando
@@ -119,12 +120,7 @@ fun postMove(manager: GameManager,args: List<String>):String?{
         energiaConsumidaMov *= -1
     }
 
-    if (jogador[0].especie.energiaAtual - energiaConsumidaMov < 0) {
-        manager.mudarTurno()
-        return "Sem energia"
-    }
-
-    if(args[1].toInt() < 1 || args[1].toInt() > manager.meta){
+    if(args[1].toInt() < 1){
         manager.mudarTurno()
         return "Movimento invalido"
     }
