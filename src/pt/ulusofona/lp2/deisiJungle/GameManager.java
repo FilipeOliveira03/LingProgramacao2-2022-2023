@@ -30,7 +30,6 @@ public class GameManager {
     private static int jogadasPassadas = 0;
     private int capote = 0;
 
-
     public static int getJogadasPassadas() {
         return jogadasPassadas;
     }
@@ -82,6 +81,7 @@ public class GameManager {
             throws InvalidInitialJungleException {
 
         jogadasPassadas = 0;
+        turno = 1;
         tabuleiroAlimentos.clear();
         bananas.clear();
         cogumelos.clear();

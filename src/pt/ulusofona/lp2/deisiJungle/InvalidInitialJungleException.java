@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import java.util.Objects;
-
 public class InvalidInitialJungleException extends Exception{
 
     private String message = "";
@@ -21,6 +19,6 @@ public class InvalidInitialJungleException extends Exception{
 
     public boolean isInvalidFood(){
 
-        return message.equals("");
+        return !message.equals("");
     }
 }
