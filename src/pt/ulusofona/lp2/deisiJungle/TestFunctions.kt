@@ -350,6 +350,26 @@ class TestFunctions(){
         val resultadoEsperado = null
         assertEquals( resultadoEsperado, resultadoReal)
     }
+
+    @Test
+    fun testMove(){
+
+        val manager = GameManager()
+
+        val arrayPlayers = arrayOf(arrayOf("11", "Pedro", "E"), arrayOf("22", "Tomas", "T"),arrayOf("33", "Joao", "T"))
+
+        //val arrayAlimentos = arrayOf(arrayOf("b", "2"), arrayOf("b", "3"), arrayOf("m", "4"), arrayOf("a", "5"))
+
+        manager.createInitialJungle(30, arrayPlayers)
+
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+        commandGetFn.invoke(manager, listOf("MOVE", "8"))
+        commandGetFn.invoke(manager, listOf("MOVE", "2"))
+        commandGetFn.invoke(manager, listOf("MOVE", "-10"))
+        manager.currentPlayerInfo
+
+    }
 }
 
 

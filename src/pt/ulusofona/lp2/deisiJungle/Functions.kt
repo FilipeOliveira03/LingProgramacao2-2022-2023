@@ -114,10 +114,14 @@ fun postMove(manager: GameManager,args: List<String>):String?{
     val posicaoPrevista = posicaoAtual + args[1].toInt()
 
     if(args[1].toInt() < 1 || args[1].toInt() > manager.meta){
+        manager.mudarTurno()
         return "Movimento invalido"
     }
 
+
+
     if(manager.tabuleiroAlimentos[posicaoPrevista].equals("b") && manager.bananas[posicaoPrevista]?.countBanCacho?.equals(0) == true){
+        manager.mudarTurno()
         return "OK"
     }
 

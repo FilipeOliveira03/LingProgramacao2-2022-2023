@@ -874,4 +874,31 @@ public class TestGame {
         manager.getGameResults();
 
     }
+
+    @Test
+    public void test() throws InvalidInitialJungleException {
+
+        GameManager manager = new GameManager();
+
+        String[][] arrayPlayers = {
+                {"11", "abc", "E"},
+                {"22", "Leão", "L"},
+                {"33", "cba", "Z"},
+        };
+
+        String[][] arrayalimentos = {
+                {"c","6"},
+                {"c","11"},
+                {"c","16"},
+                {"c","21"},
+        };
+
+        manager.createInitialJungle(30, arrayPlayers);
+        manager.moveCurrentPlayer(8, true);
+        manager.moveCurrentPlayer(2, true);
+        manager.moveCurrentPlayer(-10, true);
+        manager.getCurrentPlayerInfo();
+
+
+    }
 }
