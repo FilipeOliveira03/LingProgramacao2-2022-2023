@@ -14,11 +14,34 @@ public class InvalidInitialJungleException extends Exception{
 
     public boolean isInvalidPlayer(){
 
-        return !message.equals("");
+        switch (message){
+            case "O id de um dos utilizadores não têm números",
+                    "O id de um dos utilizadores têm números negativos",
+                    "Existem dois jogadores com o mesmo id",
+                    "Um dos utilizadores têm um nome inválido",
+                    "Existe mais do que um tarzan",
+                    "O número de jogadores em jogo é inválido",
+                    "A espécie não existe"-> {
+                return true;
+            }
+            default -> {
+                return false;
+            }
+        }
     }
 
     public boolean isInvalidFood(){
 
-        return message.equals("");
+        switch (message){
+            case "A posição da comida não é um número",
+                    "A posição da comida é inválida", "A comida não existe" -> {
+                return true;
+            }
+            default -> {
+                return false;
+            }
+        }
+
+
     }
 }
