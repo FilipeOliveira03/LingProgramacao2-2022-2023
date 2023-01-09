@@ -1,8 +1,10 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import java.util.Objects;
+
 public class InvalidInitialJungleException extends Exception{
 
-    private final String message;
+    private String message = "";
 
     public InvalidInitialJungleException(String message) {
         this.message = message;
@@ -13,10 +15,12 @@ public class InvalidInitialJungleException extends Exception{
     }
 
     public boolean isInvalidPlayer(){
-        return true;
+
+        return message.equals("");
     }
 
     public boolean isInvalidFood(){
-        return true;
+
+        return message.equals("");
     }
 }

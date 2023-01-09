@@ -100,6 +100,7 @@ public class GameManager {
             }
 
             if(!OtherFunctions.isNumeric(foodsInfo[countAlimentos][1])){
+
                 throw new InvalidInitialJungleException("A posição da comida não é um número");
                // return new InitializationError(INVALID_FOOD_POSITION_NOT_NUMBER);
             }

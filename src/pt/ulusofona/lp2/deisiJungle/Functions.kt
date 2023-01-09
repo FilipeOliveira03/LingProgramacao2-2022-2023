@@ -151,7 +151,6 @@ fun main() {
     manager.moveCurrentPlayer(1,true)
     manager.moveCurrentPlayer(1,true)
     manager.moveCurrentPlayer(20,true)
-    manager.winnerInfo
     val result = commandGetFn.invoke(manager, listOf("MOVE", "6"))
     println(result)
 }
