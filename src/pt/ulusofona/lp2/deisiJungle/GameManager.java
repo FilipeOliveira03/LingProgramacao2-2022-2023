@@ -690,8 +690,9 @@ public class GameManager {
             if(!array.isEmpty()){
 
                 for (Player jogador : array) {
-                    pos++;
+
                     if (jogador.getID()!= vencedor.getID()) {
+                        pos++;
                         String especie = "";
 
                         switch (jogador.getEspecie().getNomeSigla()) {
