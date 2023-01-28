@@ -645,54 +645,85 @@ public class GameManager {
         return null;
     }
 
-    public ArrayList<String> getGameResults(){
+    public ArrayList<String> getGameResults() {
 
-        ArrayList<String> resultadoJogo= new ArrayList<>();
+        ArrayList<String> resultadoJogo = new ArrayList<>();
         ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
-        Player vencedor = new Player();
+        Player vencedor;
         int pos = 1;
         int casaDoMeio;
-        if(meta%2==0){
-            casaDoMeio= meta / 2;
-        }else{
-            casaDoMeio= (meta+1)/2 ;
+        if (meta % 2 == 0) {
+            casaDoMeio = meta / 2;
+        } else {
+            casaDoMeio = (meta + 1) / 2;
         }
-    if(casaDoMeioTest) {
-        for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).getPosicaoAtual() == casaDoMeio) {
+        if (casaDoMeioTest) {
+            for (int i = 0; i < jogadores.size(); i++) {
+                if (jogadores.get(i).getPosicaoAtual() == casaDoMeio) {
 
-                jogadoresDoMeio.add(jogadores.get(i));
+                    jogadoresDoMeio.add(jogadores.get(i));
+                }
             }
-        }
-    if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() > jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
-           vencedor = jogadoresDoMeio.get(0);
-        }else{
-            vencedor = jogadoresDoMeio.get(1);
-        }
-        String especieV = "";
-        switch (vencedor.getEspecie().getNomeSigla()) {
+            if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() > jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
+                vencedor = jogadoresDoMeio.get(0);
+            } else {
+                vencedor = jogadoresDoMeio.get(1);
+            }
+            String especieV = "";
+            switch (vencedor.getEspecie().getNomeSigla()) {
 
-            case "L" -> especieV = "Leao";
-            case "E" -> especieV = "Elefante";
-            case "T" -> especieV = "Tartaruga";
-            case "P" -> especieV = "Passaro";
-            case "Z" -> especieV = "Tarzan";
-            case "U" -> especieV = "Unicornio";
-        }
-        resultadoJogo.add("#" + pos + " " + vencedor.getNome() + ", " + especieV + ", " +
-                vencedor.getPosicaoAtual() + ", " + vencedor.getDistanciaViajada() +
-                ", " + vencedor.getAlimentosIngeridos().size());
+                case "L" -> especieV = "Leao";
+                case "E" -> especieV = "Elefante";
+                case "T" -> especieV = "Tartaruga";
+                case "P" -> especieV = "Passaro";
+                case "Z" -> especieV = "Tarzan";
+                case "U" -> especieV = "Unicornio";
+            }
+            resultadoJogo.add("#" + pos + " " + vencedor.getNome() + ", " + especieV + ", " +
+                    vencedor.getPosicaoAtual() + ", " + vencedor.getDistanciaViajada() +
+                    ", " + vencedor.getAlimentosIngeridos().size());
+            pos++;
+            for (int countJogadores = tabuleiro.size(); countJogadores >= 1; countJogadores--) {
 
-        for (int countJogadores = tabuleiro.size(); countJogadores >= 1; countJogadores--) {
+                ArrayList<Player> array = tabuleiro.get(countJogadores);
 
-            ArrayList<Player> array = tabuleiro.get(countJogadores);
+                if (!array.isEmpty()) {
 
-            if(!array.isEmpty()){
+                    for (Player jogador : array) {
 
-                for (Player jogador : array) {
+                        if (jogador.getID() != vencedor.getID()) {
 
-                    if (jogador.getID()!= vencedor.getID()) {
-                        pos++;
+                            String especie = "";
+
+                            switch (jogador.getEspecie().getNomeSigla()) {
+
+                                case "L" -> especie = "Leao";
+                                case "E" -> especie = "Elefante";
+                                case "T" -> especie = "Tartaruga";
+                                case "P" -> especie = "Passaro";
+                                case "Z" -> especie = "Tarzan";
+                                case "U" -> especie = "Unicornio";
+                            }
+
+                            resultadoJogo.add("#" + pos + " " + jogador.getNome() + ", " + especie + ", " +
+                                    jogador.getPosicaoAtual() + ", " + jogador.getDistanciaViajada() +
+                                    ", " + jogador.getAlimentosIngeridos().size());
+
+                            pos++;
+                        }
+                    }
+                }
+            }
+
+        } else {
+            for (int countJogadores = tabuleiro.size(); countJogadores >= 1; countJogadores--) {
+
+                ArrayList<Player> array = tabuleiro.get(countJogadores);
+
+                if (!array.isEmpty()) {
+
+                    for (Player jogador : array) {
+
                         String especie = "";
 
                         switch (jogador.getEspecie().getNomeSigla()) {
@@ -709,63 +740,33 @@ public class GameManager {
                                 jogador.getPosicaoAtual() + ", " + jogador.getDistanciaViajada() +
                                 ", " + jogador.getAlimentosIngeridos().size());
 
-
+                        pos++;
                     }
                 }
             }
-        }
 
-    }
-        for (int countJogadores = tabuleiro.size(); countJogadores >= 1; countJogadores--) {
+            if (capote >= 1) {
 
-            ArrayList<Player> array = tabuleiro.get(countJogadores);
+                ArrayList<String> resultadoJogoCapote = new ArrayList<>();
 
-            if(!array.isEmpty()){
+                String primeiro = resultadoJogo.get(0).replaceFirst("1", "2");
+                String segundo = resultadoJogo.get(1).replaceFirst("2", "1");
 
-                for (Player jogador : array) {
+                resultadoJogoCapote.add(segundo);
+                resultadoJogoCapote.add(primeiro);
 
-                    String especie = "";
+                for (int countJog = 2; countJog < resultadoJogo.size(); countJog++) {
+                    resultadoJogoCapote.add(resultadoJogo.get(countJog));
 
-                    switch (jogador.getEspecie().getNomeSigla()) {
-
-                        case "L" -> especie = "Leao";
-                        case "E" -> especie = "Elefante";
-                        case "T" -> especie = "Tartaruga";
-                        case "P" -> especie = "Passaro";
-                        case "Z" -> especie = "Tarzan";
-                        case "U" -> especie = "Unicornio";
-                    }
-
-                    resultadoJogo.add("#" + pos + " " + jogador.getNome() + ", " + especie + ", " +
-                            jogador.getPosicaoAtual() + ", " + jogador.getDistanciaViajada() +
-                            ", " + jogador.getAlimentosIngeridos().size());
-
-                    pos++;
                 }
-            }
-        }
 
-        if(capote >= 1){
-
-            ArrayList<String> resultadoJogoCapote = new ArrayList<>();
-
-            String primeiro = resultadoJogo.get(0).replaceFirst("1", "2");
-            String segundo =  resultadoJogo.get(1).replaceFirst("2", "1");
-
-            resultadoJogoCapote.add(segundo);
-            resultadoJogoCapote.add(primeiro);
-
-            for (int countJog = 2; countJog < resultadoJogo.size(); countJog++) {
-                resultadoJogoCapote.add(resultadoJogo.get(countJog));
+                resultadoJogo = resultadoJogoCapote;
 
             }
-
-            resultadoJogo = resultadoJogoCapote;
-
+        }
+            return resultadoJogo;
         }
 
-        return resultadoJogo;
-    }
 
     public JPanel getAuthorsPanel() throws IOException {
 
