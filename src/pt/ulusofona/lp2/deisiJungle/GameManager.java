@@ -69,7 +69,9 @@ public class GameManager {
                 { "L", "Leão","lion.png", "80", "2", "10", "4..6" },
                 { "T", "Tartaruga", "turtle.png" , "150", "1", "5", "1..3"},
                 { "P", "Pássaro","bird.png" , "70", "4", "50", "5..6"},
-                { "Z", "Tarzan","tarzan.png" , "70", "2", "20", "1..6"} };
+                { "Z", "Tarzan","tarzan.png" , "70", "2", "20", "1..6"} ,
+                { "U", "Unicórnio","unicorn.png" , "70", "8", "20", "3..6"}
+        };
     }
 
     public String[][] getFoodTypes(){
@@ -674,7 +676,7 @@ public class GameManager {
                 ", " + vencedor.getAlimentosIngeridos().size());
 
         for (int countJogadores = tabuleiro.size(); countJogadores >= 1; countJogadores--) {
-
+            pos++;
             ArrayList<Player> array = tabuleiro.get(countJogadores);
 
             if(!array.isEmpty()){
@@ -698,7 +700,7 @@ public class GameManager {
                                 jogador.getPosicaoAtual() + ", " + jogador.getDistanciaViajada() +
                                 ", " + jogador.getAlimentosIngeridos().size());
 
-                        pos++;
+
                     }
                 }
             }
