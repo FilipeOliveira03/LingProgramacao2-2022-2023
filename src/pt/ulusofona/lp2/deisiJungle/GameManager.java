@@ -684,13 +684,13 @@ public class GameManager {
                 ", " + vencedor.getAlimentosIngeridos().size());
 
         for (int countJogadores = tabuleiro.size(); countJogadores >= 1; countJogadores--) {
-            pos++;
+
             ArrayList<Player> array = tabuleiro.get(countJogadores);
 
             if(!array.isEmpty()){
 
                 for (Player jogador : array) {
-
+                    pos++;
                     if (jogador.getID()!= vencedor.getID()) {
                         String especie = "";
 
