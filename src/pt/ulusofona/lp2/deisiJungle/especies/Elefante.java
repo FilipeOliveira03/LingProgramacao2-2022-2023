@@ -10,6 +10,5 @@ public class Elefante extends Especie {
         this.velocidade = "1..6";
         this.tipoAlimentacao = "Herbívoro";
         this.nomeEspecie = "Elefante";
-    }
-
+  }
 }
