@@ -664,14 +664,22 @@ public class GameManager {
                 jogadoresDoMeio.add(jogadores.get(i));
             }
         }
-        if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() > jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
+    if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() > jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
            vencedor = jogadoresDoMeio.get(0);
-
-
         }else{
             vencedor = jogadoresDoMeio.get(1);
         }
-        resultadoJogo.add("#" + pos + " " + vencedor.getNome() + ", " + vencedor + ", " +
+        String especieV = "";
+        switch (vencedor.getEspecie().getNomeSigla()) {
+
+            case "L" -> especieV = "Leao";
+            case "E" -> especieV = "Elefante";
+            case "T" -> especieV = "Tartaruga";
+            case "P" -> especieV = "Passaro";
+            case "Z" -> especieV = "Tarzan";
+            case "U" -> especieV = "Unicornio";
+        }
+        resultadoJogo.add("#" + pos + " " + vencedor.getNome() + ", " + especieV + ", " +
                 vencedor.getPosicaoAtual() + ", " + vencedor.getDistanciaViajada() +
                 ", " + vencedor.getAlimentosIngeridos().size());
 
