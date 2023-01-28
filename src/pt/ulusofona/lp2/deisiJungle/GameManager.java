@@ -24,7 +24,7 @@ public class GameManager {
     private final HashMap <Integer,String> tabuleiroAlimentos = new HashMap<>();
     private final HashMap <Integer,CachoBananas> bananas = new HashMap<>();
     private final HashMap <Integer,Cogumelo> cogumelos = new HashMap<>();
-
+    private boolean CasaDoMeioTest = false;
     private int meta;
     private int turno = 1;
     private static int jogadasPassadas = 0;
@@ -223,6 +223,7 @@ public class GameManager {
                 case "T" -> new Tartaruga();
                 case "P" -> new Passaro();
                 case "Z" -> new Tarzan();
+                case "U" -> new Unicornio();
                 default -> null;
             };
 
@@ -280,6 +281,7 @@ public class GameManager {
                 case "T" -> info[0] = "turtle.png";
                 case "P" -> info[0] = "bird.png";
                 case "Z" -> info[0] = "tarzan.png";
+                case "U" -> info[0] = "unicorn.png";
             }
 
             String id = String.valueOf(jogador.getID());
@@ -500,11 +502,16 @@ public class GameManager {
             if(alimento != null){
                 if(alimentoTabu.equals("c") && jogador.getEspecie().getTipoAlimentacao().equals("Herbívoro")){
                     return new MovementResult(VALID_MOVEMENT); }
-                alimento.acontecimentoIngerir(jogador);
-                MovementResult.mudaOutPutAlimento(alimento.getNome());
-                jogador.adicionaAlimentosIngeridos(alimentoTabu);
-                return new MovementResult(CAUGHT_FOOD);
-
+                if (!Objects.equals(jogador.getEspecie().getNomeSigla(), "U")) {
+                    alimento.acontecimentoIngerir(jogador);
+                    MovementResult.mudaOutPutAlimento(alimento.getNome());
+                    jogador.adicionaAlimentosIngeridos(alimentoTabu);
+                    return new MovementResult(CAUGHT_FOOD);
+                }
+            }
+        }else{
+            if(Objects.equals(jogador.getEspecie().getNomeSigla(), "U")){
+                jogador.getEspecie().mudaEnergiaAtual(jogador.getEspecie().getEnergiaAtual()+2);
             }
         }
         return new MovementResult(VALID_MOVEMENT);
@@ -516,6 +523,52 @@ public class GameManager {
         int jogoAcabadoMeta = 0;
         int jogoAcabadoCapote = 0;
         capote = 0;
+        int countJogCasaMeio= 0;
+        int countJogAFrenteCasaMeio = 0;
+        int casaDoMeio;
+        boolean CasaDoMeioTest = false;
+        ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
+
+        if(meta%2==0){
+            casaDoMeio= meta / 2;
+        }else{
+            casaDoMeio= (meta+1)/2 ;
+        }
+        for (int i = 0; i < jogadores.size(); i++) {
+            if (jogadores.get(i).getPosicaoAtual()==casaDoMeio){
+                countJogCasaMeio++;
+                jogadoresDoMeio.add(jogadores.get(i));
+            }
+            if (jogadores.get(i).getPosicaoAtual()>=casaDoMeio){
+               countJogAFrenteCasaMeio++;
+
+            }
+        }
+        if(countJogCasaMeio==2&&countJogAFrenteCasaMeio>0){
+            CasaDoMeioTest=true;
+ if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual()>jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()){
+     String[] infojogadorvencedor = new String[4];
+
+     infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(0).getID());
+     infojogadorvencedor[1] = jogadoresDoMeio.get(0).getNome();
+     infojogadorvencedor[2] = jogadoresDoMeio.get(0).getEspecie().getNomeSigla();
+     infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual());
+     mudarTurno();
+     return infojogadorvencedor;
+            }else{
+     String[] infojogadorvencedor = new String[4];
+
+     infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(1).getID());
+     infojogadorvencedor[1] = jogadoresDoMeio.get(1).getNome();
+     infojogadorvencedor[2] = jogadoresDoMeio.get(1).getEspecie().getNomeSigla();
+     infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual());
+     mudarTurno();
+     return infojogadorvencedor;
+ }
+
+
+        }
+
 
         int[] posicoes = new int[jogadores.size()];
 
@@ -613,6 +666,7 @@ public class GameManager {
                         case "T" -> especie = "Tartaruga";
                         case "P" -> especie = "Passaro";
                         case "Z" -> especie = "Tarzan";
+                        case "U" -> especie = "Unicornio";
                     }
 
                     resultadoJogo.add("#" + pos + " " + jogador.getNome() + ", " + especie + ", " +
@@ -847,6 +901,7 @@ public class GameManager {
                         case "T" -> new Tartaruga();
                         case "P" -> new Passaro();
                         case "Z" -> new Tarzan();
+                        case "U" -> new Unicornio();
                         default -> null;
                     };
 
