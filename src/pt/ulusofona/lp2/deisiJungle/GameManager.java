@@ -70,7 +70,7 @@ public class GameManager {
                 { "T", "Tartaruga", "turtle.png" , "150", "1", "5", "1..3"},
                 { "P", "Pássaro","bird.png" , "70", "4", "50", "5..6"},
                 { "Z", "Tarzan","tarzan.png" , "70", "2", "20", "1..6"} ,
-                { "U", "Unicórnio","unicorn.png" , "70", "8", "20", "3..6"}
+                { "U", "Unicórnio","unicorn.png" , "200", "8", "20", "3..6"}
         };
     }
 
