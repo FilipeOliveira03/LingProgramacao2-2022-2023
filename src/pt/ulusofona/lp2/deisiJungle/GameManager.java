@@ -24,7 +24,6 @@ public class GameManager {
     private final HashMap <Integer,String> tabuleiroAlimentos = new HashMap<>();
     private final HashMap <Integer,CachoBananas> bananas = new HashMap<>();
     private final HashMap <Integer,Cogumelo> cogumelos = new HashMap<>();
-    private boolean casaDoMeioTest = false;
     private int meta;
     private int turno = 1;
     private static int jogadasPassadas = 0;
