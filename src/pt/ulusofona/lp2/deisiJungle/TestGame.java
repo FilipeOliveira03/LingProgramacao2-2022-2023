@@ -878,8 +878,8 @@ public class TestGame {
         manager.moveCurrentPlayer(0, true);
         manager.moveCurrentPlayer(1, true);
         manager.moveCurrentPlayer(1, true);
-        manager.moveCurrentPlayer(+1, true);
-        manager.getWinnerInfo();
+        manager.moveCurrentPlayer(1, true);
+        manager.getGameResults();
        var a = manager.getGameResults();
         for (int i = 0; i < a.size(); i++) {
             System.out.println(a.get(i));

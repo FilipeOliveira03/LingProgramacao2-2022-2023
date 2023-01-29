@@ -547,7 +547,7 @@ public class GameManager {
             }
         }
         if(countJogCasaMeio==2&&countJogAFrenteCasaMeio>0){
-            casaDoMeioTest=true;
+
  if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual()>jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()){
      String[] infojogadorvencedor = new String[4];
 
@@ -652,12 +652,24 @@ public class GameManager {
         Player vencedor;
         int pos = 1;
         int casaDoMeio;
+        int countJogCasaMeio= 0;
+        int countJogAFrenteCasaMeio = 0;
         if (meta % 2 == 0) {
             casaDoMeio = meta / 2;
         } else {
             casaDoMeio = (meta + 1) / 2;
         }
-        if (casaDoMeioTest) {
+        for (int i = 0; i < jogadores.size(); i++) {
+            if (jogadores.get(i).getPosicaoAtual()==casaDoMeio){
+                countJogCasaMeio++;
+                jogadoresDoMeio.add(jogadores.get(i));
+            }
+            if (jogadores.get(i).getPosicaoAtual()>=casaDoMeio){
+                countJogAFrenteCasaMeio++;
+
+            }
+        }
+        if (countJogCasaMeio==2&&countJogAFrenteCasaMeio>0) {
             for (int i = 0; i < jogadores.size(); i++) {
                 if (jogadores.get(i).getPosicaoAtual() == casaDoMeio) {
 
