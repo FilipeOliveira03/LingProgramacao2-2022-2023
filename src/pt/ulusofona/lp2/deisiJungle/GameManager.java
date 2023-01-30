@@ -533,18 +533,20 @@ public class GameManager {
             casaDoMeio= (meta +1)/2 ;
 
         }
-       int[] countJogador = new int[2];
+
+        int countJogadorM=0;
+        int countJogadorF=0;
 
         ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
 
         for (int countjogadores = 0; countjogadores < jogadores.size(); countjogadores++) {
             if(jogadores.get(countjogadores).getPosicaoAtual()==casaDoMeio){
-                countJogador[0]++;
+                countJogadorM++;
             jogadoresDoMeio.add(jogadores.get(countjogadores));
             }
 
  if(jogadores.get(countjogadores).getPosicaoAtual()>casaDoMeio&&jogadores.get(countjogadores).getPosicaoAtual()<meta){
-     countJogador[1]++;}
+     countJogadorF++;}
 
         }
 
@@ -620,7 +622,7 @@ public class GameManager {
                 return infojogadorvencedor;
             }
 
-        if (countJogador[0]==2&&countJogador[1]>0){
+        if (countJogadorM==2&&countJogadorF>0){
             novocapote=true;
             String[] infojogadorvencedor = new String[4];
 
