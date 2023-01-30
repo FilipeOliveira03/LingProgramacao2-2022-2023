@@ -547,28 +547,7 @@ public class GameManager {
      countJogador[1]++;}
 
         }
-if (countJogador[0]==2&&countJogador[1]>0){
-    novocapote=true;
-    String[] infojogadorvencedor = new String[4];
 
-if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual()>jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()){
-
-                infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(0).getID());
-                infojogadorvencedor[1] = jogadoresDoMeio.get(0).getNome();
-                infojogadorvencedor[2] = jogadoresDoMeio.get(0).getEspecie().getNomeSigla();
-                infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual());
-
-}else{
-
-    infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(1).getID());
-    infojogadorvencedor[1] = jogadoresDoMeio.get(1).getNome();
-    infojogadorvencedor[2] = jogadoresDoMeio.get(1).getEspecie().getNomeSigla();
-    infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual());
-
-}
-    mudarTurno();
-    return infojogadorvencedor;
-}
 
 
             int[] posicoes = new int[jogadores.size()];
@@ -641,6 +620,28 @@ if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual()>jogadoresDoMeio.get(1)
                 return infojogadorvencedor;
             }
 
+        if (countJogador[0]==2&&countJogador[1]>0){
+            novocapote=true;
+            String[] infojogadorvencedor = new String[4];
+
+            if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual()>jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()){
+
+                infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(0).getID());
+                infojogadorvencedor[1] = jogadoresDoMeio.get(0).getNome();
+                infojogadorvencedor[2] = jogadoresDoMeio.get(0).getEspecie().getNomeSigla();
+                infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual());
+
+            }else{
+
+                infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(1).getID());
+                infojogadorvencedor[1] = jogadoresDoMeio.get(1).getNome();
+                infojogadorvencedor[2] = jogadoresDoMeio.get(1).getEspecie().getNomeSigla();
+                infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual());
+
+            }
+            mudarTurno();
+            return infojogadorvencedor;
+        }
 
         return null;
     }
