@@ -573,6 +573,8 @@ public class GameManager {
         }
 
 
+
+
         int[] posicoes = new int[jogadores.size()];
 
 
