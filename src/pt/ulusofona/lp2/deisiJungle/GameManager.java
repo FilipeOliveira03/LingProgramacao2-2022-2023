@@ -529,13 +529,13 @@ public class GameManager {
         int countJogCasaMeio= 0;
         int countJogAFrenteCasaMeio = 0;
         int casaDoMeio;
-
+        int segundameta = meta + 1;
         ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
 
         if(meta%2==0){
             casaDoMeio= meta / 2;
         }else{
-            casaDoMeio= (meta+1)/2 ;
+            casaDoMeio= segundameta/2 ;
         }
         for (int i = 0; i < jogadores.size(); i++) {
             if (jogadores.get(i).getPosicaoAtual()==casaDoMeio){
