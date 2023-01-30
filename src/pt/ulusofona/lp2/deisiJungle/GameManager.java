@@ -534,6 +534,7 @@ public class GameManager {
 
         }
        int[] countJogador = new int[2];
+
         ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
 
         for (int countjogadores = 0; countjogadores < jogadores.size(); countjogadores++) {
