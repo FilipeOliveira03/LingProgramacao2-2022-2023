@@ -501,9 +501,10 @@ public class GameManager {
                 default -> null; };
 
             if(alimento != null){
+                if (!Objects.equals(jogador.getEspecie().getNomeSigla(), "U")) {
                 if(alimentoTabu.equals("c") && jogador.getEspecie().getTipoAlimentacao().equals("Herbívoro")){
                     return new MovementResult(VALID_MOVEMENT); }
-                if (!Objects.equals(jogador.getEspecie().getNomeSigla(), "U")) {
+
                     alimento.acontecimentoIngerir(jogador);
                     MovementResult.mudaOutPutAlimento(alimento.getNome());
                     jogador.adicionaAlimentosIngeridos(alimentoTabu);
