@@ -790,7 +790,7 @@ public class TestGame {
 
         String[][] arrayPlayers = {
                 {"11", "abc", "L"},
-                {"22", "Leão", "L"},
+                {"22", "Leão", "U"},
         };
 
         String[][] arrayalimentos = {
@@ -857,8 +857,8 @@ public class TestGame {
         String[][] arrayPlayers = {
                 {"11", "abc", "E"},
                 {"22", "Leão", "U"},
-                {"33", "Dumbo", "E"},
-                {"44", "4p", "Z"},
+                {"33", "Dumbo", "E"}
+
 
         };
 
@@ -866,19 +866,23 @@ public class TestGame {
                 {"c","6"},
                 {"c","11"},
                 {"c","16"},
-                {"c","21"},
+                {"c","18"},
         };
 
-        manager.createInitialJungle(10, arrayPlayers);
-        manager.moveCurrentPlayer(4, true);//1
-        manager.moveCurrentPlayer(4, true);//2
-        manager.moveCurrentPlayer(7, true);//3
-        manager.moveCurrentPlayer(2, true);//4
-        manager.moveCurrentPlayer(-1, true);//1
+        manager.createInitialJungle(20, arrayPlayers, arrayalimentos);
+        manager.moveCurrentPlayer(6, true);//1
+        manager.moveCurrentPlayer(8, true);//2
+        manager.moveCurrentPlayer(6, true);//3
+        manager.moveCurrentPlayer(6, true);//1
+        manager.moveCurrentPlayer(8, true);//2
+        manager.moveCurrentPlayer(6, true);//3
+        manager.moveCurrentPlayer(0, true);//1
+        manager.moveCurrentPlayer(0, true);//2
+        manager.moveCurrentPlayer(-1, true);//3
+        manager.moveCurrentPlayer(0, true);//1
         manager.moveCurrentPlayer(0, true);//2
         manager.moveCurrentPlayer(1, true);//3
-        manager.moveCurrentPlayer(1, true);//4
-        manager.moveCurrentPlayer(1, true);//1
+
         manager.getGameResults();
        var a = manager.getGameResults();
         for (int i = 0; i < a.size(); i++) {
