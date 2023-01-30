@@ -642,8 +642,12 @@ public class GameManager {
                 return infojogadorvencedor;
             }
 
-            return null;
+
         }
+
+
+
+        return null;
     }
 
     public ArrayList<String> getGameResults() {
