@@ -25,6 +25,7 @@ public class GameManager {
     private final HashMap <Integer,CachoBananas> bananas = new HashMap<>();
     private final HashMap <Integer,Cogumelo> cogumelos = new HashMap<>();
     private int meta;
+    private boolean novocapote = false;
     private int turno = 1;
     private static int jogadasPassadas = 0;
     private int capote = 0;
@@ -620,7 +621,7 @@ public class GameManager {
         if(countJogCasaMeio==2&&countJogAFrenteCasaMeio>0) {
             String[] infojogadorvencedor = new String[4];
             if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() >= jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
-
+                novocapote = true;
 
                 infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(0).getID());
                 infojogadorvencedor[1] = jogadoresDoMeio.get(0).getNome();
@@ -652,24 +653,14 @@ public class GameManager {
         Player vencedor;
         int pos = 1;
         int casaDoMeio;
-        int countJogCasaMeio= 0;
-        int countJogAFrenteCasaMeio = 0;
+
         if (meta % 2 == 0) {
             casaDoMeio = meta / 2;
         } else {
             casaDoMeio = (meta + 1) / 2;
         }
-        for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).getPosicaoAtual()==casaDoMeio){
-                countJogCasaMeio++;
-                jogadoresDoMeio.add(jogadores.get(i));
-            }
-            if (jogadores.get(i).getPosicaoAtual()>casaDoMeio&&jogadores.get(i).getPosicaoAtual()<meta){
-                countJogAFrenteCasaMeio++;
 
-            }
-        }
-        if (countJogCasaMeio==2&&countJogAFrenteCasaMeio>0) {
+        if (novocapote) {
             for (int i = 0; i < jogadores.size(); i++) {
                 if (jogadores.get(i).getPosicaoAtual() == casaDoMeio) {
 
