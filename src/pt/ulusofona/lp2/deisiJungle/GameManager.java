@@ -522,31 +522,83 @@ public class GameManager {
     }
 
     public String[] getWinnerInfo() {
-
+        capote = 0;
         int jogoAcabadoMeta = 0;
         int jogoAcabadoCapote = 0;
-        capote = 0;
-        int countJogCasaMeio= 0;
-        int countJogAFrenteCasaMeio = 0;
+
         int casaDoMeio;
-        int segundameta = meta + 1;
+        if (meta%2==0){
+            casaDoMeio= meta /2;
+        }else{
+            casaDoMeio= (meta +1)/2 ;
+
+        }
+       int[] countJogador = new int[2];
         ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
 
-        if(meta%2==0){
-            casaDoMeio= meta / 2;
-        }else{
-            casaDoMeio= segundameta/2 ;
-        }
-        for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).getPosicaoAtual()==casaDoMeio){
-                countJogCasaMeio++;
-                jogadoresDoMeio.add(jogadores.get(i));
+        for (int countjogadores = 0; countjogadores < jogadores.size(); countjogadores++) {
+            if(jogadores.get(countjogadores).getPosicaoAtual()==casaDoMeio){
+                countJogador[0]++;
+            jogadoresDoMeio.add(jogadores.get(countjogadores));
             }
-            if (jogadores.get(i).getPosicaoAtual()>casaDoMeio&&jogadores.get(i).getPosicaoAtual()<meta){
-               countJogAFrenteCasaMeio++;
 
-            }
+ if(jogadores.get(countjogadores).getPosicaoAtual()>casaDoMeio&&jogadores.get(countjogadores).getPosicaoAtual()<meta){
+     countJogador[1]++;}
+
         }
+if (countJogador[0]==2&&countJogador[1]>0){
+    novocapote=true;
+    String[] infojogadorvencedor = new String[4];
+
+if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual()>jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()){
+
+                infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(0).getID());
+                infojogadorvencedor[1] = jogadoresDoMeio.get(0).getNome();
+                infojogadorvencedor[2] = jogadoresDoMeio.get(0).getEspecie().getNomeSigla();
+                infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual());
+
+}else{
+
+    infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(1).getID());
+    infojogadorvencedor[1] = jogadoresDoMeio.get(1).getNome();
+    infojogadorvencedor[2] = jogadoresDoMeio.get(1).getEspecie().getNomeSigla();
+    infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual());
+
+}
+    mudarTurno();
+    return infojogadorvencedor;
+}
+
+
+
+
+
+
+
+
+
+
+//        int countJogCasaMeio= 0;
+//        int countJogAFrenteCasaMeio = 0;
+//        int casaDoMeio;
+//        int segundameta = meta + 1;
+//        ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
+//
+//        if(meta%2==0){
+//            casaDoMeio= meta / 2;
+//        }else{
+//            casaDoMeio= segundameta/2 ;
+//        }
+//        for (int i = 0; i < jogadores.size(); i++) {
+//            if (jogadores.get(i).getPosicaoAtual()==casaDoMeio){
+//                countJogCasaMeio++;
+//                jogadoresDoMeio.add(jogadores.get(i));
+//            }
+//            if (jogadores.get(i).getPosicaoAtual()>casaDoMeio&&jogadores.get(i).getPosicaoAtual()<meta){
+//               countJogAFrenteCasaMeio++;
+//
+//            }
+//        }
 
             int[] posicoes = new int[jogadores.size()];
 
@@ -618,27 +670,27 @@ public class GameManager {
                 return infojogadorvencedor;
             }
 
-        if(countJogCasaMeio==2&&countJogAFrenteCasaMeio>0) {
-            String[] infojogadorvencedor = new String[4];
-            if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() > jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
-                novocapote = true;
-
-                infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(0).getID());
-                infojogadorvencedor[1] = jogadoresDoMeio.get(0).getNome();
-                infojogadorvencedor[2] = jogadoresDoMeio.get(0).getEspecie().getNomeSigla();
-                infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual());
-            } else {
-
-
-                infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(1).getID());
-                infojogadorvencedor[1] = jogadoresDoMeio.get(1).getNome();
-                infojogadorvencedor[2] = jogadoresDoMeio.get(1).getEspecie().getNomeSigla();
-                infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual());
-            }
-            mudarTurno();
-            return infojogadorvencedor;
-
-        }
+//        if(countJogCasaMeio==2&&countJogAFrenteCasaMeio>0) {
+//            String[] infojogadorvencedor = new String[4];
+//            if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() > jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
+//                novocapote = true;
+//
+//                infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(0).getID());
+//                infojogadorvencedor[1] = jogadoresDoMeio.get(0).getNome();
+//                infojogadorvencedor[2] = jogadoresDoMeio.get(0).getEspecie().getNomeSigla();
+//                infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual());
+//            } else {
+//
+//
+//                infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(1).getID());
+//                infojogadorvencedor[1] = jogadoresDoMeio.get(1).getNome();
+//                infojogadorvencedor[2] = jogadoresDoMeio.get(1).getEspecie().getNomeSigla();
+//                infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual());
+//            }
+//            mudarTurno();
+//            return infojogadorvencedor;
+//
+//        }
 
 
 
@@ -649,28 +701,17 @@ public class GameManager {
     public ArrayList<String> getGameResults() {
 
         ArrayList<String> resultadoJogo = new ArrayList<>();
-        ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
-        Player vencedor;
+
         int pos = 1;
-        int casaDoMeio;
-        int segundameta = meta +1 ;
-        if (meta % 2 == 0) {
-            casaDoMeio = meta / 2;
-        } else {
-            casaDoMeio = segundameta / 2;
-        }
+
 
         if (novocapote) {
+            Player vencedor = new Player();
+            String[] arrayinfo = getWinnerInfo();
             for (int i = 0; i < jogadores.size(); i++) {
-                if (jogadores.get(i).getPosicaoAtual() == casaDoMeio) {
-
-                    jogadoresDoMeio.add(jogadores.get(i));
+                if(Objects.equals(arrayinfo[0], String.valueOf(jogadores.get(i).getID()))){
+                 vencedor=jogadores.get(i);
                 }
-            }
-            if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() > jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
-                vencedor = jogadoresDoMeio.get(0);
-            } else {
-                vencedor = jogadoresDoMeio.get(1);
             }
             String especieV = "";
             switch (vencedor.getEspecie().getNomeSigla()) {
@@ -717,6 +758,7 @@ public class GameManager {
                     }
                 }
             }
+            return resultadoJogo;
 
         } else {
             for (int countJogadores = tabuleiro.size(); countJogadores >= 1; countJogadores--) {
@@ -767,6 +809,8 @@ public class GameManager {
 
             }
         }
+
+
             return resultadoJogo;
         }
 

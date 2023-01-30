@@ -5,6 +5,7 @@ import pt.ulusofona.lp2.deisiJungle.especies.Tarzan;
 import pt.ulusofona.lp2.deisiJungle.jogador.Player;
 
 import java.io.File;
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -870,21 +871,19 @@ public class TestGame {
         };
 
         manager.createInitialJungle(20, arrayPlayers, arrayalimentos);
-        manager.moveCurrentPlayer(6, true);//1
-        manager.moveCurrentPlayer(8, true);//2
-        manager.moveCurrentPlayer(6, true);//3
-        manager.moveCurrentPlayer(6, true);//1
-        manager.moveCurrentPlayer(8, true);//2
-        manager.moveCurrentPlayer(6, true);//3
+        manager.moveCurrentPlayer(9, true);//1
+        manager.moveCurrentPlayer(11, true);//2
+        manager.moveCurrentPlayer(10, true);//3
         manager.moveCurrentPlayer(0, true);//1
-        manager.moveCurrentPlayer(0, true);//2
+        manager.moveCurrentPlayer(6, true);//2
         manager.moveCurrentPlayer(-1, true);//3
-        manager.moveCurrentPlayer(0, true);//1
-        manager.moveCurrentPlayer(0, true);//2
-        manager.moveCurrentPlayer(1, true);//3
 
         manager.getGameResults();
-       var a = manager.getGameResults();
+
+
+        var b = manager.getWinnerInfo();
+        var a = manager.getGameResults();
+        System.out.println(Arrays.toString(b));
         for (int i = 0; i < a.size(); i++) {
             System.out.println(a.get(i));
         }
