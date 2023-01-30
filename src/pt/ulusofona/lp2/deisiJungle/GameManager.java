@@ -653,11 +653,11 @@ public class GameManager {
         Player vencedor;
         int pos = 1;
         int casaDoMeio;
-
+        int segundameta = meta +1 ;
         if (meta % 2 == 0) {
             casaDoMeio = meta / 2;
         } else {
-            casaDoMeio = (meta + 1) / 2;
+            casaDoMeio = segundameta / 2;
         }
 
         if (novocapote) {
