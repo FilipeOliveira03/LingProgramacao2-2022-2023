@@ -620,7 +620,7 @@ public class GameManager {
 
         if(countJogCasaMeio==2&&countJogAFrenteCasaMeio>0) {
             String[] infojogadorvencedor = new String[4];
-            if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() >= jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
+            if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() > jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
                 novocapote = true;
 
                 infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(0).getID());
