@@ -25,7 +25,7 @@ public class GameManager {
     private final HashMap <Integer,CachoBananas> bananas = new HashMap<>();
     private final HashMap <Integer,Cogumelo> cogumelos = new HashMap<>();
     private int meta;
-    private boolean novocapote = false;
+    private int novocapote = 0;
     private int turno = 1;
     private static int jogadasPassadas = 0;
     private int capote = 0;
@@ -547,8 +547,9 @@ public class GameManager {
 
             }
         }
+
         if(countJogCasaMeio==2&&countJogAFrenteCasaMeio>0){
-                   novocapote=true;
+                   novocapote++;
             if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual()>jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()){
                 String[] infojogadorvencedor = new String[4];
 
@@ -900,7 +901,7 @@ public class GameManager {
         int pos = 1;
 
 
-        if (novocapote) {
+        if (novocapote>0) {
             Player vencedor = new Player();
             String[] arrayinfo = getWinnerInfo();
             for (int i = 0; i < jogadores.size(); i++) {
