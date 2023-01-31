@@ -870,10 +870,10 @@ public class TestGame {
                 {"c","18"},
         };
 
-        manager.createInitialJungle(20, arrayPlayers, arrayalimentos);
-        manager.moveCurrentPlayer(5, true);//1
+        manager.createInitialJungle(21, arrayPlayers, arrayalimentos);
+        manager.moveCurrentPlayer(6, true);//1
         manager.moveCurrentPlayer(14, true);//2
-        manager.moveCurrentPlayer(15, true);//3
+        manager.moveCurrentPlayer(16, true);//3
         manager.moveCurrentPlayer(4, true);//1
         manager.moveCurrentPlayer(0,  true); //2
         manager.moveCurrentPlayer(-6, true);//3
