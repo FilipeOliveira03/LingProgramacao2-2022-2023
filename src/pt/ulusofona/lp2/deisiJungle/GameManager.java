@@ -568,81 +568,79 @@ public class GameManager {
             return infojogadorvencedor;
 
 
-        }
+        }else {
 
 
+            int[] posicoes = new int[jogadores.size()];
 
 
-        int[] posicoes = new int[jogadores.size()];
+            for (int countJogadores = 0; countJogadores < jogadores.size(); countJogadores++) {
 
+                if (jogadores.get(countJogadores).getPosicaoAtual() == meta) {
 
-        for (int countJogadores = 0; countJogadores < jogadores.size(); countJogadores++) {
+                    jogoAcabadoMeta++;
+                }
 
-            if(jogadores.get(countJogadores).getPosicaoAtual() == meta) {
-
-                jogoAcabadoMeta++;
+                posicoes[countJogadores] = jogadores.get(countJogadores).getPosicaoAtual();
             }
 
-            posicoes[countJogadores] = jogadores.get(countJogadores).getPosicaoAtual();
-        }
+            Arrays.sort(posicoes);
 
-        Arrays.sort(posicoes);
+            int distanciaMetade = meta / 2;
 
-        int distanciaMetade = meta / 2;
+            for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
+                tabuleiro.get(countTabuleiro).sort(Comparator.comparing(Player::getID));
+            }
 
-        for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
-            tabuleiro.get(countTabuleiro).sort(Comparator.comparing(Player::getID));
-        }
+            if (jogoAcabadoMeta != 0) {
 
-        if(jogoAcabadoMeta != 0) {
+                Player jogadorVencedor = new Player();
 
-            Player jogadorVencedor = new Player();
+                int soUm = 0;
+                for (int countJogadoresReverso = tabuleiro.size(); countJogadoresReverso >= 1; countJogadoresReverso--) {
 
-            int soUm = 0;
-            for (int countJogadoresReverso = tabuleiro.size(); countJogadoresReverso >= 1; countJogadoresReverso--) {
-
-                if(soUm == 0){
-                    if(!tabuleiro.get(countJogadoresReverso).isEmpty() ){
-                        jogadorVencedor = tabuleiro.get(countJogadoresReverso).get(0);
-                        soUm++;
+                    if (soUm == 0) {
+                        if (!tabuleiro.get(countJogadoresReverso).isEmpty()) {
+                            jogadorVencedor = tabuleiro.get(countJogadoresReverso).get(0);
+                            soUm++;
+                        }
                     }
                 }
+
+                String[] infojogadorvencedor = new String[4];
+
+                infojogadorvencedor[0] = String.valueOf(jogadorVencedor.getID());
+                infojogadorvencedor[1] = jogadorVencedor.getNome();
+                infojogadorvencedor[2] = jogadorVencedor.getEspecie().getNomeSigla();
+                infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergiaAtual());
+
+                mudarTurno();
+                return infojogadorvencedor;
             }
 
-            String[] infojogadorvencedor = new String[4];
+            int primeiro = posicoes[posicoes.length - 1];
+            int segundo = posicoes[posicoes.length - 2];
 
-            infojogadorvencedor[0] = String.valueOf(jogadorVencedor.getID());
-            infojogadorvencedor[1] = jogadorVencedor.getNome();
-            infojogadorvencedor[2] = jogadorVencedor.getEspecie().getNomeSigla();
-            infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergiaAtual());
+            if (primeiro - distanciaMetade > segundo) {
+                jogoAcabadoCapote++;
+                capote++;
+            }
 
-            mudarTurno();
-            return infojogadorvencedor;
+            if (jogoAcabadoCapote != 0) {
+
+                Player jogadorVencedor = tabuleiro.get(segundo).get(0);
+
+                String[] infojogadorvencedor = new String[4];
+
+                infojogadorvencedor[0] = String.valueOf(jogadorVencedor.getID());
+                infojogadorvencedor[1] = jogadorVencedor.getNome();
+                infojogadorvencedor[2] = jogadorVencedor.getEspecie().getNomeSigla();
+                infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergiaAtual());
+
+                mudarTurno();
+                return infojogadorvencedor;
+            }
         }
-
-        int primeiro = posicoes[posicoes.length - 1];
-        int segundo = posicoes[posicoes.length - 2];
-
-        if(primeiro - distanciaMetade > segundo){
-            jogoAcabadoCapote++;
-            capote++;
-        }
-
-        if(jogoAcabadoCapote != 0){
-
-            Player jogadorVencedor =  tabuleiro.get(segundo).get(0);
-
-            String[] infojogadorvencedor = new String[4];
-
-            infojogadorvencedor[0] = String.valueOf(jogadorVencedor.getID());
-            infojogadorvencedor[1] = jogadorVencedor.getNome();
-            infojogadorvencedor[2] = jogadorVencedor.getEspecie().getNomeSigla();
-            infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergiaAtual());
-
-            mudarTurno();
-            return infojogadorvencedor;
-        }
-
         return null;
 //        int jogoAcabadoMeta = 0;
 //        int jogoAcabadoCapote = 0;
