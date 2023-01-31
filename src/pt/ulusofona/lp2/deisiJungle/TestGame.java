@@ -872,11 +872,11 @@ public class TestGame {
 
         manager.createInitialJungle(20, arrayPlayers, arrayalimentos);
         manager.moveCurrentPlayer(5, true);//1
-        manager.moveCurrentPlayer(18, true);//2
+        manager.moveCurrentPlayer(19, true);//2
         manager.moveCurrentPlayer(6, true);//3
         manager.moveCurrentPlayer(0, true);//1
         manager.moveCurrentPlayer(0, true);//2
-        manager.moveCurrentPlayer(-1, true);//3
+        manager.moveCurrentPlayer(0, true);//3
 
         var b = manager.getWinnerInfo();
         var a = manager.getGameResults();
