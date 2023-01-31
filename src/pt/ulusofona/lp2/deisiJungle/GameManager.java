@@ -630,7 +630,7 @@ public class GameManager {
             novocapote++;
             Player vencedor;
             String[] infojogadorvencedor = new String[4];
-            if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() > jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
+            if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() >= jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
                vencedor = jogadoresDoMeio.get(0);
 
             } else {
