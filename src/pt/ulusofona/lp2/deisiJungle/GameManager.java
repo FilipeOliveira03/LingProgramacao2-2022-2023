@@ -575,28 +575,7 @@ public class GameManager {
 
         if(jogoAcabadoMeta != 0) {
 
-            if (countJogCasaMeio == 2 && countJogAFrenteCasaMeio > 0) {
-                novocapote++;
-                String[] infojogadorvencedor = new String[4];
-                if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() > jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
 
-                    infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(0).getID());
-                    infojogadorvencedor[1] = jogadoresDoMeio.get(0).getNome();
-                    infojogadorvencedor[2] = jogadoresDoMeio.get(0).getEspecie().getNomeSigla();
-                    infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual());
-
-                } else {
-
-                    infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(1).getID());
-                    infojogadorvencedor[1] = jogadoresDoMeio.get(1).getNome();
-                    infojogadorvencedor[2] = jogadoresDoMeio.get(1).getEspecie().getNomeSigla();
-                    infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual());
-                }
-                mudarTurno();
-                return infojogadorvencedor;
-
-
-            }
 
             Player jogadorVencedor = new Player();
 
@@ -622,6 +601,8 @@ public class GameManager {
             return infojogadorvencedor;
         }
 
+
+
         int primeiro = posicoes[posicoes.length - 1];
         int segundo = posicoes[posicoes.length - 2];
 
@@ -645,7 +626,28 @@ public class GameManager {
             return infojogadorvencedor;
         }
 
+        if (countJogCasaMeio == 2 && countJogAFrenteCasaMeio > 0) {
+            novocapote++;
+            String[] infojogadorvencedor = new String[4];
+            if (jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual() > jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual()) {
 
+                infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(0).getID());
+                infojogadorvencedor[1] = jogadoresDoMeio.get(0).getNome();
+                infojogadorvencedor[2] = jogadoresDoMeio.get(0).getEspecie().getNomeSigla();
+                infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual());
+
+            } else {
+
+                infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(1).getID());
+                infojogadorvencedor[1] = jogadoresDoMeio.get(1).getNome();
+                infojogadorvencedor[2] = jogadoresDoMeio.get(1).getEspecie().getNomeSigla();
+                infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(1).getEspecie().getEnergiaAtual());
+            }
+            mudarTurno();
+            return infojogadorvencedor;
+
+
+        }
 
         return null;
     }
