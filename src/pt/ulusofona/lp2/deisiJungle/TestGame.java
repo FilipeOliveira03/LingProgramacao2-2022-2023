@@ -913,7 +913,7 @@ public class TestGame {
         manager.moveCurrentPlayer(0, true);//1
         manager.moveCurrentPlayer(0, true);//2
         manager.moveCurrentPlayer(0, true);//3
-
+        System.out.println(manager.getMeta());
         var b = manager.getWinnerInfo();
         var a = manager.getGameResults();
         System.out.println(Arrays.toString(b));
