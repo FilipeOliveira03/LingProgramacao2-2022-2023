@@ -542,7 +542,7 @@ public class GameManager {
                 countJogCasaMeio++;
                 jogadoresDoMeio.add(jogadores.get(i));
             }
-            if (jogadores.get(i).getPosicaoAtual()>=casaDoMeio){
+            if (jogadores.get(i).getPosicaoAtual()>casaDoMeio&&jogadores.get(i).getPosicaoAtual()<meta){
                 countJogAFrenteCasaMeio++;
 
             }
