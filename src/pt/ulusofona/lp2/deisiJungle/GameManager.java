@@ -631,6 +631,7 @@ public class GameManager {
                 infojogadorvencedor[1] = jogadoresDoMeio.get(0).getNome();
                 infojogadorvencedor[2] = jogadoresDoMeio.get(0).getEspecie().getNomeSigla();
                 infojogadorvencedor[3] = String.valueOf(jogadoresDoMeio.get(0).getEspecie().getEnergiaAtual());
+
             } else {
 
                 infojogadorvencedor[0] = String.valueOf(jogadoresDoMeio.get(1).getID());
