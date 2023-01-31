@@ -586,13 +586,9 @@ public class GameManager {
 
         Arrays.sort(posicoes);
 
-        //int distanciaMetade =meta / 2;
-        int distanciaMetade;
-        if (meta % 2 == 0) {
-            distanciaMetade = meta / 2;
-        } else {
-            distanciaMetade = (meta + 1) / 2;
-        }
+        int distanciaMetade =meta / 2;
+
+
         for (int countTabuleiro = 1; countTabuleiro <= tabuleiro.size(); countTabuleiro++) {
             tabuleiro.get(countTabuleiro).sort(Comparator.comparing(Player::getID));
         }
