@@ -70,14 +70,19 @@ public class TestGame {
         };
 
         manager.createInitialJungle(10, arrayPlayers);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
-        manager.moveCurrentPlayer(6, false);
+        manager.moveCurrentPlayer(1, false);
+        System.out.println(manager.getTurno());
+        manager.moveCurrentPlayer(1, false);
+        System.out.println(manager.getTurno());
+        manager.moveCurrentPlayer(1, false);
+        System.out.println(manager.getTurno());
+        manager.moveCurrentPlayer(1, false);
+        System.out.println(manager.getTurno());
+        manager.moveCurrentPlayer(1, false);
+        System.out.println(manager.getTurno());
+        manager.moveCurrentPlayer(1, false);
+        System.out.println(manager.getTurno());
+        manager.moveCurrentPlayer(1, false);
 
         MovementResult resultadoReal = manager.moveCurrentPlayer(-2, false);
         MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
@@ -175,6 +180,7 @@ public class TestGame {
 
         String[] resultadoReal = manager.getCurrentPlayerEnergyInfo(1);
         String[] resultadoEsperado = arrayEnergiaE;
+
 
         assertEquals("testGetCurrentPlayerEnergyInfo3", resultadoEsperado, resultadoReal);
     }

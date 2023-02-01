@@ -27,6 +27,11 @@ public class GameManager {
     private int meta;
     private int novocapote = 0;
     private int turno = 1;
+
+    public int getTurno() {
+        return turno;
+    }
+
     private static int jogadasPassadas = 0;
     private int capote = 0;
 
