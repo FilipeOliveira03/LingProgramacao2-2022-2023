@@ -449,8 +449,7 @@ public class GameManager {
 
             if ((nrSquares > 0 && (nrSquares > veloMax || nrSquares < veloMin)) ||
                     (nrSquares < 0 && (nrSquares < veloMax * -1 || nrSquares > veloMin * -1))){
-                mudarTurno();
-                return new MovementResult(INVALID_MOVEMENT); }
+                mudarTurno(); return new MovementResult(INVALID_MOVEMENT); }
 
         }
 
@@ -533,17 +532,17 @@ public class GameManager {
 
         ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
 
-        if (meta % 2 == 0) {
-            casaDoMeio = meta / 2;
+        if (tabuleiro.size() % 2 == 0) {
+            casaDoMeio = tabuleiro.size() / 2;
         } else {
-            casaDoMeio = (meta + 1) / 2;
+            casaDoMeio = (tabuleiro.size() + 1) / 2;
         }
         for (int i = 0; i < jogadores.size(); i++) {
             if (jogadores.get(i).getPosicaoAtual() == casaDoMeio) {
                 countJogCasaMeio++;
                 jogadoresDoMeio.add(jogadores.get(i));
             }
-            if (jogadores.get(i).getPosicaoAtual() > casaDoMeio && jogadores.get(i).getPosicaoAtual() < meta) {
+            if (jogadores.get(i).getPosicaoAtual() > casaDoMeio&& jogadores.get(i).getPosicaoAtual() < meta ) {
                 countJogAFrenteCasaMeio++;
 
             }
