@@ -32,8 +32,7 @@ public class GameManager {
 
     public static int arredonda(double num){
         double a  = num/2;
-        a+=0.5;
-        return (int) a;
+        return (int) (a+0.5);
     }
     public static int getJogadasPassadas() {
         return jogadasPassadas;
@@ -533,7 +532,7 @@ public class GameManager {
         capote = 0;
         int countJogCasaMeio = 0;
         int countJogAFrenteCasaMeio = 0;
-        double casaDoMeiotest;
+
         int casaDoMeio;
 
         ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
