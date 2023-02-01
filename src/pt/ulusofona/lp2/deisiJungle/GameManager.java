@@ -918,7 +918,7 @@ public class GameManager {
 
             }
             resultadoJogo.add("#" + pos + " " + vencedor.getNome() + ", " + especieV + ", " +
-                    vencedor.getPosicaoAtual()+1 + ", " + vencedor.getDistanciaViajada() +
+                    vencedor.getPosicaoAtual() + ", " + vencedor.getDistanciaViajada() +
                     ", " + vencedor.getAlimentosIngeridos().size());
             pos++;
 
