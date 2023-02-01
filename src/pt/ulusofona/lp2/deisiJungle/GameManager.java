@@ -915,11 +915,13 @@ public class GameManager {
                 case "P" -> especieV = "Passaro";
                 case "Z" -> especieV = "Tarzan";
                 case "U" -> especieV = "Unicornio";
+
             }
             resultadoJogo.add("#" + pos + " " + vencedor.getNome() + ", " + especieV + ", " +
-                    vencedor.getPosicaoAtual() + ", " + vencedor.getDistanciaViajada() +
+                    vencedor.getPosicaoAtual()+1 + ", " + vencedor.getDistanciaViajada() +
                     ", " + vencedor.getAlimentosIngeridos().size());
             pos++;
+
             for (int countJogadores = tabuleiro.size(); countJogadores >= 1; countJogadores--) {
 
                 ArrayList<Player> array = tabuleiro.get(countJogadores);

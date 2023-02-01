@@ -856,7 +856,7 @@ public class TestGame {
         GameManager manager = new GameManager();
 
         String[][] arrayPlayers = {
-                {"11", "abc", "L"},
+                {"11", "abc", "E"},
                 {"22", "Leão", "L"},
                 {"33", "Dumbo", "E"}
         };
@@ -873,7 +873,7 @@ public class TestGame {
         manager.moveCurrentPlayer(4, true);//2
         manager.moveCurrentPlayer(4, true);//3
         manager.moveCurrentPlayer(4, true);//1
-        manager.moveCurrentPlayer(0,  true); //2
+        manager.moveCurrentPlayer(0, true);//2
         manager.moveCurrentPlayer(0, true);//3
 
         var b = manager.getWinnerInfo();
