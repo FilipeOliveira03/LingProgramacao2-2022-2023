@@ -30,6 +30,11 @@ public class GameManager {
     private static int jogadasPassadas = 0;
     private int capote = 0;
 
+    public static int arredonda(double num){
+        double a  = num/2;
+        a+=0.5;
+        return (int) a;
+    }
     public static int getJogadasPassadas() {
         return jogadasPassadas;
     }
@@ -528,15 +533,13 @@ public class GameManager {
         capote = 0;
         int countJogCasaMeio = 0;
         int countJogAFrenteCasaMeio = 0;
+        double casaDoMeiotest;
         int casaDoMeio;
 
         ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
 
-        if ((meta+1) % 2 == 0) {
-            casaDoMeio = (meta+1)/ 2;
-        } else {
-            casaDoMeio = (meta + 2) / 2;
-        }
+        double metadouble = meta;
+        casaDoMeio= arredonda(metadouble);
         for (int i = 0; i < jogadores.size(); i++) {
             if (jogadores.get(i).getPosicaoAtual() == casaDoMeio) {
                 countJogCasaMeio++;
