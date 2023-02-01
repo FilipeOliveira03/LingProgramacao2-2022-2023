@@ -538,7 +538,7 @@ public class GameManager {
 
         ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
 
-        double metadouble = meta;
+        double metadouble = meta+1;
         casaDoMeio= arredonda(metadouble);
         for (int i = 0; i < jogadores.size(); i++) {
             if (jogadores.get(i).getPosicaoAtual() == casaDoMeio) {
