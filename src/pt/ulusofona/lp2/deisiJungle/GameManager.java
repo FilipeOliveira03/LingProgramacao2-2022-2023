@@ -494,7 +494,7 @@ public class GameManager {
         if(nrSquares > 0){ jogador.adicionaDistanciaViajada(nrSquares);
         }else{ jogador.adicionaDistanciaViajada(nrSquares * -1); }
 
-        mudarTurno();
+       mudarTurno();
 
         if(alimentoTabu != null){
             Alimento alimento = switch (alimentoTabu) {
@@ -508,12 +508,12 @@ public class GameManager {
             if(alimento != null){
                 if (!Objects.equals(jogador.getEspecie().getNomeSigla(), "U")) {
                 if(alimentoTabu.equals("c") && jogador.getEspecie().getTipoAlimentacao().equals("Herbívoro")){
-                    return new MovementResult(VALID_MOVEMENT); }
+                    mudarTurno(); return new MovementResult(VALID_MOVEMENT); }
 
                     alimento.acontecimentoIngerir(jogador);
                     MovementResult.mudaOutPutAlimento(alimento.getNome());
                     jogador.adicionaAlimentosIngeridos(alimentoTabu);
-                    return new MovementResult(CAUGHT_FOOD);
+                    mudarTurno(); return new MovementResult(CAUGHT_FOOD);
                 }
             }
         }else{
@@ -521,7 +521,9 @@ public class GameManager {
                 jogador.getEspecie().mudaEnergiaAtual(jogador.getEspecie().getEnergiaAtual()+2);
             }
         }
-        return new MovementResult(VALID_MOVEMENT);
+
+
+        mudarTurno();   return new MovementResult(VALID_MOVEMENT);
 
     }
 
