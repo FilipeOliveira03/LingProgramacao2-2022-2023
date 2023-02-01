@@ -856,8 +856,8 @@ public class TestGame {
         GameManager manager = new GameManager();
 
         String[][] arrayPlayers = {
-                {"11", "abc", "U"},
-                {"22", "Leão", "E"},
+                {"11", "abc", "L"},
+                {"22", "Leão", "L"},
                 {"33", "Dumbo", "E"}
         };
 
@@ -868,11 +868,11 @@ public class TestGame {
                 {"c","4"},
         };
 
-        manager.createInitialJungle(7, arrayPlayers, arrayalimentos);
-        manager.moveCurrentPlayer(3, true);//1
+        manager.createInitialJungle(10, arrayPlayers, arrayalimentos);
+        manager.moveCurrentPlayer(4, true);//1
         manager.moveCurrentPlayer(4, true);//2
-        manager.moveCurrentPlayer(3, true);//3
-        manager.moveCurrentPlayer(0, true);//1
+        manager.moveCurrentPlayer(4, true);//3
+        manager.moveCurrentPlayer(4, true);//1
         manager.moveCurrentPlayer(0,  true); //2
         manager.moveCurrentPlayer(0, true);//3
 
