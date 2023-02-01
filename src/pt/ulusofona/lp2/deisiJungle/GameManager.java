@@ -544,7 +544,7 @@ public class GameManager {
                 countJogCasaMeio++;
                 jogadoresDoMeio.add(jogadore);
             }
-            if (jogadore.getPosicaoAtual() > casaDoMeio ) {
+            if (jogadore.getPosicaoAtual() > casaDoMeio && jogadore.getPosicaoAtual() < meta  ) {
                 countJogAFrenteCasaMeio++;
 
             }
