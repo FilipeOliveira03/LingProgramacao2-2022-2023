@@ -864,19 +864,19 @@ public class TestGame {
         };
 
         String[][] arrayalimentos = {
-                {"b","6"},
-                {"c","10"},
-                {"c","16"},
-                {"c","18"},
+                {"b","2"},
+                {"c","5"},
+                {"c","3"},
+                {"c","4"},
         };
 
-        manager.createInitialJungle(21, arrayPlayers, arrayalimentos);
-        manager.moveCurrentPlayer(6, true);//1
-        manager.moveCurrentPlayer(14, true);//2
-        manager.moveCurrentPlayer(16, true);//3
-        manager.moveCurrentPlayer(4, true);//1
+        manager.createInitialJungle(6, arrayPlayers, arrayalimentos);
+        manager.moveCurrentPlayer(3, true);//1
+        manager.moveCurrentPlayer(4, true);//2
+        manager.moveCurrentPlayer(3, true);//3
+        manager.moveCurrentPlayer(0, true);//1
         manager.moveCurrentPlayer(0,  true); //2
-        manager.moveCurrentPlayer(-6, true);//3
+        manager.moveCurrentPlayer(0, true);//3
 
         var b = manager.getWinnerInfo();
         var a = manager.getGameResults();

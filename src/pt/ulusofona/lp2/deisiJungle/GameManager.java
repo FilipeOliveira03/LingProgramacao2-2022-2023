@@ -532,10 +532,10 @@ public class GameManager {
 
         ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
 
-        if (tabuleiro.size() % 2 == 0) {
-            casaDoMeio = tabuleiro.size() / 2;
+        if ((meta+1) % 2 == 0) {
+            casaDoMeio = (meta+1)/ 2;
         } else {
-            casaDoMeio = (tabuleiro.size() + 1) / 2;
+            casaDoMeio = (meta + 2) / 2;
         }
         for (int i = 0; i < jogadores.size(); i++) {
             if (jogadores.get(i).getPosicaoAtual() == casaDoMeio) {
