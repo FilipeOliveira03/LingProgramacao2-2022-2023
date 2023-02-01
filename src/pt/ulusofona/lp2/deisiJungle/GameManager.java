@@ -539,12 +539,12 @@ public class GameManager {
 
         double metadouble = meta+1;
         casaDoMeio= arredonda(metadouble);
-        for (int i = 0; i < jogadores.size(); i++) {
-            if (jogadores.get(i).getPosicaoAtual() == casaDoMeio) {
+        for (Player jogadore : jogadores) {
+            if (jogadore.getPosicaoAtual() == casaDoMeio) {
                 countJogCasaMeio++;
-                jogadoresDoMeio.add(jogadores.get(i));
+                jogadoresDoMeio.add(jogadore);
             }
-            if (jogadores.get(i).getPosicaoAtual() > casaDoMeio&& jogadores.get(i).getPosicaoAtual() < meta ) {
+            if (jogadore.getPosicaoAtual() > casaDoMeio ) {
                 countJogAFrenteCasaMeio++;
 
             }
