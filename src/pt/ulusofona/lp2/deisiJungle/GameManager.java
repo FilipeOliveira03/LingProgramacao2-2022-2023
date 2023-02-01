@@ -537,7 +537,7 @@ public class GameManager {
 
         ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
 
-        double metadouble = meta+1;
+        double metadouble = meta;
         casaDoMeio= arredonda(metadouble);
         for (Player jogadore : jogadores) {
             if (jogadore.getPosicaoAtual() == casaDoMeio) {
@@ -549,10 +549,6 @@ public class GameManager {
 
             }
         }
-
-
-
-
         int[] posicoes = new int[jogadores.size()];
 
 
@@ -896,7 +892,7 @@ public class GameManager {
 
 
     public ArrayList<String> getGameResults() {
-
+      getWinnerInfo();
         ArrayList<String> resultadoJogo = new ArrayList<>();
 
         int pos = 1;

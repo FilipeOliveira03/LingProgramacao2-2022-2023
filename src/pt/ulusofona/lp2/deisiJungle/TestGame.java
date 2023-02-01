@@ -859,8 +859,6 @@ public class TestGame {
                 {"11", "abc", "U"},
                 {"22", "Leão", "E"},
                 {"33", "Dumbo", "E"}
-
-
         };
 
         String[][] arrayalimentos = {
