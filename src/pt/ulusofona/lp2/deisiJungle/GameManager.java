@@ -100,7 +100,7 @@ public class GameManager {
         tabuleiroAlimentos.clear();
         bananas.clear();
         cogumelos.clear();
-        jogadores.clear();
+
 
         boolean[] verificarComida = new boolean[foodsInfo.length];
 
@@ -156,7 +156,6 @@ public class GameManager {
         jogadores.clear();
         tabuleiro.clear();
         capote = 0;
-
 
         int countNrTarzan = 0;
 
