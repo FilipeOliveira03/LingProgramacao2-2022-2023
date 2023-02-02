@@ -152,7 +152,7 @@ public class GameManager {
     }
 
     public void createInitialJungle(int jungleSize, String[][] playersInfo) throws InvalidInitialJungleException {
-
+        turno = 1;
         jogadores.clear();
         tabuleiro.clear();
         capote = 0;

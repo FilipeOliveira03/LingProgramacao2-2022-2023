@@ -882,7 +882,7 @@ public class TestGame {
         System.out.println(manager.getTurno());
         manager.moveCurrentPlayer(1, false);//2
         System.out.println(manager.getTurno());
-        manager.createInitialJungle(11, arrayPlayers, arrayalimentos);
+        manager.createInitialJungle(11, arrayPlayers);
         System.out.println(manager.getTurno());
         manager.moveCurrentPlayer(2, false);//3
 
