@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.io.*;
-
+//d
 public class GameManager {
 
     private final HashMap <Integer,ArrayList<Player>> tabuleiro = new HashMap<>();
