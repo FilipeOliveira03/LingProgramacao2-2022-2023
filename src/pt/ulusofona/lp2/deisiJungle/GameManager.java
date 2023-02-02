@@ -157,6 +157,7 @@ public class GameManager {
         tabuleiro.clear();
         capote = 0;
 
+
         int countNrTarzan = 0;
 
         boolean[] verificarEspecie = new boolean[playersInfo.length];

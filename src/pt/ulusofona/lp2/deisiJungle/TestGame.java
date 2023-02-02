@@ -872,18 +872,20 @@ public class TestGame {
 
         manager.createInitialJungle(11, arrayPlayers, arrayalimentos);
         System.out.println(manager.getTurno());
-        manager.moveCurrentPlayer(-2, false);//1
+        manager.moveCurrentPlayer(1, false);//1
         System.out.println(manager.getTurno());
-        manager.moveCurrentPlayer(5, false);//2
+        manager.moveCurrentPlayer(1, false);//2
         System.out.println(manager.getTurno());
-        manager.moveCurrentPlayer(6, false);//3
+        manager.moveCurrentPlayer(1, false);//3
         System.out.println(manager.getTurno());
-        manager.moveCurrentPlayer(5, false);//1
+        manager.moveCurrentPlayer(1, false);//1
         System.out.println(manager.getTurno());
-        manager.moveCurrentPlayer(0, false);//2
+        manager.moveCurrentPlayer(1, false);//2
+        System.out.println(manager.getTurno());
+        manager.createInitialJungle(11, arrayPlayers, arrayalimentos);
         System.out.println(manager.getTurno());
         manager.moveCurrentPlayer(2, false);//3
-        System.out.println(manager.getTurno());
+
 
         var b = manager.getWinnerInfo();
         var a = manager.getGameResults();
