@@ -602,7 +602,7 @@ public class GameManager {
             infojogadorvencedor[2] = jogadorVencedor.getEspecie().getNomeSigla();
             infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergiaAtual());
 
-            mudarTurno();
+           // mudarTurno();
             return infojogadorvencedor;
         }
 
@@ -627,7 +627,7 @@ public class GameManager {
             infojogadorvencedor[2] = jogadorVencedor.getEspecie().getNomeSigla();
             infojogadorvencedor[3] = String.valueOf(jogadorVencedor.getEspecie().getEnergiaAtual());
 
-            mudarTurno();
+   //         mudarTurno();
             return infojogadorvencedor;
         }
         if (countJogCasaMeio == 2 && countJogAFrenteCasaMeio > 0) {
@@ -644,7 +644,7 @@ public class GameManager {
             infojogadorvencedor[1] = vencedor.getNome();
             infojogadorvencedor[2] = vencedor.getEspecie().getNomeSigla();
             infojogadorvencedor[3] = String.valueOf(vencedor.getEspecie().getEnergiaAtual());
-            mudarTurno();
+         //   mudarTurno();
             return infojogadorvencedor;
         }
 

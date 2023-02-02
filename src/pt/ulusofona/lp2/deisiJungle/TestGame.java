@@ -70,19 +70,15 @@ public class TestGame {
         };
 
         manager.createInitialJungle(10, arrayPlayers);
-        manager.moveCurrentPlayer(1, false);
         System.out.println(manager.getTurno());
-        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(3, false);
         System.out.println(manager.getTurno());
-        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(4, false);
         System.out.println(manager.getTurno());
-        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(0, false);
         System.out.println(manager.getTurno());
-        manager.moveCurrentPlayer(1, false);
+        manager.moveCurrentPlayer(5, false);
         System.out.println(manager.getTurno());
-        manager.moveCurrentPlayer(1, false);
-        System.out.println(manager.getTurno());
-        manager.moveCurrentPlayer(1, false);
 
         MovementResult resultadoReal = manager.moveCurrentPlayer(-2, false);
         MovementResult resultadoEsperado = new MovementResult(INVALID_MOVEMENT);
@@ -875,12 +871,19 @@ public class TestGame {
         };
 
         manager.createInitialJungle(11, arrayPlayers, arrayalimentos);
+        System.out.println(manager.getTurno());
         manager.moveCurrentPlayer(5, false);//1
+        System.out.println(manager.getTurno());
         manager.moveCurrentPlayer(5, false);//2
+        System.out.println(manager.getTurno());
         manager.moveCurrentPlayer(5, false);//3
+        System.out.println(manager.getTurno());
         manager.moveCurrentPlayer(1, false);//1
+        System.out.println(manager.getTurno());
         manager.moveCurrentPlayer(1, false);//2
+        System.out.println(manager.getTurno());
         manager.moveCurrentPlayer(3, false);//3
+        System.out.println(manager.getTurno());
 
         var b = manager.getWinnerInfo();
         var a = manager.getGameResults();
