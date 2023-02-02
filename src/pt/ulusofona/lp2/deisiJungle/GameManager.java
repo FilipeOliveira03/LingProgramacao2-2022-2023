@@ -93,14 +93,14 @@ public class GameManager {
         };
     }
 
-    public void createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo)
-            throws InvalidInitialJungleException {
+    public void createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) throws InvalidInitialJungleException {
 
         jogadasPassadas = 0;
         turno = 1;
         tabuleiroAlimentos.clear();
         bananas.clear();
         cogumelos.clear();
+        jogadores.clear();
 
         boolean[] verificarComida = new boolean[foodsInfo.length];
 
@@ -526,10 +526,7 @@ public class GameManager {
                 jogador.getEspecie().mudaEnergiaAtual(jogador.getEspecie().getEnergiaAtual()+2);
             }
         }
-
-
         return new MovementResult(VALID_MOVEMENT);
-
     }
 
     public String[] getWinnerInfo() {
@@ -541,7 +538,6 @@ public class GameManager {
         int countJogAFrenteCasaMeio = 0;
 
         int casaDoMeio;
-
         ArrayList<Player> jogadoresDoMeio = new ArrayList<>();
 
         double metadouble = meta;
